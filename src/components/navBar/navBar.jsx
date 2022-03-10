@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Clubdetail = () => {
+const Navbar = () => {
     return (
         <div>
-            Club Detail
+            Nav Bar
         </div>
     );
 }
 
-export default Clubdetail;
+export default Navbar;

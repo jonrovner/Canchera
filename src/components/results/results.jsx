@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Clubdetail = () => {
+const Results = () => {
     return (
         <div>
-            Club Detail
+            Results
         </div>
     );
 }
 
-export default Clubdetail;
+export default Results;
