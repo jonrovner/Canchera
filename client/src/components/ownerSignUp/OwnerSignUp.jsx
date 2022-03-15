@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import Modal from "./Modal/Modal";
+import ModalError from "./Modal/ModalError";
 import style from "./OwnerSignUp.module.scss";
 import { Validate } from "./validaciones/validaciones.js";
 
@@ -8,7 +10,8 @@ const OwnerSignUp = () => {
     email: "",
     password: "",
   });
-
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
 
   const handlerInputChange = (e) => {
@@ -25,8 +28,14 @@ const OwnerSignUp = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("enviado");
-    /* dispatch(); */
+    if (data.name && data.email && data.password) {
+      console.log("enviado");
+      setOpenModal(true);
+      /* dispatch(); */
+    } else {
+      console.log("no enviado");
+      setOpenModalError(true);
+    }
   };
 
   /* const disabeledSubmit = useMemo(() => {
@@ -85,6 +94,8 @@ const OwnerSignUp = () => {
             /* disabled={disabeledSubmit} */
             value="Send"
           />
+          {openModal && <Modal closeModal={setOpenModal} />}
+          {openModalError && <ModalError closeModal={setOpenModalError} />}
         </div>
       </form>
     </div>
