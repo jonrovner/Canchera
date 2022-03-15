@@ -1,4 +1,3 @@
-import "./App.css";
 import Ownersignup from "./components/ownerSignUp/OwnerSignUp";
 
 function App() {
