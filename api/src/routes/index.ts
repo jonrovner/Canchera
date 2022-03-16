@@ -5,6 +5,7 @@ import {Router, Request, Response} from "express"
 // const PokemonRoutes = require('./pokemonRoutes');
  const SignUp = require('./signup');
  const User = require('./user')
+ const Club = require('./club')
 
 const router = Router();
 
@@ -13,6 +14,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
  router.use('/', SignUp);
  router.use('/', User)
+ router.use('/', Club);
 // router.use('/types', TypeRoutes);
 
 module.exports = router;
