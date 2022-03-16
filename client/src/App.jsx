@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router";
+import Clubdetail from "./components/ClubDetail/ClubDetail";
 import Landing from "./components/Landing/Landing";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/clubDetail" element={<Clubdetail />} />
       </Routes>
     </div>
   );
