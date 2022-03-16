@@ -1,9 +1,9 @@
-import Ownersignup from "./components/OwnerSignUp/OwnerSignUp";
+import OwnerSignUp from "./components/ownerSignUp/OwnerSignUp";
 
 function App() {
   return (
     <div>
-      <Ownersignup />
+      <OwnerSignUp />
     </div>
   );
 }

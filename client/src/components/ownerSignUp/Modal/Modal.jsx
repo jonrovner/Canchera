@@ -1,8 +1,9 @@
 import React from "react";
+import style from "./Modal.module.scss";
 
 const Modal = ({ closeModal }) => {
   return (
-    <div className="modalBackground">
+    <div className={style.modalBackground}>
       <div className="modalContainer">
         <button onClick={() => closeModal(false)}> X </button>
         <div className="title">
