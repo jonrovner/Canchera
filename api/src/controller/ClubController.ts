@@ -58,17 +58,15 @@ try {
             closeHour:nameClub.closeHour,
             image:nameClub.image,
             score:nameClub.score,
-            userId:nameClub.UserId
+            userId:nameClub.UserId,
+            latitude:nameClub.latitude,
+            longitude:nameClub.longitude
         }
         return res.status(200).json(clubName);
     }
     
     const foundClub = await Club.findAll({
-        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId'],
-        include:{
-            model:User,
-            attributes:['name', 'rol']
-        }
+        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId', 'latitude', 'longitude'],        
     })
     return res.status(200).json(foundClub);
 } catch (error) {
@@ -76,8 +74,5 @@ try {
 };
 
 },
-
- 
-
 
 }

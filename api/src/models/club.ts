@@ -9,7 +9,9 @@ interface ClubAttributes {
   openHour: number;
   closeHour: number;
   image: string;
-  score: string;   
+  score: string;
+  latitude: number;
+  longitude: number;
 }
 
 
@@ -29,6 +31,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     closeHour!: number;
     image!: string;
     score!: string; 
+    latitude!: number;
+    longitude!: number;
 
     static associate(models: any) {
       // define association here
@@ -76,7 +80,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
     score: {
       type: DataTypes.ENUM,
       values: ['1', '2', '3', '4', '5']      
-    }
+    },
+    latitude: {
+      type: DataTypes.FLOAT
+    },
+    longitude: {
+      type: DataTypes.FLOAT
+    },
    
   }, {
     sequelize,
