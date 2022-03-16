@@ -1,16 +1,16 @@
-import React, { useState, /* useMemo */ useEffect } from "react";
-import style from "./OwnerSignUp.module.scss";
+import React, { useEffect, useState } from "react";
+import style from "./UserSignUp.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { get_users, post_users } from "../../redux/action";
+import { Validate } from "./validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
-import { Validate } from "./validaciones/validaciones.js";
-import { get_users, post_users, post_users_owner } from "../../redux/action";
 
-const OwnerSignUp = () => {
+const UserSignUp = () => {
   let users = useSelector((state) => state.users);
   let dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ const OwnerSignUp = () => {
         setOpenModalError(true);
       } else {
         console.log("no existe");
-        dispatch(post_users_owner(data));
+        dispatch(post_users(data));
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
@@ -80,7 +80,7 @@ const OwnerSignUp = () => {
           onSubmit(e);
         }}
       >
-        <h2 className={style.title}>Register Owner</h2>
+        <h2 className={style.title}>Register User</h2>
         <div className={style.inputField}>
           <FaUserAlt className={style.fasFaUser} />
           <input
@@ -160,4 +160,4 @@ const OwnerSignUp = () => {
   );
 };
 
-export default OwnerSignUp;
+export default UserSignUp;

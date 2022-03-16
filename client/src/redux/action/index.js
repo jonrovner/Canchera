@@ -16,10 +16,19 @@ export const get_users = () => async (dispatch) => {
   }
 };
 
-export const post_users = (data) => async (dispatch) => {
+export const post_users_owner = (data) => async (dispatch) => {
   console.log("Data enviada:", data);
   try {
     await axios.post("http://localhost:3001/signup/owner", data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const post_users = (data) => async (dispatch) => {
+  console.log("Data enviada:", data);
+  try {
+    await axios.post("http://localhost:3001/signup/user", data);
   } catch (e) {
     console.log(e);
   }
