@@ -6,6 +6,7 @@ import {
     getHours,
 
 } from 'date-fns'
+import './fieldCalendar.css'
 
 const Fieldcalendar = ({day, close, players, ilumination, price, handleClick}) => {
     
@@ -24,7 +25,7 @@ const Fieldcalendar = ({day, close, players, ilumination, price, handleClick}) =
             {
                     hours && hours.map( (date, i) => (
                         <div className={'hour'} key={i} onClick={()=>handleClick(date)}>
-                            {getHours(date)} hs
+                            {getHours(date)}hs
                         </div>
                     ))
                 }
