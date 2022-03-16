@@ -5,14 +5,20 @@ export const Validate = (prevData) => {
   } else if (prevData.name.length < 5) {
     errors.name = "Name field must have 5 characters minimum";
   }
-  /* const regex = /^[1-5]+$/; */
+
+  var emailEnviado = prevData.email;
+  var arroba = emailEnviado.indexOf("@");
+  var punto = emailEnviado.lastIndexOf(".");
+  var extension = emailEnviado.split(".")[1];
   if (prevData.email.length < 1) {
     errors.email = "Email is required";
-  } /* else if (
-    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(prevData.email)
-  ) {
-    errors.email = "Debe ser un email";
-  } */
+  } else if (arroba < 1 || punto - arroba < 2 || emailEnviado === "") {
+    errors.email = "Email is invalido";
+  } else {
+    if (extension.length > 3) {
+      errors.email = "Email is invalido";
+    }
+  }
 
   if (prevData.password.length < 1) {
     errors.password = "Password is required";

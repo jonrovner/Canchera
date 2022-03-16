@@ -1,32 +1,33 @@
 import React, { useState, /* useMemo */ useEffect } from "react";
+import style from "./OwnerSignUp.module.scss";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
-import style from "./OwnerSignUp.module.scss";
-import { useDispatch /* useSelector */ } from "react-redux";
+import { FaUserAlt } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { MdEmail } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
+import { useDispatch, useSelector } from "react-redux";
 import { Validate } from "./validaciones/validaciones.js";
-import { /* get_users */ post_users } from "../../redux/action";
-import { usuarios } from "../../redux/action/data";
+import { get_users, post_users } from "../../redux/action";
 
 const OwnerSignUp = () => {
-  /* let users = useSelector((state) => state.users); */
+  let users = useSelector((state) => state.users);
   let dispatch = useDispatch();
-  let [info, setInfo] = useState([]);
-  useEffect(() => {
-    /* dispatch(get_users()); */
-    setInfo(usuarios);
-  }, [setInfo]);
 
-  console.log(info);
-
+  /*  let [info, setInfo] = useState([]); */
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalError, setOpenModalError] = useState(false);
+  const [error, setError] = useState({});
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const [openModal, setOpenModal] = useState(false);
-  const [openModalError, setOpenModalError] = useState(false);
-  const [error, setError] = useState({});
+  useEffect(() => {
+    dispatch(get_users());
+    /* setInfo(usuarios); */
+  }, [dispatch]);
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -43,14 +44,17 @@ const OwnerSignUp = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password) {
-      let filtro = info.filter((i) => i.email === data.email);
-      if (filtro.length > 0) {
+      let userExiste = users.data.find((u) => u.email === data.email);
+      console.log(userExiste);
+      if (userExiste) {
         console.log("existe");
         setOpenModalError(true);
       } else {
         console.log("no existe");
         dispatch(post_users(data));
         setOpenModal(true);
+        let formulario = document.getElementById("formul");
+        formulario.reset();
       }
     } else {
       console.log("no enviado");
@@ -69,12 +73,15 @@ const OwnerSignUp = () => {
   return (
     <div className={style.contenedor}>
       <form
+        id="formul"
+        className={style.signInForm}
         onSubmit={(e) => {
           onSubmit(e);
         }}
       >
-        <h1>Registro</h1>
-        <div>
+        <h2 className={style.title}>Register</h2>
+        <div className={style.inputField}>
+          <FaUserAlt className={style.fasFaUser} />
           <input
             autoComplete="off"
             type="text"
@@ -83,9 +90,12 @@ const OwnerSignUp = () => {
             placeholder="Name"
             onChange={(e) => handlerInputChange(e)}
           />
-          {error.name && <p>{error.name}</p>}
         </div>
-        <div>
+        <div className={style.containerError}>
+          {error.name && <p className={style.error}>{error.name}</p>}
+        </div>
+        <div className={style.inputField}>
+          <MdEmail className={style.fasFaUser} />
           <input
             autoComplete="off"
             type="text"
@@ -94,9 +104,12 @@ const OwnerSignUp = () => {
             placeholder="Email"
             onChange={(e) => handlerInputChange(e)}
           />
-          {error.email && <p>{error.email}</p>}
         </div>
-        <div>
+        <div className={style.containerError}>
+          {error.email && <p className={style.error}>{error.email}</p>}
+        </div>
+        <div className={style.inputField}>
+          <RiLockPasswordFill className={style.fasFaUser} />
           <input
             autoComplete="off"
             type="password"
@@ -105,17 +118,25 @@ const OwnerSignUp = () => {
             placeholder="Password"
             onChange={(e) => handlerInputChange(e)}
           />
-          {error.password && <p>{error.password}</p>}
+        </div>
+        <div className={style.containerError}>
+          {error.password && <p className={style.error}>{error.password}</p>}
         </div>
         <div>
           <input
             type="submit"
             className={style.boton}
             /* disabled={disabeledSubmit} */
-            value="Send"
+            value="Register"
           />
           {openModal && <Modal closeModal={setOpenModal} />}
           {openModalError && <ModalError closeModal={setOpenModalError} />}
+        </div>
+        <p class={style.socialText}>O inicia con tu red social favorita</p>
+        <div class={style.socialMedia}>
+          <a href="#" class={style.socialIcon}>
+            <FcGoogle class={style.fabFaGoogle} />
+          </a>
         </div>
       </form>
     </div>

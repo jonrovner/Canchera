@@ -1,12 +1,12 @@
 import axios from "axios";
-import { usuarios } from "./data";
+/* import { usuarios } from "./data"; */
 
 export const GET_USERS = "GET_USERS";
 export const POST_USERS = "POST_USERS";
 
 export const get_users = () => async (dispatch) => {
   try {
-    let user = await axios.get(usuarios);
+    let user = await axios.get("http://localhost:3001/user");
     return dispatch({
       type: GET_USERS,
       payload: user,
