@@ -1,15 +1,29 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, /* useMemo */ useEffect } from "react";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
 import style from "./OwnerSignUp.module.scss";
+import { useDispatch /* useSelector */ } from "react-redux";
 import { Validate } from "./validaciones/validaciones.js";
+import { /* get_users */ post_users } from "../../redux/action";
+import { usuarios } from "../../redux/action/data";
 
 const OwnerSignUp = () => {
+  /* let users = useSelector((state) => state.users); */
+  let dispatch = useDispatch();
+  let [info, setInfo] = useState([]);
+  useEffect(() => {
+    /* dispatch(get_users()); */
+    setInfo(usuarios);
+  }, [setInfo]);
+
+  console.log(info);
+
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -29,9 +43,15 @@ const OwnerSignUp = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password) {
-      console.log("enviado");
-      setOpenModal(true);
-      /* dispatch(); */
+      let filtro = info.filter((i) => i.email === data.email);
+      if (filtro.length > 0) {
+        console.log("existe");
+        setOpenModalError(true);
+      } else {
+        console.log("no existe");
+        dispatch(post_users(data));
+        setOpenModal(true);
+      }
     } else {
       console.log("no enviado");
       setOpenModalError(true);
