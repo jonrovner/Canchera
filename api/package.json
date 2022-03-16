@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only app.ts",
+    "start": "tsnd  --respawn index.ts",
     "dev": "tsnd  --respawn index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
