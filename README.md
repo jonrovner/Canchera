@@ -8,7 +8,7 @@
 
 - <a href='https://github.com/jonrovner'>Jonathan Rovner</a>
 
-- <a href='https://github.com/'>Jose Puello</a>
+- <a href='https://github.com/JosePuelloCortina'>Jose Puello</a>
 
 - <a href='https://github.com/leo10-kz'>Leonel Quiroga</a>
 
