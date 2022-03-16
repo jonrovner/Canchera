@@ -3,16 +3,18 @@ import style from "./ModalError.module.scss";
 
 const ModalError = ({ closeModal }) => {
   return (
-    <div className="modalBackground">
-      <div className="modalContainer">
-        <button onClick={() => closeModal(false)}> X </button>
-        <div className="title">
-          <h1>Algo fallo</h1>
+    <div className={style.modalBackground}>
+      <div className={style.modalContainer}>
+        <button className={style.cancelBtn} onClick={() => closeModal(false)}>
+          X
+        </button>
+        <div className={style.title}>
+          <h1> HUBO UN ERROR</h1>
         </div>
-        <div className="body">
-          <span>Revisa algo jaja</span>
+        <div className={style.body}>
+          <span>AWDASDAWDAWDAWAWDAW</span>
         </div>
-        <div className="footer">
+        <div className={style.footer}>
           <span>need help? 'ayuda'</span>
         </div>
       </div>

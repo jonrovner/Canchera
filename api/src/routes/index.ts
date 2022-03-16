@@ -7,6 +7,8 @@ import {Router, Request, Response} from "express"
  const SignUp = require('./signup');
  const User = require('./user')
  const Field = require('./field')
+ const Club = require('./club')
+
 
 const router = Router();
 
@@ -16,6 +18,8 @@ const router = Router();
  router.use('/', SignUp);
  router.use('/', User)
  router.use('/', Field)
+ router.use('/', Club);
+
 
 
 module.exports = router;
