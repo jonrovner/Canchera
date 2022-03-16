@@ -51,8 +51,7 @@ const Clubdetail = () => {
         days[i] = addDays(today, i)
 
     }
-    console.log('dates are', days)
-
+    
     const handleHourClick = (date) => {
         let existent = selectedDates.find( d => d.toString() === date.toString())
         if (!existent){
@@ -62,9 +61,13 @@ const Clubdetail = () => {
             setSelectedDates([...selectedDates.filter(d => d.toString() !== date.toString())])
         }
     }
-    
-    console.log('selected dates are: ', selectedDates)
 
+    const handleReservation = () => {
+        if (!selectedDates.length) {
+            return
+        }        
+    }
+    
     
     return (
        <div className='clubDetail'>
@@ -84,6 +87,8 @@ const Clubdetail = () => {
                price={field.price} 
                handleClick={handleHourClick}/>
            ))}
+
+           <button onClick={()=>handleReservation}>Reservar</button>
     
           
        </div>
