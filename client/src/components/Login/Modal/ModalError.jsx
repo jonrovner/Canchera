@@ -9,13 +9,13 @@ const ModalError = ({ closeModal }) => {
           X
         </button>
         <div className={style.title}>
-          <h1> HUBO UN ERROR</h1>
+          <h1>There's been a problem</h1>
         </div>
         <div className={style.body}>
-          <span>AWDASDAWDAWDAWAWDAW</span>
+          <span>Wrong Username or Password</span>
         </div>
         <div className={style.footer}>
-          <span>need help? 'ayuda'</span>
+          <span>Did you forget your password?</span>
         </div>
       </div>
     </div>

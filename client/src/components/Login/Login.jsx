@@ -2,13 +2,12 @@ import React, { useState, /* useMemo */ useEffect } from "react";
 import style from "./Login.module.scss";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
-import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Validate } from "./validaciones/validaciones.js";
-import { get_users, post_users } from "../../redux/action";
+import { get_users } from "../../redux/action";
 
 const Login = () => {
   let users = useSelector((state) => state.users);
@@ -42,21 +41,23 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (data.name && data.email && data.password) {
-      let userExiste = users.data.find((u) => u.email === data.email);
-      console.log(userExiste);
+    if (data.email && data.password) {
+      let userExiste = users.data.find(
+        (u) => u.email === data.email && u.password === data.password
+      );
+      /* console.log(userExiste); */
       if (userExiste) {
         console.log("existe");
-        setOpenModalError(true);
-      } else {
-        console.log("no existe");
-        dispatch(post_users(data));
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
+        /* useNavigate(/) */
+      } else {
+        console.log("no existe");
+        setOpenModalError(true);
       }
     } else {
-      console.log("no enviado");
+      console.log("datos no enviado o incorrectos");
       setOpenModalError(true);
     }
   };
@@ -107,7 +108,7 @@ const Login = () => {
             type="submit"
             className={style.boton}
             /* disabled={disabeledSubmit} */
-            value="Register"
+            value="Sign In"
           />
           {openModal && <Modal closeModal={setOpenModal} />}
           {openModalError && <ModalError closeModal={setOpenModalError} />}

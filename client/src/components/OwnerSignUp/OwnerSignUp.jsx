@@ -8,7 +8,7 @@ import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Validate } from "./validaciones/validaciones.js";
-import { get_users, post_users, post_users_owner } from "../../redux/action";
+import { get_users, post_users_owner } from "../../redux/action";
 
 const OwnerSignUp = () => {
   let users = useSelector((state) => state.users);
