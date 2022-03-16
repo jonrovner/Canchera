@@ -6,13 +6,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
-    background-color: red;
-    width: 30rem;
-    height: 30rem;
-    h1 {
-      background-color: aliceblue;
-      color: blue;
-    }
+    align-items: center;
+    background-color: #faefef;
+    height: 100vh;
+    width: 100vw;
   }
 }
