@@ -63,7 +63,7 @@ const Clubdetail = () => {
         }
     }
     
-
+    console.log('selected dates are: ', selectedDates)
 
     
     return (
@@ -81,7 +81,8 @@ const Clubdetail = () => {
                close={detail.closeHour}
                players={field.players}
                ilumination={field.ilumination}
-               price={field.price} />
+               price={field.price} 
+               handleClick={handleHourClick}/>
            ))}
     
           

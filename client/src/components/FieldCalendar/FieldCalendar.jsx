@@ -8,17 +8,13 @@ import {
 } from 'date-fns'
 
 const Fieldcalendar = ({day, close, players, ilumination, price, handleClick}) => {
+    
     console.log('day is ', day)
     
      const hours = eachHourOfInterval({
         start: day,
         end: setHours(day, close)
     }) 
-
-    
-   // console.log('hours are', hours)
-    
-    
     
     return (
         <div>
