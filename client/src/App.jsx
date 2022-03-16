@@ -7,7 +7,11 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
+<<<<<<< HEAD
         <Route path="/signup" element={<OwnerSignUp />} />
+=======
+        <Route path="/signup/owner" element={<OwnerSignUp />} />
+>>>>>>> 3f6242ac0760370d90f4e0371124b73f2bc8f134
       </Routes>
     </div>
   );
