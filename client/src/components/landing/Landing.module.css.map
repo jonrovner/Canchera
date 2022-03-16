@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,gBAAgB,EAAE,IAAI;EACtB,KAAK,EAAE,MAAM;EACb,MAAM,EAAE,IAAI;CAAG",
+    "sources": [
+        "Landing.module.sass"
+    ],
+    "names": [],
+    "file": "Landing.module.css"
+}
