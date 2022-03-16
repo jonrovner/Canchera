@@ -6,8 +6,18 @@ export const Validate = (prevData) => {
     errors.name = "Name field must have 5 characters minimum";
   }
 
+  var emailEnviado = prevData.email;
+  var arroba = emailEnviado.indexOf("@");
+  var punto = emailEnviado.lastIndexOf(".");
+  var extension = emailEnviado.split(".")[1];
   if (prevData.email.length < 1) {
     errors.email = "Email is required";
+  } else if (arroba < 1 || punto - arroba < 2 || emailEnviado === "") {
+    errors.email = "Email is invalido";
+  } else {
+    if (extension.length > 3) {
+      errors.email = "Email is invalido";
+    }
   }
 
   if (prevData.password.length < 1) {
