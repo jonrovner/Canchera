@@ -26,7 +26,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     status!: boolean;
 
     static associate(models: any) {
-      // define association here      
+      // define association here   
+       User.hasOne(models.Club);
     }
   };
   User.init({

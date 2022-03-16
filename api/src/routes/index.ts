@@ -7,10 +7,6 @@ import {Router, Request, Response} from "express"
 
 const router = Router();
 
-router.get('/prueba', (req: Request, res: Response) =>{
-    console.log("PROBANDOOOOOOO");
-    res.send("DAOLE PAPAaoeaoeaoe")    
-})
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
