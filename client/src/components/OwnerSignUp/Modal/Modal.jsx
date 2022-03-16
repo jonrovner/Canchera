@@ -4,16 +4,16 @@ import style from "./Modal.module.scss";
 const Modal = ({ closeModal }) => {
   return (
     <div className={style.modalBackground}>
-      <div className="modalContainer">
+      <div className={style.modalContainer}>
         <button onClick={() => closeModal(false)}> X </button>
-        <div className="title">
-          <h1> Are you sure?</h1>
+        <div className={style.title}>
+          <h1>BIENVENIDO A CANCHERA</h1>
         </div>
-        <div className="body">
-          <span>Congratulation buddy</span>
+        <div className={style.body}>
+          <span>Felicitaciones, tu cuenta fue aprobada</span>
         </div>
-        <div className="footer">
-          <span>need help? 'ayuda'</span>
+        <div className={style.footer}>
+          <span>nesecitas ayuda? 'ayuda'</span>
         </div>
       </div>
     </div>
