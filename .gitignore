@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /client/node_modules
+/client/package-lock.json
 /api/node_modules
 
 # testing
