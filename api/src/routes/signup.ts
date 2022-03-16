@@ -8,6 +8,7 @@ const AuthController = require("../controller/AuthController.ts")
 router.post('/signin', AuthController.signIn)
 
 router.post('/signup/user', AuthController.userSignUp);
+
 router.post('/signup/owner', AuthController.ownerSignUp);
 
 
