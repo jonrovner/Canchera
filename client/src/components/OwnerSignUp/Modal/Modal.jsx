@@ -4,15 +4,15 @@ import style from "./Modal.module.scss";
 const Modal = ({ closeModal }) => {
   return (
     <div className={style.modalBackground}>
-      <div className="modalContainer">
+      <div className={style.modalContainer}>
         <button onClick={() => closeModal(false)}> X </button>
-        <div className="title">
+        <div className={style.title}>
           <h1> Are you sure?</h1>
         </div>
-        <div className="body">
+        <div className={style.body}>
           <span>Congratulation buddy</span>
         </div>
-        <div className="footer">
+        <div className={style.footer}>
           <span>need help? 'ayuda'</span>
         </div>
       </div>
