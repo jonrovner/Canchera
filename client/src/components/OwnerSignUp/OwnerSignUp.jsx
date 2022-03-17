@@ -38,7 +38,7 @@ const OwnerSignUp = () => {
     if (data.name && data.email && data.password && data.confirmPassword) {
       let existe = await axios.post("http://localhost:3001/signup/owner", data);
 
-      if (!existe.data.errors) {
+      if (!existe.data.error) {
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
