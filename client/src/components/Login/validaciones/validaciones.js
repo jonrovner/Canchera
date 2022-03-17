@@ -1,12 +1,6 @@
 export const Validate = (prevData) => {
   let errors = {};
 
-  if (prevData.name.length < 1) {
-    errors.name = "Name field is required";
-  } else if (prevData.name.length < 5) {
-    errors.name = "Name field must have 5 characters minimum";
-  }
-
   var emailEnviado = prevData.email;
   var arroba = emailEnviado.indexOf("@");
   var punto = emailEnviado.lastIndexOf(".");
@@ -24,12 +18,5 @@ export const Validate = (prevData) => {
   if (prevData.password.length < 1) {
     errors.password = "Password is required";
   }
-
-  if (prevData.confirmPassword.length < 1) {
-    errors.confirmPassword = "Confirm Password is required";
-  } else if (prevData.password !== prevData.confirmPassword) {
-    errors.confirmPassword = "Password must be the same";
-  }
-
   return errors;
 };

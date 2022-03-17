@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import style from "./OwnerSignUp.module.scss";
+import style from "./UserSignUp.module.scss";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { get_users_email, post_users_owner } from "../../redux/action";
+import { Validate } from "./validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
-import { Validate } from "./validaciones/validaciones.js";
-import { get_users_email, post_users_owner } from "../../redux/action";
 
-const OwnerSignUp = () => {
+const UserSignUp = () => {
   /* let users = useSelector((state) => state.users); */
   let dispatch = useDispatch();
 
@@ -25,6 +25,11 @@ const OwnerSignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
+  /*useEffect(() => {
+    dispatch(get_users());
+    /* setInfo(usuarios); 
+  }, [dispatch]);*/
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -40,12 +45,12 @@ const OwnerSignUp = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     if (data.name && data.email && data.password && data.confirmPassword) {
       /* await dispatch(get_users_email(data.email)); */
       let users = await axios.get(
         `http://localhost:3001/user?email=${data.email}`
       );
+
       console.log(users.data);
       if (users.data.hasOwnProperty("msg")) {
         console.log("no existe un usuario registrado con este email");
@@ -80,7 +85,7 @@ const OwnerSignUp = () => {
           onSubmit(e);
         }}
       >
-        <h2 className={style.title}>Register Owner</h2>
+        <h2 className={style.title}>Register User</h2>
         <div className={style.inputField}>
           <FaUserAlt className={style.fasFaUser} />
           <input
@@ -160,4 +165,4 @@ const OwnerSignUp = () => {
   );
 };
 
-export default OwnerSignUp;
+export default UserSignUp;
