@@ -3,8 +3,8 @@ const router = Router();
 const BookingController = require('../controller/BookingController')
 
 router.post('/booking', BookingController.postBooking);
-// router.get('/clubs', ClubController.getClubs);
-// router.get('/:clubId')
+router.get('/booking/:clubId', BookingController.getBookings);
+
 
 
 module.exports = router;
