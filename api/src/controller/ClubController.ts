@@ -51,11 +51,7 @@ const { name } = req.query;
 try {
     if(name){
         const nameClub = await Club.findOne({where:{name:name},
-         attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId', 'latitude', 'longitude'],
-         include:{
-             model:Field,
-             attributes:['id', 'players', 'price']
-         }
+         attributes:['id', 'name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'latitude', 'longitude'],
         
         });
         if(!nameClub) return res.status(401).json({ Message:"No hay clubes con ese name " });
@@ -63,11 +59,8 @@ try {
     }
     
     const foundClub = await Club.findAll({
-        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId', 'latitude', 'longitude'], 
-        include:{
-            model:Field,
-            attributes:['id', 'players', 'price']
-        }       
+        attributes:['id', 'name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'latitude', 'longitude'], 
+        
     })
     return res.status(200).json(foundClub);
 } catch (error) {
@@ -75,5 +68,27 @@ try {
 };
 
 },
+
+
+ async clubDetail(req:Request, res:Response, next:NextFunction){ 
+   
+   const {id} = req.params;
+
+   try {
+    const detailClub = await Club.findOne({where:{id:id},
+        attributes:['name','location', 'openHour','closeHour', 'image', 'score', 'latitude', 'longitude'],
+        include:{
+            model:Field,
+            attributes:['id', 'players', 'price']
+        }
+      });
+    
+      return res.status(200).json(detailClub);
+    
+   } catch (error) {
+       next(error)       
+   }
+
+ }
 
 }
