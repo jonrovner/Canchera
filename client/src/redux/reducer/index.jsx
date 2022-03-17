@@ -1,7 +1,7 @@
 import { GET_USERS_EMAIL, POST_USERS_SIGNIN } from "../action/index";
 const initialState = {
   cancha: [],
-  users: {},
+  user: {},
   usersignin: {},
 };
 
