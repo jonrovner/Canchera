@@ -1,0 +1,23 @@
+.navbar {
+    width: 100%;
+    background-color: #555;
+    overflow: auto;
+  }
+
+  .navbar a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+  }
+    
+  /* .navbar a:hover {
+    background-color: #000;
+  } */ 
+
+  .login{
+    float: right;
+  }
+  
