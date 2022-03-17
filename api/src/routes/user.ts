@@ -1,9 +1,7 @@
-import Router from 'express'
+import Router from "express";
 const router = Router();
-const UserController = require('../controller/UserController.ts')
-const verifyRecord = require('../middlewares/verifyRecord')
+const UserController = require("../controller/UserController.ts");
 
-router.get('/user', verifyRecord.verifyUser , UserController.getUser);
-
+router.get("/user", UserController.getUser);
 
 module.exports = router;
