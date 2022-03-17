@@ -22,10 +22,13 @@
 .Footer .video {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .Footer .video iframe {
   width: 100%;
+  -webkit-transform: scale(120%);
+          transform: scale(120%);
 }
 
 .Footer .content {
