@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import style from "./UserSignUp.module.scss";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { get_users_email, post_users_owner } from "../../redux/action";
 import { Validate } from "./validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
@@ -12,10 +10,6 @@ import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 
 const UserSignUp = () => {
-  /* let users = useSelector((state) => state.users); */
-  let dispatch = useDispatch();
-
-  /*  let [info, setInfo] = useState([]); */
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -25,11 +19,6 @@ const UserSignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
-  /*useEffect(() => {
-    dispatch(get_users());
-    /* setInfo(usuarios); 
-  }, [dispatch]);*/
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -46,20 +35,13 @@ const UserSignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password && data.confirmPassword) {
-      /* await dispatch(get_users_email(data.email)); */
-      let users = await axios.get(
-        `http://localhost:3001/user?email=${data.email}`
-      );
+      let existe = await axios.post("http://localhost:3001/signup/owner", data);
 
-      console.log(users.data);
-      if (users.data.hasOwnProperty("msg")) {
-        console.log("no existe un usuario registrado con este email");
-        dispatch(post_users_owner(data));
+      if (!existe.data.errors) {
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
       } else {
-        console.log("existe un usuario registrado con este email");
         setOpenModalError(true);
       }
     } else {
@@ -68,13 +50,13 @@ const UserSignUp = () => {
     }
   };
 
-  /* const disabeledSubmit = useMemo(() => {
+  const disabeledSubmit = useMemo(() => {
     if (error.name || error.email || error.password) {
       return true;
     }
 
     return false;
-  }, [error]); */
+  }, [error]);
 
   return (
     <div className={style.contenedor}>
@@ -148,7 +130,7 @@ const UserSignUp = () => {
           <input
             type="submit"
             className={style.boton}
-            /* disabled={disabeledSubmit} */
+            disabled={disabeledSubmit}
             value="Register"
           />
           {openModal && <Modal closeModal={setOpenModal} />}

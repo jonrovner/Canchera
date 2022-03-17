@@ -1,4 +1,4 @@
-import React, { useState /* useMemo */ /*  useEffect  */ } from "react";
+import React, { useState, useMemo /*  useEffect  */ } from "react";
 import style from "./Login.module.scss";
 import axios from "axios";
 import Modal from "./Modal/Modal";
@@ -55,6 +55,14 @@ const Login = () => {
     }
   };
 
+  const disabeledSubmit = useMemo(() => {
+    if (error.email || error.password) {
+      return true;
+    }
+
+    return false;
+  }, [error]);
+
   return (
     <div className={style.contenedor}>
       <form
@@ -100,7 +108,7 @@ const Login = () => {
           <input
             type="submit"
             className={style.boton}
-            /* disabled={disabeledSubmit} */
+            disabled={disabeledSubmit}
             value="Sign In"
           />
           {openModal && <Modal closeModal={setOpenModal} />}
