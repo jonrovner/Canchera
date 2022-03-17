@@ -9,8 +9,9 @@ const verifyUser = require('../middlewares/verifyRecord')
 
 router.post('/signin', AuthController.signIn)
 
-router.post('/signup/user',verifyUser.verifyUser, AuthController.userSignUp);
-router.post('/signup/owner', verifyUser.verifyUser, AuthController.ownerSignUp);
+router.post('/signup/user', AuthController.userSignUp);
+
+router.post('/signup/owner', AuthController.ownerSignUp);
 
 
 module.exports = router;

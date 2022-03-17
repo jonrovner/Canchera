@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import style from "./UserSignUp.module.scss";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { get_users, post_users } from "../../redux/action";
+import { get_users_email, post_users_owner } from "../../redux/action";
 import { Validate } from "./validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
@@ -11,7 +12,7 @@ import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 
 const UserSignUp = () => {
-  let users = useSelector((state) => state.users);
+  /* let users = useSelector((state) => state.users); */
   let dispatch = useDispatch();
 
   /*  let [info, setInfo] = useState([]); */
@@ -25,10 +26,10 @@ const UserSignUp = () => {
     confirmPassword: "",
   });
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(get_users());
-    /* setInfo(usuarios); */
-  }, [dispatch]);
+    /* setInfo(usuarios); 
+  }, [dispatch]);*/
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -42,20 +43,24 @@ const UserSignUp = () => {
     setError(Validate({ ...data, [name]: value }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password && data.confirmPassword) {
-      let userExiste = users.data.find((u) => u.email === data.email);
-      console.log(userExiste);
-      if (userExiste) {
-        console.log("existe");
-        setOpenModalError(true);
-      } else {
-        console.log("no existe");
-        dispatch(post_users(data));
+      /* await dispatch(get_users_email(data.email)); */
+      let users = await axios.get(
+        `http://localhost:3001/user?email=${data.email}`
+      );
+
+      console.log(users.data);
+      if (users.data.hasOwnProperty("msg")) {
+        console.log("no existe un usuario registrado con este email");
+        dispatch(post_users_owner(data));
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
+      } else {
+        console.log("existe un usuario registrado con este email");
+        setOpenModalError(true);
       }
     } else {
       console.log("no enviado");
@@ -149,10 +154,10 @@ const UserSignUp = () => {
           {openModal && <Modal closeModal={setOpenModal} />}
           {openModalError && <ModalError closeModal={setOpenModalError} />}
         </div>
-        <p class={style.socialText}>O inicia con tu red social favorita</p>
-        <div class={style.socialMedia}>
-          <a href="#" class={style.socialIcon}>
-            <FcGoogle class={style.fabFaGoogle} />
+        <p className={style.socialText}>O inicia con tu red social favorita</p>
+        <div className={style.socialMedia}>
+          <a href="#" className={style.socialIcon}>
+            <FcGoogle className={style.fabFaGoogle} />
           </a>
         </div>
       </form>

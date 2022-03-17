@@ -10,7 +10,9 @@ const Modal = ({ closeModal }) => {
           <h1>BIENVENIDO A CANCHERA</h1>
         </div>
         <div className={style.body}>
-          <span>Logeado con exito</span>
+          <span>
+            Registrado con exito, ahora puede realizar reservas de horario.
+          </span>
         </div>
         <div className={style.footer}>
           <span>nesecitas ayuda? 'ayuda'</span>
