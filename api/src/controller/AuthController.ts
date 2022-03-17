@@ -16,7 +16,7 @@ module.exports = {
             } 
         }).then((user: any) =>{
             if(!user) {
-                res.status(404).json({msg: "Usuario con este correo no encontrado"})
+                res.status(201).json({msg: "Usuario con este correo no encontrado"})
             }else{
                if(bcrypt.compareSync(password, user.password)){
                  const token = jwt.sign({user: user}, authConfig.secret, {
@@ -25,7 +25,7 @@ module.exports = {
                 res.json({user: user, token: token});            
 
                }else {
-                   res.status(401).json({msg: "Contraseña incorrecta"})
+                   res.status(202).json({msg: "Contraseña incorrecta"})
                }
             }
 

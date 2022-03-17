@@ -10,7 +10,7 @@ module.exports = {
     const user = await User.findOne({where: {email}})
 
        if(user) return res.status(200).json(user);
-       else return res.status(404).json({msg:"No existe usuario con este email"})
+       else return res.status(201).json({msg:"No existe usuario con este email"})
    } catch (error) {
      next(error)  
    };

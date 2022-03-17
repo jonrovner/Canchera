@@ -1,5 +1,6 @@
-import React, { useState, /* useMemo */ useEffect } from "react";
+import React, { useState /* useMemo */ /*  useEffect  */ } from "react";
 import style from "./Login.module.scss";
+import axios from "axios";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -7,13 +8,12 @@ import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Validate } from "./validaciones/validaciones.js";
-import { get_users } from "../../redux/action";
+import { post_users_signin } from "../../redux/action";
 
 const Login = () => {
-  let users = useSelector((state) => state.users);
-  let dispatch = useDispatch();
+  /* let users = useSelector((state) => state.usersignin); */
+  /* let dispatch = useDispatch(); */
 
-  /*  let [info, setInfo] = useState([]); */
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -21,11 +21,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    dispatch(get_users());
-    /* setInfo(usuarios); */
-  }, [dispatch]);
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -39,25 +34,23 @@ const Login = () => {
     setError(Validate({ ...data, [name]: value }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      let userExiste = users.data.find(
-        (u) => u.email === data.email && u.password === data.password
-      );
-      /* console.log(userExiste); */
-      if (userExiste) {
-        console.log("existe");
+      /* dispatch(post_users_signin(data));
+      console.log(users.user); */
+      let users = await axios.post(`http://localhost:3001/signin`, data);
+      console.log(users.data);
+
+      if (users.data.hasOwnProperty("msg")) {
+        setOpenModalError(true);
+      } else {
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
-        /* useNavigate(/) */
-      } else {
-        console.log("no existe");
-        setOpenModalError(true);
       }
     } else {
-      console.log("datos no enviado o incorrectos");
+      console.log("datos no ingresados o incorrectos");
       setOpenModalError(true);
     }
   };
@@ -113,10 +106,10 @@ const Login = () => {
           {openModal && <Modal closeModal={setOpenModal} />}
           {openModalError && <ModalError closeModal={setOpenModalError} />}
         </div>
-        <p class={style.socialText}>O inicia con tu red social favorita</p>
-        <div class={style.socialMedia}>
-          <a href="#" class={style.socialIcon}>
-            <FcGoogle class={style.fabFaGoogle} />
+        <p className={style.socialText}>O inicia con tu red social favorita</p>
+        <div className={style.socialMedia}>
+          <a href="#" className={style.socialIcon}>
+            <FcGoogle className={style.fabFaGoogle} />
           </a>
         </div>
       </form>
