@@ -6,7 +6,7 @@ module.exports = {
 
 async postClub(req:Request, res:Response, next:NextFunction){
 
- const { name, description, location, openHour, closeHour, image, score, userId } = req.body
+ const { name, description, location, openHour, closeHour, image, score,latitude, longitude, userId } = req.body
 
  try {
     if(!name || !location || !openHour || !closeHour) return res.status(400).json({
@@ -27,6 +27,8 @@ async postClub(req:Request, res:Response, next:NextFunction){
             closeHour:closeHour,
             image:image,
             score:score,
+            latitude:latitude,
+            longitude:longitude,
             UserId:userId 
         });
          return res.status(200).json(newClub)
@@ -48,25 +50,24 @@ const { name } = req.query;
 
 try {
     if(name){
-        const nameClub = await Club.findOne({where:{name:name}});
+        const nameClub = await Club.findOne({where:{name:name},
+         attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId', 'latitude', 'longitude'],
+         include:{
+             model:Field,
+             attributes:['id', 'players', 'price']
+         }
+        
+        });
         if(!nameClub) return res.status(401).json({ Message:"No hay clubes con ese name " });
-        let clubName = {
-            name:nameClub.name,
-            description:nameClub.description,
-            location:nameClub.location,
-            openHour:nameClub.openHour,
-            closeHour:nameClub.closeHour,
-            image:nameClub.image,
-            score:nameClub.score,
-            userId:nameClub.UserId,
-            latitude:nameClub.latitude,
-            longitude:nameClub.longitude
-        }
-        return res.status(200).json(clubName);
+        return res.status(200).json(nameClub);
     }
     
     const foundClub = await Club.findAll({
-        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId', 'latitude', 'longitude'],        
+        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId', 'latitude', 'longitude'], 
+        include:{
+            model:Field,
+            attributes:['id', 'players', 'price']
+        }       
     })
     return res.status(200).json(foundClub);
 } catch (error) {
