@@ -6,14 +6,9 @@ import ModalError from "./Modal/ModalError";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
 import { Validate } from "./validaciones/validaciones.js";
-import { post_users_signin } from "../../redux/action";
 
 const Login = () => {
-  /* let users = useSelector((state) => state.usersignin); */
-  /* let dispatch = useDispatch(); */
-
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -37,10 +32,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      /* dispatch(post_users_signin(data));
-      console.log(users.user); */
       let users = await axios.post(`http://localhost:3001/signin`, data);
-      console.log(users.data);
 
       if (users.data.hasOwnProperty("msg")) {
         setOpenModalError(true);
@@ -50,7 +42,6 @@ const Login = () => {
         formulario.reset();
       }
     } else {
-      console.log("datos no ingresados o incorrectos");
       setOpenModalError(true);
     }
   };
