@@ -48,26 +48,24 @@ const { name } = req.query;
 
 try {
     if(name){
-        const nameClub = await Club.findOne({where:{name:name}});
-        if(!nameClub) return res.status(401).json({ Message:"No hay clubes con ese name " });
-        let clubName = {
-            name:nameClub.name,
-            description:nameClub.description,
-            location:nameClub.location,
-            openHour:nameClub.openHour,
-            closeHour:nameClub.closeHour,
-            image:nameClub.image,
-            score:nameClub.score,
-            userId:nameClub.UserId
+        const nameClub = await Club.findOne({where:{name:name},
+         attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score'],
+         include:{
+            model:Field,
+            attributes:['id' ,'players', 'price']
         }
-        return res.status(200).json(clubName);
+
+        });
+        if(!nameClub) return res.status(401).json({ Message:"No hay clubes con ese name " });
+       
+        return res.status(200).json(nameClub);
     }
     
     const foundClub = await Club.findAll({
-        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'UserId'],
+        attributes:['name', 'description', 'location', 'openHour','closeHour', 'image', 'score'],
         include:{
-            model:User,
-            attributes:['name', 'rol']
+            model:Field,
+            attributes:['id' ,'players', 'price']
         }
     })
     return res.status(200).json(foundClub);
