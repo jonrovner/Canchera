@@ -4,7 +4,11 @@ module.exports = {
   development: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
+<<<<<<< HEAD
     port: 5432,
+=======
+    port: process.env.DBPORT || 5432,
+>>>>>>> 615807fb66db3f28cbc87ed587c2fe172c308925
     database: process.env.DB_NAME,
     host: "127.0.0.1",
     dialect: "postgres",
