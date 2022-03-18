@@ -6,7 +6,7 @@ module.exports = {
 
 async postClub(req:Request, res:Response, next:NextFunction){
 
- const { name, description, location, openHour, closeHour, image, score,latitude, longitude, userId } = req.body
+ const { name, description, location, openHour, closeHour, image,latitude, score, longitude, userId,fields } = req.body
 
  try {
     if(!name || !location || !openHour || !closeHour) return res.status(400).json({
@@ -19,6 +19,8 @@ async postClub(req:Request, res:Response, next:NextFunction){
 
     if(user && user.rol === "owner" && !club){
 
+        
+        
         const newClub = await Club.create({
             name:name,
             description:description,
@@ -29,11 +31,20 @@ async postClub(req:Request, res:Response, next:NextFunction){
             score:score,
             latitude:latitude,
             longitude:longitude,
-            UserId:userId 
+            UserId:userId, 
         });
-         return res.status(200).json(newClub)
+
+        await fields.forEach((fieldInArray:any)=>{
+            Field.create({   
+               ...fieldInArray,
+               ClubId:newClub.id
+              }) 
+        });
+      
+         
+         return res.status(200).json(newClub);
     }else{
-        res.status(400).json({error:"no se puede crear"})
+        res.status(400).json({error:"no se puede crear"});
     }
     
     
@@ -52,7 +63,11 @@ try {
     if(name){
         const nameClub = await Club.findOne({where:{name:name},
          attributes:['id', 'name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'latitude', 'longitude'],
-        
+         include:{
+             model:Field,
+             attributes:['players', 'price', 'light', 'surface']
+         }  
+
         });
         if(!nameClub) return res.status(401).json({ Message:"No hay clubes con ese name " });
         return res.status(200).json(nameClub);
@@ -60,7 +75,10 @@ try {
     
     const foundClub = await Club.findAll({
         attributes:['id', 'name', 'description', 'location', 'openHour','closeHour', 'image', 'score', 'latitude', 'longitude'], 
-        
+        include:{
+            model:Field,
+            attributes:['players', 'price', 'light', 'surface']
+        }  
     })
     return res.status(200).json(foundClub);
 } catch (error) {
