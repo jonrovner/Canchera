@@ -50,7 +50,6 @@ const Login = () => {
     let existe = await axios.get(
       `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
     );
-    console.log(existe.data);
 
     var obj = {
       name: r.profileObj.name,
@@ -62,6 +61,7 @@ const Login = () => {
       setOpenModalError(true);
     } else {
       window.localStorage.setItem("user", JSON.stringify(obj));
+      setOpenModal(true);
       let formulario = document.getElementById("formul");
       formulario.reset();
     }
