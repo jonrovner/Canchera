@@ -39,6 +39,12 @@ const UserSignUp = () => {
     if (data.name && data.email && data.password && data.confirmPassword) {
       let existe = await axios.post("http://localhost:3001/signup/user", data);
       if (!existe.data.error) {
+        var obj = {
+          name: existe.data.user.name,
+          email: existe.data.user.email,
+          token: existe.data.token,
+        };
+        window.localStorage.setItem("user", JSON.stringify(obj));
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();

@@ -1,7 +1,8 @@
-import { POST_USERS_SIGNIN } from "../action/index";
+import { POST_USERS_SIGNIN, GET_USERS_EMAIL } from "../action/index";
 const initialState = {
   cancha: [],
   usersignin: [],
+  user: {},
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -10,6 +11,12 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         usersignin: payload,
+      };
+    }
+    case GET_USERS_EMAIL: {
+      return {
+        ...state,
+        user: payload,
       };
     }
 
