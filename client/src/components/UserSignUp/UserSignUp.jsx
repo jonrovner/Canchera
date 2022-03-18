@@ -4,10 +4,12 @@ import axios from "axios";
 import { Validate } from "./validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
+import { GoogleLogin } from "react-google-login";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
+import { post_users_google } from "../../redux/action";
 
 const UserSignUp = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -35,7 +37,7 @@ const UserSignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password && data.confirmPassword) {
-      let existe = await axios.post("http://localhost:3001/signup/owner", data);
+      let existe = await axios.post("http://localhost:3001/signup/user", data);
 
       if (!existe.data.errors) {
         setOpenModal(true);
@@ -46,6 +48,32 @@ const UserSignUp = () => {
       }
     } else {
       console.log("no enviado");
+      setOpenModalError(true);
+    }
+  };
+
+  const responseGoogle = async (r) => {
+    console.log(r.profileObj.name.toString(), r.profileObj.email.toString());
+    let dataGoogle = {
+      name: r.profileObj.name.toString(),
+      email: r.profileObj.email.toString(),
+    };
+    let existe = await axios.post(
+      "http://localhost:3001/singup/google",
+      dataGoogle
+    );
+    console.log(existe.data);
+    if (!existe.message) {
+      var obj = {
+        name: r.profileObj.name,
+        email: r.profileObj.email,
+        token: r.tokenId,
+      };
+      window.localStorage.setItem("user", JSON.stringify(obj));
+      setOpenModal(true);
+      let formulario = document.getElementById("formul");
+      formulario.reset();
+    } else {
       setOpenModalError(true);
     }
   };
@@ -138,9 +166,16 @@ const UserSignUp = () => {
         </div>
         <p className={style.socialText}>O inicia con tu red social favorita</p>
         <div className={style.socialMedia}>
-          <a href="#" className={style.socialIcon}>
+          {/* <a href="#" className={style.socialIcon}>
             <FcGoogle className={style.fabFaGoogle} />
-          </a>
+          </a> */}
+          <GoogleLogin
+            clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
+            buttonText="Sign In with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </div>
       </form>
     </div>
