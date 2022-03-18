@@ -9,6 +9,7 @@ import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
+import Navbar from "./components/NavBar/NavBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,11 +26,27 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/clubDetail" element={<Clubdetail />} />
+        <Route
+          path="/clubDetail"
+          element={
+            <>
+              {" "}
+              <Navbar /> <Clubdetail />{" "}
+            </>
+          }
+        />
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/createClub" element={<CreateClub />} />
+        <Route
+          path="/createClub"
+          element={
+            <>
+              {" "}
+              <Navbar /> <CreateClub />{" "}
+            </>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
