@@ -6,7 +6,8 @@ interface FieldAttributes {
   players: number;
   price: number;  
   image: string;
-  light: boolean;   
+  light: boolean;
+  surface: string;   
 }
 
 
@@ -23,6 +24,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     price!: number;
     image!: string;
     light!: boolean;
+    surface!: string;  
    
 
     static associate(models: any) {
@@ -54,7 +56,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
     light: {
       type: DataTypes.BOOLEAN,       
-      },    
+      },
+    surface: {
+      type: DataTypes.ENUM,
+      values: ['cesped', 'sintetico', 'cemento']      
+    },    
   }, {
     sequelize,
     modelName: 'Field',
