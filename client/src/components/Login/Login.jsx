@@ -7,8 +7,19 @@ import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "./validaciones/validaciones.js";
+import BotonLogout from "../BotonLogout/BotonLogout";
+import { useDispatch, useSelector } from "react-redux";
+import { get_users_email } from "../../redux/action";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const userConect = useSelector((state) => state.usersConect);
+  const user = useSelector((state) => state.user);
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  console.log(userConect);
+
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -37,7 +48,6 @@ const Login = () => {
       if (users.data.hasOwnProperty("msg")) {
         setOpenModalError(true);
       } else {
-        console.log(users);
         var obj = {
           name: users.data.user.name,
           email: users.data.user.email,
@@ -47,6 +57,7 @@ const Login = () => {
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
+        navigate("/");
       }
     } else {
       setOpenModalError(true);
@@ -57,7 +68,7 @@ const Login = () => {
     let existe = await axios.get(
       `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
     );
-
+    console.log(existe);
     var obj = {
       name: r.profileObj.name,
       email: r.profileObj.email,
@@ -68,9 +79,11 @@ const Login = () => {
       setOpenModalError(true);
     } else {
       window.localStorage.setItem("user", JSON.stringify(obj));
+      await dispatch(get_users_email(r.profileObj.name));
       setOpenModal(true);
       let formulario = document.getElementById("formul");
       formulario.reset();
+      navigate("/");
     }
   };
 
@@ -84,69 +97,79 @@ const Login = () => {
 
   return (
     <div className={style.contenedor}>
-      <form
-        id="formul"
-        className={style.signInForm}
-        onSubmit={(e) => {
-          onSubmit(e);
-        }}
-      >
-        <h2 className={style.title}>Sign In</h2>
+      <div className={style.socialMedia}>
+        <BotonLogout />
+      </div>
+      {typeof user.email == "string" ? (
+        <div>Ya estas conectado</div>
+      ) : (
+        <form
+          form
+          id="formul"
+          className={style.signInForm}
+          onSubmit={(e) => {
+            onSubmit(e);
+          }}
+        >
+          <h2 className={style.title}>Sign In</h2>
 
-        <div className={style.inputField}>
-          <MdEmail className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="text"
-            name="email"
-            id="email"
-            placeholder="Email"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.email && <p className={style.error}>{error.email}</p>}
-        </div>
+          <div className={style.inputField}>
+            <MdEmail className={style.fasFaUser} />
+            <input
+              autoComplete="off"
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={(e) => handlerInputChange(e)}
+            />
+          </div>
+          <div className={style.containerError}>
+            {error.email && <p className={style.error}>{error.email}</p>}
+          </div>
 
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.password && <p className={style.error}>{error.password}</p>}
-        </div>
+          <div className={style.inputField}>
+            <RiLockPasswordFill className={style.fasFaUser} />
+            <input
+              autoComplete="off"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={(e) => handlerInputChange(e)}
+            />
+          </div>
+          <div className={style.containerError}>
+            {error.password && <p className={style.error}>{error.password}</p>}
+          </div>
 
-        <div>
-          <input
-            type="submit"
-            className={style.boton}
-            disabled={disabeledSubmit}
-            value="Sign In"
-          />
-          {openModal && <Modal closeModal={setOpenModal} />}
-          {openModalError && <ModalError closeModal={setOpenModalError} />}
-        </div>
-        <p className={style.socialText}>O inicia con tu red social favorita</p>
-        <div className={style.socialMedia}>
-          {/* <a href="#" className={style.socialIcon}>
+          <div>
+            <input
+              type="submit"
+              className={style.boton}
+              disabled={disabeledSubmit}
+              value="Sign In"
+            />
+            {openModal && <Modal closeModal={setOpenModal} />}
+            {openModalError && <ModalError closeModal={setOpenModalError} />}
+          </div>
+          <p className={style.socialText}>
+            O inicia con tu red social favorita
+          </p>
+          <div className={style.socialMedia}>
+            {/* <a href="#" className={style.socialIcon}>
             <FcGoogle className={style.fabFaGoogle} />
           </a> */}
-          <GoogleLogin
-            clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
-            buttonText="Sign In with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
-        </div>
-      </form>
+            <GoogleLogin
+              clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
+              buttonText="Sign In with Google"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
+        </form>
+      )}
     </div>
   );
 };

@@ -1,8 +1,14 @@
-import { POST_USERS_SIGNIN, GET_USERS_EMAIL } from "../action/index";
+import {
+  POST_USERS_SIGNIN,
+  GET_USERS_EMAIL,
+  CLEAR_STATE_USER,
+  LOAD_STATE_USER,
+} from "../action/index";
 const initialState = {
   cancha: [],
   usersignin: [],
-  user: {},
+  user: [],
+  usersConect: [],
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -17,6 +23,20 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         user: payload,
+      };
+    }
+    case LOAD_STATE_USER: {
+      return {
+        ...state,
+        usersConect: [...state.usersConect, payload],
+      };
+    }
+    case CLEAR_STATE_USER: {
+      /*   let filtrados = state.usersConect.filter((u) => u.email !== payload); */
+
+      return {
+        ...state,
+        user: [],
       };
     }
 
