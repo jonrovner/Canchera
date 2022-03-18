@@ -3,9 +3,9 @@ import style from "./Login.module.scss";
 import axios from "axios";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
+import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
 import { Validate } from "./validaciones/validaciones.js";
 
 const Login = () => {
@@ -43,6 +43,27 @@ const Login = () => {
       }
     } else {
       setOpenModalError(true);
+    }
+  };
+
+  const responseGoogle = async (r) => {
+    let existe = await axios.get(
+      `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
+    );
+
+    var obj = {
+      name: r.profileObj.name,
+      email: r.profileObj.email,
+      token: r.tokenId,
+    };
+
+    if (!existe.data.email) {
+      setOpenModalError(true);
+    } else {
+      window.localStorage.setItem("user", JSON.stringify(obj));
+      setOpenModal(true);
+      let formulario = document.getElementById("formul");
+      formulario.reset();
     }
   };
 
@@ -107,13 +128,19 @@ const Login = () => {
         </div>
         <p className={style.socialText}>O inicia con tu red social favorita</p>
         <div className={style.socialMedia}>
-          <a href="#" className={style.socialIcon}>
+          {/* <a href="#" className={style.socialIcon}>
             <FcGoogle className={style.fabFaGoogle} />
-          </a>
+          </a> */}
+          <GoogleLogin
+            clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
+            buttonText="Sign In with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </div>
       </form>
     </div>
   );
 };
-
 export default Login;

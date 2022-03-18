@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import Clubdetail from "./components/ClubDetail/ClubDetail";
 import CreateClub from "./components/createClub/CreateClub";
@@ -8,6 +9,13 @@ import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
 
 function App() {
+  /* useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []); */
   return (
     <div className="App">
       <Routes>
