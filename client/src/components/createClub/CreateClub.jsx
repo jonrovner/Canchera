@@ -9,7 +9,8 @@ const CreateClub = () => {
 
     
     const [ input, setInput] = useState({fields: []}) 
-    const [ location, setLocation] = useState("")   
+    const [ location, setLocation] = useState("")
+    const [ latLong, setLatLong] =  useState({})   
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -31,10 +32,14 @@ const CreateClub = () => {
         const queryString = location.split(" ").join("+")
         console.log('querystring is', queryString)
         axios.get(`https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`)
-        .then( res => console.log(res.data))
+        .then( res => {
+            console.log(res.data)
+            setLatLong({lat:res.data[0].lat, lon:res.data[0].lon})
+        })
     }
     
     console.log('input is ', input)
+    console.log('latLong is', latLong)
     return (
         <div className='createClub'>
             <form onSubmit={(e) => {handleSubmit(e)}}>
@@ -52,19 +57,20 @@ const CreateClub = () => {
             <button onClick={findMap}>find map</button>
             <br />
 
-            <MapContainer center={[51.505, -0.09]} zoom={13} id="map">
+{   latLong.lat && 
+            <MapContainer center={[latLong.lat, latLong.lon]} zoom={13} id="map">
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[51.505, -0.09]}>
+                <Marker position={[latLong.lat, latLong.lon]}>
                     <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                     </Popup>
                 </Marker>
             </MapContainer>
             
-            
+}            
             <label htmlFor="open">horario apertura</label>
             <select onChange={(e)=>handleInput(e)} type="text" name="open">
                 <option value="5">5am</option>
