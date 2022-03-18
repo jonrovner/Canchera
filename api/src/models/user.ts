@@ -58,8 +58,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       }
     },
     password: {
-      type: DataTypes.STRING,
-      allowNull: false,     
+      type: DataTypes.STRING,        
     },
     rol: {
       type: DataTypes.ENUM,
