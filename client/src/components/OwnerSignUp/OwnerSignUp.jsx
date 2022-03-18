@@ -137,12 +137,6 @@ const OwnerSignUp = () => {
           {openModal && <Modal closeModal={setOpenModal} />}
           {openModalError && <ModalError closeModal={setOpenModalError} />}
         </div>
-        <p className={style.socialText}>O inicia con tu red social favorita</p>
-        <div className={style.socialMedia}>
-          <a href="#" className={style.socialIcon}>
-            <FcGoogle className={style.fabFaGoogle} />
-          </a>
-        </div>
       </form>
     </div>
   );

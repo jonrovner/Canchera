@@ -6,7 +6,6 @@ import ModalError from "./Modal/ModalError";
 import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
 import { Validate } from "./validaciones/validaciones.js";
 
 const Login = () => {
@@ -48,17 +47,25 @@ const Login = () => {
   };
 
   const responseGoogle = async (r) => {
-    console.log(r);
+    let existe = await axios.get(
+      `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
+    );
+    console.log(existe.data);
+
     var obj = {
       name: r.profileObj.name,
       email: r.profileObj.email,
       token: r.tokenId,
     };
-    window.localStorage.setItem("user", JSON.stringify(obj));
-  };
 
-  let formulario = document.getElementById("formul");
-  formulario.reset();
+    if (!existe.data.email) {
+      setOpenModalError(true);
+    } else {
+      window.localStorage.setItem("user", JSON.stringify(obj));
+      let formulario = document.getElementById("formul");
+      formulario.reset();
+    }
+  };
 
   const disabeledSubmit = useMemo(() => {
     if (error.email || error.password) {
