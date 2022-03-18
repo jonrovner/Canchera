@@ -3,6 +3,7 @@ import style from "./Login.module.scss";
 import axios from "axios";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
+import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
@@ -45,6 +46,19 @@ const Login = () => {
       setOpenModalError(true);
     }
   };
+
+  const responseGoogle = async (r) => {
+    console.log(r);
+    var obj = {
+      name: r.profileObj.name,
+      email: r.profileObj.email,
+      token: r.tokenId,
+    };
+    window.localStorage.setItem("user", JSON.stringify(obj));
+  };
+
+  let formulario = document.getElementById("formul");
+  formulario.reset();
 
   const disabeledSubmit = useMemo(() => {
     if (error.email || error.password) {
@@ -107,13 +121,19 @@ const Login = () => {
         </div>
         <p className={style.socialText}>O inicia con tu red social favorita</p>
         <div className={style.socialMedia}>
-          <a href="#" className={style.socialIcon}>
+          {/* <a href="#" className={style.socialIcon}>
             <FcGoogle className={style.fabFaGoogle} />
-          </a>
+          </a> */}
+          <GoogleLogin
+            clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
+            buttonText="Sign In with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </div>
       </form>
     </div>
   );
 };
-
 export default Login;
