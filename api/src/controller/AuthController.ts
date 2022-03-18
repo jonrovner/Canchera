@@ -106,4 +106,28 @@ module.exports = {
 
     return res.json({ error: "Ese email ya esta registrado." });
   },
+
+  async googleSingUp(req:Request, res:Response){
+
+     const { name, email } = req.body;
+
+     let newUser = {
+      name,
+      email,
+      rol: "user",
+      status: true,
+    };
+
+    const [user, created] = await User.findOrCreate({
+      where: {
+        email: email,
+      },
+      defaults: newUser,
+    });
+
+    if(!created) return res.json({ message: "Ya existe una cuenta con este email" });
+    return res.json(user);
+
+  }
+
 };
