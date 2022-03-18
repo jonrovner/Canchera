@@ -38,3 +38,12 @@ export const post_users = (data) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const post_users_google = (data) => async (dispatch) => {
+  console.log("Data enviada:", data);
+  try {
+    await axios.post("http://localhost:3001/signup/singup/google", data);
+  } catch (e) {
+    console.log(e);
+  }
+};
