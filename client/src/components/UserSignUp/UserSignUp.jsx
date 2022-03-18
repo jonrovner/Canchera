@@ -62,8 +62,8 @@ const UserSignUp = () => {
       "http://localhost:3001/singup/google",
       dataGoogle
     );
-    console.log(existe.data);
-    if (!existe.message) {
+    console.log(existe.data.message);
+    if (!existe.data.message) {
       var obj = {
         name: r.profileObj.name,
         email: r.profileObj.email,
