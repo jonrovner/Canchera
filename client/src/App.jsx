@@ -7,15 +7,20 @@ import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
+import { useDispatch } from "react-redux";
+import { get_users_email } from "./redux/action";
 
 function App() {
-  /* useEffect(() => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
+      dispatch(get_users_email(foundUser.email));
     }
-  }, []); */
+  }, []);
+
   return (
     <div className="App">
       <Routes>
