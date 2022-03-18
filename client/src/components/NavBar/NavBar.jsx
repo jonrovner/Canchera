@@ -1,27 +1,37 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {AiFillHome,AiOutlineSearch, AiFillMail, AiOutlineUser} from 'react-icons/ai';
+import {AiFillHome,AiOutlineSearch, AiFillMail, AiOutlineUser, AiFillFileAdd} from 'react-icons/ai';
 
 import './NavBar.css'
 
 const Navbar = () => {
     return (
-        <div className='navbar'>
+        <div id='navbar'>
             <div>
-                <a href='#'><AiFillHome/> Home </a>
+                <NavLink exact to='/'>
+                    <h3><AiFillHome/> Home</h3>
+                </NavLink>
             </div>
             <div>
-                <a className='link' href='#'><AiFillMail/> Contact</a>            
-            </div> 
+                <NavLink exact to='/contact'>
+                    <h3><AiFillMail/> Contact</h3>
+                </NavLink>            
+            </div>
+            <div>
+                <NavLink exact to='/createClub'>
+                    <h3><AiFillFileAdd/> Create Club</h3>
+                </NavLink>           
+            </div>  
             <div className='search'>                
                 <NavLink to={'#'}>  
-                    
                     <input type="text" placeholder='Buscar' />                  
                     <button><AiOutlineSearch/></button>                 
                 </NavLink>
             </div> 
             <div className='login'>
-                <a  href='#'><AiOutlineUser/> Login</a> 
+                <NavLink exact to='/login'>
+                    <h3><AiOutlineUser/> Login</h3>
+                </NavLink> 
             </div>
         </div>
     );

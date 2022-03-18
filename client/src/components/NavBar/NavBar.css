@@ -1,21 +1,30 @@
-.navbar {
+#navbar {
     width: 100%;
     background-color: #555;
     overflow: auto;
+    position: fixed;
+    transition: top 0.3s;
   }
 
-  .navbar a {
+  #navbar h3 {
     float: left;
+    display: block;
     text-align: center;
     padding: 12px;
     color: white;
     text-decoration: none;
     font-size: 17px;
   }
+
+  #navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
     
   /* .navbar a:hover {
     background-color: #000;
   } */ 
+  
 
   .login{
     float: right;
