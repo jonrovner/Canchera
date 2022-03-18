@@ -35,31 +35,40 @@ module.exports = {
       });
   },
 
-  userSignUp(req: Request, res: Response) {
+  async userSignUp(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
     let encryptedPassword = bcrypt.hashSync(password, +authConfig.rounds);
 
-    User.create({
+    let newUser = {
       name,
       email,
       password: encryptedPassword,
       rol: "user",
       status: true,
-    })
-      .then((user: any) => {
-        const token = jwt.sign({ user: user }, authConfig.secret, {
-          expiresIn: authConfig.expires,
-        });
+    };
 
-        res.json({
-          user,
-          token,
-        });
-      })
-      .catch((err: any) => {
-        res.status(500).json(err);
+    const [user, created] = await User.findOrCreate({
+      where: {
+        email: email,
+      },
+      defaults: newUser,
+    });
+
+    // si created es true, el usuario fue registrado con exito.
+    // de lo contrario, ese mail ya esta registrado
+    if (created) {
+      const token = jwt.sign({ user: user }, authConfig.secret, {
+        expiresIn: authConfig.expires,
       });
+
+      return res.json({
+        user,
+        token,
+      });
+    }
+
+    return res.json({ error: "Ese email ya esta registrado." });
   },
 
   async ownerSignUp(req: Request, res: Response) {
