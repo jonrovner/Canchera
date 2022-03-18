@@ -11,4 +11,6 @@ router.post("/signup/user", AuthController.userSignUp);
 
 router.post("/signup/owner", AuthController.ownerSignUp);
 
+router.post("/singup/google", AuthController.googleSingUp)
+
 module.exports = router;
