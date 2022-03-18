@@ -26,27 +26,11 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route
-          path="/clubDetail"
-          element={
-            <>
-              {" "}
-              <Navbar /> <Clubdetail />{" "}
-            </>
-          }
-        />
+        <Route path="/clubDetail" element={<> <Navbar /> <Clubdetail /> </>} />
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/createClub"
-          element={
-            <>
-              {" "}
-              <Navbar /> <CreateClub />{" "}
-            </>
-          }
-        />
+        <Route path="/createClub" element={<> <Navbar /> <CreateClub /> </>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
