@@ -37,6 +37,13 @@ const Login = () => {
       if (users.data.hasOwnProperty("msg")) {
         setOpenModalError(true);
       } else {
+        console.log(users);
+        var obj = {
+          name: users.data.user.name,
+          email: users.data.user.email,
+          token: users.data.token,
+        };
+        window.localStorage.setItem("user", JSON.stringify(obj));
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();

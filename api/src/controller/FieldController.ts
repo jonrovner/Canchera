@@ -8,7 +8,7 @@ module.exports = {
     async postField(req: Request, res: Response, next: NextFunction) {
     
         try {
-            const {clubId, players, price, image, light} = req.body;
+            const {clubId, players, price, image, light, surface} = req.body;
             
             if(!players || !price) return res.status(400).json({msg: "Los campos de jugadores y precio son obligatorios"})
 
@@ -19,7 +19,9 @@ module.exports = {
                     price,
                     image,
                     light,
-                    ClubId: clubId
+                    ClubId: clubId,
+                    surface
+
                 });
                 res.json(field);
             }else return res.status(400).json({msg: "El club asociado no existe"})

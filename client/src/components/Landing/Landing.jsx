@@ -7,8 +7,12 @@ import Footer from "../Footer/Footer";
 import heroImg from "../../assets/2.jpg";
 import playerImg from "../../assets/1.jpg";
 import hostImg from "../../assets/4.jpg";
+import { useSelector } from "react-redux";
 
 const Landing = () => {
+  let user = useSelector((state) => state.user);
+  console.log("state: ", user);
+
   return (
     <div className={styles.Landing}>
       <NavBar />
