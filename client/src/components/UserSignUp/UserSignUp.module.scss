@@ -86,6 +86,12 @@
     .boton:hover {
       background-color: #4d84e2;
     }
+    .boton:disabled {
+      background-color: rgba(128, 128, 128, 0.788);
+    }
+    .boton:disabled:hover {
+      background-color: rgba(128, 128, 128, 0.788);
+    }
     .socialText {
       padding: 0.7rem 0;
       font-size: 1rem;

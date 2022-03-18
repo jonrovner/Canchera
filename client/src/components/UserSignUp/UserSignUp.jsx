@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import style from "./UserSignUp.module.scss";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { get_users_email, post_users_owner } from "../../redux/action";
 import { Validate } from "./validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
+import { GoogleLogin } from "react-google-login";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
+import { post_users_google } from "../../redux/action";
 
 const UserSignUp = () => {
-  /* let users = useSelector((state) => state.users); */
-  let dispatch = useDispatch();
-
-  /*  let [info, setInfo] = useState([]); */
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -25,11 +21,6 @@ const UserSignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
-  /*useEffect(() => {
-    dispatch(get_users());
-    /* setInfo(usuarios); 
-  }, [dispatch]);*/
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -46,20 +37,13 @@ const UserSignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password && data.confirmPassword) {
-      /* await dispatch(get_users_email(data.email)); */
-      let users = await axios.get(
-        `http://localhost:3001/user?email=${data.email}`
-      );
+      let existe = await axios.post("http://localhost:3001/signup/user", data);
 
-      console.log(users.data);
-      if (users.data.hasOwnProperty("msg")) {
-        console.log("no existe un usuario registrado con este email");
-        dispatch(post_users_owner(data));
+      if (!existe.data.errors) {
         setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
       } else {
-        console.log("existe un usuario registrado con este email");
         setOpenModalError(true);
       }
     } else {
@@ -68,13 +52,39 @@ const UserSignUp = () => {
     }
   };
 
-  /* const disabeledSubmit = useMemo(() => {
+  const responseGoogle = async (r) => {
+    console.log(r.profileObj.name.toString(), r.profileObj.email.toString());
+    let dataGoogle = {
+      name: r.profileObj.name.toString(),
+      email: r.profileObj.email.toString(),
+    };
+    let existe = await axios.post(
+      "http://localhost:3001/singup/google",
+      dataGoogle
+    );
+    console.log(existe.data.message);
+    if (!existe.data.message) {
+      var obj = {
+        name: r.profileObj.name,
+        email: r.profileObj.email,
+        token: r.tokenId,
+      };
+      window.localStorage.setItem("user", JSON.stringify(obj));
+      setOpenModal(true);
+      let formulario = document.getElementById("formul");
+      formulario.reset();
+    } else {
+      setOpenModalError(true);
+    }
+  };
+
+  const disabeledSubmit = useMemo(() => {
     if (error.name || error.email || error.password) {
       return true;
     }
 
     return false;
-  }, [error]); */
+  }, [error]);
 
   return (
     <div className={style.contenedor}>
@@ -148,7 +158,7 @@ const UserSignUp = () => {
           <input
             type="submit"
             className={style.boton}
-            /* disabled={disabeledSubmit} */
+            disabled={disabeledSubmit}
             value="Register"
           />
           {openModal && <Modal closeModal={setOpenModal} />}
@@ -156,9 +166,16 @@ const UserSignUp = () => {
         </div>
         <p className={style.socialText}>O inicia con tu red social favorita</p>
         <div className={style.socialMedia}>
-          <a href="#" className={style.socialIcon}>
+          {/* <a href="#" className={style.socialIcon}>
             <FcGoogle className={style.fabFaGoogle} />
-          </a>
+          </a> */}
+          <GoogleLogin
+            clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
+            buttonText="Sign In with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </div>
       </form>
     </div>

@@ -12,7 +12,9 @@ const ModalError = ({ closeModal }) => {
           <h1>Ocurrio un error</h1>
         </div>
         <div className={style.body}>
-          <span>Ya existe una cuenta asociada a este email.</span>
+          <span>
+            Ya existe una cuenta asociada a este email. Por favor, Inicia Sesion
+          </span>
         </div>
         <div className={style.footer}>
           <span>need help? 'ayuda'</span>
