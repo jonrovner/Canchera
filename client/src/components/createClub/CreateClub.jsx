@@ -16,8 +16,9 @@ const CreateClub = () => {
 
     const [ location, setLocation] = useState("")
     const [ latLong, setLatLong] =  useState({})
-    const user = useSelector(state => state.user)
     
+    const user = useSelector(state => state.user)
+    console.log('user : ', user)
 
     const handleSubmit = async (e) => {
        e.preventDefault()  
