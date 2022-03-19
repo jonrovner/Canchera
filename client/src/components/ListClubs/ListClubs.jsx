@@ -6,18 +6,18 @@ import CardClub from "../CardClub/CardClub";
 
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
-  console.log(clubes);
+
   let dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(get_all_clubes());
   }, []);
-
   return (
     <div className={style.contenedor}>
       {clubes.map((c) => (
         <CardClub
           key={c.id}
+          id={c.id}
           name={c.name}
           img={c.image}
           location={c.location}
