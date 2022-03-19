@@ -20,3 +20,10 @@
 #map{
     height: 200px;
 }
+
+.validation{
+    display: inline;
+    color: red;
+    font-size: x-small;
+    margin-top: -1%;
+}

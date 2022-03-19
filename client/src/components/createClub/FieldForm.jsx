@@ -9,7 +9,7 @@ const FieldForm = ({handleInput}) => {
 
     return (
         <div>            
-            <select name="size" onChange={(e) => setField({...field, [e.target.name]:e.target.value})}>
+            <select name="players" onChange={(e) => setField({...field, [e.target.name]:e.target.value})}>
                 <option value="">tamaño</option>    
                 <option value="5">5 a 6</option>    
                 <option value="9">7 a 9</option>    
@@ -23,7 +23,9 @@ const FieldForm = ({handleInput}) => {
             </select>
             <label htmlFor="price">Precio</label>
             <input type="text" name="price" onChange={(e) => setField({...field, [e.target.name]:e.target.value})}/>        
-            <button onClick={(e)=>{handleInput(e, field)}}>add</button>
+            <button onClick={(e)=>{
+                e.preventDefault()
+                handleInput(field)}}>add</button>
         </div>
     );
 }
