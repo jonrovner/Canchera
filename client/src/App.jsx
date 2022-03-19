@@ -13,11 +13,11 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/clubDetail" element={<> <NavBar/> <Clubdetail /> </>} />
+        <Route path="/clubDetail" element={<Clubdetail />} />
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/createClub" element={<> <NavBar/> <CreateClub /> </>} />
+        <Route path="/createClub" element={<CreateClub /> } />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
