@@ -48,14 +48,14 @@ const CreateClub = () => {
         e.preventDefault()
         const queryString = location.split(" ").join("+")
         console.log('querystring is', queryString)
-        axios.get(`https://nominatim.openHourstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`)
+        axios.get(`https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`)
         .then( res => {
             console.log(res.data)
+            setInput({...input, latitude:res.data[0].lat, longitude:res.data[0].lon})
             if (!res.data[0].lat){
                 return setValid({...valid, map: 'ingrese una dirección válida'})
             }
             setLatLong({lat:res.data[0].lat, lon:res.data[0].lon})
-            setInput({...input, latitude:res.data[0].lat, longitude:res.data[0].lon})
         })
         .catch(err => {
             setInput(input=>({...input, latitude:'34.60', longitude:'58.38' }))
@@ -64,8 +64,8 @@ const CreateClub = () => {
         })
     }
     
-    //console.log('input is ', input)
-   // console.log('latLong is', latLong)
+    console.log('input is ', input)
+    console.log('latLong is', latLong)
     //console.log('valid:', valid)
     return (
         <div className='createClub'>
@@ -95,8 +95,8 @@ const CreateClub = () => {
 {   latLong.lat && 
             <MapContainer center={[latLong.lat, latLong.lon]} zoom={13} id="map">
                 <TileLayer
-                    attribution='&copy; <a href="https://www.openHourstreetmap.org/copyright">OpenHourStreetMap</a> contributors'
-                    url="https://{s}.tile.openHourstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={[latLong.lat, latLong.lon]}>
                     <Popup>
