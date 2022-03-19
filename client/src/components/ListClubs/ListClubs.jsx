@@ -7,11 +7,14 @@ import CardClub from "../CardClub/CardClub";
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
 
+  console.log(clubes);
+
   let dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(get_all_clubes());
   }, []);
+
   return (
     <div className={style.contenedor}>
       {clubes.map((c) => (

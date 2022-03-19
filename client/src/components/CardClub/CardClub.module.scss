@@ -1,3 +1,4 @@
+
 .link {
   .contenedor {
     margin: 0.5rem;
@@ -29,4 +30,28 @@
 .link:active {
   text-decoration: none;
   text-decoration-color: none;
+
+.contenedor {
+  margin: 0.5rem;
+  background-color: rgb(157, 180, 240);
+  border: 2px solid black;
+  width: 100%rem;
+  height: auto;
+  min-height: 10rem;
+  display: flex;
+  .divImg {
+    width: 25rem;
+    img {
+      height: 110%rem;
+    }
+  }
+  .divInfo {
+    margin-left: 2rem;
+    width: 25rem;
+  }
+  .divContenido {
+    display: flex;
+    flex-direction: column;
+  }
+
 }
