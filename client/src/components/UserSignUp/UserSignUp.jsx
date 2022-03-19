@@ -63,12 +63,6 @@ const UserSignUp = () => {
     );
     console.log(existe.data.message);
     if (!existe.data.message) {
-      var obj = {
-        name: r.profileObj.name,
-        email: r.profileObj.email,
-        token: r.tokenId,
-      };
-      window.localStorage.setItem("user", JSON.stringify(obj));
       setOpenModal(true);
       let formulario = document.getElementById("formul");
       formulario.reset();
