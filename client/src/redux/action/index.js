@@ -4,6 +4,17 @@ export const GET_USERS_EMAIL = "GET_USERS_EMAIL";
 export const POST_USERS_SIGNIN = "POST_USERS_SIGNIN";
 export const CLEAR_STATE_USER = "CLEAR_STATE_USER";
 export const LOAD_STATE_USER = "LOAD_STATE_USER";
+export const GET_ALL_CLUBES = "GET_ALL_CLUBES";
+
+export const get_all_clubes = () => async (dispatch) => {
+  try {
+    let clubes = await axios.get(`http://localhost:3001/club`);
+    console.log(clubes.data);
+    return dispatch({ type: GET_ALL_CLUBES, payload: clubes.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const get_users_email = (email) => async (dispatch) => {
   try {
