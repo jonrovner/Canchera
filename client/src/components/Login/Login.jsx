@@ -9,7 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { Validate } from "./validaciones/validaciones.js";
 import BotonLogout from "../BotonLogout/BotonLogout";
 import { useDispatch, useSelector } from "react-redux";
-import { get_users_email } from "../../redux/action";
+import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const Login = () => {
@@ -28,6 +28,7 @@ const Login = () => {
     password: "",
   });
 
+  
   const handlerInputChange = (e) => {
     var value = e.target.value;
     var name = e.target.name;
@@ -48,13 +49,15 @@ const Login = () => {
       if (users.data.hasOwnProperty("msg")) {
         setOpenModalError(true);
       } else {
-        var obj = {
+        dispatch(set_user(users.data.user))
+
+        /* var obj = {
           name: users.data.user.name,
           email: users.data.user.email,
           token: users.data.token,
-        };
-        window.localStorage.setItem("user", JSON.stringify(obj));
-        setOpenModal(true);
+        }; */
+        window.localStorage.setItem("user", JSON.stringify(users.data.user));
+        //setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
         navigate("/");
@@ -100,9 +103,7 @@ const Login = () => {
       <div className={style.socialMedia}>
         <BotonLogout />
       </div>
-      {typeof user.email == "string" ? (
-        <div>Ya estas conectado</div>
-      ) : (
+      { (
         <form
           form
           id="formul"

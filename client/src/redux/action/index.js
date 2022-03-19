@@ -5,6 +5,7 @@ export const POST_USERS_SIGNIN = "POST_USERS_SIGNIN";
 export const CLEAR_STATE_USER = "CLEAR_STATE_USER";
 export const LOAD_STATE_USER = "LOAD_STATE_USER";
 export const GET_ALL_CLUBES = "GET_ALL_CLUBES";
+export const SET_USER = "SET_USER";
 
 export const get_all_clubes = () => async (dispatch) => {
   try {
@@ -69,3 +70,7 @@ export const load_state_user = (user) => async (dispatch) => {
   console.log(user);
   return dispatch({ type: LOAD_STATE_USER, payload: user });
 };
+
+export const set_user = (user) => async (dispatch) => {
+  return dispatch({type: SET_USER, payload: user})
+}
