@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Fieldcalendar from '../FieldCalendar/FieldCalendar.jsx'
+import FieldCalendar from '../FieldCalendar/FieldCalendar.jsx'
 import {
     setHours,
     setMinutes,
@@ -79,7 +79,7 @@ const Clubdetail = () => {
            <h2>Calendario</h2>
            {detail && detail.fields && detail.fields.map( field => (
                
-               <Fieldcalendar 
+               <FieldCalendar 
                day={selectedDay}
                close={detail.closeHour}
                players={field.players}
