@@ -3,8 +3,10 @@ import {
   GET_USERS_EMAIL,
   CLEAR_STATE_USER,
   LOAD_STATE_USER,
+  GET_ALL_CLUBES,
 } from "../action/index";
 const initialState = {
+  clubes: [],
   cancha: [],
   usersignin: [],
   user: [],
@@ -13,6 +15,12 @@ const initialState = {
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case GET_ALL_CLUBES: {
+      return {
+        ...state,
+        clubes: payload,
+      };
+    }
     case POST_USERS_SIGNIN: {
       return {
         ...state,
