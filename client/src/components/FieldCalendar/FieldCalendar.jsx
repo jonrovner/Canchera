@@ -8,11 +8,9 @@ import {
 } from 'date-fns'
 import './fieldCalendar.css'
 
-const Fieldcalendar = ({day, close, players, ilumination, price, handleClick}) => {
+const FieldCalendar = ({day, close, players, ilumination, price, handleClick}) => {
     
-    console.log('day is ', day)
-    
-     const hours = eachHourOfInterval({
+    const hours = eachHourOfInterval({
         start: day,
         end: setHours(day, close)
     }) 
@@ -23,16 +21,16 @@ const Fieldcalendar = ({day, close, players, ilumination, price, handleClick}) =
             <div className={'hoursCalendar'}>
 
             {
-                    hours && hours.map( (date, i) => (
-                        <div className={'hour'} key={i} onClick={()=>handleClick(date)}>
-                            {getHours(date)}hs
-                        </div>
-                    ))
-                }
+                hours && hours.map( (date, i) => (
+                    <div className={'hour'} key={i} onClick={()=>handleClick(date)}>
+                        {getHours(date)}hs
+                    </div>
+                ))
+            }
 
             </div>
         </div>
     );
 }
 
-export default Fieldcalendar;
+export default FieldCalendar;

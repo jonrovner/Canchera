@@ -15,9 +15,9 @@ async postClub(req:Request, res:Response, next:NextFunction){
 
     const user= await User.findOne({where:{id:userId}}) 
 
-    const club = await Club.findOne({where:{ UserId: userId }})
+    //const club = await Club.findOne({where:{ UserId: userId }})
 
-    if(user && user.rol === "owner" && !club){
+    if(user && user.rol === "owner" ){
 
         
         
