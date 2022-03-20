@@ -4,6 +4,7 @@ import {
   CLEAR_STATE_USER,
   LOAD_STATE_USER,
   GET_ALL_CLUBES,
+  SET_USER,
 } from "../action/index";
 const initialState = {
   clubes: [],
@@ -28,6 +29,7 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
     case GET_USERS_EMAIL: {
+      console.log('updating user')
       return {
         ...state,
         user: payload,
@@ -46,6 +48,12 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         user: [],
       };
+    }
+    case SET_USER: {
+      return {
+        ...state,
+        user: payload
+      }
     }
 
     default:
