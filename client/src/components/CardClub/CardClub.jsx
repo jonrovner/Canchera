@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./CardClub.module.scss";
 
-const CardClub = ({ id, name, img, location, openHour, closeHour }) => {
+const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
   return (
     <Link className={style.link} to={`/club/${id}`}>
       <div className={style.contenedor}>
@@ -17,6 +17,12 @@ const CardClub = ({ id, name, img, location, openHour, closeHour }) => {
             <span>
               Horario: {openHour}am-{closeHour}pm
             </span>
+            {Fields?.map((f) => (
+              <div>
+                <li>Futbol {f.players}</li>
+                <label htmlFor="price">${f.price}</label>
+              </div>
+            ))}
           </div>
         </div>
       </div>
