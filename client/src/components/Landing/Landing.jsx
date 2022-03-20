@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const Landing = () => {
   let user = useSelector((state) => state.user);
-  console.log("state: ", user);
+  //console.log("state: ", user);
 
   return (
     <div className={styles.Landing}>
