@@ -15,7 +15,6 @@ import ListClubs from "./components/ListClubs/ListClubs";
 function App() {
   const dispatch = useDispatch();
 
-  /* 
   let fn = async (usuario) => {
     await dispatch(get_users_email(usuario.email));
   };
@@ -25,8 +24,7 @@ function App() {
       const foundUser = JSON.parse(loggedInUser);
       fn(foundUser);
     }
-  }, []); 
-  */
+  }, []);
 
   return (
     <div className="App">
