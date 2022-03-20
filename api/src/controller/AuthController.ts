@@ -38,6 +38,10 @@ module.exports = {
   async userSignUp(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
+    if (!name) return res.json({ error: "Nombre es requerido." });
+    if (!email) return res.json({ error: "Email es requerido." });
+    if (!password) return res.json({ error: "Password es requerido." });
+
     let encryptedPassword = bcrypt.hashSync(password, +authConfig.rounds);
 
     let newUser = {
@@ -74,6 +78,10 @@ module.exports = {
   async ownerSignUp(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
+    if (!name) return res.json({ error: "Nombre es requerido." });
+    if (!email) return res.json({ error: "Email es requerido." });
+    if (!password) return res.json({ error: "Password es requerido." });
+
     let encryptedPassword = bcrypt.hashSync(password, +authConfig.rounds);
 
     let newUser = {
@@ -107,11 +115,10 @@ module.exports = {
     return res.json({ error: "Ese email ya esta registrado." });
   },
 
-  async googleSingUp(req:Request, res:Response){
+  async googleSingUp(req: Request, res: Response) {
+    const { name, email } = req.body;
 
-     const { name, email } = req.body;
-
-     let newUser = {
+    let newUser = {
       name,
       email,
       rol: "user",
@@ -125,9 +132,8 @@ module.exports = {
       defaults: newUser,
     });
 
-    if(!created) return res.json({ message: "Ya existe una cuenta con este email" });
+    if (!created)
+      return res.json({ message: "Ya existe una cuenta con este email" });
     return res.json(user);
-
-  }
-
+  },
 };
