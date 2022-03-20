@@ -5,7 +5,9 @@ import {
   LOAD_STATE_USER,
   GET_ALL_CLUBES,
   SET_USER,
+  ORDER_CLUBS,
 } from "../action/index";
+import { order } from "./metodos/order";
 const initialState = {
   clubes: [],
   cancha: [],
@@ -29,7 +31,7 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
     case GET_USERS_EMAIL: {
-      console.log('updating user')
+      console.log("updating user");
       return {
         ...state,
         user: payload,
@@ -52,8 +54,16 @@ function rootReducer(state = initialState, { type, payload }) {
     case SET_USER: {
       return {
         ...state,
-        user: payload
-      }
+        user: payload,
+      };
+    }
+
+    case ORDER_CLUBS: {
+      let ordered = order(state.clubes, payload);
+      return {
+        ...state,
+        clubes: ordered,
+      };
     }
 
     default:

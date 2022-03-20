@@ -6,6 +6,7 @@ export const CLEAR_STATE_USER = "CLEAR_STATE_USER";
 export const LOAD_STATE_USER = "LOAD_STATE_USER";
 export const GET_ALL_CLUBES = "GET_ALL_CLUBES";
 export const SET_USER = "SET_USER";
+export const ORDER_CLUBS = "ORDER_CLUBS";
 
 export const get_all_clubes = () => async (dispatch) => {
   try {
@@ -72,5 +73,9 @@ export const load_state_user = (user) => async (dispatch) => {
 };
 
 export const set_user = (user) => async (dispatch) => {
-  return dispatch({type: SET_USER, payload: user})
-}
+  return dispatch({ type: SET_USER, payload: user });
+};
+
+export const order_clubs = (order) => {
+  return { type: ORDER_CLUBS, payload: order };
+};
