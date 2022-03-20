@@ -9,6 +9,7 @@ export const SET_USER = "SET_USER";
 export const ORDER_NAME_CLUBS = "ORDER_NAME_CLUBS";
 export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
 
+
 export const get_all_clubes = () => async (dispatch) => {
   try {
     let clubes = await axios.get(`http://localhost:3001/club`);
@@ -77,10 +78,12 @@ export const set_user = (user) => async (dispatch) => {
   return dispatch({ type: SET_USER, payload: user });
 };
 
+
 export const order_name_clubs = (order) => {
   return { type: ORDER_NAME_CLUBS, payload: order };
 };
 
 export const order_price_clubs = (order) => {
   return { type: ORDER_PRICE_CLUBS, payload: order };
+
 };
