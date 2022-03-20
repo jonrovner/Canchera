@@ -23,6 +23,16 @@ export const order = (array, orderBy) => {
       }
       return 0;
     });
+
+  } else if (orderBy === "hp") {
+    array = array
+      .map((a) => a.Fields)
+      .map((f) => f.slice().sort((b, a) => a.price - b.price));
+  } else if (orderBy === "lp") {
+    array = array.map((a) =>
+      a.Fields.map((f) => f.slice().sort((b, a) => b.price - a.price))
+    );
+
   }
 
   return array;
