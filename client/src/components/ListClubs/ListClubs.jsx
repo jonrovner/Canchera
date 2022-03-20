@@ -3,7 +3,8 @@ import style from "./ListClubs.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { get_all_clubes } from "../../redux/action";
 import CardClub from "../CardClub/CardClub";
-import Order from "../Order/Order";
+import OrderName from "../Order/OrderName";
+import OrderPrice from "../Order/OrderPrice";
 
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
@@ -18,7 +19,8 @@ const ListClubs = () => {
 
   return (
     <>
-      <Order />
+      <OrderName />
+      <OrderPrice />
       <div className={style.contenedor}>
         {clubes.map((c) => (
           <CardClub

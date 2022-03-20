@@ -1,19 +1,19 @@
 import React from "react";
-import style from "./Order.module.scss";
+import style from "./OrderName.module.scss";
 import { useDispatch } from "react-redux";
-import { order_clubs } from "../../redux/action";
+import { order_name_clubs } from "../../redux/action";
 
 const Order = () => {
   const dispatch = useDispatch();
 
   const handleOrderByFilter = (e) => {
     let orderBy = e.target.value;
-    dispatch(order_clubs(orderBy));
+    dispatch(order_name_clubs(orderBy));
   };
 
   return (
     <div className={style.contenedor}>
-      <label htmlFor="orderBy">Order By:</label>
+      <label htmlFor="orderBy">Order By Name:</label>
       <select
         data-testid="select-input"
         className={style.mainSelect}
