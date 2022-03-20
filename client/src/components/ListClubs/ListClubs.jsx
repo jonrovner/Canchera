@@ -29,6 +29,7 @@ const ListClubs = () => {
             location={c.location}
             openHour={c.openHour}
             closeHour={c.closeHour}
+            Fields={c.Fields}
           />
         ))}
       </div>
