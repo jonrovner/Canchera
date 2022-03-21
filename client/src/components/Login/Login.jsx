@@ -38,7 +38,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      let users = await axios.post(`http://localhost:3001/signin`, data);
+      let users = await axios.post(`/signin`, data);
 
       if (users.data.hasOwnProperty("msg")) {
         setOpenModalError(true);
@@ -63,7 +63,7 @@ const Login = () => {
 
   const responseGoogle = async (r) => {
     let existe = await axios.get(
-      `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
+      `/user?email=${r.profileObj.email.toString()}`
     );
     console.log(existe);
     var obj = {
