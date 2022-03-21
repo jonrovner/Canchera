@@ -18,7 +18,6 @@ let transporter = nodemailer.createTransport({
 
 const sendEmail = async (email, subject, html) => {
   try {
-
     await transporter.sendMail({
       from: `Canchera <${email.user}>`, // sender address
       to: email, // list of receivers
@@ -28,14 +27,12 @@ const sendEmail = async (email, subject, html) => {
     });
   } catch (error) {
     console.log(error);
-
   }
-
 };
 
 const getTemplate = (name, token) => {
   let url;
-  if (true) {
+  if (process.env.NODE_ENV) {
     url = "https://canchera.herokuapp.com";
   } else {
     url = "http://localhost:3001";

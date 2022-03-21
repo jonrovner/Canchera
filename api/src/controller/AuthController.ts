@@ -168,7 +168,8 @@ module.exports = {
         status: true,
       });
 
-      if (true) return res.redirect("https://canchera.vercel.app/login");
+      if (process.env.NODE_ENV)
+        return res.redirect("https://canchera.vercel.app/login");
 
       return res.redirect("http://localhost:3000/login");
     } catch (error) {
