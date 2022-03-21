@@ -29,7 +29,7 @@ const OwnerSignUp = () => {
         [e.target.name]: e.target.value,
       };
     });
-    setError(Validate({ ...data, [name]: value }));
+    //setError(Validate({ ...data, [name]: value }));
   };
 
   const onSubmit = async (e) => {
