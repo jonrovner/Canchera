@@ -1,0 +1,12 @@
+POST http://localhost:3001/booking HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId": "88700cce-e0ff-4fd9-9703-a1d9bc86e885",
+    "dates": [
+        {
+            "time": "2022-03-21T17:00:00.960Z",
+            "FieldId": "1"
+        }
+    ]
+}

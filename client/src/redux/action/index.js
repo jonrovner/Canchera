@@ -8,6 +8,19 @@ export const GET_ALL_CLUBES = "GET_ALL_CLUBES";
 export const SET_USER = "SET_USER";
 export const ORDER_NAME_CLUBS = "ORDER_NAME_CLUBS";
 export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
+export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL"
+
+
+export const get_club_detail = (clubId) => async (dispatch) => {
+  try {
+    let club = await axios.get(`http://localhost:3001/club/${clubId}`)
+    let bookings = await axios.get(`http://localshost:3001/booking/${clubId}`)
+    let resData = {...club.data, ...bookings.data}
+    return dispatch({type: GET_CLUB_DETAIL, payload: resData})
+  } catch (error){ console.log(error)}
+
+
+}
 
 export const get_all_clubes = () => async (dispatch) => {
   try {
