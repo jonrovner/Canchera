@@ -27,7 +27,6 @@ const sendEmail = async (email, subject, html) => {
     });
   } catch (error) {
     console.log(error);
-  }
 };
 
 const getTemplate = (name, token) => {
