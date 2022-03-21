@@ -5,41 +5,17 @@ import {
     setMinutes,
     addDays
 } from 'date-fns'
-  
-const detail = {
-    id: 1,
-    name: 'La pelota no se mancha',
-    description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni',
-    location: 'Av. San Martín 1042, CABA',
-    openHour: 8,
-    closeHour: 22,
-    image: 'https://picsum.photos/200/300',
-    score: '5',
-    fields: [
-        {
-            id: 1,
-            players: 5,
-            price: 2500,
-            image: 'https://picsum.photos/200/300',
-            light: true,
-            reservations: ["2022-03-16T11:00:06.449Z", "2022-03-23T11:00:06.449Z"]
-            
-        },
-        {
-            id: 2,
-            players: 11,
-            price: 4500,
-            image: 'https://picsum.photos/200/300',
-            light: false,
-            reservations: ["2022-03-16T12:00:06.449Z", "2022-03-16T13:00:06.449Z"]
-
-         }
-    ],
-    
-}
-
+import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Clubdetail = () => {
+    const params = useParams()
+    const clubs = useSelector( state => state.clubes)
+    
+    console.log(clubs)
+    const detail = clubs && clubs.find( club => club.id === params.id)
+    
+
     const now = new Date()
     const today = setMinutes(setHours(now, detail.openHour), 0)
     const [selectedDay, setSelectedDay] = useState(today)
@@ -68,6 +44,7 @@ const Clubdetail = () => {
         }        
     }
     
+    console.log('fields', detail.fields)
     
     return (
        <div className='clubDetail'>
@@ -77,7 +54,7 @@ const Clubdetail = () => {
            <p>{detail.description}</p>
            <p>horario: de {detail.openHour} a {detail.closeHour}</p>
            <h2>Calendario</h2>
-           {detail && detail.fields && detail.fields.map( field => (
+           {detail && detail.Fields && detail.Fields.map( field => (
                
                <FieldCalendar 
                day={selectedDay}
