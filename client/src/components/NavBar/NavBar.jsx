@@ -47,7 +47,9 @@ const Navbar = () => {
       </div>
       <div className="login">
         {typeof user.email === "string" ? (
-          <BotonLogout />
+          <h3>
+            <BotonLogout />
+          </h3>
         ) : (
           <NavLink exact="true" to="/login">
             <h3>
