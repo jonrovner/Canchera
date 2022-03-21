@@ -6,36 +6,19 @@ const email = {
   pass: process.env.EMAIL_PASS,
 };
 
-/* let transporter = nodemailer.createTransport({
-  host: "smtp.sendgrid.net",
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
     user: email.user, // generated ethereal user
     pass: email.pass, // generated ethereal password
   },
-}); */
+});
 
 const sendEmail = async (email, subject, html) => {
-  const sgMail = require("@sendgrid/mail");
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const msg = {
-    to: email, // Change to your recipient
-    from: "javier.musso96@gmail.com", // Change to your verified sender
-    subject: subject,
-    text: "test text",
-    html: html,
-  };
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("Email sent");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  try {
 
-  /* try {
     await transporter.sendMail({
       from: `Canchera <${email.user}>`, // sender address
       to: email, // list of receivers
@@ -45,7 +28,9 @@ const sendEmail = async (email, subject, html) => {
     });
   } catch (error) {
     console.log(error);
-  } */
+
+  }
+
 };
 
 const getTemplate = (name, token) => {
