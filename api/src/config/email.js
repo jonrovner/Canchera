@@ -18,6 +18,7 @@ let transporter = nodemailer.createTransport({
 
 const sendEmail = async (email, subject, html) => {
   try {
+
     await transporter.sendMail({
       from: `Canchera <${email.user}>`, // sender address
       to: email, // list of receivers
@@ -27,7 +28,9 @@ const sendEmail = async (email, subject, html) => {
     });
   } catch (error) {
     console.log(error);
+
   }
+
 };
 
 const getTemplate = (name, token) => {
