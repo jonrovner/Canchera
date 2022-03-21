@@ -21,6 +21,7 @@
 const db = require("./src/db");
 import server from "./src/app";
 
+
 // Syncing all the models at once.
 db.sequelize.sync({ force: true }).then(() => {
   server.listen(process.env.PORT, () => {
