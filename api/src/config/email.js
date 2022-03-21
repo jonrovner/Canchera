@@ -1,9 +1,5 @@
 const nodemailer = require('nodemailer');
 
-const email = {
-    user:'leitochaso10@gmail.com',
-    pass:'eswsbrqdxvqajjxu'
-}
 
 
 let transporter = nodemailer.createTransport({
