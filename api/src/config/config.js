@@ -6,8 +6,9 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     port: process.env.DBPORT || 5432,
     database: process.env.DB_NAME,
-    host: "127.0.0.1",
+    host: process.env.DB_HOST,
     dialect: "postgres",
+    logging: false,
   },
   test: {
     username: "root",
@@ -17,10 +18,20 @@ module.exports = {
     dialect: "mysql",
   },
   production: {
-    username: "root",
-    password: null,
-    database: "database_production",
-    host: "127.0.0.1",
-    dialect: "mysql",
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DBPORT || 5432,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: {
+        require: true,
+        // Ref.: https://github.com/brianc/node-postgres/issues/2009
+        rejectUnauthorized: false,
+      },
+      keepAlive: true,
+    },
+    ssl: true,
   },
 };

@@ -7,18 +7,13 @@ import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "./validaciones/validaciones.js";
-import BotonLogout from "../BotonLogout/BotonLogout";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-  const userConect = useSelector((state) => state.usersConect);
-  const user = useSelector((state) => state.user);
   let dispatch = useDispatch();
   let navigate = useNavigate();
-
-  console.log(userConect);
 
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
@@ -28,7 +23,6 @@ const Login = () => {
     password: "",
   });
 
-  
   const handlerInputChange = (e) => {
     var value = e.target.value;
     var name = e.target.name;
@@ -38,18 +32,18 @@ const Login = () => {
         [e.target.name]: e.target.value,
       };
     });
-    setError(Validate({ ...data, [name]: value }));
+    //setError(Validate({ ...data, [name]: value }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      let users = await axios.post(`http://localhost:3001/signin`, data);
+      let users = await axios.post(`/signin`, data);
 
       if (users.data.hasOwnProperty("msg")) {
         setOpenModalError(true);
       } else {
-        dispatch(set_user(users.data.user))
+        dispatch(set_user(users.data.user));
 
         /* var obj = {
           name: users.data.user.name,
@@ -69,7 +63,7 @@ const Login = () => {
 
   const responseGoogle = async (r) => {
     let existe = await axios.get(
-      `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
+      `/user?email=${r.profileObj.email.toString()}`
     );
     console.log(existe);
     var obj = {
@@ -100,10 +94,7 @@ const Login = () => {
 
   return (
     <div className={style.contenedor}>
-      <div className={style.socialMedia}>
-        <BotonLogout />
-      </div>
-      { (
+      {
         <form
           form
           id="formul"
@@ -170,7 +161,7 @@ const Login = () => {
             />
           </div>
         </form>
-      )}
+      }
     </div>
   );
 };

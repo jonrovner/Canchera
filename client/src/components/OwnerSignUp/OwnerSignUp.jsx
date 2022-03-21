@@ -29,14 +29,14 @@ const OwnerSignUp = () => {
         [e.target.name]: e.target.value,
       };
     });
-    setError(Validate({ ...data, [name]: value }));
+    //setError(Validate({ ...data, [name]: value }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     if (data.name && data.email && data.password && data.confirmPassword) {
-      let existe = await axios.post("http://localhost:3001/signup/owner", data);
+      let existe = await axios.post("/signup/owner", data);
 
       if (!existe.data.error) {
         setOpenModal(true);

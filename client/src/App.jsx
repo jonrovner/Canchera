@@ -15,7 +15,6 @@ import ListClubs from "./components/ListClubs/ListClubs";
 function App() {
   const dispatch = useDispatch();
 
-  /* 
   let fn = async (usuario) => {
     await dispatch(get_users_email(usuario.email));
   };
@@ -25,35 +24,19 @@ function App() {
       const foundUser = JSON.parse(loggedInUser);
       fn(foundUser);
     }
-  }, []); 
-  */
+  }, []);
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route
-          path="/clubDetail"
-          element={
-            <>
-              {" "}
-              <Navbar /> <Clubdetail />{" "}
-            </>
-          }
-        />
+       
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/createClub"
-          element={
-            <>
-              {" "}
-              <Navbar /> <CreateClub />{" "}
-            </>
-          }
-        />
+        <Route path="/createClub" element={<CreateClub />}/>
         <Route path="/clubs" element={<ListClubs />} />
+        <Route path="/club/:id" element={<Clubdetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -16,9 +16,8 @@ const Footer = () => {
         <iframe
           height="120%"
           src="https://player.vimeo.com/video/291893941?h=b268c1e346&muted=1&autoplay=1&loop=1&transparent=0&background=1&controls=0"
-          frameborder="0"
+          frameBorder="0"
           allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen=""
         ></iframe>
       </div>
       <div className={styles.content}>

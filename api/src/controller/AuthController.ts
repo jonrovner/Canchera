@@ -1,8 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 const { User } = require("../db.ts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.js");
+const { sendEmail, getTemplate } = require("../config/email");
+const env = process.env.NODE_ENV || "development";
+const config = require("../config/config")[env];
 
 module.exports = {
   //Login
@@ -16,7 +19,7 @@ module.exports = {
     })
       .then((user: any) => {
         if (!user) {
-          res
+          return res
             .status(201)
             .json({ msg: "Usuario con este correo no encontrado" });
         } else {
@@ -24,19 +27,29 @@ module.exports = {
             const token = jwt.sign({ user: user }, authConfig.secret, {
               expiresIn: authConfig.expires,
             });
-            res.json({ user: user, token: token });
+
+            if (user.status !== true)
+              return res.json({
+                msg: "Antes de loguearte confirma el mail que te fue enviado",
+              });
+
+            return res.json({ user: user, token: token });
           } else {
-            res.status(202).json({ msg: "Contraseña incorrecta" });
+            return res.status(202).json({ msg: "Contraseña incorrecta" });
           }
         }
       })
       .catch((err: any) => {
-        res.status(500).json(err);
+        return res.status(500).json(err);
       });
   },
 
   async userSignUp(req: Request, res: Response) {
     const { name, email, password } = req.body;
+
+    if (!name) return res.json({ error: "Nombre es requerido." });
+    if (!email) return res.json({ error: "Email es requerido." });
+    if (!password) return res.json({ error: "Password es requerido." });
 
     let encryptedPassword = bcrypt.hashSync(password, +authConfig.rounds);
 
@@ -45,7 +58,7 @@ module.exports = {
       email,
       password: encryptedPassword,
       rol: "user",
-      status: true,
+      //status: true,
     };
 
     const [user, created] = await User.findOrCreate({
@@ -74,6 +87,10 @@ module.exports = {
   async ownerSignUp(req: Request, res: Response) {
     const { name, email, password } = req.body;
 
+    if (!name) return res.json({ error: "Nombre es requerido." });
+    if (!email) return res.json({ error: "Email es requerido." });
+    if (!password) return res.json({ error: "Password es requerido." });
+
     let encryptedPassword = bcrypt.hashSync(password, +authConfig.rounds);
 
     let newUser = {
@@ -81,7 +98,7 @@ module.exports = {
       email,
       password: encryptedPassword,
       rol: "owner",
-      status: false,
+      //status: false,
     };
 
     const [user, created] = await User.findOrCreate({
@@ -98,6 +115,9 @@ module.exports = {
         expiresIn: authConfig.expires,
       });
 
+      const template = getTemplate(name, token);
+      await sendEmail(email, "Comunidad de Canchera", template);
+
       return res.json({
         user,
         token,
@@ -107,11 +127,10 @@ module.exports = {
     return res.json({ error: "Ese email ya esta registrado." });
   },
 
-  async googleSingUp(req:Request, res:Response){
+  async googleSingUp(req: Request, res: Response) {
+    const { name, email } = req.body;
 
-     const { name, email } = req.body;
-
-     let newUser = {
+    let newUser = {
       name,
       email,
       rol: "user",
@@ -125,9 +144,36 @@ module.exports = {
       defaults: newUser,
     });
 
-    if(!created) return res.json({ message: "Ya existe una cuenta con este email" });
+    if (!created)
+      return res.json({ message: "Ya existe una cuenta con este email" });
     return res.json(user);
+  },
 
-  }
+  async confirmUser(req: Request, res: Response, next: NextFunction) {
+    const { token } = req.params;
 
+    try {
+      const data = await jwt.verify(token, authConfig.secret);
+
+      if (data === null) res.json({ msg: "Error al obtener la data" });
+
+      const { user } = data;
+
+      const usuario = await User.findOne({ where: { email: user.email } });
+
+      if (!usuario) return res.json({ msg: "Error en la validacion" });
+
+      await usuario.update({
+        ...usuario,
+        status: true,
+      });
+
+      if (process.env.NODE_ENV)
+        return res.redirect("https://canchera.vercel.app/login");
+
+      return res.redirect("http://localhost:3000/login");
+    } catch (error) {
+      next(error);
+    }
+  },
 };
