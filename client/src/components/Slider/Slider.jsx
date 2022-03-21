@@ -27,7 +27,6 @@ const Slider = () => {
     },
   ];
 
-  console.log(currentSlider);
   const handleOnClick = (way) => {
     way === "left"
       ? setCurrentSlider(currentSlider > 0 ? currentSlider - 1 : 3)
