@@ -69,7 +69,7 @@ const Login = () => {
 
   const responseGoogle = async (r) => {
     let existe = await axios.get(
-      `http://localhost:3001/user?email=${r.profileObj.email.toString()}`
+      `/user?email=${r.profileObj.email.toString()}`
     );
     console.log(existe);
     var obj = {
