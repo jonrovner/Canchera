@@ -37,7 +37,7 @@ const UserSignUp = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.name && data.email && data.password && data.confirmPassword) {
-      let existe = await axios.post("http://localhost:3001/signup/user", data);
+      let existe = await axios.post("/signup/user", data);
       if (!existe.data.error) {
         setOpenModal(true);
         let formulario = document.getElementById("formul");

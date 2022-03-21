@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import BotonLogout from "../BotonLogout/BotonLogout";
 import {
   AiFillHome,
   AiOutlineSearch,
@@ -9,12 +10,14 @@ import {
 } from "react-icons/ai";
 
 import "./NavBar.css";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  let user = useSelector((state) => state.user);
   return (
     <div id="navbar">
       <div>
-        <NavLink exact="true" to="/">
+        <NavLink exact="true" to="/clubs">
           <h3>
             <AiFillHome /> Home
           </h3>
@@ -43,9 +46,24 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="login">
-        <NavLink exact="true" to="/login">
+        {typeof user.email === "string" ? (
+          <BotonLogout />
+        ) : (
+          <NavLink exact="true" to="/login">
+            <h3>
+              <AiOutlineUser /> Login
+            </h3>
+          </NavLink>
+        )}
+
+        <NavLink exact="true" to="signup/owner">
           <h3>
-            <AiOutlineUser /> Login
+            <AiOutlineUser /> Registrate como Dueño
+          </h3>
+        </NavLink>
+        <NavLink exact="true" to="signup/user">
+          <h3>
+            <AiOutlineUser /> Registrate como Jugador
           </h3>
         </NavLink>
       </div>
