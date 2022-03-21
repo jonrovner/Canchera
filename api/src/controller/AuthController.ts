@@ -3,8 +3,8 @@ const { User } = require("../db.ts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.js");
-const { sendEmail, getTemplate } = require('../config/email');
-const env = process.env.NODE_ENV || 'development';
+const { sendEmail, getTemplate } = require("../config/email");
+const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 
 module.exports = {
@@ -18,20 +18,20 @@ module.exports = {
       },
     })
       .then((user: any) => {
-         
-        
         if (!user) {
-         return  res
-          .status(201)
-          .json({ msg: "Usuario con este correo no encontrado" });
+          return res
+            .status(201)
+            .json({ msg: "Usuario con este correo no encontrado" });
         } else {
-
           if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign({ user: user }, authConfig.secret, {
               expiresIn: authConfig.expires,
             });
 
-            if(user.status !== true) return res.json({ msg:"Antes de loguearte confirma el mail que te fue enviado" });
+            if (user.status !== true)
+              return res.json({
+                msg: "Antes de loguearte confirma el mail que te fue enviado",
+              });
 
             return res.json({ user: user, token: token });
           } else {
@@ -40,7 +40,7 @@ module.exports = {
         }
       })
       .catch((err: any) => {
-       return  res.status(500).json(err);
+        return res.status(500).json(err);
       });
   },
 
@@ -114,10 +114,11 @@ module.exports = {
       const token = jwt.sign({ user: user }, authConfig.secret, {
         expiresIn: authConfig.expires,
       });
-   
-      
+
       const template = getTemplate(name, token);
-      await sendEmail(email, "Comunidad de Canchera", template );
+      console.log("sending email");
+
+      await sendEmail(email, "Comunidad de Canchera", template);
 
       return res.json({
         user,
@@ -150,36 +151,31 @@ module.exports = {
     return res.json(user);
   },
 
-  async confirmUser(req:Request, res:Response, next:NextFunction){
-     const { token } = req.params;
+  async confirmUser(req: Request, res: Response, next: NextFunction) {
+    const { token } = req.params;
 
-     try {
-       const data = await jwt.verify(token, authConfig.secret);
-       
-      
-       if(data === null) res.json({ msg:"Error al obtener la data" });
+    try {
+      const data = await jwt.verify(token, authConfig.secret);
 
-       const { user } = data;
-       
-       
-      
-       const usuario = await User.findOne({ where:{email:user.email}});
+      if (data === null) res.json({ msg: "Error al obtener la data" });
 
-       if(!usuario) return res.json({ msg:"Error en la validacion" });
+      const { user } = data;
 
-       await usuario.update({
-         ...usuario,
-         status:true
-       });
+      const usuario = await User.findOne({ where: { email: user.email } });
 
-       if(config.use_env_variable) return res.redirect("https://canchera.vercel.app/login");
+      if (!usuario) return res.json({ msg: "Error en la validacion" });
 
-       return res.redirect("http://localhost:3000/login");
+      await usuario.update({
+        ...usuario,
+        status: true,
+      });
 
-     } catch (error) {
-       next(error)
-     }
+      if (config.use_env_variable)
+        return res.redirect("https://canchera.vercel.app/login");
 
-  }
-
+      return res.redirect("http://localhost:3000/login");
+    } catch (error) {
+      next(error);
+    }
+  },
 };
