@@ -23,8 +23,10 @@ import server from "./src/app";
 
 
 // Syncing all the models at once.
+
 db.sequelize.sync({ force: true }).then(() => {
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001");
   });
 });
+
