@@ -41,7 +41,7 @@
 }
 
 .Landing .content .hero h1, .Landing .content .player h1, .Landing .content .host h1 {
-  font-size: 75px;
+  font-size: 40px;
 }
 
 .Landing .content .hero img, .Landing .content .player img, .Landing .content .host img {
@@ -60,9 +60,9 @@
 }
 
 .Landing .content .player h2 {
-  font-size: 50px;
-  margin-right: 40px;
-  text-align: right;
+  font-size: 30px;
+  margin: 30px;
+  text-align: center;
 }
 
 .Landing .content .player div {
@@ -84,8 +84,9 @@
 }
 
 .Landing .content .host h2 {
-  margin-left: 40px;
-  font-size: 50px;
+  margin: 30px;
+  font-size: 30px;
+  text-align: center;
 }
 
 .Landing .content .host div {
