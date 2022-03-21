@@ -116,8 +116,6 @@ module.exports = {
       });
 
       const template = getTemplate(name, token);
-      console.log("sending email");
-
       await sendEmail(email, "Comunidad de Canchera", template);
 
       return res.json({
@@ -170,8 +168,7 @@ module.exports = {
         status: true,
       });
 
-      if (config.use_env_variable)
-        return res.redirect("https://canchera.vercel.app/login");
+      if (true) return res.redirect("https://canchera.vercel.app/login");
 
       return res.redirect("http://localhost:3000/login");
     } catch (error) {
