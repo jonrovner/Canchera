@@ -20,7 +20,6 @@ const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
             {Fields?.map((f) => (
               <div>
                 <li>Futbol {f.players}</li>
-                <label htmlFor="price">${f.price}</label>
               </div>
             ))}
           </div>
