@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import FieldCalendar from '../FieldCalendar/FieldCalendar.jsx'
 import {
     setHours,
@@ -6,18 +6,24 @@ import {
     addDays
 } from 'date-fns'
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { get_club_detail } from '../../redux/action/index.js';
 
 const Clubdetail = () => {
     const params = useParams()
-    const clubs = useSelector( state => state.clubes)
-    
-    console.log(clubs)
-    const detail = clubs && clubs.find( club => club.id === params.id)
-    
+    const dispatch = useDispatch()
+   
+   
+    useEffect(() => {
+        dispatch(get_club_detail(params.id))
+        
+    }, [dispatch, params.id]);
+
+    const club = useSelector(state => state.clubDetail)
+    console.log('club detail', club)
 
     const now = new Date()
-    const today = setMinutes(setHours(now, detail.openHour), 0)
+    const today = club && setMinutes(setHours(now, club.openHour), 0)
     const [selectedDay, setSelectedDay] = useState(today)
     const [selectedDates, setSelectedDates] = useState([])
 
@@ -44,31 +50,42 @@ const Clubdetail = () => {
         }        
     }
     
-    console.log('fields', detail.fields)
+    //console.log('fields', club.fields)
     
     return (
-       <div className='clubDetail'>
-           <img src={detail.image} alt={detail.name} />
-           <h1>{detail.name}</h1>
-           <h3>{detail.location}</h3>
-           <p>{detail.description}</p>
-           <p>horario: de {detail.openHour} a {detail.closeHour}</p>
-           <h2>Calendario</h2>
-           {detail && detail.Fields && detail.Fields.map( field => (
-               
-               <FieldCalendar 
-               day={selectedDay}
-               close={detail.closeHour}
-               players={field.players}
-               ilumination={field.ilumination}
-               price={field.price} 
-               handleClick={handleHourClick}/>
-           ))}
+        <div>
 
-           <button onClick={()=>handleReservation}>Reservar</button>
+        {
+            club && (<div className='clubDetail'>
+            <img src={club.image} alt={club.name} />
+            <h1>{club.name}</h1>
+            <h3>{club.location}</h3>
+            <p>{club.description}</p>
+            <p>horario: de {club.openHour} a {club.closeHour}</p>
+            <h2>Calendario</h2>
+            {club && club.Fields && club.Fields.map( field => (
+                
+                <FieldCalendar 
+                day={selectedDay}
+                close={club.closeHour}
+                players={field.players}
+                ilumination={field.ilumination}
+                price={field.price} 
+                handleClick={handleHourClick}/>
+            ))}
     
-          
-       </div>
+            <button onClick={()=>handleReservation}>Reservar</button>
+     
+           
+        </div>) 
+
+        }
+
+        </div>
+
+        
+            
+       
    );
 }
  

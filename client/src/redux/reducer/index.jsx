@@ -8,6 +8,7 @@ import {
 
   ORDER_NAME_CLUBS,
   ORDER_PRICE_CLUBS,
+  GET_CLUB_DETAIL,
 
 } from "../action/index";
 import { order } from "./metodos/order";
@@ -17,10 +18,19 @@ const initialState = {
   usersignin: [],
   user: [],
   usersConect: [],
+  clubDetail: {}
 };
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    
+    case GET_CLUB_DETAIL:{
+      return {
+        ...state,
+        clubDetail: payload
+      }
+    }
+
     case GET_ALL_CLUBES: {
       return {
         ...state,

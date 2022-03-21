@@ -1,8 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 const { User } = require("../db.ts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.js");
+const { sendEmail, getTemplate } = require('../config/email');
+const env = process.env.NODE_ENV || 'development';
+const config = require("../config/config")[env];
 
 module.exports = {
   //Login
@@ -15,23 +18,29 @@ module.exports = {
       },
     })
       .then((user: any) => {
+         
+        
         if (!user) {
-          res
-            .status(201)
-            .json({ msg: "Usuario con este correo no encontrado" });
+         return  res
+          .status(201)
+          .json({ msg: "Usuario con este correo no encontrado" });
         } else {
+
           if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign({ user: user }, authConfig.secret, {
               expiresIn: authConfig.expires,
             });
-            res.json({ user: user, token: token });
+
+            if(user.status !== true) return res.json({ msg:"Antes de loguearte confirma el mail que te fue enviado" });
+
+            return res.json({ user: user, token: token });
           } else {
-            res.status(202).json({ msg: "Contraseña incorrecta" });
+            return res.status(202).json({ msg: "Contraseña incorrecta" });
           }
         }
       })
       .catch((err: any) => {
-        res.status(500).json(err);
+       return  res.status(500).json(err);
       });
   },
 
@@ -49,7 +58,7 @@ module.exports = {
       email,
       password: encryptedPassword,
       rol: "user",
-      status: true,
+      //status: true,
     };
 
     const [user, created] = await User.findOrCreate({
@@ -89,7 +98,7 @@ module.exports = {
       email,
       password: encryptedPassword,
       rol: "owner",
-      status: false,
+      //status: false,
     };
 
     const [user, created] = await User.findOrCreate({
@@ -105,6 +114,10 @@ module.exports = {
       const token = jwt.sign({ user: user }, authConfig.secret, {
         expiresIn: authConfig.expires,
       });
+   
+      
+      const template = getTemplate(name, token);
+      await sendEmail(email, "Comunidad de Canchera", template );
 
       return res.json({
         user,
@@ -136,4 +149,37 @@ module.exports = {
       return res.json({ message: "Ya existe una cuenta con este email" });
     return res.json(user);
   },
+
+  async confirmUser(req:Request, res:Response, next:NextFunction){
+     const { token } = req.params;
+
+     try {
+       const data = await jwt.verify(token, authConfig.secret);
+       
+      
+       if(data === null) res.json({ msg:"Error al obtener la data" });
+
+       const { user } = data;
+       
+       
+      
+       const usuario = await User.findOne({ where:{email:user.email}});
+
+       if(!usuario) return res.json({ msg:"Error en la validacion" });
+
+       await usuario.update({
+         ...usuario,
+         status:true
+       });
+
+       if(config.use_env_variable) return res.redirect("https://canchera.vercel.app/login");
+
+       return res.redirect("http://localhost:3000/login");
+
+     } catch (error) {
+       next(error)
+     }
+
+  }
+
 };

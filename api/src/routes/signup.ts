@@ -11,6 +11,8 @@ router.post("/signup/user", AuthController.userSignUp);
 
 router.post("/signup/owner", AuthController.ownerSignUp);
 
-router.post("/singup/google", AuthController.googleSingUp)
+router.post("/singup/google", AuthController.googleSingUp);
+
+router.get("/confirm/:token", AuthController.confirmUser)
 
 module.exports = router;
