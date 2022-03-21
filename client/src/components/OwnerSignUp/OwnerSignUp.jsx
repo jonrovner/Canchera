@@ -36,7 +36,7 @@ const OwnerSignUp = () => {
     e.preventDefault();
 
     if (data.name && data.email && data.password && data.confirmPassword) {
-      let existe = await axios.post("http://localhost:3001/signup/owner", data);
+      let existe = await axios.post("/signup/owner", data);
 
       if (!existe.data.error) {
         setOpenModal(true);

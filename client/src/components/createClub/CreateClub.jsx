@@ -27,7 +27,7 @@ const CreateClub = () => {
         }
         else {
             const toPost = {...input, image:"TBD", score:"3", userId: user.id}
-            axios.post('http://localhost:3001/club', toPost)
+            axios.post('/club', toPost)
             .then(res => console.log('res data : ', res.data))
             .catch(err => console.log(err))
         } 
