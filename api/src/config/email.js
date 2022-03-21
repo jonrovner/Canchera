@@ -32,7 +32,7 @@ const sendEmail = async (email, subject, html) => {
 
 const getTemplate = (name, token) => {
   let url;
-  if (config.use_env_variable) {
+  if (true) {
     url = "https://canchera.herokuapp.com";
   } else {
     url = "http://localhost:3001";
