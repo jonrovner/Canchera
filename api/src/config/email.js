@@ -1,4 +1,10 @@
 const nodemailer = require('nodemailer');
+const env = process.env.NODE_ENV || 'development';
+const config = require("../config/config")[env];
+const email={
+    user:process.env.EMAIL_USER,
+    pass:process.env.EMAIL_PASS,
+}
 
 
 
@@ -7,8 +13,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure:true,
     auth: {
-      user: process.env.EMAIL_USER, // generated ethereal user
-      pass: process.env.EMAIL_PASS, // generated ethereal password
+      user: email.user, // generated ethereal user
+      pass: email.pass, // generated ethereal password
     },
   });
 
@@ -30,11 +36,18 @@ let transporter = nodemailer.createTransport({
   }
 
   const getTemplate = (name, token) =>{
+      let url;
+      if(config.use_env_variable){
+          url = "https://canchera.herokuapp.com"
+      }else{
+           url = "http://localhost:3001"
+      }
+      
       return `
       <div>
         <h1>Bienvenido a la comunidad de canchera ${name}</h1>
         <p>Para confirmar tu cuenta clickea  el enlace</p>
-        <a href="http://localhost:3001/confirm/${token}">Confirmar cuenta</a>
+        <a href="${url}/confirm/${token}">Confirmar cuenta</a>
       </div>
       
       `

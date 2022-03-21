@@ -3,7 +3,9 @@ const { User } = require("../db.ts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.js");
-const { sendEmail, getTemplate } = require('../config/email')
+const { sendEmail, getTemplate } = require('../config/email');
+const env = process.env.NODE_ENV || 'development';
+const config = require("../config/config")[env];
 
 module.exports = {
   //Login
@@ -17,25 +19,28 @@ module.exports = {
     })
       .then((user: any) => {
          
-        if(user.status !== true) res.json({ msg:"Antes de loguearte confirma el mail que te fue enviado" })
-
+        
         if (!user) {
-          res
-            .status(201)
-            .json({ msg: "Usuario con este correo no encontrado" });
+         return  res
+          .status(201)
+          .json({ msg: "Usuario con este correo no encontrado" });
         } else {
+
           if (bcrypt.compareSync(password, user.password)) {
             const token = jwt.sign({ user: user }, authConfig.secret, {
               expiresIn: authConfig.expires,
             });
-            res.json({ user: user, token: token });
+
+            if(user.status !== true) return res.json({ msg:"Antes de loguearte confirma el mail que te fue enviado" });
+
+            return res.json({ user: user, token: token });
           } else {
-            res.status(202).json({ msg: "Contraseña incorrecta" });
+            return res.status(202).json({ msg: "Contraseña incorrecta" });
           }
         }
       })
       .catch((err: any) => {
-        res.status(500).json(err);
+       return  res.status(500).json(err);
       });
   },
 
@@ -166,6 +171,8 @@ module.exports = {
          ...usuario,
          status:true
        });
+
+       if(config.use_env_variable) return res.redirect("https://canchera.vercel.app/login");
 
        return res.redirect("http://localhost:3000/login");
 
