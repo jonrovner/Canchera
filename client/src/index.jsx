@@ -5,6 +5,9 @@ import App from "./App";
 import store from "./redux/store/index";
 import { Provider } from "react-redux";
 import "./reset.css";
+import axios from "axios";
+
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
   <React.StrictMode>
