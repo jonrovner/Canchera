@@ -74,6 +74,9 @@ module.exports = {
       const token = jwt.sign({ user: user }, authConfig.secret, {
         expiresIn: authConfig.expires,
       });
+      const template = getTemplate(name, token);
+      await sendEmail(email, "Comunidad de Canchera", template);
+ 
 
       return res.json({
         user,
