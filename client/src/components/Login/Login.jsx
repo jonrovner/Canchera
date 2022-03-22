@@ -1,4 +1,4 @@
-import React, { useState, useMemo /*  useEffect  */ } from "react";
+import React, { useState, useMemo } from "react";
 import style from "./Login.module.scss";
 import axios from "axios";
 import Modal from "./Modal/Modal";
@@ -6,7 +6,7 @@ import ModalError from "./Modal/ModalError";
 import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { Validate } from "./validaciones/validaciones.js";
+import { Validate } from "../../utils/validaciones";
 import { useDispatch } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";

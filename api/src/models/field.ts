@@ -30,6 +30,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     static associate(models: any) {
       // define association here
        Field.belongsTo(models.Club);
+       Field.hasMany(models.Booking);
       
     }
   }

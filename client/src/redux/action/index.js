@@ -12,13 +12,15 @@ export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL"
 
 
 export const get_club_detail = (clubId) => async (dispatch) => {
+  
   try {
     let club = await axios.get(`http://localhost:3001/club/${clubId}`)
-    let bookings = await axios.get(`http://localshost:3001/booking/${clubId}`)
-    let resData = {...club.data, ...bookings.data}
+    let bookings = await axios.get(`http://localhost:3001/booking/${clubId}`)
+    let resData = bookings && bookings.length > 0 ? {...club.data, ...bookings.data} : {...club.data}
+  
     return dispatch({type: GET_CLUB_DETAIL, payload: resData})
+  
   } catch (error){ console.log(error)}
-
 
 }
 
