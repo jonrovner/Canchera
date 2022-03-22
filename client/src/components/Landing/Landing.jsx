@@ -19,22 +19,24 @@ const Landing = () => {
       <NavBar />
       <div className={styles.content}>
         <section className={styles.hero}>
-          <h1>El fútbol tiene un arraigo particular en la cultura argentina. Su poder es ampliamente movilizador y nos permite generar un espacio participación colectiva, independientemente de su genero.</h1>
+          <h1>"Siempre quiero más. 
+            Ya sea que se trate de un gol o de ganar un juego, 
+            nunca estoy satisfecho" Messi</h1>
           <img src={heroImg} alt="" />
         </section>
         <Slider />
         <section className={styles.player}>
           <img src={playerImg} alt="" />
           <div>
-            <h2>¡No más llamados por teléfonos, ni tardar horas en conseguir turnos disponible para practicar tu deporte preferido!</h2>
-            <button>Reservar!</button>
+            <h2>Reservar una cancha nunca fue tan fácil!</h2>
+            <button>Hacelo ya!</button>
           </div>
         </section>
         <Collage />
         <section className={styles.host}>
           <div>
-            <h2>La mejor aplicación para reservar canchas. Busca y reserva en segundos tu cancha favorita, gratis y sin complicaciones. Reservar una cancha nunca fue tan fácil!</h2>
-            <button>Aplicar!</button>
+            <h2>Busca y reserva en segundos tu cancha favorita, gratis y sin complicaciones. </h2>
+            <button>Aplicar</button>
           </div>
           <img src={hostImg} alt="" />
         </section>

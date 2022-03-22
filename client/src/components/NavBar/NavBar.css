@@ -1,5 +1,10 @@
 #navbar {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 10vh;
     width: 100%;
+    padding: 20px;
     background-color: #555;
     overflow: auto;
     

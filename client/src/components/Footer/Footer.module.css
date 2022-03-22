@@ -1,6 +1,7 @@
 .Footer {
   color: white;
   background-color: black;
+ 
   width: 100%;
   height: 100vh;
   display: -webkit-box;
@@ -22,6 +23,7 @@
 .Footer .video {
   width: 100%;
   height: 100%;
+  margin-bottom: 20px;
   overflow: hidden;
 }
 

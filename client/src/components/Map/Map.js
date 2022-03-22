@@ -13,9 +13,19 @@ function Map() {
   const clubes = useSelector((state) => state.clubes);
   console.log(clubes);
 
-  const positions =
-    clubes &&
-    clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
+  const positions = clubes && clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
+  console.log(positions)
+
+  const ciudades = clubes && clubes.map((club) => ([club.location]));
+  console.log(ciudades)
+
+  // const unicos = [];
+  // for(var i = 0; i < ciudades.length; i++) { 
+  // const elemento = ciudades[i]; 
+  // if (!unicos.includes(ciudades[i])) {
+  //   unicos.push(elemento);
+  // }}
+  // console.log(unicos);
 
   const [activeMarker, setActiveMarker] = useState(null);
 

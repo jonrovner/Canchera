@@ -41,13 +41,14 @@
 }
 
 .Landing .content .hero h1, .Landing .content .player h1, .Landing .content .host h1 {
-  font-size: 40px;
+  font-size: 50px;
 }
 
 .Landing .content .hero img, .Landing .content .player img, .Landing .content .host img {
   width: 500px;
   margin-right: -150px;
 }
+
 
 .Landing .content .player {
   padding: 0px;
@@ -60,7 +61,7 @@
 }
 
 .Landing .content .player h2 {
-  font-size: 30px;
+  font-size: 50px;
   margin: 30px;
   text-align: center;
 }
@@ -85,7 +86,7 @@
 
 .Landing .content .host h2 {
   margin: 30px;
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
 }
 
