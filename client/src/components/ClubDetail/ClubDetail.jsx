@@ -6,12 +6,14 @@ import {
     setSeconds,
     addDays
 } from 'date-fns'
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { get_club_detail } from '../../redux/action/index.js';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import axios from 'axios';
 
 const Clubdetail = () => {
+    const navigate = useNavigate()
     const params = useParams()
     const dispatch = useDispatch()   
    
@@ -53,10 +55,12 @@ const Clubdetail = () => {
         const toPost = {userId: user.id, dates: selectedDates}
         const reservation = await axios.post(`http://localhost:3001/booking`, toPost)
         console.log('reservation : ', reservation.data)
+        navigate('/clubs')
     }
     //console.log('user : ', user.id)
     //console.log('selected', selectedDates)
-    //console.log('club detail', club)
+    console.log('club detail', club)
+    
     return (
         <div>
         {
@@ -64,6 +68,18 @@ const Clubdetail = () => {
             <img src={club.image} alt={club.name} />
             <h1>{club.name}</h1>
             <h3>{club.location}</h3>
+
+            { club.latitude && <MapContainer center={[club.latitude, club.longitude]} zoom={13} id="map">
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[club.latitude, club.longitude]}>
+                    
+                </Marker>
+                
+            </MapContainer> }
+
             <p>{club.description}</p>
             <p>horario: de {club.openHour} a {club.closeHour}</p>
             <h2>Calendario</h2>
