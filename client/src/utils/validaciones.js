@@ -2,12 +2,15 @@ export const Validate = (prevData) => {
   let errors = {};
 
   if (prevData.name.length < 1) {
-    errors.name = "Name field is required";
-  } else if (prevData.name.length < 5) {
-    errors.name = "Name field must have 5 characters minimum";
+    errors.name = "Nombre es un campo requerido.";
+  } else if (prevData.name.length < 3) {
+    errors.name = "Nombre debe tener al menos 3 caracteres.";
   }
 
-  var emailEnviado = prevData.email;
+  //
+  //  que es esto nico jjajaja
+  //
+  /* var emailEnviado = prevData.email;
   var arroba = emailEnviado.indexOf("@");
   var punto = emailEnviado.lastIndexOf(".");
   var extension = emailEnviado.split(".")[1];
@@ -19,16 +22,22 @@ export const Validate = (prevData) => {
     if (extension.length > 3) {
       errors.email = "Email is invalido";
     }
+  } */
+
+  let email = prevData.email;
+  if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    errors.email = "Email es invalido.";
   }
+  if (email.length < 1) errors.email = "Email es un campo requerido.";
 
   if (prevData.password.length < 1) {
-    errors.password = "Password is required";
+    errors.password = "Contraseña es un campo requerido";
   }
 
   if (prevData.confirmPassword.length < 1) {
-    errors.confirmPassword = "Confirm Password is required";
+    errors.confirmPassword = "Confirmacion de contraseña requerida.";
   } else if (prevData.password !== prevData.confirmPassword) {
-    errors.confirmPassword = "Password must be the same";
+    errors.confirmPassword = "Las contraseñas deben coincidir.";
   }
 
   return errors;

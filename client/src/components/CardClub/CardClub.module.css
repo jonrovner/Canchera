@@ -1,0 +1,44 @@
+.link .contenedor {
+  margin: 0.5rem;
+  background-color: #9db4f0;
+  color: black;
+  border: 2px solid black;
+  width: 100%rem;
+  height: auto;
+  min-height: 10rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.link .contenedor .divImg {
+  width: 25rem;
+}
+
+.link .contenedor .divImg img {
+  height: 110%rem;
+}
+
+.link .contenedor .divInfo {
+  margin-left: 2rem;
+  width: 25rem;
+}
+
+.link .contenedor .divContenido {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.link:link,
+.link:visited,
+.link:active {
+  text-decoration: none;
+  -webkit-text-decoration-color: none;
+          text-decoration-color: none;
+}
+/*# sourceMappingURL=CardClub.module.css.map */
