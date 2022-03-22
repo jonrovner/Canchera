@@ -21,7 +21,6 @@
 const db = require("./src/db");
 import server from "./src/app";
 
-
 // Syncing all the models at once.
 
 db.sequelize.sync({ force: false }).then(() => {
@@ -29,4 +28,3 @@ db.sequelize.sync({ force: false }).then(() => {
     console.log("%s listening at 3001");
   });
 });
-
