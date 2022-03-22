@@ -1,15 +1,13 @@
 import React, { useMemo, useState } from "react";
 import style from "./UserSignUp.module.scss";
 import axios from "axios";
-import { Validate } from "./validaciones/validaciones";
+import { Validate } from "../../utils/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
 import { GoogleLogin } from "react-google-login";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
-import { post_users_google } from "../../redux/action";
 
 const UserSignUp = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -57,10 +55,7 @@ const UserSignUp = () => {
       name: r.profileObj.name.toString(),
       email: r.profileObj.email.toString(),
     };
-    let existe = await axios.post(
-      "http://localhost:3001/singup/google",
-      dataGoogle
-    );
+    let existe = await axios.post("/singup/google", dataGoogle);
     console.log(existe.data.message);
     if (!existe.data.message) {
       setOpenModal(true);

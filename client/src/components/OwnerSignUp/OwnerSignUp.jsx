@@ -6,8 +6,7 @@ import ModalError from "./Modal/ModalError";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
-import { Validate } from "./validaciones/validaciones.js";
+import { Validate } from "../../utils/validaciones";
 
 const OwnerSignUp = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -29,7 +28,7 @@ const OwnerSignUp = () => {
         [e.target.name]: e.target.value,
       };
     });
-    //setError(Validate({ ...data, [name]: value }));
+    setError(Validate({ ...data, [name]: value }));
   };
 
   const onSubmit = async (e) => {
