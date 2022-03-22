@@ -63,8 +63,8 @@ function Map() {
         <GoogleMap
           onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
-          center={{ lat: -29.15477, lng: -59.264938 }}
-          zoom={14}
+          center={{ lat:-32.96326511574192, lng:-61.409007928306615 }}
+          zoom={5}
           mapContainerStyle={{ width: "70vw", height: "60vh" }}
           options={{ mapId: "f8e61b002a1322a0" }}
         >

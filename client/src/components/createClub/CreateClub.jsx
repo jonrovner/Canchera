@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './createClub.css'
 import { validate } from './validation';
+import { useNavigate } from 'react-router';
 
 const CreateClub = () => {
+    const navigate = useNavigate()
     const [showValid, setShowValid] = useState(false)    
     const [ valid, setValid] = useState({}) 
     const [ input, setInput] = useState({fields: []})
@@ -28,7 +30,12 @@ const CreateClub = () => {
         else {
             const toPost = {...input, image:"TBD", score:"3", userId: user.id}
             axios.post('/club', toPost)
-            .then(res => console.log('res data : ', res.data))
+            .then(res => {
+                console.log('res data : ', res.data)
+                if(res.data.name){
+                    navigate('/clubs')
+                }
+            })
             .catch(err => console.log(err))
         } 
     }
@@ -140,7 +147,7 @@ const CreateClub = () => {
                 input.fields && input.fields.map( (field, i) => (
                  <div className='field' key={i}>
                      <h3>cancha {i+1}</h3>
-                     <p>tamaño: {field.size}</p>
+                     <p>tamaño: {field.players}</p>
                      <p>precio: {field.price}</p>
                  </div>   
                 ))
