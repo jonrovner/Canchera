@@ -14,7 +14,7 @@ export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL"
 export const get_club_detail = (clubId) => async (dispatch) => {
   
   try {
-    let club = await axios.get(`http://localhost:3001/club/${clubId}`)
+    let club = await axios.get(`/club/${clubId}`)
     
   
     return dispatch({type: GET_CLUB_DETAIL, payload: club.data})
