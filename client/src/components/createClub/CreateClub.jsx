@@ -140,7 +140,7 @@ const CreateClub = () => {
                 input.fields && input.fields.map( (field, i) => (
                  <div className='field' key={i}>
                      <h3>cancha {i+1}</h3>
-                     <p>tamaño: {field.size}</p>
+                     <p>tamaño: {field.players}</p>
                      <p>precio: {field.price}</p>
                  </div>   
                 ))

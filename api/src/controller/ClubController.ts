@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-const { Club, Field, User } = require("../db.ts");
+const { Club, Field, User, Booking } = require("../db.ts");
 
 module.exports = {
   async postClub(req: Request, res: Response, next: NextFunction) {
@@ -136,6 +136,10 @@ module.exports = {
         include: {
           model: Field,
           attributes: ["id", "players", "price"],
+          include: {
+            model: Booking,
+            attributes: ["time"]
+          }
         },
       });
 

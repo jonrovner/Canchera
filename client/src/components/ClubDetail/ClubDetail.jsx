@@ -21,27 +21,29 @@ const Clubdetail = () => {
     }, [dispatch, params.id]);
 
     const club = useSelector(state => state.clubDetail)
-    console.log('club detail', club)
     const user = useSelector(state => state.user)
+    
     const now = new Date()
     const today = setSeconds(setMinutes(setHours(now, 8), 0),0)
     const [selectedDay, setSelectedDay] = useState(today)
     const [selectedDates, setSelectedDates] = useState([])
-
+    
     const days = [today]
     
     for (let i=1; i<15; i++){
         days[i] = addDays(today, i)
-
     }
     
-    const handleHourClick = (date, fieldId) => {
+    const handleHourClick = (e, date, fieldId) => {
+        
         let existent = selectedDates.find( d => d.time.toString() === date.toString())
         if (!existent){
             setSelectedDates([...selectedDates, {time:date, field:fieldId}])
+            e.target.classList.add('selected')
         }
         else {
             setSelectedDates([...selectedDates.filter(d => d.time.toString() !== date.toString())])
+            e.target.classList.remove('selected')
         }
     }
 
@@ -55,9 +57,9 @@ const Clubdetail = () => {
     console.log('user : ', user.id)
     console.log('selected', selectedDates)
     
+        console.log('club detail', club)
     return (
         <div>
-
         {
             club && (<div className='clubDetail'>
             <img src={club.image} alt={club.name} />
@@ -75,6 +77,7 @@ const Clubdetail = () => {
                 ilumination={field.ilumination}
                 price={field.price} 
                 fieldId={field.id}
+                bookings={club.bookings.find(b => b.id === field.id)}
                 handleClick={handleHourClick}/>
             ))}
     

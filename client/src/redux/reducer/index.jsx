@@ -16,7 +16,7 @@ const initialState = {
   clubes: [],
   cancha: [],
   usersignin: [],
-  user: [],
+  user: {},
   usersConect: [],
   clubDetail: {}
 };
