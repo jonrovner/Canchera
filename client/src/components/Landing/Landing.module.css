@@ -50,7 +50,6 @@
   margin-right: -150px;
 }
 
-
 .Landing .content .player {
   padding: 0px;
   overflow: hidden;
@@ -63,8 +62,8 @@
 
 .Landing .content .player h2 {
   font-size: 50px;
-  margin: 30px;
-  text-align: center;
+  margin-right: 40px;
+  text-align: right;
 }
 
 .Landing .content .player div {
@@ -86,9 +85,8 @@
 }
 
 .Landing .content .host h2 {
-  margin: 30px;
-  font-size: 40px;
-  text-align: center;
+  margin-left: 40px;
+  font-size: 50px;
 }
 
 .Landing .content .host div {
