@@ -33,19 +33,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 40px;
-  padding-left: 80px;
+  padding: 5px;
+  padding-left: 40px;
+  padding-right: 100px;
   border: 2px solid black;
   margin: 40px;
   border-radius: 20px;
 }
 
 .Landing .content .hero h1, .Landing .content .player h1, .Landing .content .host h1 {
-  font-size: 75px;
+  font-size: 80px;
 }
 
 .Landing .content .hero img, .Landing .content .player img, .Landing .content .host img {
-  width: 500px;
+  width: 350px;
   margin-right: -150px;
 }
 

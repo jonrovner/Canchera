@@ -19,12 +19,15 @@ const Landing = () => {
       <NavBar />
       <div className={styles.content}>
         <section className={styles.hero}>
-          <h1>"Siempre quiero más. 
-            Ya sea que se trate de un gol o de ganar un juego, 
-            nunca estoy satisfecho" Messi</h1>
+          <h1>Decidete a jugar por mas!</h1>
           <img src={heroImg} alt="" />
         </section>
-        <Slider />
+        <h1>"Siempre quiero más. 
+            Ya sea que se trate de un gol o de ganar un juego, 
+            nunca estoy satisfecho"</h1>
+            <h2 >Messi</h2>
+            <br/>
+        <Slider />        
         <section className={styles.player}>
           <img src={playerImg} alt="" />
           <div>
