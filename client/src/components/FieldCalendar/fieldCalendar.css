@@ -10,3 +10,9 @@
     border: 1px solid black;
     border-radius: 5px;
 }
+.selected {
+    background-color: green;
+}
+.reserved {
+    background-color: red;
+}
