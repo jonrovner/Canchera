@@ -28,7 +28,6 @@
                     border-radius: 20px
                     object-fit: cover
                     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
-
     .buttons
         z-index: 2
         display: flex
@@ -44,3 +43,9 @@
             align-items: center
             justify-content: center
             background-color: transparent
+.sliderContainer::after
+    width: 100%
+    height: 100%
+    content: ''
+    position: absolute
+    background-image: linear-gradient(to right, #ffffff, #ffffff00, #ffffff00, #ffffff00, #ffffff00, #ffffff00, #ffffff)
