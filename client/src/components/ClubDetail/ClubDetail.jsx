@@ -3,16 +3,17 @@ import FieldCalendar from '../FieldCalendar/FieldCalendar.jsx'
 import {
     setHours,
     setMinutes,
+    setSeconds,
     addDays
 } from 'date-fns'
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { get_club_detail } from '../../redux/action/index.js';
+import axios from 'axios';
 
 const Clubdetail = () => {
     const params = useParams()
-    const dispatch = useDispatch()
-   
+    const dispatch = useDispatch()   
    
     useEffect(() => {
         dispatch(get_club_detail(params.id))
@@ -21,9 +22,9 @@ const Clubdetail = () => {
 
     const club = useSelector(state => state.clubDetail)
     console.log('club detail', club)
-
+    const user = useSelector(state => state.user)
     const now = new Date()
-    const today = club && setMinutes(setHours(now, club.openHour), 0)
+    const today = setSeconds(setMinutes(setHours(now, 8), 0),0)
     const [selectedDay, setSelectedDay] = useState(today)
     const [selectedDates, setSelectedDates] = useState([])
 
@@ -34,23 +35,25 @@ const Clubdetail = () => {
 
     }
     
-    const handleHourClick = (date) => {
-        let existent = selectedDates.find( d => d.toString() === date.toString())
+    const handleHourClick = (date, fieldId) => {
+        let existent = selectedDates.find( d => d.time.toString() === date.toString())
         if (!existent){
-            setSelectedDates([...selectedDates, date])
+            setSelectedDates([...selectedDates, {time:date, field:fieldId}])
         }
         else {
-            setSelectedDates([...selectedDates.filter(d => d.toString() !== date.toString())])
+            setSelectedDates([...selectedDates.filter(d => d.time.toString() !== date.toString())])
         }
     }
 
-    const handleReservation = () => {
-        if (!selectedDates.length) {
-            return
-        }        
+    const handleReservation = async () => {
+              
+        console.log('you selected dates', selectedDates)
+        const toPost = {userId: user.id, dates: selectedDates}
+        const reservation = await axios.post(`http://localhost:3001/booking`, toPost)
+        console.log('reservation : ', reservation.data)
     }
-    
-    //console.log('fields', club.fields)
+    console.log('user : ', user.id)
+    console.log('selected', selectedDates)
     
     return (
         <div>
@@ -71,10 +74,11 @@ const Clubdetail = () => {
                 players={field.players}
                 ilumination={field.ilumination}
                 price={field.price} 
+                fieldId={field.id}
                 handleClick={handleHourClick}/>
             ))}
     
-            <button onClick={()=>handleReservation}>Reservar</button>
+            <button onClick={()=>handleReservation()}>Reservar</button>
      
            
         </div>) 

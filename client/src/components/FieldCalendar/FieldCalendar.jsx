@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {
     setHours,
@@ -8,8 +8,10 @@ import {
 } from 'date-fns'
 import './fieldCalendar.css'
 
-const FieldCalendar = ({day, close, players, ilumination, price, handleClick}) => {
+const FieldCalendar = ({day, close, players, ilumination, price, handleClick, fieldId}) => {
     
+    console.log('day :', day)
+
     const hours = eachHourOfInterval({
         start: day,
         end: setHours(day, close)
@@ -22,7 +24,7 @@ const FieldCalendar = ({day, close, players, ilumination, price, handleClick}) =
 
             {
                 hours && hours.map( (date, i) => (
-                    <div className={'hour'} key={i} onClick={()=>handleClick(date)}>
+                    <div className={'hour'} key={i} onClick={()=>handleClick(date, fieldId)}>
                         {getHours(date)}hs
                     </div>
                 ))
