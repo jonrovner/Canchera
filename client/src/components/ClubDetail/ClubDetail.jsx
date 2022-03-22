@@ -9,7 +9,9 @@ import {
 import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { get_club_detail } from '../../redux/action/index.js';
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+
 import axios from 'axios';
 
 const Clubdetail = () => {
@@ -55,12 +57,13 @@ const Clubdetail = () => {
         const toPost = {userId: user.id, dates: selectedDates}
         const reservation = await axios.post(`/booking`, toPost)
         console.log('reservation : ', reservation.data)
+
         navigate('/clubs')
     }
     //console.log('user : ', user.id)
     //console.log('selected', selectedDates)
     console.log('club detail', club)
-    
+
     return (
         <div>
         {
