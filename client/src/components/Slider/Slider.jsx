@@ -1,10 +1,11 @@
 import { useState } from "react";
-import styles from "./Slider.module.scss";
+import styles from "./Slider.module.css";
 import img1 from "../../assets/1.jpg";
 import img2 from "../../assets/2.jpg";
 import img3 from "../../assets/3.png";
 import img4 from "../../assets/4.jpg";
 import arrow from "../../assets/arrow.png";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Slider = () => {
   const [currentSlider, setCurrentSlider] = useState(0);
@@ -33,6 +34,7 @@ const Slider = () => {
       : setCurrentSlider(
           currentSlider < data.length - 1 ? currentSlider + 1 : 0
         );
+    console.log(currentSlider);
   };
 
   return (
@@ -49,18 +51,14 @@ const Slider = () => {
           </div>
         ))}
       </div>
-      <img
-        src={arrow}
-        alt="img not found"
-        className={styles.arrowLeft}
-        onClick={() => handleOnClick("left")}
-      />
-      <img
-        src={arrow}
-        alt="img not found"
-        className={styles.arrowRight}
-        onClick={() => handleOnClick()}
-      />
+      <div className={styles.buttons}>
+        <button onClick={() => handleOnClick("left")}>
+          <FaChevronLeft />
+        </button>
+        <button onClick={() => handleOnClick()}>
+          <FaChevronRight />
+        </button>
+      </div>
     </div>
   );
 };
