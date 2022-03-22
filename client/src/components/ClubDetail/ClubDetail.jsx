@@ -53,7 +53,7 @@ const Clubdetail = () => {
               
         console.log('you selected dates', selectedDates)
         const toPost = {userId: user.id, dates: selectedDates}
-        const reservation = await axios.post(`http://localhost:3001/booking`, toPost)
+        const reservation = await axios.post(`/booking`, toPost)
         console.log('reservation : ', reservation.data)
         navigate('/clubs')
     }
