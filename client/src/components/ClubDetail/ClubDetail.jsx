@@ -54,10 +54,9 @@ const Clubdetail = () => {
         const reservation = await axios.post(`http://localhost:3001/booking`, toPost)
         console.log('reservation : ', reservation.data)
     }
-    console.log('user : ', user.id)
-    console.log('selected', selectedDates)
-    
-        console.log('club detail', club)
+    //console.log('user : ', user.id)
+    //console.log('selected', selectedDates)
+    //console.log('club detail', club)
     return (
         <div>
         {
@@ -77,7 +76,7 @@ const Clubdetail = () => {
                 ilumination={field.ilumination}
                 price={field.price} 
                 fieldId={field.id}
-                bookings={club.bookings.find(b => b.id === field.id)}
+                bookings={field.Bookings}
                 handleClick={handleHourClick}/>
             ))}
     
