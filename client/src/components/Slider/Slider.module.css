@@ -87,4 +87,13 @@
           justify-content: center;
   background-color: transparent;
 }
+
+.sliderContainer::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  position: absolute;
+  background-image: -webkit-gradient(linear, left top, right top, from(#ffffff), color-stop(#ffffff00), color-stop(#ffffff00), color-stop(#ffffff00), color-stop(#ffffff00), color-stop(#ffffff00), to(#ffffff));
+  background-image: linear-gradient(to right, #ffffff, #ffffff00, #ffffff00, #ffffff00, #ffffff00, #ffffff00, #ffffff);
+}
 /*# sourceMappingURL=Slider.module.css.map */
