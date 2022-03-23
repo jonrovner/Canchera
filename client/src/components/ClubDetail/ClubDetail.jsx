@@ -1,22 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import FieldCalendar from '../FieldCalendar/FieldCalendar.jsx'
-import {
-    setHours,
-    setMinutes,
-    setSeconds,
-    addDays
-} from 'date-fns'
-import { useNavigate, useParams } from 'react-router';
+import {setHours,setMinutes,setSeconds,addDays} from 'date-fns'
+import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { get_club_detail } from '../../redux/action/index.js';
-
-//import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import './clubDetail.css'
 
 import axios from 'axios';
 
 const Clubdetail = () => {
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
     const params = useParams()
     const dispatch = useDispatch()   
    
@@ -28,6 +22,14 @@ const Clubdetail = () => {
 
     const club = useSelector(state => state.clubDetail)
     const user = useSelector(state => state.user)
+   
+    const [price, setPrice] = useState(0)
+   /*  const [preferenceId, setPreferenceId] = useState("")
+    
+     useEffect(() => {
+      createCheckoutButton(preferenceId)
+        
+    }, [preferenceId]); */
     
     // par armar el calendario, creo un array de 14 fechas a partir de hoy
     const now = new Date()
@@ -41,14 +43,16 @@ const Clubdetail = () => {
     
     //when user selects an hour from calendar
     
-    const handleHourClick = (e, date, fieldId) => {
+    const handleHourClick = (e, date, fieldId, fieldPrice) => {
         let existent = selectedDates.find( d => d.time.toString() === date.toString())
         if (!existent){
             setSelectedDates([...selectedDates, {time:date, field:fieldId}])
+            setPrice(price => price+fieldPrice)
             e.target.classList.add('selected')
         }
         else {
             setSelectedDates([...selectedDates.filter(d => d.time.toString() !== date.toString())])
+            setPrice(price => price - fieldPrice)
             e.target.classList.remove('selected')
         }
     }
@@ -57,12 +61,25 @@ const Clubdetail = () => {
     //on submit
     const handleReservation = async () => {
               
-        console.log('you selected dates', selectedDates)
-        const toPost = {userId: user.id, dates: selectedDates}
+       // console.log('you selected dates', selectedDates)
+        
+       const toPost = {userId: user.id, dates: selectedDates}
         const reservation = await axios.post(`/booking`, toPost)
-        console.log('reservation : ', reservation.data)
+        
+        //console.log('reservation : ', reservation.data)
+       
+        if (reservation.data.length){
+            try{
+                const mpResponse = await axios.post('/checkout', {price})
+                console.log(mpResponse.data)
+                if(mpResponse.data.id){
+                    return window.open(mpResponse.data.sandbox_init_point)
+                }
+            
+            } catch(err){console.log(err)}
+        }
 
-        navigate('/clubs')
+       // navigate('/clubs')
     }
 
     const handleOnLoad = (map) => {
@@ -74,12 +91,25 @@ const Clubdetail = () => {
     //console.log('selected', selectedDates)
     console.log('club detail', club)
 
+
+    /* function createCheckoutButton(preference) {
+        var script = document.createElement("script");
+        script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+        script.type = "text/javascript";
+        script.dataset.preferenceId = preference;
+        document.getElementById("checkout-btn").innerHTML = "";
+        document.querySelector("#checkout-btn").appendChild(script);
+    }
+    */
+    
+
     return (
-        <div>
+        <div className='clubDetails'>
         {
             club && (<div className='clubDetail'>
             <img src={club.image} alt={club.name} />
             <h1>{club.name}</h1>
+            <h4>{club.description}</h4>
             <h3>{club.location}</h3>
 
             { club.latitude && 
@@ -87,10 +117,9 @@ const Clubdetail = () => {
             <GoogleMap onLoad={handleOnLoad}
             center={position}
             zoom={5}
-            mapContainerStyle={{ width: "70vw", height: "60vh" }}
+            mapContainerStyle={{ width: "50vw", height: "40vh" }}
             options={{ mapId: "f8e61b002a1322a0" }}
-            >
-            
+            >            
               <Marker
                 key={club.id}
                 position={position}
@@ -118,6 +147,7 @@ const Clubdetail = () => {
             ))}
     
             <button onClick={()=>handleReservation()}>Reservar</button>
+            <div id={'checkout-btn'} ></div>
      
            
         </div>) 
