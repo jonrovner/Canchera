@@ -47,7 +47,7 @@ module.exports = {
         await fields.forEach((fieldInArray: any) => {
           Field.create({
             ...fieldInArray,
-            ClubId: newClub.id,
+            ClubId: newClub.name,
           });
         });
 
@@ -61,14 +61,13 @@ module.exports = {
   },
 
   async getClubs(req: Request, res: Response, next: NextFunction) {
-    const { name } = req.query;
+    const { clubName } = req.query;
 
     try {
-      if (name) {
+      if (clubName) {
         const nameClub = await Club.findOne({
-          where: { name: name },
-          attributes: [
-            "id",
+          where: { name: clubName },
+          attributes: [            
             "name",
             "description",
             "location",
@@ -88,13 +87,12 @@ module.exports = {
         if (!nameClub)
           return res
             .status(401)
-            .json({ Message: "No hay clubes con ese name " });
+            .json({ Message: "No hay clubes con ese nombre " });
         return res.status(200).json(nameClub);
       }
 
       const foundClub = await Club.findAll({
-        attributes: [
-          "id",
+        attributes: [          
           "name",
           "description",
           "location",
@@ -118,11 +116,11 @@ module.exports = {
   },
 
   async clubDetail(req: Request, res: Response, next: NextFunction) {
-    const { id } = req.params;
+    const { clubName } = req.params;
 
     try {
       const detailClub = await Club.findOne({
-        where: { id: id },
+        where: { name: clubName },
         attributes: [
           "name",
           "description",

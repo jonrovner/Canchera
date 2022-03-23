@@ -8,18 +8,18 @@ module.exports = {
     async postField(req: Request, res: Response, next: NextFunction) {
     
         try {
-            const {clubId, players, price, image, light, surface} = req.body;
+            const {clubName, players, price, image, light, surface} = req.body;
             
             if(!players || !price) return res.status(400).json({msg: "Los campos de jugadores y precio son obligatorios"})
 
-            const club = await Club.findOne({where: {id: clubId}})
+            const club = await Club.findOne({where: {name: clubName}})
             if(club){
                 const field = await Field.create({
                     players,
                     price,
                     image,
                     light,
-                    ClubId: clubId,
+                    ClubId: clubName,
                     surface
 
                 });
@@ -31,11 +31,11 @@ module.exports = {
     },
 
     async getFields (req: Request, res: Response, next: NextFunction) {
-        const { clubId } = req.query;
+        const { clubName } = req.query;
 
-        if(clubId) {
+        if(clubName) {
             try {
-                const fields = await Field.findAll({where: {ClubId: clubId}});
+                const fields = await Field.findAll({where: {ClubId: clubName}});
                 
                 if(fields.length > 0) {
                     res.json(fields);
@@ -43,19 +43,20 @@ module.exports = {
             }catch(error) {
                 res.status(401).send(error)
             }
-        }else {
-
-            try{
-                const fields = await Field.findAll();    
-                
-                if(fields.length > 0) {
-                    res.json(fields);
-                } else return res.status(404).json({msg: "No hay canchas disponibles en este momento"});
-            
-            }catch(error) {
-                res.status(401).send(error)
-            }
         }
+    //     else {
+
+    //         try{
+    //             const fields = await Field.findAll();    
+                
+    //             if(fields.length > 0) {
+    //                 res.json(fields);
+    //             } else return res.status(404).json({msg: "No hay canchas disponibles en este momento"});
+            
+    //         }catch(error) {
+    //             res.status(401).send(error)
+    //         }
+    //     }
     }
 
 }
