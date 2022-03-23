@@ -47,7 +47,7 @@ module.exports = {
         await fields.forEach((fieldInArray: any) => {
           Field.create({
             ...fieldInArray,
-            ClubId: newClub.name,
+            ClubName: newClub.name,
           });
         });
 
@@ -67,7 +67,7 @@ module.exports = {
       if (clubName) {
         const nameClub = await Club.findOne({
           where: { name: clubName },
-          attributes: [            
+          attributes: [
             "name",
             "description",
             "location",
@@ -92,7 +92,7 @@ module.exports = {
       }
 
       const foundClub = await Club.findAll({
-        attributes: [          
+        attributes: [
           "name",
           "description",
           "location",
@@ -137,8 +137,8 @@ module.exports = {
           attributes: ["id", "players", "price", "surface"],
           include: {
             model: Booking,
-            attributes: ["time"]
-          }
+            attributes: ["time"],
+          },
         },
       });
 

@@ -13,15 +13,17 @@ function Map() {
   const clubes = useSelector((state) => state.clubes);
   console.log(clubes);
 
-  const positions = clubes && clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
-  console.log(positions)
+  const positions =
+    clubes &&
+    clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
+  console.log(positions);
 
-  const ciudades = clubes && clubes.map((club) => ([club.location]));
-  console.log(ciudades)
+  const ciudades = clubes && clubes.map((club) => [club.location]);
+  console.log(ciudades);
 
   // const unicos = [];
-  // for(var i = 0; i < ciudades.length; i++) { 
-  // const elemento = ciudades[i]; 
+  // for(var i = 0; i < ciudades.length; i++) {
+  // const elemento = ciudades[i];
   // if (!unicos.includes(ciudades[i])) {
   //   unicos.push(elemento);
   // }}
@@ -63,19 +65,19 @@ function Map() {
         <GoogleMap
           onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
-          center={{ lat:-32.96326511574192, lng:-61.409007928306615 }}
+          center={{ lat: -32.96326511574192, lng: -61.409007928306615 }}
           zoom={5}
           mapContainerStyle={{ width: "70vw", height: "60vh" }}
           options={{ mapId: "f8e61b002a1322a0" }}
         >
           {clubes.map((club, index) => (
             <Marker
-              key={club.id}
+              key={index}
               position={positions[index]}
               icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
-              onClick={() => handleActiveMarker(club.id)}
+              onClick={() => handleActiveMarker(club.name)}
             >
-              {activeMarker === club.id ? (
+              {activeMarker === club.name ? (
                 <InfoWindow onCloseClick={() => setActiveMarker(null)}>
                   <div>{club.name}</div>
                 </InfoWindow>
