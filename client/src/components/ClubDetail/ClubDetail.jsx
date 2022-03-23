@@ -10,7 +10,8 @@ import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { get_club_detail } from '../../redux/action/index.js';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+//import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
 import axios from 'axios';
 
@@ -50,6 +51,7 @@ const Clubdetail = () => {
             e.target.classList.remove('selected')
         }
     }
+    const position = club.latitude && ({lat:club.latitude, lng:club.longitude})
 
     const handleReservation = async () => {
               
@@ -60,6 +62,12 @@ const Clubdetail = () => {
 
         navigate('/clubs')
     }
+
+    const handleOnLoad = (map) => {
+        const bounds = new window.google.maps.LatLngBounds();
+        bounds.extend(position);
+        map.fitBounds(bounds);
+      };
     //console.log('user : ', user.id)
     //console.log('selected', selectedDates)
     console.log('club detail', club)
@@ -72,16 +80,24 @@ const Clubdetail = () => {
             <h1>{club.name}</h1>
             <h3>{club.location}</h3>
 
-            { club.latitude && <MapContainer center={[club.latitude, club.longitude]} zoom={13} id="map">
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[club.latitude, club.longitude]}>
-                    
-                </Marker>
-                
-            </MapContainer> }
+            { club.latitude && 
+            
+            <GoogleMap onLoad={handleOnLoad}
+            center={position}
+            zoom={5}
+            mapContainerStyle={{ width: "70vw", height: "60vh" }}
+            options={{ mapId: "f8e61b002a1322a0" }}
+            >
+            
+              <Marker
+                key={club.id}
+                position={position}
+                icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+               
+              ></Marker>
+            </GoogleMap>
+            
+            }
 
             <p>{club.description}</p>
             <p>horario: de {club.openHour} a {club.closeHour}</p>
