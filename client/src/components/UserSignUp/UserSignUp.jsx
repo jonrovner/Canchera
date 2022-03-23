@@ -8,6 +8,9 @@ import { GoogleLogin } from "react-google-login";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { set_user } from "../../redux/action";
+import { useNavigate } from "react-router";
 
 const UserSignUp = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,6 +22,9 @@ const UserSignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -44,26 +50,24 @@ const UserSignUp = () => {
         setOpenModalError(true);
       }
     } else {
-      console.log("no enviado");
       setOpenModalError(true);
     }
   };
 
   const responseGoogle = async (r) => {
-    console.log(r.profileObj.name.toString(), r.profileObj.email.toString());
+    var obj = {
+      name: r.profileObj.name,
+      email: r.profileObj.email,
+      token: r.tokenId,
+    };
     let dataGoogle = {
       name: r.profileObj.name.toString(),
       email: r.profileObj.email.toString(),
     };
-    let existe = await axios.post("/singup/google", dataGoogle);
-    console.log(existe.data.message);
-    if (!existe.data.message) {
-      setOpenModal(true);
-      let formulario = document.getElementById("formul");
-      formulario.reset();
-    } else {
-      setOpenModalError(true);
-    }
+    let user = await axios.post("/singup/google", dataGoogle);
+    window.localStorage.setItem("user", JSON.stringify(obj));
+    await dispatch(set_user(user.data));
+    navigate("/clubs");
   };
 
   const disabeledSubmit = useMemo(() => {
@@ -154,9 +158,6 @@ const UserSignUp = () => {
         </div>
         <p className={style.socialText}>O inicia con tu red social favorita</p>
         <div className={style.socialMedia}>
-          {/* <a href="#" className={style.socialIcon}>
-            <FcGoogle className={style.fabFaGoogle} />
-          </a> */}
           <GoogleLogin
             clientId="78433659675-c72pqgtd1614q2nhb5sqk42f52de5cqg.apps.googleusercontent.com"
             buttonText="Sign In with Google"
