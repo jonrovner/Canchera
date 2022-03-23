@@ -9,13 +9,13 @@ const ModalError = ({ closeModal }) => {
           X
         </button>
         <div className={style.title}>
-          <h1>Ocurrio un error</h1>
+          <h1>Ocurrio un error!!!!</h1>
         </div>
         <div className={style.body}>
           <span>Ya existe una cuenta asociada a este email.</span>
         </div>
         <div className={style.footer}>
-          <span>need help? 'ayuda'</span>
+          <span></span>
         </div>
       </div>
     </div>

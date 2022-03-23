@@ -7,15 +7,13 @@ const Modal = ({ closeModal }) => {
       <div className={style.modalContainer}>
         <button onClick={() => closeModal(false)}> X </button>
         <div className={style.title}>
-          <h1>BIENVENIDO A CANCHERA</h1>
+          <h1>Bienvenido a Canchera!!!</h1>
         </div>
         <div className={style.body}>
-          <span>
-            Registrado con exito, ahora puede realizar reservas de horario.
-          </span>
+          <span>Se ha enviado un email para confirmar tu cuenta.</span>
         </div>
         <div className={style.footer}>
-          <span>nesecitas ayuda? 'ayuda'</span>
+          <span></span>
         </div>
       </div>
     </div>
