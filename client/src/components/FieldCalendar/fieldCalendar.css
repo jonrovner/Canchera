@@ -3,10 +3,10 @@
     
 }
 .hour{
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0.5rem;
-    
+    width:3rem;
+    height: 3rem;  
+    background-color:whitesmoke;
+    border-right: 1px solid black;
     border-right: 1px solid black;
     border-radius: 5px;
 }
@@ -15,4 +15,22 @@
 }
 .reserved {
     background-color: red;
+}
+.fieldInfo{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fieldInfo h5{
+    margin:0;
+    padding:0;
+}
+.fieldInfo p{
+    margin: 0;
+    padding: 0;
+    font-size: smaller;
+}
+.surface{
+    font-size: small;
 }

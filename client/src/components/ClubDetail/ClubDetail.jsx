@@ -130,19 +130,21 @@ const Clubdetail = () => {
             
             }
 
-            <p>{club.description}</p>
+            
             <p>horario: de {club.openHour} a {club.closeHour}</p>
             <h2>Calendario</h2>
             {club && club.Fields && club.Fields.map( field => (
                 
                 <FieldCalendar 
                 day={selectedDay}
+                open={club.openHour}
                 close={club.closeHour}
                 players={field.players}
                 ilumination={field.ilumination}
                 price={field.price} 
                 fieldId={field.id}
                 bookings={field.Bookings}
+                surface={field.surface}
                 handleClick={handleHourClick}/>
             ))}
     
