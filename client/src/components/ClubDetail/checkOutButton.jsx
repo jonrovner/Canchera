@@ -1,15 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 const CheckOutButton = () => {
 
-    function createCheckoutButton(preference) {
-        var script = document.createElement("script");
-        script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-        script.type = "text/javascript";
-        script.dataset.preferenceId = preference;
-        document.getElementById("checkout-btn").innerHTML = "";
-        document.querySelector("#checkout-btn").appendChild(script);
-      }
+   
 
 
   

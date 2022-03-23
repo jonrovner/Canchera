@@ -20,6 +20,7 @@ const Clubdetail = () => {
     const params = useParams()
     const dispatch = useDispatch()   
    
+    //carga los detalles del club en el state
     useEffect(() => {
         dispatch(get_club_detail(params.id))
         
@@ -28,19 +29,19 @@ const Clubdetail = () => {
     const club = useSelector(state => state.clubDetail)
     const user = useSelector(state => state.user)
     
+    // par armar el calendario, creo un array de 14 fechas a partir de hoy
     const now = new Date()
     const today = setSeconds(setMinutes(setHours(now, 8), 0),0)
     const [selectedDay, setSelectedDay] = useState(today)
     const [selectedDates, setSelectedDates] = useState([])
-    
     const days = [today]
-    
     for (let i=1; i<15; i++){
         days[i] = addDays(today, i)
     }
     
+    //when user selects an hour from calendar
+    
     const handleHourClick = (e, date, fieldId) => {
-        
         let existent = selectedDates.find( d => d.time.toString() === date.toString())
         if (!existent){
             setSelectedDates([...selectedDates, {time:date, field:fieldId}])
@@ -53,6 +54,7 @@ const Clubdetail = () => {
     }
     const position = club.latitude && ({lat:club.latitude, lng:club.longitude})
 
+    //on submit
     const handleReservation = async () => {
               
         console.log('you selected dates', selectedDates)
@@ -124,9 +126,6 @@ const Clubdetail = () => {
 
         </div>
 
-        
-            
-       
    );
 }
  
