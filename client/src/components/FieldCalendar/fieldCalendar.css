@@ -1,13 +1,13 @@
 .hoursCalendar{
     display: flex;
-    gap:0.2rem;
+    
 }
 .hour{
     width: 2.5rem;
     height: 2.5rem;
     padding: 0.5rem;
     
-    border: 1px solid black;
+    border-right: 1px solid black;
     border-radius: 5px;
 }
 .selected {

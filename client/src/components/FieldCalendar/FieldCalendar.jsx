@@ -37,7 +37,7 @@ const FieldCalendar = ({day, close, players, bookings, price, handleClick, field
                     <div 
                     className={bookingStrings.indexOf(date) !==-1 ? 'hour reserved' : 'hour'} 
                     key={i} 
-                    onClick={(e)=>handleClick(e, date, fieldId)}
+                    onClick={(e)=>handleClick(e, date, fieldId, price)}
                    
                     >
                         {getHours(hours[i])}hs
