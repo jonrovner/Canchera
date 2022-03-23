@@ -8,7 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/validaciones";
 import { useDispatch } from "react-redux";
-import { get_users_email, set_user } from "../../redux/action";
+import { set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const Login = () => {
@@ -44,14 +44,7 @@ const Login = () => {
         setOpenModalError(true);
       } else {
         dispatch(set_user(users.data.user));
-
-        /* var obj = {
-          name: users.data.user.name,
-          email: users.data.user.email,
-          token: users.data.token,
-        }; */
         window.localStorage.setItem("user", JSON.stringify(users.data.user));
-        //setOpenModal(true);
         let formulario = document.getElementById("formul");
         formulario.reset();
         navigate("/");
@@ -62,26 +55,19 @@ const Login = () => {
   };
 
   const responseGoogle = async (r) => {
-    let existe = await axios.get(
-      `/user?email=${r.profileObj.email.toString()}`
-    );
-    console.log(existe);
     var obj = {
       name: r.profileObj.name,
       email: r.profileObj.email,
       token: r.tokenId,
     };
-
-    if (!existe.data.email) {
-      setOpenModalError(true);
-    } else {
-      window.localStorage.setItem("user", JSON.stringify(obj));
-      await dispatch(get_users_email(r.profileObj.name));
-      setOpenModal(true);
-      let formulario = document.getElementById("formul");
-      formulario.reset();
-      navigate("/");
-    }
+    let dataGoogle = {
+      name: r.profileObj.name.toString(),
+      email: r.profileObj.email.toString(),
+    };
+    let user = await axios.post("/singup/google", dataGoogle);
+    window.localStorage.setItem("user", JSON.stringify(obj));
+    await dispatch(set_user(user.data));
+    navigate("/clubs");
   };
 
   const disabeledSubmit = useMemo(() => {
@@ -149,11 +135,8 @@ const Login = () => {
             O inicia con tu red social favorita
           </p>
           <div className={style.socialMedia}>
-            {/* <a href="#" className={style.socialIcon}>
-            <FcGoogle className={style.fabFaGoogle} />
-          </a> */}
             <GoogleLogin
-              clientId="78433659675-c72pqgtd1614q2nhb5sqk42f52de5cqg.apps.googleusercontent.com"
+              clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
               buttonText="Sign In with Google"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
