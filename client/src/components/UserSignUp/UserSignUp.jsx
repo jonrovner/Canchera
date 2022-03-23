@@ -159,7 +159,7 @@ const UserSignUp = () => {
         <p className={style.socialText}>O inicia con tu red social favorita</p>
         <div className={style.socialMedia}>
           <GoogleLogin
-            clientId="23495507523-1lcbskoue2o5r1d5bg3705a729nvijsb.apps.googleusercontent.com"
+            clientId="78433659675-c72pqgtd1614q2nhb5sqk42f52de5cqg.apps.googleusercontent.com"
             buttonText="Sign In with Google"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
