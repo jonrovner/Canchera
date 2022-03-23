@@ -11,11 +11,12 @@ const Modal = ({ closeModal }) => {
         </div>
         <div className={style.body}>
           <span>
-            Registrado con exito, ahora puede realizar reservas de horario.
+            Registrado con exito. Se ha enviado un email para confirmar su
+            cuenta.
           </span>
         </div>
         <div className={style.footer}>
-          <span>nesecitas ayuda? 'ayuda'</span>
+          <span></span>
         </div>
       </div>
     </div>
