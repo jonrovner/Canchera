@@ -7,7 +7,6 @@ import CardClub from "../CardClub/CardClub";
 import OrderName from "../Order/OrderName";
 import OrderPrice from "../Order/OrderPrice";
 
-
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
 
@@ -21,15 +20,13 @@ const ListClubs = () => {
 
   return (
     <>
-
       <OrderName />
       <OrderPrice />
 
       <div className={style.contenedor}>
-        {clubes.map((c) => (
+        {clubes.map((c, i) => (
           <CardClub
-            key={c.id}
-            id={c.id}
+            key={i}
             name={c.name}
             img={c.image}
             location={c.location}

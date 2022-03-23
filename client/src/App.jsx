@@ -30,13 +30,13 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-       
+
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/createClub" element={<CreateClub />}/>
+        <Route path="/createClub" element={<CreateClub />} />
         <Route path="/clubs" element={<ListClubs />} />
-        <Route path="/club/:id" element={<Clubdetail />} />
+        <Route path="/club/:clubName" element={<Clubdetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
