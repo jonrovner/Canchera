@@ -9,6 +9,7 @@ import {Router, Request, Response} from "express"
  const Field = require('./field')
  const Club = require('./club')
  const Booking = require('./booking')
+ const Checkout = require('./checkout')
 
 
 const router = Router();
@@ -21,6 +22,7 @@ const router = Router();
  router.use('/', Field)
  router.use('/', Club);
  router.use('/', Booking);
+ router.use('/', Checkout)
 
 
 

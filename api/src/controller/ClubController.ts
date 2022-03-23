@@ -125,6 +125,7 @@ module.exports = {
         where: { id: id },
         attributes: [
           "name",
+          "description",
           "location",
           "openHour",
           "closeHour",
@@ -135,7 +136,7 @@ module.exports = {
         ],
         include: {
           model: Field,
-          attributes: ["id", "players", "price"],
+          attributes: ["id", "players", "price", "surface"],
           include: {
             model: Booking,
             attributes: ["time"]
