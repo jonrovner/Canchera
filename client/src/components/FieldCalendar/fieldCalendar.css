@@ -7,7 +7,8 @@
     height: 3rem;  
     background-color:whitesmoke;
     border-right: 1px solid black;
-    
+    border-right: 1px solid black;
+    border-radius: 5px;
 }
 .selected {
     background-color: green;
