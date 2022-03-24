@@ -23,19 +23,19 @@ export default function ContactUs  () {
 
   return (
       <div className={styles.container}> 
-          <h1>Contactenos</h1>
+          <h1 className={styles.h1}>Contactenos</h1>
     <form className={styles.formmail} ref={form} onSubmit={sendEmail}>
-      <label>Nombre</label>
-      <input type="text" placeholder='Nombre...' name="user_name" required />
+      <label className={styles.label}>Nombre</label>
+      <input className={styles.input} type="text" placeholder='Nombre...' name="user_name" required />
 
-      <label>Telefono</label>
-      <input type="tel" placeholder='telefono...' name="user_tel" required />
+      <label className={styles.label}>Telefono</label>
+      <input className={styles.input} type="tel" placeholder='telefono...' name="user_tel" required />
 
-      <label>Email</label>
-      <input type="email" placeholder='mail...' name="user_email" />
+      <label className={styles.label}>Email</label>
+      <input className={styles.input} type="email" placeholder='mail...' name="user_email" />
 
-      <label>Mensaje</label>
-      <textarea type="text" placeholder='Su mensaje...' name="message" required />
+      <label className={styles.label}>Mensaje</label>
+      <textarea className={styles.textarea} type="text" placeholder='Su mensaje...' name="message" required />
 
       <input className={styles.button} type="submit" value="Enviar" />
     <br/>

@@ -9,7 +9,7 @@
     align-items: center;
   }
   
-  h1 {
+  .h1 {
     color: #9cc7f3;
     font-size: 4rem;
     font-weight: 500;
@@ -32,14 +32,14 @@
     align-items: center;
   }
   
-  label {
+  .label {
     font-size: 1.5rem;
     color: #9cc7f3;
     font-weight: 900;
     margin: 1rem;
   }
   
-  input {
+  .input {
     width: 16rem;
     height: 3rem;
     font-size: 1rem;
@@ -49,7 +49,7 @@
     color: #ffff;
   }
   
-  textarea {
+  .textarea {
     width: 16rem;
     height: 10rem;
     border-radius: 10px;
@@ -75,8 +75,4 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: #ffff;
-  }
-
-  h3{
-    color: #9cc7f3 
   }
