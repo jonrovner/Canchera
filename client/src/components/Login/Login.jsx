@@ -8,7 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/validaciones";
 import { useDispatch } from "react-redux";
-import { set_user } from "../../redux/action";
+import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const Login = () => {
@@ -55,19 +55,24 @@ const Login = () => {
   };
 
   const responseGoogle = async (r) => {
-    var obj = {
-      name: r.profileObj.name,
-      email: r.profileObj.email,
-      token: r.tokenId,
-    };
     let dataGoogle = {
       name: r.profileObj.name.toString(),
       email: r.profileObj.email.toString(),
     };
-    let user = await axios.post("/singup/google", dataGoogle);
-    window.localStorage.setItem("user", JSON.stringify(obj));
-    await dispatch(set_user(user.data));
-    navigate("/clubs");
+    let existe = await axios.post("/singup/google", dataGoogle);
+    if (!existe.data.message) {
+      window.localStorage.setItem("user", JSON.stringify(existe.data));
+      await dispatch(set_user(existe.data));
+      navigate("/clubs");
+      let formulario = document.getElementById("formul");
+      formulario.reset();
+    } else {
+      let usuario = await axios.get(`/user?email=${r.profileObj.email}`);
+      await dispatch(get_users_email(r.profileObj.email));
+      await dispatch(set_user(usuario.data));
+      window.localStorage.setItem("user", JSON.stringify(usuario.data));
+      navigate("/clubs");
+    }
   };
 
   const disabeledSubmit = useMemo(() => {
