@@ -48,7 +48,43 @@ const getTemplate = (name, token) => {
       `;
 };
 
+const sendEmailPassword = async (email, subject, html) =>{
+  try {
+    await transporter.sendMail({
+      from: `Canchera <${email.user}>`, // sender address
+      to: email, // list of receivers
+      subject, // Subject line
+      text: "Gracias por seguir confiando en Canchera", // plain text body
+      html,
+    });
+  } catch (error) {
+    console.log(error);
+};
+
+};
+
+const getTemplatePassword = (name, token) =>{
+
+  let url;
+  if (process.env.NODE_ENV) {
+    url = "https://canchera.herokuapp.com";
+  } else {
+    url = "http://localhost:3001";
+  }
+
+  return `
+  <div>
+    <h1>${name} es su dia de suerte</h1>
+    <p>a solicitado un restablecimiento de contraseña para su cuenta de Heroku. Siga el siguiente enlace para establecer una nueva contraseña:</p>
+    <a href="${url}/resetpassword/${token}">Confirmar identidad</a>
+  </div>
+  
+  `
+};
+
 module.exports = {
   sendEmail,
   getTemplate,
+  sendEmailPassword,
+  getTemplatePassword
 };

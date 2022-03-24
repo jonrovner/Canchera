@@ -9,7 +9,6 @@ import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
-import Navbar from "./components/NavBar/NavBar";
 import ListClubs from "./components/ListClubs/ListClubs";
 
 function App() {
@@ -24,19 +23,19 @@ function App() {
       const foundUser = JSON.parse(loggedInUser);
       fn(foundUser);
     }
-  }, []);
+  });
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-       
+
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/createClub" element={<CreateClub />}/>
+        <Route path="/createClub" element={<CreateClub />} />
         <Route path="/clubs" element={<ListClubs />} />
-        <Route path="/club/:id" element={<Clubdetail />} />
+        <Route path="/club/:clubName" element={<Clubdetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
