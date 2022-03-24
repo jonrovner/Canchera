@@ -7,3 +7,18 @@
 #map{
     width: 50px
 }
+
+.reservationDetails{
+    
+    width: 35vw;
+    height: 20vh;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.calendarControls{
+    display:flex;
+    gap: 1rem;
+}

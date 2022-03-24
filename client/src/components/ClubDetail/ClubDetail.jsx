@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import FieldCalendar from "../FieldCalendar/FieldCalendar.jsx";
-import { setHours, setMinutes, setSeconds, addDays } from "date-fns";
+import FieldCalendar from "./FieldCalendar/FieldCalendar.jsx";
+import { setHours, setMinutes, setSeconds, addDays, subDays, isToday } from "date-fns";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./clubDetail.css";
-
 import axios from "axios";
 
 const Clubdetail = () => {
@@ -29,10 +28,28 @@ const Clubdetail = () => {
   // para armar el calendario, creo un array de 14 fechas a partir de hoy
   const now = new Date();
   const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
-  const [selectedDay] = useState(today);
+  const [selectedDay, setSelectedDay] = useState(today);
   const days = [today];
   for (let i = 1; i < 15; i++) {
     days[i] = addDays(today, i);
+  }
+  const handleNextDay = () => {
+    if (selectedDay.toString() === days[days.length-1].toString()){
+      return
+
+    }
+    else{
+      setSelectedDay(selectedDay => addDays(selectedDay, 1))
+    }
+  }
+  const handlePrevDay = () => {
+    if (selectedDay.toString() === days[0].toString()){
+      return
+
+    }
+    else{
+      setSelectedDay(selectedDay => subDays(selectedDay, 1))
+    }
   }
   
   //para armar la reserva
@@ -137,6 +154,15 @@ const Clubdetail = () => {
             horario: de {club.openHour} a {club.closeHour}
           </p>
           <h2>Calendario</h2>
+          <p>Seleccione clickeando las horas que desea reservar</p>
+
+          <div className="calendarControls">
+
+            <button onClick={handlePrevDay}>dia anterior</button>
+            <p>{isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}</p>
+            <button onClick={handleNextDay}>dia siguiente</button>
+
+          </div>
           {club &&
             club.Fields &&
             club.Fields.map((field) => (
