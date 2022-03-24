@@ -14,11 +14,11 @@ const Clubdetail = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-  console.log(params.clubName);
+  console.log(params.clubName.replaceAll("-", " "));
 
   //carga los detalles del club en el state
   useEffect(() => {
-    dispatch(get_club_detail(params.clubName));
+    dispatch(get_club_detail(params.clubName.replaceAll("-", " ")));
   }, [dispatch, params.clubName]);
 
   const club = useSelector((state) => state.clubDetail);
@@ -35,7 +35,7 @@ const Clubdetail = () => {
   // par armar el calendario, creo un array de 14 fechas a partir de hoy
   const now = new Date();
   const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
-  const [selectedDay, setSelectedDay] = useState(today);
+  const [selectedDay] = useState(today);
   const [selectedDates, setSelectedDates] = useState([]);
   const days = [today];
   for (let i = 1; i < 15; i++) {
