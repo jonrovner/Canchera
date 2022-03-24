@@ -4,6 +4,7 @@ import Clubdetail from "./components/ClubDetail/ClubDetail";
 import CreateClub from "./components/createClub/CreateClub";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
+import ContactUs from "./components/Email/Email"
 import NotFound from "./components/NotFound/NotFound";
 import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/createClub" element={<CreateClub />} />
         <Route path="/clubs" element={<ListClubs />} />
         <Route path="/club/:clubName" element={<Clubdetail />} />
