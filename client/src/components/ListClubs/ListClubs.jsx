@@ -16,7 +16,7 @@ const ListClubs = () => {
 
   useEffect(() => {
     dispatch(get_all_clubes());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

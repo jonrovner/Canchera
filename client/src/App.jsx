@@ -9,7 +9,6 @@ import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
-import Navbar from "./components/NavBar/NavBar";
 import ListClubs from "./components/ListClubs/ListClubs";
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
       const foundUser = JSON.parse(loggedInUser);
       fn(foundUser);
     }
-  }, []);
+  });
 
   return (
     <div className="App">
