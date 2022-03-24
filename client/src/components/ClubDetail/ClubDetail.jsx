@@ -7,6 +7,7 @@ import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./clubDetail.css";
 import axios from "axios";
+import ReservationModal from "./ReservationModal.jsx";
 
 const Clubdetail = () => {
   //const navigate = useNavigate()
@@ -58,6 +59,7 @@ const Clubdetail = () => {
   useEffect(()=>{
     setReservationDetail({'hours':selectedDates.length, 'price': price})
   },[selectedDates, price]) 
+  const [showModal, setShowModal] = useState(false)
 
   
 
@@ -92,6 +94,7 @@ const Clubdetail = () => {
 
     if (reservation.data.length) {
       try {
+        setShowModal(true)
         const mpResponse = await axios.post("/checkout", { price });
         console.log(mpResponse.data);
         if (mpResponse.data.id) {
@@ -158,9 +161,9 @@ const Clubdetail = () => {
 
           <div className="calendarControls">
 
-            <button onClick={handlePrevDay}>dia anterior</button>
+            <div className="button" onClick={handlePrevDay}>⏪</div>
             <p>{isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}</p>
-            <button onClick={handleNextDay}>dia siguiente</button>
+            <div className="button" onClick={handleNextDay}>⏩</div>
 
           </div>
           {club &&
@@ -179,13 +182,17 @@ const Clubdetail = () => {
                 handleClick={handleHourClick}
               />
             ))}
-           <div className="reservationDetails">
-             <p>detalles de su reserva:</p>
-             <p>{reservationDetail.hours} horas reservadas</p>
-             <p>total: $ {reservationDetail.price}</p>
-             </div> 
-          <button onClick={() => handleReservation()}>Confirmar</button>
-          <div id={"checkout-btn"}></div>
+
+              <div className="reservationDetails">
+                <p>detalles de su reserva:</p>
+                <p>{reservationDetail.hours} horas reservadas</p>
+                <p>total: $ {reservationDetail.price}</p>
+                 <div id={"checkout-btn"}>
+                   <button onClick={() => handleReservation()}>Confirmar</button>
+                </div> 
+              </div>
+                {/* {showModal && <ReservationModal detail={reservationDetail} />} */}
+                
         </div>
       )}
     </div>
