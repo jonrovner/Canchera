@@ -7,7 +7,6 @@ import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./clubDetail.css";
 import axios from "axios";
-import ReservationModal from "./ReservationModal.jsx";
 
 const Clubdetail = () => {
   //const navigate = useNavigate()
@@ -37,18 +36,15 @@ const Clubdetail = () => {
   const handleNextDay = () => {
     if (selectedDay.toString() === days[days.length-1].toString()){
       return
-
-    }
-    else{
+    } else {
       setSelectedDay(selectedDay => addDays(selectedDay, 1))
     }
   }
+
   const handlePrevDay = () => {
     if (selectedDay.toString() === days[0].toString()){
       return
-
-    }
-    else{
+    } else {
       setSelectedDay(selectedDay => subDays(selectedDay, 1))
     }
   }
@@ -59,12 +55,8 @@ const Clubdetail = () => {
   useEffect(()=>{
     setReservationDetail({'hours':selectedDates.length, 'price': price})
   },[selectedDates, price]) 
-  const [showModal, setShowModal] = useState(false)
-
   
-
   //cuando el usuario selecciona una hora en el calendar
-
   const handleHourClick = (e, date, fieldId, fieldPrice) => {
     let existent = selectedDates.find(
       (d) => d.time.toString() === date.toString()
@@ -79,34 +71,26 @@ const Clubdetail = () => {
       ]);
       setPrice((price) => price - fieldPrice);
       e.target.classList.remove("selected");
-    }
-    
-  };
-  
+    }    
+  };  
 
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
     const toPost = { userId: user.id, dates: selectedDates };
     const reservation = await axios.post(`/booking`, toPost);
-
-    //console.log('reservation : ', reservation.data)
-
     if (reservation.data.length) {
       try {
-        setShowModal(true)
+        
         const mpResponse = await axios.post("/checkout", { price });
         console.log(mpResponse.data);
         if (mpResponse.data.id) {
-          createCheckoutButton(mpResponse.data.id)
-          //return window.open(mpResponse.data.sandbox_init_point);
+          createCheckoutButton(mpResponse.data.id)          
         }
       } catch (err) {
         console.log(err);
       }
     }
-
-    // navigate('/clubs')
   };
 
   const handleOnLoad = (map) => {
@@ -143,7 +127,7 @@ const Clubdetail = () => {
               center={position}
               zoom={5}
               mapContainerStyle={{ width: "50vw", height: "40vh" }}
-              options={{ mapId: "f8e61b002a1322a0" }}
+              options={{ mapId: "f8e61b002a1322a0", styles:["terrain"] }}
             >
               <Marker
                 key={club.name}
@@ -190,8 +174,7 @@ const Clubdetail = () => {
                  <div id={"checkout-btn"}>
                    <button onClick={() => handleReservation()}>Confirmar</button>
                 </div> 
-              </div>
-                {/* {showModal && <ReservationModal detail={reservationDetail} />} */}
+              </div>               
                 
         </div>
       )}
