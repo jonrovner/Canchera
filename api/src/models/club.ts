@@ -2,7 +2,6 @@
 import { Model, UUIDV4 } from "sequelize";
 
 interface ClubAttributes {
-  id: number;
   name: string;
   description: string;
   location: string;
@@ -22,7 +21,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    id!: number;
     name!: string;
     description!: string;
     location!: string;
@@ -42,15 +40,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   Club.init(
     {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: UUIDV4,
-        allowNull: false,
-        primaryKey: true,
-      },
-      name: {
+        name: {
         type: DataTypes.STRING,
         allowNull: false,
+        primaryKey: true,
+        unique: true,
         validate: {
           len: {
             args: [2, 30],

@@ -3,7 +3,7 @@ const { User } = require("../db.ts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../config/auth.js");
-const { sendEmail, getTemplate } = require("../config/email");
+const { sendEmail, getTemplate, sendEmailPassword, getTemplatePassword } = require("../config/email");
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 
@@ -147,8 +147,8 @@ module.exports = {
       defaults: newUser,
     });
 
-    //if (!created)
-      //return res.json({ message: "Ya existe una cuenta con este email" });
+    if (!created)
+      return res.json({ message: "Ya existe una cuenta con este email" });
     return res.json(user);
   },
 
@@ -179,4 +179,60 @@ module.exports = {
       next(error);
     }
   },
+
+
+  async forgotPassword(req:Request, res:Response, next:NextFunction){
+
+   const { email } = req.body;
+
+   try {
+     if(!email) return res.json({ msg:"El email es requerido" });
+
+     const user = await User.findOne({ where:{ email:email } });
+     const token = jwt.sign({ user:user }, authConfig.secret, {
+      expiresIn: authConfig.expires,
+    });
+
+    const templatePassword = getTemplatePassword(user.name, token);
+    await sendEmailPassword(user.email, "Restablecer Contraseña", templatePassword);
+
+    return res.status(200).json({ msg:"Se envio un email para su cambio de password" });
+     
+   } catch (error) {
+     next(error);
+   }
+
+  },
+
+  async resetPassword( req:Request, res:Response, next:NextFunction ){
+
+    const { password } = req.body;
+    const { token } = req.params;
+
+    try {
+      
+      if(!password) return res.json({ msg: "Password requerido" });
+      let newPassword = bcrypt.hashSync(password, +authConfig.rounds);
+
+      const dataToken = jwt.verify(token, authConfig.secret); 
+      
+      if(!dataToken) return res.json({ msg:"Error al obtener la data" });
+      const { user } = dataToken;
+
+      const usuario = await User.findOne({ where:{ email: user.email } });
+      
+      if(!usuario) return res.json({ msg:"Algo salio mal" });
+
+      await usuario.update({ 
+        ...usuario,
+        password:newPassword
+       })
+
+     return res.status(200).json(usuario);
+
+    } catch (error) {
+      next(error)
+    }
+
+  }
 };

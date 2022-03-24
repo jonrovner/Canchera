@@ -15,4 +15,9 @@ router.post("/singup/google", AuthController.googleSingUp);
 
 router.get("/confirm/:token", AuthController.confirmUser)
 
+router.post("/forgotpassword", AuthController.forgotPassword);
+
+router.put("/resetpassword/:token", AuthController.resetPassword);
+
+
 module.exports = router;

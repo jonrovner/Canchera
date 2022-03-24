@@ -36,11 +36,11 @@ async postBooking(req:Request, res:Response, next:NextFunction){
 
 async getBookings(req:Request, res:Response, next:NextFunction){ 
    
-    const { clubId } = req.params;
-    if(!clubId) return res.status(400).json({msg:"Falta el id del club"});
+    const { clubName } = req.params;
+    if(!clubName) return res.status(400).json({msg:"Falta el id del club"});
     try {
-     const fields = await Field.findAll({where:{ClubId: clubId},
-         attributes:['id', 'players', 'price', "image", "light"],
+     const fields = await Field.findAll({where:{name: clubName},
+         attributes:['name', 'players', 'price', "image", "light"],
          include:{
              model:Booking,
              attributes:['id', 'time', 'paymentPending', "UserId"]
