@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import {Link} from 'react-router-dom'
 import emailjs from '@emailjs/browser';
 import styles from './Form.module.css'
 
@@ -11,11 +12,13 @@ export default function ContactUs  () {
     emailjs.sendForm('service_biq34kj', 'template_u82bwka', form.current, 'QB_YGsFz8TqzByi-w')
       .then((result) => {          
         console.log(result.text);
-        alert('Mensaje enviado!')
+        
       }, (error) => {
           console.log(error.text);
           alert('Su mensaje no pudo enviarse')
       });
+      e.target.reset()
+      alert('Mensaje enviado!')
   };
 
   return (
@@ -35,7 +38,14 @@ export default function ContactUs  () {
       <textarea type="text" placeholder='Su mensaje...' name="message" />
 
       <input className={styles.button} type="submit" value="Enviar" />
+    <br/>
+      <div> 
+      <Link to= '/'>
+        <button className={styles.button}>Volver</button>
+      </Link>
+    </div>
     </form>
+    
     </div>
   );
 };
