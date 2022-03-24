@@ -1,14 +1,19 @@
 .hoursCalendar{
     display: flex;
+    gap:0.1rem;
+    align-items: center;
     
 }
 .hour{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width:3rem;
     height: 3rem;  
     background-color:whitesmoke;
     border-right: 1px solid black;
-    border-right: 1px solid black;
-    border-radius: 5px;
+    
 }
 .selected {
     background-color: green;
@@ -33,4 +38,7 @@
 }
 .surface{
     font-size: small;
+}
+.hour:hover{
+    background-color: white;
 }
