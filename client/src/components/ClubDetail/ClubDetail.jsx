@@ -23,26 +23,28 @@ const Clubdetail = () => {
 
   const club = useSelector((state) => state.clubDetail);
   const user = useSelector((state) => state.user);
-
+  const position = club.latitude && { lat: club.latitude, lng: club.longitude };
   const [price, setPrice] = useState(0);
-  /*  const [preferenceId, setPreferenceId] = useState("")
-    
-     useEffect(() => {
-      createCheckoutButton(preferenceId)
-        
-    }, [preferenceId]); */
-
-  // par armar el calendario, creo un array de 14 fechas a partir de hoy
+  
+  // para armar el calendario, creo un array de 14 fechas a partir de hoy
   const now = new Date();
   const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
   const [selectedDay] = useState(today);
-  const [selectedDates, setSelectedDates] = useState([]);
   const days = [today];
   for (let i = 1; i < 15; i++) {
     days[i] = addDays(today, i);
   }
+  
+  //para armar la reserva
+  const [reservationDetail, setReservationDetail] = useState({})
+  const [selectedDates, setSelectedDates] = useState([]);
+  useEffect(()=>{
+    setReservationDetail({'hours':selectedDates.length, 'price': price})
+  },[selectedDates, price]) 
 
-  //when user selects an hour from calendar
+  
+
+  //cuando el usuario selecciona una hora en el calendar
 
   const handleHourClick = (e, date, fieldId, fieldPrice) => {
     let existent = selectedDates.find(
@@ -59,13 +61,13 @@ const Clubdetail = () => {
       setPrice((price) => price - fieldPrice);
       e.target.classList.remove("selected");
     }
+    
   };
-  const position = club.latitude && { lat: club.latitude, lng: club.longitude };
+  
 
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
-
     const toPost = { userId: user.id, dates: selectedDates };
     const reservation = await axios.post(`/booking`, toPost);
 
@@ -76,7 +78,8 @@ const Clubdetail = () => {
         const mpResponse = await axios.post("/checkout", { price });
         console.log(mpResponse.data);
         if (mpResponse.data.id) {
-          return window.open(mpResponse.data.sandbox_init_point);
+          createCheckoutButton(mpResponse.data.id)
+          //return window.open(mpResponse.data.sandbox_init_point);
         }
       } catch (err) {
         console.log(err);
@@ -95,7 +98,7 @@ const Clubdetail = () => {
   //console.log('selected', selectedDates)
   console.log("club detail", club);
 
-  /* function createCheckoutButton(preference) {
+  const createCheckoutButton = (preference) => {
         var script = document.createElement("script");
         script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
         script.type = "text/javascript";
@@ -103,7 +106,7 @@ const Clubdetail = () => {
         document.getElementById("checkout-btn").innerHTML = "";
         document.querySelector("#checkout-btn").appendChild(script);
     }
-    */
+   
 
   return (
     <div className="clubDetails">
@@ -150,8 +153,12 @@ const Clubdetail = () => {
                 handleClick={handleHourClick}
               />
             ))}
-
-          <button onClick={() => handleReservation()}>Reservar</button>
+           <div className="reservationDetails">
+             <p>detalles de su reserva:</p>
+             <p>{reservationDetail.hours} horas reservadas</p>
+             <p>total: $ {reservationDetail.price}</p>
+             </div> 
+          <button onClick={() => handleReservation()}>Confirmar</button>
           <div id={"checkout-btn"}></div>
         </div>
       )}
