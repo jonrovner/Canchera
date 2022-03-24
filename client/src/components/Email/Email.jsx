@@ -26,16 +26,16 @@ export default function ContactUs  () {
           <h1>Contactenos</h1>
     <form className={styles.formmail} ref={form} onSubmit={sendEmail}>
       <label>Nombre</label>
-      <input type="text" placeholder='Nombre...' name="user_name" />
+      <input type="text" placeholder='Nombre...' name="user_name" required />
 
       <label>Telefono</label>
-      <input type="tel" placeholder='telefono...' name="user_tel" />
+      <input type="tel" placeholder='telefono...' name="user_tel" required />
 
       <label>Email</label>
       <input type="email" placeholder='mail...' name="user_email" />
 
       <label>Mensaje</label>
-      <textarea type="text" placeholder='Su mensaje...' name="message" />
+      <textarea type="text" placeholder='Su mensaje...' name="message" required />
 
       <input className={styles.button} type="submit" value="Enviar" />
     <br/>
