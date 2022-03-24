@@ -147,8 +147,8 @@ module.exports = {
       defaults: newUser,
     });
 
-    //if (!created)
-      //return res.json({ message: "Ya existe una cuenta con este email" });
+    if (!created)
+      return res.json({ message: "Ya existe una cuenta con este email" });
     return res.json(user);
   },
 

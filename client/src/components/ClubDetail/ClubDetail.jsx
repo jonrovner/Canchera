@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import FieldCalendar from "../FieldCalendar/FieldCalendar.jsx";
-import { setHours, setMinutes, setSeconds, addDays } from "date-fns";
+import FieldCalendar from "./FieldCalendar/FieldCalendar.jsx";
+import { setHours, setMinutes, setSeconds, addDays, subDays, isToday } from "date-fns";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./clubDetail.css";
-
 import axios from "axios";
 
 const Clubdetail = () => {
@@ -23,27 +22,41 @@ const Clubdetail = () => {
 
   const club = useSelector((state) => state.clubDetail);
   const user = useSelector((state) => state.user);
-
+  const position = club.latitude && { lat: club.latitude, lng: club.longitude };
   const [price, setPrice] = useState(0);
-  /*  const [preferenceId, setPreferenceId] = useState("")
-    
-     useEffect(() => {
-      createCheckoutButton(preferenceId)
-        
-    }, [preferenceId]); */
-
-  // par armar el calendario, creo un array de 14 fechas a partir de hoy
+  
+  // para armar el calendario, creo un array de 14 fechas a partir de hoy
   const now = new Date();
   const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
-  const [selectedDay] = useState(today);
-  const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedDay, setSelectedDay] = useState(today);
   const days = [today];
   for (let i = 1; i < 15; i++) {
     days[i] = addDays(today, i);
   }
+  const handleNextDay = () => {
+    if (selectedDay.toString() === days[days.length-1].toString()){
+      return
+    } else {
+      setSelectedDay(selectedDay => addDays(selectedDay, 1))
+    }
+  }
 
-  //when user selects an hour from calendar
-
+  const handlePrevDay = () => {
+    if (selectedDay.toString() === days[0].toString()){
+      return
+    } else {
+      setSelectedDay(selectedDay => subDays(selectedDay, 1))
+    }
+  }
+  
+  //para armar la reserva
+  const [reservationDetail, setReservationDetail] = useState({})
+  const [selectedDates, setSelectedDates] = useState([]);
+  useEffect(()=>{
+    setReservationDetail({'hours':selectedDates.length, 'price': price})
+  },[selectedDates, price]) 
+  
+  //cuando el usuario selecciona una hora en el calendar
   const handleHourClick = (e, date, fieldId, fieldPrice) => {
     let existent = selectedDates.find(
       (d) => d.time.toString() === date.toString()
@@ -58,32 +71,26 @@ const Clubdetail = () => {
       ]);
       setPrice((price) => price - fieldPrice);
       e.target.classList.remove("selected");
-    }
-  };
-  const position = club.latitude && { lat: club.latitude, lng: club.longitude };
+    }    
+  };  
 
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
-
     const toPost = { userId: user.id, dates: selectedDates };
     const reservation = await axios.post(`/booking`, toPost);
-
-    //console.log('reservation : ', reservation.data)
-
     if (reservation.data.length) {
       try {
+        
         const mpResponse = await axios.post("/checkout", { price });
         console.log(mpResponse.data);
         if (mpResponse.data.id) {
-          return window.open(mpResponse.data.sandbox_init_point);
+          createCheckoutButton(mpResponse.data.id)          
         }
       } catch (err) {
         console.log(err);
       }
     }
-
-    // navigate('/clubs')
   };
 
   const handleOnLoad = (map) => {
@@ -95,7 +102,7 @@ const Clubdetail = () => {
   //console.log('selected', selectedDates)
   console.log("club detail", club);
 
-  /* function createCheckoutButton(preference) {
+  const createCheckoutButton = (preference) => {
         var script = document.createElement("script");
         script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
         script.type = "text/javascript";
@@ -103,7 +110,7 @@ const Clubdetail = () => {
         document.getElementById("checkout-btn").innerHTML = "";
         document.querySelector("#checkout-btn").appendChild(script);
     }
-    */
+   
 
   return (
     <div className="clubDetails">
@@ -120,7 +127,7 @@ const Clubdetail = () => {
               center={position}
               zoom={5}
               mapContainerStyle={{ width: "50vw", height: "40vh" }}
-              options={{ mapId: "f8e61b002a1322a0" }}
+              options={{ mapId: "f8e61b002a1322a0", styles:["terrain"] }}
             >
               <Marker
                 key={club.name}
@@ -134,6 +141,15 @@ const Clubdetail = () => {
             horario: de {club.openHour} a {club.closeHour}
           </p>
           <h2>Calendario</h2>
+          <p>Seleccione clickeando las horas que desea reservar</p>
+
+          <div className="calendarControls">
+
+            <div className="button" onClick={handlePrevDay}>⏪</div>
+            <p>{isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}</p>
+            <div className="button" onClick={handleNextDay}>⏩</div>
+
+          </div>
           {club &&
             club.Fields &&
             club.Fields.map((field) => (
@@ -151,8 +167,15 @@ const Clubdetail = () => {
               />
             ))}
 
-          <button onClick={() => handleReservation()}>Reservar</button>
-          <div id={"checkout-btn"}></div>
+              <div className="reservationDetails">
+                <p>detalles de su reserva:</p>
+                <p>{reservationDetail.hours} horas reservadas</p>
+                <p>total: $ {reservationDetail.price}</p>
+                 <div id={"checkout-btn"}>
+                   <button onClick={() => handleReservation()}>Confirmar</button>
+                </div> 
+              </div>               
+                
         </div>
       )}
     </div>
