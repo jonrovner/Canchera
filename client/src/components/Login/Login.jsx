@@ -45,7 +45,10 @@ const Login = () => {
         setOpenModalError(true);
       } else {
         dispatch(set_user(users.data.user));
-        window.localStorage.setItem("user", JSON.stringify(users.data.user));
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify(users.data.user.email)
+        );
         let formulario = document.getElementById("formul");
         formulario.reset();
         navigate("/");
@@ -62,7 +65,7 @@ const Login = () => {
     };
     let existe = await axios.post("/singup/google", dataGoogle);
     if (!existe.data.message) {
-      window.localStorage.setItem("user", JSON.stringify(existe.data));
+      window.localStorage.setItem("user", JSON.stringify(existe.data.email));
       await dispatch(set_user(existe.data));
       navigate("/clubs");
       let formulario = document.getElementById("formul");
@@ -71,7 +74,7 @@ const Login = () => {
       let usuario = await axios.get(`/user?email=${r.profileObj.email}`);
       await dispatch(get_users_email(r.profileObj.email));
       await dispatch(set_user(usuario.data));
-      window.localStorage.setItem("user", JSON.stringify(usuario.data));
+      window.localStorage.setItem("user", JSON.stringify(usuario.data.email));
       navigate("/clubs");
     }
   };
