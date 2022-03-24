@@ -7,6 +7,7 @@ import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
+import ContactUs from "./components/Email/Email"
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
 import Navbar from "./components/NavBar/NavBar";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/createClub" element={<CreateClub />}/>
         <Route path="/clubs" element={<ListClubs />} />
         <Route path="/club/:id" element={<Clubdetail />} />
+        <Route path="/contactUs" element={<ContactUs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
