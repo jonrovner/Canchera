@@ -16,7 +16,7 @@ function App() {
   const dispatch = useDispatch();
 
   let fn = async (usuario) => {
-    await dispatch(get_users_email(usuario.email));
+    await dispatch(get_users_email(usuario));
   };
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
