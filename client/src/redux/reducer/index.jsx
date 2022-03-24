@@ -5,11 +5,9 @@ import {
   LOAD_STATE_USER,
   GET_ALL_CLUBES,
   SET_USER,
-
   ORDER_NAME_CLUBS,
   ORDER_PRICE_CLUBS,
   GET_CLUB_DETAIL,
-
 } from "../action/index";
 import { order } from "./metodos/order";
 const initialState = {
@@ -18,17 +16,16 @@ const initialState = {
   usersignin: [],
   user: {},
   usersConect: [],
-  clubDetail: {}
+  clubDetail: {},
 };
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
-    
-    case GET_CLUB_DETAIL:{
+    case GET_CLUB_DETAIL: {
       return {
         ...state,
-        clubDetail: payload
-      }
+        clubDetail: payload,
+      };
     }
 
     case GET_ALL_CLUBES: {
@@ -44,7 +41,6 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
     case GET_USERS_EMAIL: {
-      console.log("updating user");
       return {
         ...state,
         user: payload,
@@ -71,7 +67,6 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
 
-
     case ORDER_NAME_CLUBS: {
       let ordered = order(state.clubes, payload);
       return {
@@ -81,7 +76,6 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case ORDER_PRICE_CLUBS: {
-
       let ordered = order(state.clubes, payload);
       return {
         ...state,
