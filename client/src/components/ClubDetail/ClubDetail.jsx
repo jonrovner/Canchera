@@ -36,18 +36,15 @@ const Clubdetail = () => {
   const handleNextDay = () => {
     if (selectedDay.toString() === days[days.length-1].toString()){
       return
-
-    }
-    else{
+    } else {
       setSelectedDay(selectedDay => addDays(selectedDay, 1))
     }
   }
+
   const handlePrevDay = () => {
     if (selectedDay.toString() === days[0].toString()){
       return
-
-    }
-    else{
+    } else {
       setSelectedDay(selectedDay => subDays(selectedDay, 1))
     }
   }
@@ -58,11 +55,8 @@ const Clubdetail = () => {
   useEffect(()=>{
     setReservationDetail({'hours':selectedDates.length, 'price': price})
   },[selectedDates, price]) 
-
   
-
   //cuando el usuario selecciona una hora en el calendar
-
   const handleHourClick = (e, date, fieldId, fieldPrice) => {
     let existent = selectedDates.find(
       (d) => d.time.toString() === date.toString()
@@ -77,33 +71,26 @@ const Clubdetail = () => {
       ]);
       setPrice((price) => price - fieldPrice);
       e.target.classList.remove("selected");
-    }
-    
-  };
-  
+    }    
+  };  
 
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
     const toPost = { userId: user.id, dates: selectedDates };
     const reservation = await axios.post(`/booking`, toPost);
-
-    //console.log('reservation : ', reservation.data)
-
     if (reservation.data.length) {
       try {
+        
         const mpResponse = await axios.post("/checkout", { price });
         console.log(mpResponse.data);
         if (mpResponse.data.id) {
-          createCheckoutButton(mpResponse.data.id)
-          //return window.open(mpResponse.data.sandbox_init_point);
+          createCheckoutButton(mpResponse.data.id)          
         }
       } catch (err) {
         console.log(err);
       }
     }
-
-    // navigate('/clubs')
   };
 
   const handleOnLoad = (map) => {
@@ -140,7 +127,7 @@ const Clubdetail = () => {
               center={position}
               zoom={5}
               mapContainerStyle={{ width: "50vw", height: "40vh" }}
-              options={{ mapId: "f8e61b002a1322a0" }}
+              options={{ mapId: "f8e61b002a1322a0", styles:["terrain"] }}
             >
               <Marker
                 key={club.name}
@@ -158,9 +145,9 @@ const Clubdetail = () => {
 
           <div className="calendarControls">
 
-            <button onClick={handlePrevDay}>dia anterior</button>
+            <div className="button" onClick={handlePrevDay}>⏪</div>
             <p>{isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}</p>
-            <button onClick={handleNextDay}>dia siguiente</button>
+            <div className="button" onClick={handleNextDay}>⏩</div>
 
           </div>
           {club &&
@@ -179,13 +166,16 @@ const Clubdetail = () => {
                 handleClick={handleHourClick}
               />
             ))}
-           <div className="reservationDetails">
-             <p>detalles de su reserva:</p>
-             <p>{reservationDetail.hours} horas reservadas</p>
-             <p>total: $ {reservationDetail.price}</p>
-             </div> 
-          <button onClick={() => handleReservation()}>Confirmar</button>
-          <div id={"checkout-btn"}></div>
+
+              <div className="reservationDetails">
+                <p>detalles de su reserva:</p>
+                <p>{reservationDetail.hours} horas reservadas</p>
+                <p>total: $ {reservationDetail.price}</p>
+                 <div id={"checkout-btn"}>
+                   <button onClick={() => handleReservation()}>Confirmar</button>
+                </div> 
+              </div>               
+                
         </div>
       )}
     </div>
