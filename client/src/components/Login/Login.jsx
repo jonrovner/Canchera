@@ -7,13 +7,14 @@ import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/validaciones";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const Login = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  let UsuarioState = useSelector((state) => state.user);
 
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
@@ -85,7 +86,12 @@ const Login = () => {
 
   return (
     <div className={style.contenedor}>
-      {
+      {typeof UsuarioState.email === "string" ? (
+        (setTimeout(() => {
+          navigate("/");
+        }, 3000),
+        (<p>Ya se encuentra logeado</p>))
+      ) : (
         <form
           form
           id="formul"
@@ -149,7 +155,7 @@ const Login = () => {
             />
           </div>
         </form>
-      }
+      )}
     </div>
   );
 };
