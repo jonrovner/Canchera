@@ -24,7 +24,7 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div>
-        <NavLink exact="true" to="/contact">
+        <NavLink exact="true" to="/contactUs">
           <h3>
             <AiFillMail /> Contact
           </h3>
