@@ -24,9 +24,9 @@ module.exports = {
         },
       ],
       back_urls: {
-        success: url + "/clubs",
-        failure: url + "/clubs",
-        pending: url + "/clubs",
+        success: url + "/checkout",
+        failure: url + "/checkout",
+        pending: url + "/checkout",
       },
       auto_return: "approved",
     };

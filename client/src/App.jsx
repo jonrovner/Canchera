@@ -15,6 +15,7 @@ import ValidateEmail from "./components/Password/ValidateEmail";
 import ResetPassword from "./components/Password/ResetPassword";
 
 import Dashboard from "./components/Dashboard/Dashboard"
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
         <Route path="/club/:clubName" element={<Clubdetail />} />
         <Route path="/forgotPassword" element={<ValidateEmail />} />
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
