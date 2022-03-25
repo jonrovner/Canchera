@@ -24,9 +24,9 @@ function Dashboard() {
     }, [dispatch])
     
     
-    function onSubmit(e){
-        navigate('/login')
-    }
+    // function onSubmit(e){
+    //     navigate('/login')
+    // }
    
     
     return ( 
@@ -40,7 +40,7 @@ function Dashboard() {
                 : user.rol === 'admin' ? <Admin/> 
                 : 
                 <div>
-                    <p>Cargando... </p> 
+                    <p>Cargando... </p>  
                 </div>  
 
                 
