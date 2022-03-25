@@ -10,10 +10,10 @@ import Map from "../Map/Map";
 
 const Landing = () => {
   if (window.localStorage) {
-    if (window.localStorage.getItem("firstLoad")) {
-      localStorage.removeItem("firstLoad");
+    if (window.localStorage.getItem("reload")) {
+      localStorage.removeItem("reload");
     } else {
-      window.localStorage.setItem("firstLoad", true);
+      window.localStorage.setItem("reload", true);
     }
   }
   return (
