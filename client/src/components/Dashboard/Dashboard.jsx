@@ -35,7 +35,7 @@ function Dashboard() {
 
             <h1>Dashboard</h1> 
             {
-                user.rol === 'user' ? <User/> 
+                user.rol === 'user' ? <User/>  
                 : user.rol === 'owner' ? <Owner/> 
                 : user.rol === 'admin' ? <Admin/> 
                 : 
