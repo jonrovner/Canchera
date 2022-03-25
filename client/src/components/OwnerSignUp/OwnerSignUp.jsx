@@ -51,7 +51,7 @@ const OwnerSignUp = () => {
   };
 
   const disabeledSubmit = useMemo(() => {
-    if (error.name || error.email || error.password) {
+    if (error.name || error.email || error.password || error.confirmPassword) {
       return true;
     }
 
