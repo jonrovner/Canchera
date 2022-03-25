@@ -31,7 +31,7 @@ function Dashboard() {
                 <div>
                     <p>no existe ningun usuario</p> 
                     <button onClick={onSubmit}>Login</button>
-                </div>
+                </div> 
 
 
                 
