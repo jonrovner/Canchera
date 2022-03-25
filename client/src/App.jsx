@@ -11,7 +11,7 @@ import UserSignUp from "./components/UserSignUp/UserSignUp";
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
 import ListClubs from "./components/ListClubs/ListClubs";
-import Dashboar from "./components/Dashboar/Dashboar"
+import Dashboard from "./components/Dashboard/Dashboard"
 function App() {
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
-        <Route path="/dashboar" element={<Dashboar />} />
+        <Route path="/dashboar" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/createClub" element={<CreateClub />} />

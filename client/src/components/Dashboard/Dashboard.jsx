@@ -6,14 +6,14 @@ import Admin from "./Admin";
 
 
 
-function Dashboar() {
+function Dashboard() {
 
     const user = useSelector(state => state.user)
     
     
     return ( 
         <div>
-            <h1>Dashboar</h1> 
+            <h1>Dashboard</h1> 
             {
                 user.rol === 'user' ? <User/> 
                 : user.rol === 'owner' ? <Owner/> 
@@ -28,4 +28,4 @@ function Dashboar() {
     );
 }
 
-export default Dashboar;
+export default Dashboard;
