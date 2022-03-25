@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -9,19 +9,24 @@ import Admin from "./Admin";
 
 
 import Navbar from '../NavBar/NavBar';
-
+import { clean_state } from '../../redux/action';
 
 
 function Dashboard() {
 
+    const dispatch = useDispatch();
     const user = useSelector(state => state.user)
-
-
     let navigate = useNavigate();
 
-    function onSubmit(e){
-        navigate('/login')
-    }
+
+    useEffect(() =>{
+        dispatch(clean_state())
+    }, [dispatch])
+    
+    
+    // function onSubmit(e){
+    //     navigate('/login')
+    // }
    
     
     return ( 
@@ -30,14 +35,12 @@ function Dashboard() {
 
             <h1>Dashboard</h1> 
             {
-                user.rol === 'user' ? <User/> 
+                user.rol === 'user' ? <User/>  
                 : user.rol === 'owner' ? <Owner/> 
                 : user.rol === 'admin' ? <Admin/> 
-
-                :
+                : 
                 <div>
-                    <p>no existe ningun usuario</p> 
-                    <button onClick={onSubmit}>Login</button>
+                    <p>Cargando... </p>  
                 </div>  
 
                 
