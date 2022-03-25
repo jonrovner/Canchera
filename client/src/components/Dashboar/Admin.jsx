@@ -4,7 +4,7 @@ function Admin() {
     return (
         <div>
 
-            <p>Admin</p>
+            <p> Componente Admin</p>
             
         </div>
     );

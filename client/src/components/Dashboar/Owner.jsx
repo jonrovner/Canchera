@@ -3,7 +3,7 @@ import React from 'react';
 function Owner() {
     return (
         <div>
-            <p>Owner</p>
+            <p>Componente Owner</p>
         </div>
     );
 }

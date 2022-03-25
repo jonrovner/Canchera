@@ -3,7 +3,7 @@ import React from 'react';
 function User() {
     return (
         <div>
-            <p>User</p>            
+            <p>Componente User</p>            
         </div>
     );
 }
