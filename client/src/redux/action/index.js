@@ -9,6 +9,7 @@ export const SET_USER = "SET_USER";
 export const ORDER_NAME_CLUBS = "ORDER_NAME_CLUBS";
 export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
 export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL";
+export const CLEAN_STATE = "CLEAN_STATE";
 
 export const get_club_detail = (clubName) => async (dispatch) => {
   try {
@@ -95,3 +96,7 @@ export const order_name_clubs = (order) => {
 export const order_price_clubs = (order) => {
   return { type: ORDER_PRICE_CLUBS, payload: order };
 };
+
+export const clean_state = (payload) =>{
+  return{ type: CLEAN_STATE, payload:{}}
+}
