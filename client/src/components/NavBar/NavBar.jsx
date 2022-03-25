@@ -7,7 +7,7 @@ import {
   AiFillMail,
   AiOutlineUser,
   AiFillFileAdd,
-  AiOutlineMenu
+  AiOutlineMenu,
 } from "react-icons/ai";
 
 import "./NavBar.css";
@@ -46,32 +46,37 @@ const Navbar = () => {
           </button>
         </NavLink>
       </div>
-      <div className="dropdown"> 
-      <button className="dropbtn"><AiOutlineMenu /><AiOutlineUser /></button>
+      <div className="dropdown">
+        <button className="dropbtn">
+          <AiOutlineMenu />
+          <AiOutlineUser />
+        </button>
         <div className="dropdown-content">
-
           {typeof user.email === "string" ? (
             <h3>
               <BotonLogout />
+              Hola {user.name}
             </h3>
           ) : (
-            <NavLink exact="true" to="/login">
-              <h3>
-                <AiOutlineUser /> Login
-              </h3>
-            </NavLink>
-          )}
+            <nav>
+              <NavLink exact="true" to="/login">
+                <h3>
+                  <AiOutlineUser /> Login
+                </h3>
+              </NavLink>
 
-          <NavLink exact="true" to="signup/owner">
-            <h3>
-              <AiOutlineUser /> Registrate como Dueño
-            </h3>
-          </NavLink>
-          <NavLink exact="true" to="signup/user">
-            <h3>
-              <AiOutlineUser /> Registrate como Jugador
-            </h3>
-          </NavLink>
+              <NavLink exact="true" to="signup/owner">
+                <h3>
+                  <AiOutlineUser /> Registrate como Dueño
+                </h3>
+              </NavLink>
+              <NavLink exact="true" to="signup/user">
+                <h3>
+                  <AiOutlineUser /> Registrate como Jugador
+                </h3>
+              </NavLink>
+            </nav>
+          )}
         </div>
       </div>
     </div>
