@@ -6,7 +6,7 @@ import ModalError from "./Modal/ModalError";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { Validate } from "../../utils/validaciones";
+import { Validate } from "../../utils/Validaciones/validaciones";
 
 const OwnerSignUp = () => {
   const [openModal, setOpenModal] = useState(false);

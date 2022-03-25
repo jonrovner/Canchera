@@ -6,7 +6,7 @@ import ModalError from "./Modal/ModalError";
 import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { Validate } from "../../utils/validacionesLogIn";
+import { Validate } from "../../utils/Validaciones/validacionesLogIn";
 import { useDispatch, useSelector } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
@@ -159,9 +159,12 @@ const Login = () => {
             cookiePolicy={"single_host_origin"}
           />
         </div>
+        <div className={style}>
+          <a href="" onClick={handlePass}>
+            Olvidaste tu contraseña?
+          </a>
+        </div>
       </form>
-
-      <button onClick={handlePass}>Olvidaste tu password?</button>
     </div>
   );
 };

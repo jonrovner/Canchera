@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import style from "./UserSignUp.module.scss";
 import axios from "axios";
-import { Validate } from "../../utils/validaciones";
+import { Validate } from "../../utils/Validaciones/validaciones";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
 import { GoogleLogin } from "react-google-login";

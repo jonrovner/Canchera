@@ -4,17 +4,17 @@ import Clubdetail from "./components/ClubDetail/ClubDetail";
 import CreateClub from "./components/createClub/CreateClub";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
-import ContactUs from "./components/Email/Email"
+import ContactUs from "./components/Email/Email";
 import NotFound from "./components/NotFound/NotFound";
 import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
 import ListClubs from "./components/ListClubs/ListClubs";
-import ValidateEmail from "./components/Password/ValidateEmail";
-import ResetPassword from "./components/Password/ResetPassword";
+import ValidateEmail from "./components/Password/ValidateEmail/ValidateEmail";
+import ResetPassword from "./components/Password/ResetPassword/ResetPassword";
 
-import Dashboard from "./components/Dashboard/Dashboard"
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const dispatch = useDispatch();
