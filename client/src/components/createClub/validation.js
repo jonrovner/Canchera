@@ -30,3 +30,26 @@ export const validate = (input) => {
     }
     return valid
 }
+
+export const validateField = (field) => {
+    console.log('field :', field)
+    let valid = {}
+    if (!field.players || field.players === ""){
+        console.log('players is empty')
+        valid.players = 'debe elegir un tamaño'
+    }
+    if (!field.surface || field.surface === ""){
+        console.log('surface is empty')
+        valid.surface = 'debe elegir una superficie'
+    }
+    if (!field.price || field.price === ""){
+        console.log('price is empty')
+        valid.price = 'debe ingresar un precio válido'
+    }
+    else {
+        console.log('nothing is empty')
+        valid.valid = true
+    }
+    return valid
+
+}
