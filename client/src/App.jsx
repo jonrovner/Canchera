@@ -10,6 +10,8 @@ import UserSignUp from "./components/UserSignUp/UserSignUp";
 import { useDispatch } from "react-redux";
 import { get_users_email } from "./redux/action";
 import ListClubs from "./components/ListClubs/ListClubs";
+import ValidateEmail from "./components/Password/ValidateEmail";
+import ResetPassword from "./components/Password/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ function App() {
         <Route path="/createClub" element={<CreateClub />} />
         <Route path="/clubs" element={<ListClubs />} />
         <Route path="/club/:clubName" element={<Clubdetail />} />
+        <Route path="/forgotPassword" element={<ValidateEmail />} />
+        <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

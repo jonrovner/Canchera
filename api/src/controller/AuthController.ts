@@ -189,14 +189,21 @@ module.exports = {
      if(!email) return res.json({ msg:"El email es requerido" });
 
      const user = await User.findOne({ where:{ email:email } });
-     const token = jwt.sign({ user:user }, authConfig.secret, {
+     const token =  jwt.sign({ id:user.id }, authConfig.secret, {
       expiresIn: authConfig.expires,
     });
+    
+    await user.update({
+      ...user,
+      resetPassword:token
+    })
+    console.log(user);
+    
 
     const templatePassword = getTemplatePassword(user.name, token);
     await sendEmailPassword(user.email, "Restablecer Contraseña", templatePassword);
 
-    return res.status(200).json({ msg:"Se envio un email para su cambio de password" });
+    return res.status(200).json({ msg:"se envio un email para verificar su identidad" });
      
    } catch (error) {
      next(error);
@@ -206,33 +213,37 @@ module.exports = {
 
   async resetPassword( req:Request, res:Response, next:NextFunction ){
 
-    const { password } = req.body;
-    const { token } = req.params;
-
+    
     try {
+      const { password } = req.body;
+      const { token } = req.params;
+      /* req.body.password =  bcrypt.hash(req.body.password, 10)
+
+      await User.update(req.body,{where:{resetPassword:req.params.token}}); */
+     if(!password && !token) return res.status(400).json({msg:"datos necesarios"});
+
+      let salt = await bcrypt.genSalt(10);
+      let pass = await bcrypt.hash(password, salt); 
+     
+     
+     const user = await User.findOne({ where:{ resetPassword:token } });
+     if(!user) return res.status(400).json({msg:"usuario no encontrado"});
+     
+     
+     await user.update({
+       ...user,
+       password:pass
+     });
       
-      if(!password) return res.json({ msg: "Password requerido" });
-      let newPassword = bcrypt.hashSync(password, +authConfig.rounds);
-
-      const dataToken = jwt.verify(token, authConfig.secret); 
       
-      if(!dataToken) return res.json({ msg:"Error al obtener la data" });
-      const { user } = dataToken;
-
-      const usuario = await User.findOne({ where:{ email: user.email } });
+      return res.status(200).json({ msg:"password actualizado" });
       
-      if(!usuario) return res.json({ msg:"Algo salio mal" });
-
-      await usuario.update({ 
-        ...usuario,
-        password:newPassword
-       })
-
-     return res.status(200).json(usuario);
-
     } catch (error) {
       next(error)
     }
+    
 
-  }
+  },
+
+
 };

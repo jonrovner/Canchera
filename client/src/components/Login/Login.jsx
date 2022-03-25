@@ -78,6 +78,11 @@ const Login = () => {
     return false;
   }, [error]);
 
+
+  const handlePass = () => {
+    navigate("/forgotPassword");
+  };
+
   return (
     <div className={style.contenedor}>
       {
@@ -145,6 +150,7 @@ const Login = () => {
           </div>
         </form>
       }
+        <button onClick={handlePass}>Olvidaste tu password?</button>
     </div>
   );
 };
