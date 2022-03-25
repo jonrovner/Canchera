@@ -114,7 +114,7 @@ const CreateClub = () => {
 
         <label htmlFor="descritption">Description</label>
         <input onChange={handleInput} type="text" name="description" />
-        {valid.name && showValid && (
+        {valid.description && showValid && (
           <p className="validation">{valid.description}</p>
         )}
         <br />
