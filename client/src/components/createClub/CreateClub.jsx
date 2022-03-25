@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FieldForm from "./FieldForm";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+//import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import "./createClub.css";
@@ -19,7 +20,10 @@ const CreateClub = () => {
   }, [input]);
 
   const [location, setLocation] = useState("");
+  const [position, setPosition] = useState({})
   const [latLong, setLatLong] = useState({});
+
+
 
   const user = useSelector((state) => state.user);
   console.log("user : ", user);
@@ -82,6 +86,7 @@ const CreateClub = () => {
           return setValid({ ...valid, map: "ingrese una dirección válida" });
         }
         setLatLong({ lat: res.data[0].lat, lon: res.data[0].lon });
+        setPosition({lat: Number(res.data[0].lat), lng: Number(res.data[0].lon)})
       })
       .catch((err) => {
         setInput((input) => ({
@@ -93,7 +98,11 @@ const CreateClub = () => {
         //return setValid({...valid, map: 'ingrese una dirección válida'})
       });
   };
-
+  const handleOnLoad = (map) => {
+    const bounds = new window.google.maps.LatLngBounds();
+    bounds.extend(position);
+    map.fitBounds(bounds);
+  };
   console.log("input is ", input);
   console.log("latLong is", latLong);
   //console.log('valid:', valid)
@@ -134,18 +143,20 @@ const CreateClub = () => {
         )}
         <br />
 
-        {latLong.lat && (
-          <MapContainer center={[latLong.lat, latLong.lon]} zoom={13} id="map">
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[latLong.lat, latLong.lon]}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          </MapContainer>
+        {position.lat && (
+          <GoogleMap
+          onLoad={handleOnLoad}
+          center={position}
+          zoom={7}
+          mapContainerStyle={{ width: "50vw", height: "40vh" }}
+          options={{ mapId: "f8e61b002a1322a0", styles:["terrain"] }}
+        >
+          <Marker
+            
+            position={position}
+            icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+          ></Marker>
+        </GoogleMap>
         )}
         <label htmlFor="openHour">horario apertura</label>
         <select onChange={(e) => handleInput(e)} type="text" name="openHour">
