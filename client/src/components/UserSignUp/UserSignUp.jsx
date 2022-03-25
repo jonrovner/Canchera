@@ -8,11 +8,16 @@ import { GoogleLogin } from "react-google-login";
 import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { set_user } from "../../redux/action";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { get_users_email, set_user } from "../../redux/action";
 
 const UserSignUp = () => {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  let user = useSelector((state) => state.user);
+
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
@@ -22,9 +27,6 @@ const UserSignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
-  let dispatch = useDispatch();
-  let navigate = useNavigate();
 
   const handlerInputChange = (e) => {
     var value = e.target.value;
@@ -55,23 +57,28 @@ const UserSignUp = () => {
   };
 
   const responseGoogle = async (r) => {
-    var obj = {
-      name: r.profileObj.name,
-      email: r.profileObj.email,
-      token: r.tokenId,
-    };
     let dataGoogle = {
       name: r.profileObj.name.toString(),
       email: r.profileObj.email.toString(),
     };
-    let user = await axios.post("/singup/google", dataGoogle);
-    window.localStorage.setItem("user", JSON.stringify(obj));
-    await dispatch(set_user(user.data));
-    navigate("/clubs");
+    let existe = await axios.post("/singup/google", dataGoogle);
+    if (!existe.data.message) {
+      window.localStorage.setItem("user", JSON.stringify(existe.data.email));
+      await dispatch(set_user(existe.data));
+      navigate("/clubs");
+      let formulario = document.getElementById("formul");
+      formulario.reset();
+    } else {
+      let usuario = await axios.get(`/user?email=${r.profileObj.email}`);
+      await dispatch(get_users_email(r.profileObj.email));
+      await dispatch(set_user(usuario.data));
+      window.localStorage.setItem("user", JSON.stringify(usuario.data.email));
+      navigate("/clubs");
+    }
   };
 
   const disabeledSubmit = useMemo(() => {
-    if (error.name || error.email || error.password) {
+    if (error.name || error.email || error.password || error.confirmPassword) {
       return true;
     }
 

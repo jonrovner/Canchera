@@ -15,9 +15,9 @@ module.exports = {
                     quantity: 1,
                 }],
                 back_urls: {
-                    "success": "http://localhost:3001/feedback",
-                    "failure": "http://localhost:3001/feedback",
-                    "pending": "http://localhost:3001/feedback"
+                    "success": process.env.DB_HOST+"/feedback",
+                    "failure": process.env.DB_HOST+"/feedback",
+                    "pending": process.env.DB_HOST+"/feedback"
                 },
                 auto_return: 'approved',
         };

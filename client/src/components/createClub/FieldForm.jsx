@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { validateField } from "./validation";
 
 const FieldForm = ({ handleInput }) => {
+  const [valid, setValid] = useState({})
   const [field, setField] = useState({});
+ 
+  useEffect(() => {
+    setValid(validateField(field))
+    
+  }, [field]);
+
   //console.log('field is ', field)
+  
+
 
   return (
     <div>
+      <div>
+        {!valid.valid && valid.players && <p className="validation">{valid.players}</p>} 
+        {!valid.valid && valid.surface && <p className="validation">{valid.surface}</p>} 
+        {!valid.valid && valid.price && <p className="validation">{valid.price}</p> }
+        </div>
+
       <select
         name="players"
         onChange={(e) =>
@@ -30,7 +46,7 @@ const FieldForm = ({ handleInput }) => {
       </select>
       <label htmlFor="price">Precio</label>
       <input
-        type="text"
+        type="number"
         name="price"
         onChange={(e) =>
           setField({ ...field, [e.target.name]: e.target.value })
@@ -39,7 +55,10 @@ const FieldForm = ({ handleInput }) => {
       <button
         onClick={(e) => {
           e.preventDefault();
-          handleInput(field);
+          if (valid.valid) {
+
+            handleInput(field);
+          }
         }}
       >
         add

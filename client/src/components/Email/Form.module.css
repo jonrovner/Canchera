@@ -1,0 +1,78 @@
+.container {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(-45deg, #11151d,#1d1f24,#252525);  
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .h1 {
+    color: #9cc7f3;
+    font-size: 4rem;
+    font-weight: 500;
+    margin: 1;
+  }
+  
+  .formmail {
+    width: 20rem;
+    height: 45rem;
+    border: groove 3px #ffff;
+    border-radius:15px;
+    box-shadow: -3px -2px 1px #535366;
+    background: #232526;  
+    background: linear-gradient(to right, #414345, #232526);  
+    opacity: 0.8;  
+    padding: 1rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .label {
+    font-size: 1.5rem;
+    color: #9cc7f3;
+    font-weight: 900;
+    margin: 1rem;
+  }
+  
+  .input {
+    width: 16rem;
+    height: 3rem;
+    font-size: 1rem;
+    background: transparent;
+    box-shadow: 0 -2px 2px rgb(199, 194, 194);
+    border-radius: 20px;
+    color: #ffff;
+  }
+  
+  .textarea {
+    width: 16rem;
+    height: 10rem;
+    border-radius: 10px;
+    background-color: #a3a8af;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .button {
+    font-weight: 900;
+    height: 2rem;
+    width: 17rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    color: rgb(43, 33, 78);
+    background-color: #9cc7f3;
+    cursor: pointer;
+  }
+  
+  .button:hover,
+  button:focus {
+    background-color:rgb(60, 55, 77);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffff;
+  }

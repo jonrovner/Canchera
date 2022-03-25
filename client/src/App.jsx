@@ -4,6 +4,7 @@ import Clubdetail from "./components/ClubDetail/ClubDetail";
 import CreateClub from "./components/createClub/CreateClub";
 import Landing from "./components/Landing/Landing";
 import Login from "./components/Login/Login";
+import ContactUs from "./components/Email/Email"
 import NotFound from "./components/NotFound/NotFound";
 import OwnerSignUp from "./components/OwnerSignUp/OwnerSignUp";
 import UserSignUp from "./components/UserSignUp/UserSignUp";
@@ -13,11 +14,13 @@ import ListClubs from "./components/ListClubs/ListClubs";
 import ValidateEmail from "./components/Password/ValidateEmail";
 import ResetPassword from "./components/Password/ResetPassword";
 
+import Dashboard from "./components/Dashboard/Dashboard"
+
 function App() {
   const dispatch = useDispatch();
 
   let fn = async (usuario) => {
-    await dispatch(get_users_email(usuario.email));
+    await dispatch(get_users_email(usuario));
   };
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
@@ -31,10 +34,11 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Landing />} />
-
         <Route path="/signup/owner" element={<OwnerSignUp />} />
         <Route path="/signup/user" element={<UserSignUp />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/createClub" element={<CreateClub />} />
         <Route path="/clubs" element={<ListClubs />} />
         <Route path="/club/:clubName" element={<Clubdetail />} />
