@@ -1,0 +1,192 @@
+.contenedor {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.contenedor form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 0rem 5rem;
+  -webkit-transition: all 0.2s 0.7s;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 / 2;
+  width: 30rem;
+  height: 40rem;
+  border: 1px solid #3b3b3b;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+}
+
+.contenedor form .title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.contenedor form .inputField {
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 15% 85%;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.contenedor form .inputField .fasFaUser {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.contenedor form .inputField input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.contenedor form .inputField input::-webkit-input-placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.contenedor form .inputField input:-ms-input-placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.contenedor form .inputField input::-ms-input-placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.contenedor form .inputField input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.contenedor form .containerError {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.contenedor form .containerError .error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: red;
+  font-size: 14px;
+  width: 100%;
+}
+
+.contenedor form .boton {
+  width: 150px;
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.contenedor form .boton:hover {
+  background-color: #4d84e2;
+}
+
+.contenedor form .boton:disabled {
+  background: #505050;
+}
+
+.contenedor form .boton:disabled:hover {
+  background: #505050;
+}
+
+.contenedor form .socialText {
+  padding: 0.7rem 0;
+  font-size: 1rem;
+}
+
+.contenedor form .socialMedia {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.contenedor form .socialMedia .socialIcon {
+  height: 46px;
+  width: 46px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 0.45rem;
+  color: #333;
+  border-radius: 50%;
+  border: 1px solid #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.contenedor form .socialMedia .socialIcon:hover {
+  color: #4481eb;
+  border-color: #4481eb;
+}
+/*# sourceMappingURL=Login.module.css.map */

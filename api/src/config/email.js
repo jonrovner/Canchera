@@ -67,16 +67,16 @@ const getTemplatePassword = (name, token) =>{
 
   let url;
   if (process.env.NODE_ENV) {
-    url = "https://canchera.herokuapp.com";
+    url = "https://canchera.vercel.app/";
   } else {
-    url = "http://localhost:3001";
+    url = "http://localhost:3000";
   }
 
   return `
   <div>
     <h1>${name} es su dia de suerte</h1>
     <p>a solicitado un restablecimiento de contraseña para su cuenta de Heroku. Siga el siguiente enlace para establecer una nueva contraseña:</p>
-    <a href="${url}/resetpassword/${token}">Confirmar identidad</a>
+    <a href="${url}/resetpassword/${token}">${token}</a>
   </div>
   
   `

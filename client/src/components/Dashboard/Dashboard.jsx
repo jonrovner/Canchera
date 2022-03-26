@@ -12,15 +12,23 @@ import Navbar from '../NavBar/NavBar';
 import { clean_state, get_users_email } from '../../redux/action';
 
 
+
 function Dashboard() {
 
     const dispatch = useDispatch();
+
     let user = useSelector(state => state.user)
     let navigate = useNavigate();
 
     // useEffect(() =>{
     //     dispatch(get_users_email())
     // }, [dispatch])
+
+    const user = useSelector(state => state.user)
+    let navigate = useNavigate();
+
+
+  
     
     // function onSubmit(e){
     //     navigate('/login')
@@ -33,6 +41,7 @@ function Dashboard() {
 
             <h1>Dashboard</h1> 
             {
+
                 user.rol === 'user' ?  
                 <User
                     id = {user.id}                        
@@ -55,6 +64,7 @@ function Dashboard() {
                     email = {user.email}
                     rol = {user.rol}
                 /> 
+
                 : 
                 <div>
                     <p>Cargando... </p>  

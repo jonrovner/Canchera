@@ -11,6 +11,13 @@ export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
 export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL";
 export const CLEAN_STATE = "CLEAN_STATE";
 
+export const CLEAN_STATE = "CLEAN_STATE";
+
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const GET_PASSWORD = "GET_PASSWORD";
+export const RESET_PASSWORD = "RESET_PASSWORD";
+
+
 export const get_club_detail = (clubName) => async (dispatch) => {
   try {
     let club = await axios.get(`/club/${clubName}`);
@@ -97,6 +104,37 @@ export const order_price_clubs = (order) => {
   return { type: ORDER_PRICE_CLUBS, payload: order };
 };
 
+
 export const clean_state = (payload) =>{
   return{ type: CLEAN_STATE, payload:{}}
 }
+
+export const passForgotten = (email) => async (dispatch) => {
+  try {
+    let validateEmail = await axios.post("/forgotpassword", email);
+    dispatch({ type: FORGOT_PASSWORD, payload: validateEmail.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+/* export const getPass = (token) => async (dispatch) => {
+  try {
+    let newPass = await axios.get(`/resetpassword/${token}`);
+    dispatch({ type: RESET_PASSWORD, payload: newPass.data });
+  } catch (error) {
+    console.log(error);
+  }
+}; */
+
+
+export const resetPass = (password) => async (dispatch) => {
+  try {
+    
+    let newPass = await axios.put(`/resetpassword/`,password);
+    dispatch({ type: RESET_PASSWORD, payload: newPass.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
