@@ -12,6 +12,7 @@ interface ClubAttributes {
   latitude: number;
   longitude: number;
   lowestPrice: number;
+  ciudad: string;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -31,6 +32,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     latitude!: number;
     longitude!: number;
     lowestPrice!: number;
+    ciudad!: string;
 
     static associate(models: any) {
       // define association here
@@ -40,7 +42,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
   }
   Club.init(
     {
-        name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
@@ -82,6 +84,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       lowestPrice: {
         type: DataTypes.INTEGER,
+      },
+      ciudad: {
+        type: DataTypes.STRING,
       },
     },
     {
