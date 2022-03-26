@@ -12,7 +12,11 @@ const CreateClub = () => {
   const navigate = useNavigate();
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
-  const [input, setInput] = useState({ fields: [] });
+  const [input, setInput] = useState({ 
+    fields: [],
+    openHour: "6",
+    closeHour: "18"
+   });
   const [file, setFile] = useState(null);
 
   useEffect(() => {
