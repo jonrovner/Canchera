@@ -62,9 +62,8 @@ function Map() {
           onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
           center={{ lat: -32.96326511574192, lng: -61.409007928306615 }}
-          zoom={4}
+          zoom={5}
           mapContainerStyle={{ width: "700px", height: "70vh" }}
-          options={{ mapId: "f8e61b002a1322a0" }}
         >
           {clubes.map((club, index) => (
             <Marker

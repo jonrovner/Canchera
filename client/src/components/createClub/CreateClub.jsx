@@ -149,7 +149,6 @@ const CreateClub = () => {
           center={position}
           zoom={7}
           mapContainerStyle={{ width: "50vw", height: "40vh" }}
-          options={{ mapId: "f8e61b002a1322a0", styles:["terrain"] }}
         >
           <Marker
             

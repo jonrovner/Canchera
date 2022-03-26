@@ -3,9 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./CardClub.module.scss";
 
-const CardClub = ({ name, img, location, openHour, closeHour, Fields }) => {
+const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
   return (
-    <Link className={style.link} to={`/club/${name.replaceAll(" ", "-")}`}>
+    <Link key={id} className={style.link} to={`/club/${name.replaceAll(" ", "-")}`}>
       <div className={style.contenedor}>
         <div className={style.divImg}>
           <img className={style.img} src={img} alt="not found" />
