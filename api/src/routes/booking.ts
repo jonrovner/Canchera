@@ -6,6 +6,6 @@ router.post('/booking', BookingController.postBooking);
 
 router.get('/booking/:clubName', BookingController.getBookings);
 
-router.delete('/booking/:userId', )
+router.delete('/booking/:userId', BookingController.deleteBooking )
 
 module.exports = router;
