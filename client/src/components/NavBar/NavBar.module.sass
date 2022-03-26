@@ -1,0 +1,104 @@
+.Navbar
+    color: #dcdaee
+    position: fixed
+    height: 90px
+    width: 100%
+    z-index: 10
+    animation: BgIn 0.3s ease-in-out backwards
+    justify-content: space-evenly
+    .container
+        display: flex
+        align-items: center
+        height: 100%
+        width: 1200px
+        margin: auto
+        justify-content: space-between
+    .logo
+        color: #dcdaee
+        text-decoration: none
+        h2
+            font-family: 'Pattaya', sans-serif
+            font-size: 50px
+    .searchBar
+        form
+            height: 50px
+            width: 400px
+            display: flex
+            border-radius: 50px
+            background-color: #abb2d6
+            input
+                flex-grow: 2
+                height: 100%
+                background-color: transparent
+                border: none
+                padding-inline-start: 20px
+                outline: none
+                transition: background-color 0.3s ease-in-out
+                border-radius: 50px
+            input:focus, input:hover
+                background-color: #ffffff
+                border-radius: 50px
+                transition: background-color 0.3s ease-in-out
+            button
+                background-color: #7465fa
+                font-size: 30px
+                height: 50px
+                width: 50px
+                border-radius: 50px
+                border: none
+                cursor: pointer
+                transition: transform 0.3s ease-in-out
+            button:hover
+                transform: scale(110%)
+    .navLinks
+        display: flex
+        align-items: center
+        gap: 30px
+        a
+            text-decoration: none
+            color: #dcdaee
+            cursor: pointer
+            p
+                display: flex
+                align-items: center
+                gap: 3px
+        a:hover
+            text-decoration: underline
+        .user
+
+.Navbar__background
+    background-color: #001d2f
+    position: fixed
+    display: flex
+    height: 90px
+    width: 100%
+    z-index: 10
+    animation: BgIn 0.3s ease-in-out forwards
+    animation: opacityIn 0.3s ease-in-out forwards
+
+.Navbar__hidden
+    background-color: #001d2f
+    position: fixed
+    display: flex
+    height: 90px
+    width: 100%
+    z-index: 10
+    animation: opacityOut 0.3s ease-in-out forwards
+
+@keyframes opacityOut
+    from
+        opacity: 1
+    to
+        opacity: 0
+
+@keyframes opacityIn
+    from
+        opacity: 0
+    to
+        opacity: 1
+
+@keyframes BgIn
+    from
+        background-color: #001d2f
+    to
+        background-color: transparent

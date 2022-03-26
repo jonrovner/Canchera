@@ -45,19 +45,15 @@ function Map() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Map}>
       <div>
-        <h1>Clubes</h1>
+        <small>(FALTA DAR ESTILOS A ESTE COMPONENTE)</small>
+        <h2>Localidades Cancheras</h2>
         <ul>
           {!clubes
             ? "Cargando..."
             : clubes.map((club, index) => {
-                return (
-                  <li key={index}>
-                    {" "}
-                    {club.name} {club.location}{" "}
-                  </li>
-                );
+                return <li key={index}> {club.location} </li>;
               })}
         </ul>
       </div>
@@ -66,15 +62,15 @@ function Map() {
           onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
           center={{ lat: -32.96326511574192, lng: -61.409007928306615 }}
-          zoom={5}
-          mapContainerStyle={{ width: "70vw", height: "60vh" }}
+          zoom={4}
+          mapContainerStyle={{ width: "700px", height: "70vh" }}
           options={{ mapId: "f8e61b002a1322a0" }}
         >
           {clubes.map((club, index) => (
             <Marker
               key={index}
               position={positions[index]}
-              icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
               onClick={() => handleActiveMarker(club.name)}
             >
               {activeMarker === club.name ? (

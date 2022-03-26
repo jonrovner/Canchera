@@ -1,0 +1,201 @@
+.Navbar {
+  color: #dcdaee;
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  z-index: 10;
+  -webkit-animation: BgIn 0.3s ease-in-out backwards;
+          animation: BgIn 0.3s ease-in-out backwards;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.Navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  width: 1200px;
+  margin: auto;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.Navbar .logo {
+  color: #dcdaee;
+  text-decoration: none;
+}
+
+.Navbar .logo h2 {
+  font-family: 'Pattaya', sans-serif;
+  font-size: 50px;
+}
+
+.Navbar .searchBar form {
+  height: 50px;
+  width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 50px;
+  background-color: #abb2d6;
+}
+
+.Navbar .searchBar form input {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  -webkit-padding-start: 20px;
+          padding-inline-start: 20px;
+  outline: none;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 50px;
+}
+
+.Navbar .searchBar form input:focus, .Navbar .searchBar form input:hover {
+  background-color: #ffffff;
+  border-radius: 50px;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.Navbar .searchBar form button {
+  background-color: #7465fa;
+  font-size: 30px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.Navbar .searchBar form button:hover {
+  -webkit-transform: scale(110%);
+          transform: scale(110%);
+}
+
+.Navbar .navLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 30px;
+}
+
+.Navbar .navLinks a {
+  text-decoration: none;
+  color: #dcdaee;
+  cursor: pointer;
+}
+
+.Navbar .navLinks a p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+}
+
+.Navbar .navLinks a:hover {
+  text-decoration: underline;
+}
+
+.Navbar__background {
+  background-color: #001d2f;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 90px;
+  width: 100%;
+  z-index: 10;
+  -webkit-animation: BgIn 0.3s ease-in-out forwards;
+          animation: BgIn 0.3s ease-in-out forwards;
+  -webkit-animation: opacityIn 0.3s ease-in-out forwards;
+          animation: opacityIn 0.3s ease-in-out forwards;
+}
+
+.Navbar__hidden {
+  background-color: #001d2f;
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 90px;
+  width: 100%;
+  z-index: 10;
+  -webkit-animation: opacityOut 0.3s ease-in-out forwards;
+          animation: opacityOut 0.3s ease-in-out forwards;
+}
+
+@-webkit-keyframes opacityOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes opacityOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes opacityIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opacityIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes BgIn {
+  from {
+    background-color: #001d2f;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes BgIn {
+  from {
+    background-color: #001d2f;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+/*# sourceMappingURL=NavBar.module.css.map */

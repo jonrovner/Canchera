@@ -1,7 +1,12 @@
 .boton {
-  background-color: black;
-  color: white;
-  width: 6rem;
-  height: 2rem;
+  background-color: transparent;
+  border: none;
+  color: #dcdaee;
+  cursor: pointer;
+  padding: 0;
+}
+
+.boton:hover {
+  text-decoration: underline;
 }
 /*# sourceMappingURL=BotonLogout.module.css.map */

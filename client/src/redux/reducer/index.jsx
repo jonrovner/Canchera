@@ -8,6 +8,7 @@ import {
   ORDER_NAME_CLUBS,
   ORDER_PRICE_CLUBS,
   GET_CLUB_DETAIL,
+  CLEAN_STATE,
 } from "../action/index";
 import { order } from "./metodos/order";
 const initialState = {
@@ -81,6 +82,13 @@ function rootReducer(state = initialState, { type, payload }) {
         ...state,
         clubes: ordered,
       };
+    }
+
+    case CLEAN_STATE: {
+      return{
+        ...state,
+        user: payload
+      }
     }
 
     default:
