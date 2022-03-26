@@ -4,6 +4,7 @@
     flex-direction: column
     align-items: center
     .content
+        padding-top: 70px
         width: 1100px
         display: flex
         flex-direction: column
@@ -12,36 +13,104 @@
             display: flex
             align-items: center
             padding: 40px
-            padding-left: 80px
-            border: 2px solid black
-            margin: 40px
-            border-radius: 20px
-            h1
-                font-size: 75px
-            img
-                width: 500px
-                margin-right: -150px
-        .player
+            margin-block: 40px
+        .hero
+            color: #d0cbff
+            height: 80vh
+            gap: 30px
+            .text
+                width: 70%
+                h1
+                    color: #dcdaee
+                    font-size: 70px
+                    font-weight: 700
+                    line-height: 1.1
+                    margin-bottom: 30px
+                p
+                    font-size: 23px
+                    span
+                        font-family: 'Pattaya', sans-serif
+            .images
+                height: 100%
+                background-image: linear-gradient(to bottom, #a67fda, #ffffff00)
+                border-radius: 500px 500px 0px 0px
+                padding: 30px
+                img
+                    width: 100%
+        .player, .host
+            color: #140027
+            width: 100%
             padding: 0px
             overflow: hidden
-            height: 400px
-            img
-                margin: 0
-            h2
-                font-size: 50px
-                margin-right: 40px
-                text-align: right
-            div
-                display: flex
-                flex-direction: column
-                align-items: center
+            height: 80vh
+            position: relative
+            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
+            background-image: url('../../assets/9.jpg')
+            background-size: 120%
+            text-align: left
+            border-radius: 5px
+            margin-block: 80px
+            .text
+                position: absolute
+                left: 100px
+                top: 100px
+                height: 450px
+                z-index: 1
+                h2
+                    font-size: 55px
+                    font-weight: 700
+                    margin-right: 40px
+                    background-color: #d0cbff3b
+                    padding: 10px
+                    padding-bottom: 0px
+                    span
+                        color: #d0cbff
+                p
+                    width: 500px
+                    font-size: 24px
+                    background-color: #d0cbff3b
+                    padding: 10px
+                    padding-top: 0px
+                button
+                    color: #140027
+                    position: absolute
+                    bottom: 0
+                    font-size: 30px
+                    background-color: #dcdaeeb0
+                    border: none
+                    font-family: "Open Sans", sans-serif
+                    font-weight: 300
+                    padding: 10px
+                    border-radius: 5px
+                    cursor: pointer
+                    transition: all 0.3s ease-in-out
+                button:hover
+                    color:
+                    background-color: #d0cbff
+                    transform: scale(105%)
+                    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
+        .player::after, .host::after
+            width: 1040px
+            height: 571px
+            content: ''
+            position: absolute
+            left: 30px
+            border: 20px solid #dcdaeeb0
+            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
         .host
-            padding: 0px
-            overflow: hidden
-            h2
-                margin-left: 40px
-                font-size: 50px
-            div
+            background-image: url('../../assets/13.jpg')
+            text-align: right
+            .text
+                position: absolute
+                right: 100px
+                top: 100px
+                height: 450px
+                z-index: 1
                 display: flex
                 flex-direction: column
-                align-items: center
+                align-items: flex-end
+                h2
+                    margin: 0px
+                p
+                    span
+                        font-family: 'Pattaya', sans-serif

@@ -3,11 +3,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 100vh;
 }
 
@@ -16,15 +16,15 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 0rem 5rem;
   -webkit-transition: all 0.2s 0.7s;
   transition: all 0.2s 0.7s;
@@ -40,7 +40,7 @@
   border: 1px solid #3b3b3b;
   border-radius: 10px;
   -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
-  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
   margin-top: 1rem;
 }
 
@@ -60,7 +60,7 @@
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 15% 85%;
-  grid-template-columns: 15% 85%;
+      grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
   position: relative;
 }
@@ -84,6 +84,7 @@
   font-weight: 600;
   font-size: 1.1rem;
   color: #333;
+  width: 100%;
 }
 
 .contenedor form .inputField input::-webkit-input-placeholder {
@@ -159,8 +160,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .contenedor form .socialMedia .socialIcon {
@@ -170,11 +171,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 0 0.45rem;
   color: #333;
   border-radius: 50%;
@@ -189,4 +190,4 @@
   color: #4481eb;
   border-color: #4481eb;
 }
-/*# sourceMappingURL=Login.module.css.map */
+/*# sourceMappingURL=ValidateEmail.module.css.map */

@@ -13,9 +13,9 @@ import { get_users_email } from "./redux/action";
 import ListClubs from "./components/ListClubs/ListClubs";
 import ValidateEmail from "./components/Password/ValidateEmail/ValidateEmail";
 import ResetPassword from "./components/Password/ResetPassword/ResetPassword";
-import Dashboard from "./components/Dashboard/Dashboard"
+import Dashboard from "./components/Dashboard/Dashboard";
 import Checkout from "./components/Checkout/Checkout";
-
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();

@@ -1,4 +1,11 @@
-.container {
-  display: inline-flex;
-  flex-direction: row;
+.Map {
+  margin-block: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1100px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+/*# sourceMappingURL=Map.module.css.map */
