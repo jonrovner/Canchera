@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./Slider.module.css";
-import img1 from "../../assets/1.jpg";
-import img2 from "../../assets/2.jpg";
-import img3 from "../../assets/3.png";
-import img4 from "../../assets/4.jpg";
+import img1 from "../../assets/7.jpeg";
+import img2 from "../../assets/2.jpeg";
+import img3 from "../../assets/11.jpeg";
+import img4 from "../../assets/4.jpeg";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Slider = () => {
@@ -51,10 +51,10 @@ const Slider = () => {
         ))}
       </div>
       <div className={styles.buttons}>
-        <button onClick={() => handleOnClick("left")}>
+        <button className={styles.left} onClick={() => handleOnClick("left")}>
           <FaChevronLeft />
         </button>
-        <button onClick={() => handleOnClick()}>
+        <button className={styles.right} onClick={() => handleOnClick()}>
           <FaChevronRight />
         </button>
       </div>

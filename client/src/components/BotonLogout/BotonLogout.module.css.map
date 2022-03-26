@@ -1,8 +1,8 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,gBAAgB,EAAE,KAAK;EACvB,KAAK,EAAE,KAAK;EACZ,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CACb",
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,gBAAgB,EAAE,WAAW;EAC7B,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,OAAO;EACd,MAAM,EAAE,OAAO;EACf,OAAO,EAAE,CAAC;CAAG;;AACf,AAAA,MAAM,AAAA,MAAM,CAAC;EACX,eAAe,EAAE,SAAS;CAAG",
     "sources": [
-        "BotonLogout.module.scss"
+        "BotonLogout.module.sass"
     ],
     "names": [],
     "file": "BotonLogout.module.css"
