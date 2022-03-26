@@ -9,9 +9,7 @@ export const SET_USER = "SET_USER";
 export const ORDER_NAME_CLUBS = "ORDER_NAME_CLUBS";
 export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
 export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL";
-
 export const CLEAN_STATE = "CLEAN_STATE";
-
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const GET_PASSWORD = "GET_PASSWORD";
 export const RESET_PASSWORD = "RESET_PASSWORD";
@@ -135,4 +133,5 @@ export const resetPass = (password) => async (dispatch) => {
     console.log(error);
   }
 };
+
 
