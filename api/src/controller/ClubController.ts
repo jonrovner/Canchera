@@ -10,7 +10,8 @@ const multerConfig = multer.diskStorage({
     const ext = file.mimetype.split("/").pop();
     let body = JSON.parse(req.body.data);
     console.log('body is ', body)
-    cb(null, `${body.name.replaceAll(" ", "-")}.${ext}`);
+    console.log(body.name.split(" ").join("-") + "ESTE ES EL BODY NAME");
+    cb(null, `${body.name.replace(/ /g, '-')}.${ext}`);
   },
 });
 
@@ -65,7 +66,7 @@ module.exports = {
 
       let image;
       if (req.file) {
-        image = `${url}${name.replaceAll(" ", "-")}.${ext}`;
+        image = `${url}${name.replace(/ /g, '-')}.${ext}`;
       } else {
         image = `${url}club-default.jpg`;
       }

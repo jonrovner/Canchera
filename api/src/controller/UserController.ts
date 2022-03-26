@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from "express";
-const { User, Booking, Club } = require('../db.ts');
+const { User, Booking, Club, Field } = require('../db.ts');
 const bcrypt = require('bcrypt')
 
 module.exports = {
@@ -12,8 +12,11 @@ module.exports = {
     include:{
       model:Booking,
       include:{
-        model:Club,
-        attributes:['name', 'location']
+        model: Field,
+        include: {
+          model:Club,
+          attributes:['name', 'location']
+        }
       }
     }  
     });
