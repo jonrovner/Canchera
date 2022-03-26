@@ -1,77 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import BotonLogout from "../BotonLogout/BotonLogout";
-import {
-  AiFillHome,
-  AiOutlineSearch,
-  AiFillMail,
-  AiOutlineUser,
-  AiFillFileAdd,
-  AiOutlineMenu
-} from "react-icons/ai";
+import { AiFillHome, AiOutlineSearch, AiFillMail } from "react-icons/ai";
 
-import "./NavBar.css";
+import styles from "./NavBar.module.css";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
   let user = useSelector((state) => state.user);
+
+  const [scrollPosition, setPosition] = useState(0);
+
+  useEffect(() => {
+    function updatePosition() {
+      setPosition(window.scrollY);
+    }
+
+    window.addEventListener("scroll", updatePosition);
+    updatePosition();
+
+    return () => window.removeEventListener("scroll", updatePosition);
+  }, []);
+
   return (
-    <div id="navbar">
-      <div>
-        <NavLink exact="true" to="/clubs">
-          <h3>
-            <AiFillHome /> Home
-          </h3>
+    <div
+      className={
+        scrollPosition < 1
+          ? styles.Navbar
+          : scrollPosition < 3600
+          ? styles.Navbar__background
+          : styles.Navbar__hidden
+      }
+    >
+      <div className={styles.container}>
+        <NavLink exact="true" to="/" className={styles.logo}>
+          <h2>Canchera</h2>
         </NavLink>
-      </div>
-      <div>
-        <NavLink exact="true" to="/contactUs">
-          <h3>
-            <AiFillMail /> Contact
-          </h3>
-        </NavLink>
-      </div>
-      <div>
-        <NavLink exact="true" to="/createClub">
-          <h3>
-            <AiFillFileAdd /> Create Club
-          </h3>
-        </NavLink>
-      </div>
-      <div className="search">
-        <NavLink to="#">
-          <input type="text" placeholder="Buscar" />
-          <button>
-            <AiOutlineSearch />
-          </button>
-        </NavLink>
-      </div>
-      <div className="dropdown"> 
-      <button className="dropbtn"><AiOutlineMenu /><AiOutlineUser /></button>
-        <div className="dropdown-content">
 
-          {typeof user.email === "string" ? (
-            <h3>
-              <BotonLogout />
-            </h3>
-          ) : (
-            <NavLink exact="true" to="/login">
-              <h3>
-                <AiOutlineUser /> Login
-              </h3>
-            </NavLink>
-          )}
+        <div className={styles.searchBar}>
+          <form action="" onSubmit={() => alert("submit")}>
+            <input type="text" placeholder="Buscar" />
+            <button onSubmit={() => alert("submit")}>
+              <AiOutlineSearch />
+            </button>
+          </form>
+        </div>
+        <div className={styles.navLinks}>
+          <NavLink exact="true" to="/clubs">
+            <p>
+              <AiFillHome /> Establecimientos
+            </p>
+          </NavLink>
+          <NavLink exact="true" to="/signup/owner">
+            <p>
+              <AiFillHome /> Sos Dueño?
+            </p>
+          </NavLink>
+          <NavLink exact="true" to="/contactUs">
+            <p>
+              <AiFillMail /> Contacto
+            </p>
+          </NavLink>
 
-          <NavLink exact="true" to="signup/owner">
-            <h3>
-              <AiOutlineUser /> Registrate como Dueño
-            </h3>
-          </NavLink>
-          <NavLink exact="true" to="signup/user">
-            <h3>
-              <AiOutlineUser /> Registrate como Jugador
-            </h3>
-          </NavLink>
+          <div className={styles.user}>
+            {typeof user.email === "string" ? (
+              <p>
+                <NavLink to="dashboard">Hola {user.name} 👋</NavLink>
+                <BotonLogout />
+              </p>
+            ) : (
+              <nav>
+                <NavLink exact="true" to="/login">
+                  <p>Login</p>
+                </NavLink>
+
+                <NavLink exact="true" to="signup/user">
+                  <p>Registrate</p>
+                </NavLink>
+              </nav>
+            )}
+          </div>
         </div>
       </div>
     </div>

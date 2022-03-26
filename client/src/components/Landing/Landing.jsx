@@ -1,12 +1,10 @@
 import styles from "./Landing.module.css";
 import NavBar from "../NavBar/NavBar";
 import Slider from "../Slider/Slider";
-import Collage from "../Collage/Collage";
 import Footer from "../Footer/Footer";
-import heroImg from "../../assets/2.jpg";
-import playerImg from "../../assets/1.jpg";
-import hostImg from "../../assets/4.jpg";
-import Map from "../Map/Map";
+import Map from "../Map/Map.jsx";
+
+import hero from "../../assets/hero.png";
 
 const Landing = () => {
   if (window.localStorage) {
@@ -21,33 +19,49 @@ const Landing = () => {
       <NavBar />
       <div className={styles.content}>
         <section className={styles.hero}>
-          <h1>Decidete a jugar por mas!</h1>
-          <img src={heroImg} alt="" />
+          <div className={styles.images}>
+            <img src={hero} alt="" />
+          </div>
+          <div className={styles.text}>
+            <h1>Decidete a jugar por mas</h1>
+            <p>
+              Encontra una cancha cercana, reserva y paga OnLine. Olvidate de
+              los problemas, aprovecha mas el tiempo de juego con
+              <span> Canchera</span>.
+            </p>
+          </div>
         </section>
-        <h1>
-          "Siempre quiero más. Ya sea que se trate de un gol o de ganar un
-          juego, nunca estoy satisfecho"
-        </h1>
-        <h2>Messi</h2>
         <br />
-        <Slider />
+
         <section className={styles.player}>
-          <img src={playerImg} alt="" />
-          <div>
-            <h2>Reservar una cancha nunca fue tan fácil!</h2>
-            <button>Hacelo ya!</button>
+          <div className={styles.text}>
+            <h2>
+              Un deporte para <span>TODXS</span>.
+            </h2>
+            <p>
+              Desde un origen, <span>Canchera</span> nace para acompañar y
+              apoyar a minorias. Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Ipsum magnam min
+            </p>
+            <button>Buscar una cancha</button>
           </div>
         </section>
-        <Collage />
+
+        <Slider />
+
         <section className={styles.host}>
-          <div>
+          <div className={styles.text}>
             <h2>
-              Busca y reserva en segundos tu cancha favorita, gratis y sin
-              complicaciones.{" "}
+              <span>Moderniza</span> tu establecimiento.
             </h2>
-            <button>Aplicar</button>
+            <p>
+              Sos dueño de un establecimiento o club? Aplica para ser un Dueño
+              <span> Canchera</span>, moderniza tu negocio y multiplica tu
+              alcanze. Utiliza mejor tu tiempo y lleva un control de las
+              reservas y canchas.
+            </p>
+            <button>Aplicar como Dueño</button>
           </div>
-          <img src={hostImg} alt="" />
         </section>
       </div>
       <Map />

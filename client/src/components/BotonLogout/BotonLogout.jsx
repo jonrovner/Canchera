@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { clear_state_user } from "../../redux/action";
-import style from "./BotonLogout.module.scss";
+import style from "./BotonLogout.module.sass";
 
 const BotonLogout = () => {
   let dispatch = useDispatch();
