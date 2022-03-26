@@ -49,9 +49,6 @@ const Footer = () => {
               <FaMapMarkerAlt /> Goya, en la casa de Martin.
             </li>
             <li>
-              <FaPhoneAlt /> +54 9 123 456-678
-            </li>
-            <li>
               <FaEnvelope /> contacto@canchera.com
             </li>
           </ul>
