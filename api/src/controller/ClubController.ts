@@ -9,8 +9,6 @@ const multerConfig = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/").pop();
     let body = JSON.parse(req.body.data);
-    console.log('body is ', body)
-    console.log(body.name.split(" ").join("-") + "ESTE ES EL BODY NAME");
     cb(null, `${body.name.replace(/ /g, '-')}.${ext}`);
   },
 });
@@ -43,6 +41,7 @@ module.exports = {
       longitude,
       userId,
       fields,
+      ciudad,
     } = JSON.parse(req.body.data);
 
     try {
@@ -83,6 +82,7 @@ module.exports = {
           latitude: latitude,
           longitude: longitude,
           UserId: userId,
+          ciudad: ciudad,
           lowestPrice: Math.min(
             ...fields.map((field: any) => Number(field.price))
           ),
@@ -122,6 +122,7 @@ module.exports = {
             "latitude",
             "longitude",
             "lowestPrice",
+            "ciudad",
           ],
           include: {
             model: Field,
@@ -147,6 +148,7 @@ module.exports = {
           "latitude",
           "longitude",
           "lowestPrice",
+          "ciudad",
         ],
         include: {
           model: Field,
@@ -175,6 +177,7 @@ module.exports = {
           "score",
           "latitude",
           "longitude",
+          "ciudad",
         ],
         include: {
           model: Field,
