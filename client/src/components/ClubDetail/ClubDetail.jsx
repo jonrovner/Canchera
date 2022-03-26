@@ -3,7 +3,7 @@ import FieldCalendar from "./FieldCalendar/FieldCalendar.jsx";
 import { setHours, setMinutes, setSeconds, addDays, subDays, isToday } from "date-fns";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { get_club_detail } from "../../redux/action/index.js";
+import { get_club_detail, set_payment_id } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./clubDetail.css";
 import axios from "axios";
@@ -77,7 +77,23 @@ const Clubdetail = () => {
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
-    const toPost = { userId: user.id, dates: selectedDates };
+    try {
+      const mpResponse = await axios.post("/checkout", { price });
+      
+      if (mpResponse.data.id) {
+
+      const bookingDetails = {
+        toPost: {userId: user.id, dates: selectedDates},
+        payment_id: mpResponse.data.id
+      }
+
+      window.localStorage.setItem('booking_details', JSON.stringify(bookingDetails))
+      createCheckoutButton(mpResponse.data.id)  
+
+    }}catch(err){console.log(err)}
+    
+    
+  /*   const toPost = { userId: user.id, dates: selectedDates };
     const reservation = await axios.post(`/booking`, toPost);
     if (reservation.data.length) {
       try {
@@ -85,12 +101,13 @@ const Clubdetail = () => {
         const mpResponse = await axios.post("/checkout", { price });
         console.log(mpResponse.data);
         if (mpResponse.data.id) {
+          dispatch(set_payment_id(mpResponse.data.id))
           createCheckoutButton(mpResponse.data.id)          
         }
       } catch (err) {
         console.log(err);
       }
-    }
+    } */
   };
 
   const handleOnLoad = (map) => {
@@ -125,8 +142,9 @@ const Clubdetail = () => {
             <GoogleMap
               onLoad={handleOnLoad}
               center={position}
-              zoom={15}
+              zoom={18}
               mapContainerStyle={{ width: "50vw", height: "40vh" }}
+              options={{ mapId: "f8e61b002a1322a0"}}
             >
               <Marker
                 key={club.name}
