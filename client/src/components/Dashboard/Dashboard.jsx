@@ -16,10 +16,7 @@ import { clean_state, get_users_email } from '../../redux/action';
 function Dashboard() {
 
     const dispatch = useDispatch();
-
-    let user = useSelector(state => state.user)
-    let navigate = useNavigate();
-
+    
     // useEffect(() =>{
     //     dispatch(get_users_email())
     // }, [dispatch])
