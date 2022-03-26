@@ -9,20 +9,18 @@ import Admin from "./Admin";
 
 
 import Navbar from '../NavBar/NavBar';
-import { clean_state } from '../../redux/action';
+import { clean_state, get_users_email } from '../../redux/action';
 
 
 function Dashboard() {
 
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user)
+    let user = useSelector(state => state.user)
     let navigate = useNavigate();
 
-
-    useEffect(() =>{
-        dispatch(clean_state())
-    }, [dispatch])
-    
+    // useEffect(() =>{
+    //     dispatch(get_users_email())
+    // }, [dispatch])
     
     // function onSubmit(e){
     //     navigate('/login')
@@ -35,9 +33,28 @@ function Dashboard() {
 
             <h1>Dashboard</h1> 
             {
-                user.rol === 'user' ? <User/>  
-                : user.rol === 'owner' ? <Owner/> 
-                : user.rol === 'admin' ? <Admin/> 
+                user.rol === 'user' ?  
+                <User
+                    id = {user.id}                        
+                    name = {user.name}
+                    email = {user.email}
+                    rol = {user.rol}
+                />
+                     
+                : user.rol === 'owner' ? 
+                <Owner
+                    id = {user.id}                        
+                    name = {user.name}
+                    email = {user.email}
+                    rol = {user.rol}
+                /> 
+                : user.rol === 'admin' ? 
+                <Admin
+                    id = {user.id}                        
+                    name = {user.name}
+                    email = {user.email}
+                    rol = {user.rol}
+                /> 
                 : 
                 <div>
                     <p>Cargando... </p>  
