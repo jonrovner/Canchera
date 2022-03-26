@@ -125,7 +125,7 @@ const Clubdetail = () => {
             <GoogleMap
               onLoad={handleOnLoad}
               center={position}
-              zoom={18}
+              zoom={15}
               mapContainerStyle={{ width: "50vw", height: "40vh" }}
             >
               <Marker

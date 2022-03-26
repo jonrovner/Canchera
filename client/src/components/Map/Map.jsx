@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Map.module.css";
 import { get_all_clubes } from "../../redux/action/index";
@@ -21,14 +22,6 @@ function Map() {
   const ciudades = clubes && clubes.map((club) => [club.location]);
   console.log(ciudades);
 
-  // const unicos = [];
-  // for(var i = 0; i < ciudades.length; i++) {
-  // const elemento = ciudades[i];
-  // if (!unicos.includes(ciudades[i])) {
-  //   unicos.push(elemento);
-  // }}
-  // console.log(unicos);
-
   const [activeMarker, setActiveMarker] = useState(null);
 
   const handleActiveMarker = (marker) => {
@@ -48,12 +41,16 @@ function Map() {
     <div className={styles.Map}>
       <div>
         <small>(FALTA DAR ESTILOS A ESTE COMPONENTE)</small>
-        <h2>Localidades Cancheras</h2>
+        <h2>Clubes de Cancheras</h2>
         <ul>
           {!clubes
             ? "Cargando..."
             : clubes.map((club, index) => {
-                return <li key={index}> {club.location} </li>;
+                return (
+                  <Link key={index} to={`/club/${club.name}`}>
+                    <li key={index}> {club.name} </li>
+                  </Link>
+                );
               })}
         </ul>
       </div>
@@ -61,8 +58,8 @@ function Map() {
         <GoogleMap
           onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
-          center={{ lat: -32.96326511574192, lng: -61.409007928306615 }}
-          zoom={5}
+          center={{ lat: -32.9632, lng: -61.4090 }}
+         zoom={5}
           mapContainerStyle={{ width: "700px", height: "70vh" }}
         >
           {clubes.map((club, index) => (
@@ -74,7 +71,11 @@ function Map() {
             >
               {activeMarker === club.name ? (
                 <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                  <div>{club.name}</div>
+                  <div>
+                    '{club.name}'
+                    <br />
+                    {club.location}
+                  </div>
                 </InfoWindow>
               ) : null}
             </Marker>
