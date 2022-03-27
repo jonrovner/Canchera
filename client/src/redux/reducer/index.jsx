@@ -9,6 +9,7 @@ import {
   ORDER_PRICE_CLUBS,
   GET_CLUB_DETAIL,
   CLEAN_STATE,
+  LOCATION_FILTER,
 } from "../action/index";
 import { order } from "./metodos/order";
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   user: {},
   usersConect: [],
   clubDetail: {},
+  clubCopia: [],
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -33,6 +35,7 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         clubes: payload,
+        clubCopia: payload,
       };
     }
     case POST_USERS_SIGNIN: {
@@ -85,10 +88,18 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case CLEAN_STATE: {
-      return{
+      return {
         ...state,
-        user: payload
-      }
+        user: payload,
+      };
+    }
+    case LOCATION_FILTER: {
+      const club = state.clubCopia;
+      let meta = club.filter((e) => e.ciudad === payload);
+      return {
+        ...state,
+        clubes: payload === "All" ? state.clubCopia : meta,
+      };
     }
 
     default:
