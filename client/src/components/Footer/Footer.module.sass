@@ -7,15 +7,61 @@
     flex-direction: column
     justify-content: flex-end
     align-items: center
-    pointer-events: none
+    background: linear-gradient(135deg, #001d2f 25%, transparent 25%) -32px 0, linear-gradient(225deg, #001d2f 25%, transparent 25%) -32px 0, linear-gradient(315deg, #001d2f 25%, transparent 25%), linear-gradient(45deg, #001d2f 25%, transparent 25%)
+    background-size: 64px 64px
+    background-color: #002338
+    small
+        span
+            color: #00C49A
     .video
         width: 100%
         height: 100%
         overflow: hidden
+        pointer-events: none
         iframe
             width: 100%
             transform: scale(120%)
     .content
-        width: 100%
+        width: 1100px
         display: flex
         justify-content: space-evenly
+        padding: 20px
+        div
+            flex: 1 1 0px
+        ul
+            list-style-type: none
+            margin: 0
+            padding: 0
+            li
+                display: flex
+                align-items: center
+                gap: 5px
+        .social, .contact, .info
+            display: flex
+            flex-direction: column
+            padding-top: 30px
+            gap: 10px
+            h4
+                font-size: 20px
+        .logo
+            h2
+                color: #00C49A
+                font-family: 'Pattaya', sans-serif
+                font-size: 50px
+        .social
+            align-items: center
+            ul
+                display: flex
+                gap: 10px
+                font-size: 30px
+                a
+                    color: #dcdaee
+                    transition: all 0.2s ease-in-out
+                a:hover
+                    color: #00C49A
+        .info
+            a
+                text-decoration: none
+                color: #dcdaee
+            a:hover
+                color: #00C49A
