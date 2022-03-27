@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
 import style from "./ResetPassword.module.scss";
 
 const ResetPassword = () => {
+  const navigate = useNavigate();
   const { token } = useParams();
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState({
@@ -35,6 +36,7 @@ const ResetPassword = () => {
         .put(`/resetpassword/${token}`, data)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
+    navigate("/login");
   };
 
   useEffect(() => {
