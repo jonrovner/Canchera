@@ -7,21 +7,40 @@ import axios from "axios";
 import "./createClub.css";
 import { validate } from "./validation";
 import { useNavigate } from "react-router";
+import {cities} from './ar.js'
 
 const CreateClub = () => {
   const navigate = useNavigate();
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
+
   const [input, setInput] = useState({ 
     fields: [],
     openHour: "6",
     closeHour: "18"
    });
   const [file, setFile] = useState(null);
+  
+  const [filterCities, setFilterCities] = useState([])
 
   useEffect(() => {
     setValid(validate(input));
   }, [input]);
+
+  useEffect(()=>{
+    const findMatch = (word, cities) => {
+      const regex = new RegExp(word, 'gi')
+      
+      setFilterCities(cities.filter(place => {
+        return place.city.match(regex) || place.admin_name.match(regex)
+      }))
+
+      
+    }
+    findMatch(input.city, cities)
+
+
+  }, [input.location])
 
   const [location, setLocation] = useState("");
   const [position, setPosition] = useState({});
@@ -75,7 +94,8 @@ const CreateClub = () => {
 
   const findMap = (e) => {
     e.preventDefault();
-    const queryString = location.split(" ").join("+");
+    if (!input.city || !input.street || !input.num || !input.province){ return }
+    const queryString = `${input.street}+${input.num}+${input.city}+${input.province}`
     console.log("querystring is", queryString);
     axios
       .get(
@@ -114,6 +134,7 @@ const CreateClub = () => {
   };
   console.log("input is ", input);
   console.log("latLong is", latLong);
+  console.log("filtered cities: ", filterCities)
   //console.log('valid:', valid)
   return (
     <div className="createClub">
@@ -146,15 +167,19 @@ const CreateClub = () => {
         </div>
         <br />
         <div className="address">
-          <label htmlFor="ciudad">Ciudad</label>
-          <select name="ciudad" onChange={handleInput}>
-            <option value="">Seleccionar ciudad</option>
-            <option value="Mercedes">Mercedes</option>
-            <option value="Goya">Goya</option>
-            <option value="Tucuman">Tucuman</option>
-            <option value="La Rioja">La Rioja</option>
-            <option value="Corrientes">Corrientes</option>
-          </select>
+          <label htmlFor="city">Ciudad</label>
+          <input type="text" name="city" onChange={handleInput} />
+         
+          <label htmlFor="street">Calle</label>
+          <input type="text" name="street" onChange={handleInput} />
+          
+          <label htmlFor="num">Número</label>
+          <input type="text" name="num" onChange={handleInput} />
+          
+          <label htmlFor="province">Provincia</label>
+          <input type="text" name="province" onChange={handleInput} />
+          
+          
           
         </div>    
         <br />
