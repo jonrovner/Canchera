@@ -18,8 +18,10 @@
             color: #d0cbff
             height: 80vh
             gap: 30px
+            position: relative
             .text
                 width: 70%
+                position: relative
                 h1
                     color: #dcdaee
                     font-size: 70px
@@ -29,10 +31,20 @@
                 p
                     font-size: 23px
                     span
+                        color: #00C49A
                         font-family: 'Pattaya', sans-serif
+            .bgPattern
+                position: absolute
+                width: 300px
+                height: 500px
+                background-image: radial-gradient(#00C49A 2px, transparent 2px)
+                background-size: 32px 32px
+                background-color: transparent
+                top: 100px
+                right: 0
             .images
                 height: 100%
-                background-image: linear-gradient(to bottom, #a67fda, #ffffff00)
+                background-image: linear-gradient(to bottom, #00C49A, #ffffff00)
                 border-radius: 500px 500px 0px 0px
                 padding: 30px
                 img
@@ -60,15 +72,19 @@
                     font-size: 55px
                     font-weight: 700
                     margin-right: 40px
-                    background-color: #d0cbff3b
                     padding: 10px
                     padding-bottom: 0px
+                    background: rgba(255,255,255,0.15)
+                    -webkit-backdrop-filter: blur(4px)
+                    backdrop-filter: blur(4px)
                     span
-                        color: #d0cbff
+                        color: #00C49A
                 p
                     width: 500px
                     font-size: 24px
-                    background-color: #d0cbff3b
+                    background: rgba(255,255,255,0.15)
+                    -webkit-backdrop-filter: blur(4px)
+                    backdrop-filter: blur(4px)
                     padding: 10px
                     padding-top: 0px
                 button
@@ -86,12 +102,12 @@
                     transition: all 0.3s ease-in-out
                 button:hover
                     color:
-                    background-color: #d0cbff
+                    background-color: #00C49A
                     transform: scale(105%)
                     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
         .player::after, .host::after
             width: 1040px
-            height: 571px
+            height: 93%
             content: ''
             position: absolute
             left: 30px
@@ -113,4 +129,5 @@
                     margin: 0px
                 p
                     span
+                        color: #00C49A
                         font-family: 'Pattaya', sans-serif
