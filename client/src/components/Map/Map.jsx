@@ -21,8 +21,6 @@ function Map() {
     clubes &&
     clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
 
-  const ciudades = clubes && clubes.map((club) => [club.ciudad]);
-
   const [activeMarker, setActiveMarker] = useState(null);
 
   const handleActiveMarker = (marker) => {
@@ -59,27 +57,34 @@ function Map() {
 
   return (
     <div className={styles.Map}>
-      <div>
-        <small>(FALTA DAR ESTILOS A ESTE COMPONENTE)</small>
-        <h2>Clubes de Cancheras</h2>
-        <h3>Ciudades</h3>
-        <select name="ciudades" onChange={handleSelect}>
-          <option value="Goya">Goya</option>
-          <option value="Mercedes">Mercedes</option>
-          <option value="Tucuman">Tucuman</option>
-          <option value="La Rioja">La Rioja</option>
-          <option value="Corrientes">Corrientes</option>
-        </select>
-        <h3>Clubes</h3>
+      <div className={styles.clubs}>
+        <h2>
+          Donde jugar con <span>Canchera</span>!
+        </h2>
+        <div>
+          <label htmlFor="ciudades">Clubes en</label>
+          <select name="ciudades" onChange={handleSelect}>
+            <option value="Goya">Goya</option>
+            <option value="Mercedes">Mercedes</option>
+            <option value="Tucuman">Tucuman</option>
+            <option value="La Rioja">La Rioja</option>
+            <option value="Corrientes">Corrientes</option>
+          </select>
+        </div>
         <ul>
-          {clubXciudad &&
+          {clubXciudad.length ? (
             clubXciudad.map((club, index) => {
               return (
                 <Link key={index} to={`/club/${club.name}`}>
-                  <li key={index}> {club.name} </li>
+                  <li key={index}>
+                    {club.name}, ⭐{club.score}
+                  </li>
                 </Link>
               );
-            })}
+            })
+          ) : (
+            <p>Todavia no hay gente Canchera aca.</p>
+          )}
         </ul>
       </div>
       <div>

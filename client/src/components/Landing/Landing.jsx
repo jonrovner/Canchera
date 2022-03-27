@@ -22,6 +22,7 @@ const Landing = () => {
           <div className={styles.images}>
             <img src={hero} alt="" />
           </div>
+          <div className={styles.bgPattern}></div>
           <div className={styles.text}>
             <h1>Decidete a jugar por mas</h1>
             <p>
@@ -57,7 +58,7 @@ const Landing = () => {
             <p>
               Sos dueño de un establecimiento o club? Aplica para ser un Dueño
               <span> Canchera</span>, moderniza tu negocio y multiplica tu
-              alcanze. Utiliza mejor tu tiempo y lleva un control de las
+              alcance. Utiliza mejor tu tiempo y lleva un control de las
               reservas y canchas.
             </p>
             <button>Aplicar como Dueño</button>

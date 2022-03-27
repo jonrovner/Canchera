@@ -9,9 +9,17 @@
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
+  background: linear-gradient(135deg, #001d2f00 25%, transparent 25%) -32px 0, linear-gradient(225deg, #001d2f00 25%, transparent 25%) -32px 0, linear-gradient(315deg, #001d2f00 25%, transparent 25%), linear-gradient(45deg, #001d2f00 25%, transparent 25%);
+  background-size: 64px 64px;
+  background-color: #00233800;
 }
 
-.Navbar .container {
+.Navbar, .Navbar__background, .Navbar__hidden {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.Navbar .container, .Navbar__background .container, .Navbar__hidden .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -26,30 +34,47 @@
           justify-content: space-between;
 }
 
-.Navbar .logo {
-  color: #dcdaee;
+.Navbar .logo, .Navbar__background .logo, .Navbar__hidden .logo {
+  color: #00C49A;
   text-decoration: none;
 }
 
-.Navbar .logo h2 {
+.Navbar .logo h2, .Navbar__background .logo h2, .Navbar__hidden .logo h2 {
   font-family: 'Pattaya', sans-serif;
   font-size: 50px;
 }
 
-.Navbar .searchBar form {
+.Navbar .searchBar form, .Navbar__background .searchBar form, .Navbar__hidden .searchBar form {
   height: 50px;
-  width: 400px;
+  width: 370px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   border-radius: 50px;
   background-color: #abb2d6;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.Navbar .searchBar form input {
+.Navbar .searchBar form .ciudad, .Navbar__background .searchBar form .ciudad, .Navbar__hidden .searchBar form .ciudad {
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+}
+
+.Navbar .searchBar form .size, .Navbar__background .searchBar form .size, .Navbar__hidden .searchBar form .size {
+  width: 100px;
   -webkit-box-flex: 2;
       -ms-flex-positive: 2;
           flex-grow: 2;
+}
+
+.Navbar .searchBar form .clubName, .Navbar__background .searchBar form .clubName, .Navbar__hidden .searchBar form .clubName {
+  display: none;
+}
+
+.Navbar .searchBar form input, .Navbar__background .searchBar form input, .Navbar__hidden .searchBar form input {
+  font-weight: 500;
   height: 100%;
   background-color: transparent;
   border: none;
@@ -59,17 +84,19 @@
   -webkit-transition: background-color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
   border-radius: 50px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.Navbar .searchBar form input:focus, .Navbar .searchBar form input:hover {
+.Navbar .searchBar form input:focus, .Navbar .searchBar form input:hover, .Navbar .searchBar form input:not(:placeholder-shown), .Navbar__background .searchBar form input:focus, .Navbar__background .searchBar form input:hover, .Navbar__background .searchBar form input:not(:placeholder-shown), .Navbar__hidden .searchBar form input:focus, .Navbar__hidden .searchBar form input:hover, .Navbar__hidden .searchBar form input:not(:placeholder-shown) {
   background-color: #ffffff;
   border-radius: 50px;
   -webkit-transition: background-color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
 }
 
-.Navbar .searchBar form button {
-  background-color: #7465fa;
+.Navbar .searchBar form button, .Navbar__background .searchBar form button, .Navbar__hidden .searchBar form button {
+  background-color: #00C49A;
   font-size: 30px;
   height: 50px;
   width: 50px;
@@ -82,12 +109,12 @@
   transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
 
-.Navbar .searchBar form button:hover {
+.Navbar .searchBar form button:hover, .Navbar__background .searchBar form button:hover, .Navbar__hidden .searchBar form button:hover {
   -webkit-transform: scale(110%);
           transform: scale(110%);
 }
 
-.Navbar .navLinks {
+.Navbar .navLinks, .Navbar__background .navLinks, .Navbar__hidden .navLinks {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -95,15 +122,18 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.Navbar .navLinks a {
+.Navbar .navLinks a, .Navbar__background .navLinks a, .Navbar__hidden .navLinks a {
   text-decoration: none;
   color: #dcdaee;
   cursor: pointer;
+  white-space: nowrap;
 }
 
-.Navbar .navLinks a p {
+.Navbar .navLinks a p, .Navbar__background .navLinks a p, .Navbar__hidden .navLinks a p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -113,11 +143,36 @@
   gap: 3px;
 }
 
-.Navbar .navLinks a:hover {
+.Navbar .navLinks a:hover, .Navbar__background .navLinks a:hover, .Navbar__hidden .navLinks a:hover {
   text-decoration: underline;
 }
 
-.Navbar__background {
+.Navbar .user, .Navbar__background .user, .Navbar__hidden .user {
+  min-width: 111px;
+  text-align: center;
+}
+
+.Navbar .user a, .Navbar__background .user a, .Navbar__hidden .user a {
+  text-decoration: none;
+  color: #dcdaee;
+  cursor: pointer;
+}
+
+.Navbar .user a p, .Navbar__background .user a p, .Navbar__hidden .user a p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+}
+
+.Navbar .user a:hover, .Navbar__background .user a:hover, .Navbar__hidden .user a:hover {
+  text-decoration: underline;
+}
+
+.Navbar__background, .Navbar__hidden {
   background-color: #001d2f;
   position: fixed;
   display: -webkit-box;
@@ -130,6 +185,30 @@
           animation: BgIn 0.3s ease-in-out forwards;
   -webkit-animation: opacityIn 0.3s ease-in-out forwards;
           animation: opacityIn 0.3s ease-in-out forwards;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(135deg, #001d2f 25%, transparent 25%) -32px 0, linear-gradient(225deg, #001d2f 25%, transparent 25%) -32px 0, linear-gradient(315deg, #001d2f 25%, transparent 25%), linear-gradient(45deg, #001d2f 25%, transparent 25%);
+  background-size: 64px 64px;
+  background-color: #002338;
+}
+
+.Navbar__background .navLinks, .Navbar__hidden .navLinks {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: none;
+  -webkit-animation: opacityIn 0.3s ease-in-out forwards;
+          animation: opacityIn 0.3s ease-in-out forwards;
+}
+
+.Navbar__background .searchBar form, .Navbar__hidden .searchBar form {
+  width: 600px;
+}
+
+.Navbar__background .searchBar form .clubName, .Navbar__hidden .searchBar form .clubName {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: block;
 }
 
 .Navbar__hidden {
