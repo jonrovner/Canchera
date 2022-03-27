@@ -42,10 +42,12 @@
   color: #d0cbff;
   height: 80vh;
   gap: 30px;
+  position: relative;
 }
 
 .Landing .content .hero .text {
   width: 70%;
+  position: relative;
 }
 
 .Landing .content .hero .text h1 {
@@ -61,13 +63,25 @@
 }
 
 .Landing .content .hero .text p span {
+  color: #00C49A;
   font-family: 'Pattaya', sans-serif;
+}
+
+.Landing .content .hero .bgPattern {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-image: radial-gradient(#00C49A 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-color: transparent;
+  top: 100px;
+  right: 0;
 }
 
 .Landing .content .hero .images {
   height: 100%;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#a67fda), to(#ffffff00));
-  background-image: linear-gradient(to bottom, #a67fda, #ffffff00);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#00C49A), to(#ffffff00));
+  background-image: linear-gradient(to bottom, #00C49A, #ffffff00);
   border-radius: 500px 500px 0px 0px;
   padding: 30px;
 }
@@ -104,19 +118,23 @@
   font-size: 55px;
   font-weight: 700;
   margin-right: 40px;
-  background-color: #d0cbff3b;
   padding: 10px;
   padding-bottom: 0px;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .Landing .content .player .text h2 span, .Landing .content .host .text h2 span {
-  color: #d0cbff;
+  color: #00C49A;
 }
 
 .Landing .content .player .text p, .Landing .content .host .text p {
   width: 500px;
   font-size: 24px;
-  background-color: #d0cbff3b;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   padding: 10px;
   padding-top: 0px;
 }
@@ -138,7 +156,7 @@
 }
 
 .Landing .content .player .text button:hover, .Landing .content .host .text button:hover {
-  background-color: #d0cbff;
+  background-color: #00C49A;
   -webkit-transform: scale(105%);
           transform: scale(105%);
   -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
@@ -147,7 +165,7 @@
 
 .Landing .content .player::after, .Landing .content .host::after {
   width: 1040px;
-  height: 571px;
+  height: 93%;
   content: '';
   position: absolute;
   left: 30px;
@@ -184,6 +202,7 @@
 }
 
 .Landing .content .host .text p span {
+  color: #00C49A;
   font-family: 'Pattaya', sans-serif;
 }
 /*# sourceMappingURL=Landing.module.css.map */

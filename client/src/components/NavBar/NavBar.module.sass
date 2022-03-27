@@ -6,6 +6,11 @@
     z-index: 10
     animation: BgIn 0.3s ease-in-out backwards
     justify-content: space-evenly
+    background: linear-gradient(135deg, #001d2f00 25%, transparent 25%) -32px 0, linear-gradient(225deg, #001d2f00 25%, transparent 25%) -32px 0, linear-gradient(315deg, #001d2f00 25%, transparent 25%), linear-gradient(45deg, #001d2f00 25%, transparent 25%)
+    background-size: 64px 64px
+    background-color: #00233800
+.Navbar, .Navbar__background, .Navbar__hidden
+    transition: all 0.3s ease-in-out
     .container
         display: flex
         align-items: center
@@ -14,7 +19,7 @@
         margin: auto
         justify-content: space-between
     .logo
-        color: #dcdaee
+        color: #00C49A
         text-decoration: none
         h2
             font-family: 'Pattaya', sans-serif
@@ -22,12 +27,20 @@
     .searchBar
         form
             height: 50px
-            width: 400px
+            width: 370px
             display: flex
             border-radius: 50px
             background-color: #abb2d6
-            input
+            transition: all 0.3s ease-in-out
+            .ciudad
+                flex-grow: 3
+            .size
+                width: 100px
                 flex-grow: 2
+            .clubName
+                display: none
+            input
+                font-weight: 500
                 height: 100%
                 background-color: transparent
                 border: none
@@ -35,12 +48,13 @@
                 outline: none
                 transition: background-color 0.3s ease-in-out
                 border-radius: 50px
-            input:focus, input:hover
+                transition: all 0.3s ease-in-out
+            input:focus, input:hover, input:not(:placeholder-shown)
                 background-color: #ffffff
                 border-radius: 50px
                 transition: background-color 0.3s ease-in-out
             button
-                background-color: #7465fa
+                background-color: #00C49A
                 font-size: 30px
                 height: 50px
                 width: 50px
@@ -54,6 +68,21 @@
         display: flex
         align-items: center
         gap: 30px
+        transition: all 0.3s ease-in-out
+        a
+            text-decoration: none
+            color: #dcdaee
+            cursor: pointer
+            white-space: nowrap
+            p
+                display: flex
+                align-items: center
+                gap: 3px
+        a:hover
+            text-decoration: underline
+    .user
+        min-width: 111px
+        text-align: center
         a
             text-decoration: none
             color: #dcdaee
@@ -64,9 +93,8 @@
                 gap: 3px
         a:hover
             text-decoration: underline
-        .user
 
-.Navbar__background
+.Navbar__background, .Navbar__hidden
     background-color: #001d2f
     position: fixed
     display: flex
@@ -75,6 +103,20 @@
     z-index: 10
     animation: BgIn 0.3s ease-in-out forwards
     animation: opacityIn 0.3s ease-in-out forwards
+    transition: all 0.3s ease-in-out
+    background: linear-gradient(135deg, #001d2f 25%, transparent 25%) -32px 0, linear-gradient(225deg, #001d2f 25%, transparent 25%) -32px 0, linear-gradient(315deg, #001d2f 25%, transparent 25%), linear-gradient(45deg, #001d2f 25%, transparent 25%)
+    background-size: 64px 64px
+    background-color: #002338
+    .navLinks
+        transition: all 0.3s ease-in-out
+        display: none
+        animation: opacityIn 0.3s ease-in-out forwards
+    .searchBar
+        form
+            width: 600px
+            .clubName
+                flex-grow: 1
+                display: block
 
 .Navbar__hidden
     background-color: #001d2f

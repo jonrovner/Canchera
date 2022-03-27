@@ -22,37 +22,45 @@ const db = require("./src/db");
 import server from "./src/app";
 const bcrypt = require("bcrypt");
 const authConfig = require("./src/config/auth.js");
-const { User } = require('./src/db.ts');
+const { User } = require("./src/db.ts");
 
 async function dataDB() {
-
-  let encryptedPasswordUser = bcrypt.hashSync(process.env.USERPASSWORD, +authConfig.rounds);
-  let encryptedPasswordOwner = bcrypt.hashSync(process.env.OWNERPASSWORD, +authConfig.rounds);
-  let encryptedPasswordAdmin = bcrypt.hashSync(process.env.ADMINPASSWORD, +authConfig.rounds);
+  let encryptedPasswordUser = bcrypt.hashSync(
+    process.env.USERPASSWORD,
+    +authConfig.rounds
+  );
+  let encryptedPasswordOwner = bcrypt.hashSync(
+    process.env.OWNERPASSWORD,
+    +authConfig.rounds
+  );
+  let encryptedPasswordAdmin = bcrypt.hashSync(
+    process.env.ADMINPASSWORD,
+    +authConfig.rounds
+  );
 
   const userDB = {
     name: process.env.USER,
     email: process.env.USEREMAIL,
     password: encryptedPasswordUser,
-    rol: 'user',
-    status: true
-  }
+    rol: "user",
+    status: true,
+  };
   const ownerDB = {
     name: process.env.OWNER,
     email: process.env.OWNEREMAIL,
     password: encryptedPasswordOwner,
-    rol: 'owner',
-    status: true
-  }
+    rol: "owner",
+    status: true,
+  };
   const adminDB = {
     name: process.env.ADMIN,
     email: process.env.ADMINEMAIL,
     password: encryptedPasswordAdmin,
-    rol: 'admin',
-    status: true
-  }
+    rol: "admin",
+    status: true,
+  };
 
-  try{
+  try {
     await User.create(userDB);
     await User.create(ownerDB);
     await User.create(adminDB);
@@ -60,6 +68,7 @@ async function dataDB() {
   }catch(e){
     console.log("Ya existen esos usuarios en la db"+e)
     }
+
 }
 
 // Syncing all the models at once.
@@ -68,7 +77,6 @@ async function dataDB() {
 db.sequelize.sync({ force: true }).then(() => {
 
   dataDB();
-
 
   server.listen(process.env.PORT, () => {
     console.log("%s listening at 3001");
