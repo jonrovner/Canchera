@@ -74,7 +74,7 @@ async function dataDB() {
 // Syncing all the models at once.
 
 
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
 
   dataDB();
 
