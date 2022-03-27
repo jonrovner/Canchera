@@ -32,7 +32,10 @@
     border-radius: 15px;
 }
 
-
+.address{
+    display: flex;
+    flex-direction: column;
+}
 .fields{
     width: 80%;
 }

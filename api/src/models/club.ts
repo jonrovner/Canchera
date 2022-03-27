@@ -73,6 +73,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
       ciudad: {
         type: DataTypes.STRING,
         allowNull: false,

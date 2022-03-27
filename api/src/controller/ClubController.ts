@@ -47,7 +47,10 @@ module.exports = {
       fields      
     } = JSON.parse(req.body.data);
 
+    console.log('body : ', JSON.parse(req.body.data))
+
     try {
+
       if (!name || !openHour || !closeHour || !ciudad || !street || !num || !province)
         return res.status(400).json({
           warning: "Faltan datos para poder publicar su club",
@@ -79,7 +82,8 @@ module.exports = {
           description,
           ciudad,
           street,
-          num,
+          num:Number(num),
+
           province,          
           openHour,
           closeHour,

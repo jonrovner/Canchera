@@ -16,6 +16,7 @@ module.exports = {
         include: {
           model:Club,
           attributes:['name', 'province', 'ciudad', 'street', 'num']
+
         }
       }
     }  
