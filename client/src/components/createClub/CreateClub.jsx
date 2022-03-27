@@ -162,8 +162,8 @@ const CreateClub = () => {
         </div>
         <br />
         <div className="address">
-          <label htmlFor="city">Ciudad</label>
-          <input type="text" name="city" onChange={handleInput} />
+          <label htmlFor="ciudad">Ciudad</label>
+          <input type="text" name="ciudad" onChange={handleInput} />
          
           <label htmlFor="street">Calle</label>
           <input type="text" name="street" onChange={handleInput} />
