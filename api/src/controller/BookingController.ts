@@ -53,7 +53,26 @@ async getBookings(req:Request, res:Response, next:NextFunction){
         next(error)       
     }
  
-  }
+  },
+
+  async deleteBooking(req:Request, res:Response, next:NextFunction){
+
+    const {userId} = req.params;
+    const { bookings } = req.body
+     
+    let reservas = bookings.filter((booking:any) => userId === booking.UserId );
+     
+      let reservasId:any = [];
+
+     reservas.forEach((reserva:any) => {
+            reservasId.push(reserva.id);
+     });
+
+    Booking.destroy({ where:{ id:reservasId } });
+
+    return res.status(200).json({msg :"cancelada con exito"});
+
+  },
 
 
 }

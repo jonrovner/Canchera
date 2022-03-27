@@ -1,6 +1,12 @@
 import React from 'react';
+import axios from 'axios';
 
-function Owner({id, name, email, rol}) {
+
+async function Owner({id, name, email, rol}) {
+
+    const owner = await axios.get(`/owner?email=${email}`)
+    console.log(owner.data);
+
         return (
             <div>
                 <h1>Bienvenido {name}</h1> 

@@ -3,6 +3,7 @@ import NavBar from "../NavBar/NavBar";
 import Slider from "../Slider/Slider";
 import Footer from "../Footer/Footer";
 import Map from "../Map/Map.jsx";
+import Whatsapp from "../Whatsapp/Whatsapp";
 
 import hero from "../../assets/hero.png";
 
@@ -22,6 +23,7 @@ const Landing = () => {
           <div className={styles.images}>
             <img src={hero} alt="" />
           </div>
+          <div className={styles.bgPattern}></div>
           <div className={styles.text}>
             <h1>Decidete a jugar por mas</h1>
             <p>
@@ -57,7 +59,7 @@ const Landing = () => {
             <p>
               Sos dueño de un establecimiento o club? Aplica para ser un Dueño
               <span> Canchera</span>, moderniza tu negocio y multiplica tu
-              alcanze. Utiliza mejor tu tiempo y lleva un control de las
+              alcance. Utiliza mejor tu tiempo y lleva un control de las
               reservas y canchas.
             </p>
             <button>Aplicar como Dueño</button>
@@ -66,6 +68,7 @@ const Landing = () => {
       </div>
       <Map />
       <br />
+      <Whatsapp/>
       <Footer />
     </div>
   );

@@ -12,7 +12,11 @@ const CreateClub = () => {
   const navigate = useNavigate();
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
-  const [input, setInput] = useState({ fields: [] });
+  const [input, setInput] = useState({ 
+    fields: [],
+    openHour: "6",
+    closeHour: "18"
+   });
   const [file, setFile] = useState(null);
 
   useEffect(() => {
@@ -20,10 +24,8 @@ const CreateClub = () => {
   }, [input]);
 
   const [location, setLocation] = useState("");
-  const [position, setPosition] = useState({})
+  const [position, setPosition] = useState({});
   const [latLong, setLatLong] = useState({});
-
-
 
   const user = useSelector((state) => state.user);
   console.log("user : ", user);
@@ -57,6 +59,10 @@ const CreateClub = () => {
     }
   };
 
+  const handleSelector = (e) => {
+    console.log(e.target.value);
+  };
+
   const handleInput = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -86,7 +92,10 @@ const CreateClub = () => {
           return setValid({ ...valid, map: "ingrese una dirección válida" });
         }
         setLatLong({ lat: res.data[0].lat, lon: res.data[0].lon });
-        setPosition({lat: Number(res.data[0].lat), lng: Number(res.data[0].lon)})
+        setPosition({
+          lat: Number(res.data[0].lat),
+          lng: Number(res.data[0].lon),
+        });
       })
       .catch((err) => {
         setInput((input) => ({
@@ -128,6 +137,18 @@ const CreateClub = () => {
         )}
         <br />
 
+        <label htmlFor="ciudad">Ciudad</label>
+        <select name="ciudad" onChange={handleInput}>
+          <option value="">Seleccionar ciudad</option>
+          <option value="Mercedes">Mercedes</option>
+          <option value="Goya">Goya</option>
+          <option value="Tucuman">Tucuman</option>
+          <option value="La Rioja">La Rioja</option>
+          <option value="Corrientes">Corrientes</option>
+        </select>
+
+        <br />
+
         <label htmlFor="location">Location</label>
         <input
           onChange={(e) => {
@@ -145,18 +166,16 @@ const CreateClub = () => {
 
         {position.lat && (
           <GoogleMap
-          onLoad={handleOnLoad}
-          center={position}
-          zoom={7}
-          mapContainerStyle={{ width: "50vw", height: "40vh" }}
-          options={{ mapId: "f8e61b002a1322a0", styles:["terrain"] }}
-        >
-          <Marker
-            
-            position={position}
-            icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
-          ></Marker>
-        </GoogleMap>
+            onLoad={handleOnLoad}
+            center={position}
+            zoom={7}
+            mapContainerStyle={{ width: "50vw", height: "40vh" }}
+          >
+            <Marker
+              position={position}
+              icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+            ></Marker>
+          </GoogleMap>
         )}
         <label htmlFor="openHour">horario apertura</label>
         <select onChange={(e) => handleInput(e)} type="text" name="openHour">
