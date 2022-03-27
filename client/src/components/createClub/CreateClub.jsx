@@ -4,7 +4,7 @@ import FieldForm from "./FieldForm";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import "./createClub.css";
+import styles from "./createClub.module.css";
 import { validate } from "./validation";
 import { useNavigate } from "react-router";
 
@@ -12,11 +12,11 @@ const CreateClub = () => {
   const navigate = useNavigate();
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
-  const [input, setInput] = useState({ 
+  const [input, setInput] = useState({
     fields: [],
     openHour: "6",
-    closeHour: "18"
-   });
+    closeHour: "18",
+  });
   const [file, setFile] = useState(null);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const CreateClub = () => {
   console.log("latLong is", latLong);
   //console.log('valid:', valid)
   return (
-    <div className="createClub">
+    <div className={styles.CreateClub}>
       <form
         action="/club"
         enctype="multipart/form-data"
@@ -124,17 +124,13 @@ const CreateClub = () => {
         onSubmit={handleSubmit}
       >
         <div className="title">
-
           <h1>Complete los datos de su establecimiento</h1>
           {valid.all && showValid && <p className="validation">{valid.all}</p>}
-
         </div>
         <div className="clubName">
-
           <label htmlFor="name">Nombre</label>
           <input onChange={handleInput} type="text" name="name" />
           {valid.name && <p className="validation">{valid.name}</p>}
-
         </div>
         <br />
         <div className="description">
@@ -155,11 +151,9 @@ const CreateClub = () => {
             <option value="La Rioja">La Rioja</option>
             <option value="Corrientes">Corrientes</option>
           </select>
-          
-        </div>    
+        </div>
         <br />
         <div className="location">
-          
           <label htmlFor="location">Location</label>
           <input
             onChange={(e) => {
@@ -173,7 +167,7 @@ const CreateClub = () => {
           {valid.location && showValid && (
             <p className="validation">{valid.location}</p>
           )}
-        </div>    
+        </div>
         <br />
 
         {position.lat && (
@@ -191,7 +185,6 @@ const CreateClub = () => {
         )}
 
         <div className="openHours">
-
           <label htmlFor="openHour">horario apertura</label>
           <select onChange={(e) => handleInput(e)} type="text" name="openHour">
             <option value="5">5am</option>
@@ -218,11 +211,9 @@ const CreateClub = () => {
             <option value="23">11pm</option>
             <option value="0">12am</option>
           </select>
-
         </div>
         <br />
         <div className="imageInput">
-
           <label htmlFor="image">suba una imagen</label>
           <input
             name="image"
@@ -230,11 +221,9 @@ const CreateClub = () => {
             accept="image/png, image/gif, image/jpeg"
             onChange={(e) => setFile(e.target.files[0])}
           ></input>
-
         </div>
         <br />
         <div className="fields">
-            
           {input.fields &&
             input.fields.map((field, i) => (
               <div className="field" key={i}>
@@ -243,18 +232,15 @@ const CreateClub = () => {
                 <p>precio: {field.price}</p>
               </div>
             ))}
-            
         </div>
         <br />
         <div className="fieldInput">
-          
           <h4>agregue sus canchas</h4>
           {valid.fields && showValid && (
             <p className="validation">{valid.fields}</p>
           )}
           <FieldForm handleInput={fieldInput} />
-        
-        </div>  
+        </div>
         <br />
         <button type="submit">guardar</button>
       </form>
