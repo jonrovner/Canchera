@@ -83,7 +83,6 @@ module.exports = {
           ciudad,
           street,
           num:Number(num),
-
           province,          
           openHour,
           closeHour,

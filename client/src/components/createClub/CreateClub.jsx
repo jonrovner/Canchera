@@ -163,7 +163,13 @@ const CreateClub = () => {
         <br />
         <div className="address">
           <label htmlFor="ciudad">Ciudad</label>
-          <input type="text" name="ciudad" onChange={handleInput} />
+          <select type="text" name="ciudad" onChange={handleInput} >
+            <option value="Mercedes">Mercedes</option>
+            <option value="Goya">Goya</option>
+            <option value="Tucumán">Tucumán</option>
+            <option value="Corrientes">Corrientes</option>
+            <option value="La Rioja">La Rioja</option>
+          </select>
          
           <label htmlFor="street">Calle</label>
           <input type="text" name="street" onChange={handleInput} />
