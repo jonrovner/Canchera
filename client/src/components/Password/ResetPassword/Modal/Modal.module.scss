@@ -2,14 +2,13 @@
   /* width: 50%;
   height: 50%; */
   background-color: #f3e8e8;
-  position: fixed;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   .modalContainer {
     position: absolute;
-    position: fixed;
     width: 33rem;
     height: 30rem;
     border-radius: 12px;
