@@ -9,6 +9,7 @@ const multerConfig = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/").pop();
     let body = JSON.parse(req.body.data);
+
     cb(null, `${body.name.replace(/ /g, '-')}.${ext}`);
   },
 });

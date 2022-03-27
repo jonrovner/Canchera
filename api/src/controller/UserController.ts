@@ -28,6 +28,37 @@ module.exports = {
    };
   },
 
+  async getOwner (req:Request, res:Response, next:NextFunction ){        
+   try {
+      const { email } = req.query;
+
+    const owner = await User.findOne({where: {email},
+    include:{
+      model:Club,
+      include:{
+        model: Field,
+        include: {
+          model:Booking,
+          attributes:['time'],
+          include: {
+            model: User,
+            attributes:['name', 'email']            
+          }
+        }
+      }
+    }  
+    });
+
+       if(owner) return res.status(200).json(owner);
+       else return res.status(201).json({msg:"No existe dueño con este email"})
+   } catch (error) {
+     next(error)  
+   };
+  },
+
+
+
+
 
   async updateUser(req:Request, res:Response, next:NextFunction){
     
