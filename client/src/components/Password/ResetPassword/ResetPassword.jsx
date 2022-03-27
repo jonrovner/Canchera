@@ -42,12 +42,15 @@ const ResetPassword = () => {
         .catch((error) => console.log(error));
   };
 
+  console.log(data);
+  console.log(confirmPassword);
+
   const disabeledSubmit = useMemo(() => {
-    if (error.length > 0) {
-      return true;
+    if (error.length > 1) {
+      return false;
     }
 
-    return false;
+    return true;
   }, [error]);
 
   return (
