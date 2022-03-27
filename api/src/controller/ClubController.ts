@@ -34,7 +34,7 @@ module.exports = {
     const {
       name,
       description,
-      city,
+      ciudad,
       street,
       num,
       province,
@@ -48,7 +48,7 @@ module.exports = {
     } = JSON.parse(req.body.data);
 
     try {
-      if (!name || !openHour || !closeHour || !city || !street || !num || !province)
+      if (!name || !openHour || !closeHour || !ciudad || !street || !num || !province)
         return res.status(400).json({
           warning: "Faltan datos para poder publicar su club",
         });
@@ -77,7 +77,7 @@ module.exports = {
         const newClub = await Club.create({
           name,
           description,
-          city,
+          ciudad,
           street,
           num,
           province,          
@@ -119,7 +119,7 @@ module.exports = {
           attributes: [
             "name",
             "description",
-            "city",
+            "ciudad",
             "street",
             "num",
             "province",
@@ -147,7 +147,7 @@ module.exports = {
         attributes: [
           "name",
           "description",
-          "city",
+          "ciudad",
           "street",
           "num",
           "province",
@@ -179,7 +179,7 @@ module.exports = {
         attributes: [
           "name",
           "description",
-          "city",
+          "ciudad",
           "street",
           "num",
           "province",

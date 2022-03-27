@@ -4,7 +4,7 @@ import { Model, UUIDV4 } from "sequelize";
 interface ClubAttributes {
   name: string;
   description: string;
-  city: string;
+  ciudad: string;
   street: string;
   num: number;
   province: string;
@@ -26,7 +26,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
     name!: string;
     description!: string;
-    city!: string;
+    ciudad!: string;
     street!: string;
     num!: number;
     province!: string;
@@ -73,7 +73,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      city: {
+      ciudad: {
         type: DataTypes.STRING,
         allowNull: false,
       },
