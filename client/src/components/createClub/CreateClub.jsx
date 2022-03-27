@@ -40,11 +40,10 @@ const CreateClub = () => {
     findMatch(input.city, cities)
 
 
-  }, [input.location])
+  }, [input.city])
 
-  const [location, setLocation] = useState("");
   const [position, setPosition] = useState({});
-  const [latLong, setLatLong] = useState({});
+  
 
   const user = useSelector((state) => state.user);
   console.log("user : ", user);
@@ -78,10 +77,6 @@ const CreateClub = () => {
     }
   };
 
-  const handleSelector = (e) => {
-    console.log(e.target.value);
-  };
-
   const handleInput = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -95,7 +90,7 @@ const CreateClub = () => {
   const findMap = (e) => {
     e.preventDefault();
     if (!input.city || !input.street || !input.num || !input.province){ return }
-    const queryString = `${input.street}+${input.num}+${input.city}+${input.province}`
+    const queryString = `${input.street}+${input.num}+${input.city}+${input.province}+Argentina`
     console.log("querystring is", queryString);
     axios
       .get(
@@ -111,7 +106,7 @@ const CreateClub = () => {
         if (!res.data[0].lat) {
           return setValid({ ...valid, map: "ingrese una dirección válida" });
         }
-        setLatLong({ lat: res.data[0].lat, lon: res.data[0].lon });
+        
         setPosition({
           lat: Number(res.data[0].lat),
           lng: Number(res.data[0].lon),
@@ -123,7 +118,7 @@ const CreateClub = () => {
           latitude: "34.60",
           longitude: "58.38",
         }));
-        setLatLong({ lat: "34.60", lon: "58.38" });
+        
         //return setValid({...valid, map: 'ingrese una dirección válida'})
       });
   };
@@ -133,7 +128,7 @@ const CreateClub = () => {
     map.fitBounds(bounds);
   };
   console.log("input is ", input);
-  console.log("latLong is", latLong);
+  
   console.log("filtered cities: ", filterCities)
   //console.log('valid:', valid)
   return (
@@ -183,21 +178,10 @@ const CreateClub = () => {
           
         </div>    
         <br />
-        <div className="location">
+        <div className="location">          
           
-          <label htmlFor="location">Location</label>
-          <input
-            onChange={(e) => {
-              handleInput(e);
-              setLocation(e.target.value);
-            }}
-            type="text"
-            name="location"
-          />
           <button onClick={findMap}>find map</button>
-          {valid.location && showValid && (
-            <p className="validation">{valid.location}</p>
-          )}
+          
         </div>    
         <br />
 
