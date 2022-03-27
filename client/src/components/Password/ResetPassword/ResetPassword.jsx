@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
 import style from "./ResetPassword.module.scss";
@@ -26,11 +26,6 @@ const ResetPassword = () => {
       ...confirmPassword,
       [e.target.name]: e.target.value,
     });
-    if (data.password !== confirmPassword.confirmPassword) {
-      setError("Las contraseñas deben ser iguales");
-    } else {
-      setError("");
-    }
   };
 
   const onSubmit = async (e) => {
@@ -42,11 +37,17 @@ const ResetPassword = () => {
         .catch((error) => console.log(error));
   };
 
-  console.log(data);
-  console.log(confirmPassword);
+  useEffect(() => {
+    if (data.password !== confirmPassword.confirmPassword) {
+      console.log("ACA ROMPE", data, confirmPassword);
+      setError("Las contraseñas deben ser iguales");
+    } else {
+      setError("");
+    }
+  });
 
   const disabeledSubmit = useMemo(() => {
-    if (error.length > 1) {
+    if (error.length === 0) {
       return false;
     }
 
