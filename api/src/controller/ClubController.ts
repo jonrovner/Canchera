@@ -47,6 +47,8 @@ module.exports = {
       fields      
     } = JSON.parse(req.body.data);
 
+    console.log('body : ', JSON.parse(req.body.data))
+
     try {
       if (!name || !openHour || !closeHour || !city || !street || !num || !province)
         return res.status(400).json({
@@ -79,7 +81,7 @@ module.exports = {
           description,
           city,
           street,
-          num,
+          num:Number(num),
           province,          
           openHour,
           closeHour,
