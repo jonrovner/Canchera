@@ -3,8 +3,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
 import style from "./ResetPassword.module.scss";
+import Modal from "./Modal/Modal";
 
 const ResetPassword = () => {
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
   const { token } = useParams();
   const [error, setError] = useState("");
@@ -36,7 +38,7 @@ const ResetPassword = () => {
         .put(`/resetpassword/${token}`, data)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
-    navigate("/login");
+    setOpenModal(true);
   };
 
   useEffect(() => {
@@ -92,6 +94,7 @@ const ResetPassword = () => {
           disabled={disabeledSubmit}
         />
       </form>
+      {openModal && <Modal closeModal={setOpenModal} />}
     </div>
   );
 };
