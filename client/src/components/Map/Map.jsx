@@ -84,7 +84,7 @@ function Map() {
       </div>
       <div>
         <GoogleMap
-          onLoad={handleOnLoad}
+          //onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
           center={mapPos}
           zoom={zoom}
