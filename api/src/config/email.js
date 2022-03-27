@@ -82,9 +82,36 @@ const getTemplatePassword = (name, token) =>{
   `
 };
 
+const sendEmailBooking = async (email, subject, html) =>{
+  try {
+    await transporter.sendMail({
+      from: `Canchera <${email.user}>`, // sender address
+      to: email, // list of receivers
+      subject, // Subject line
+      text: "Gracias por seguir confiando en Canchera", // plain text body
+      html,
+    });
+  } catch (error) {
+    console.log(error);
+};
+
+};
+
+const getTemplateBooking =  (name ) =>{
+  return `
+  <div>
+    <h1>${name} realizaste una reserva</h1>
+    <p>Tu reserva fue realizada  con exito </p>
+  </div>
+  
+  `
+}
+
 module.exports = {
   sendEmail,
   getTemplate,
   sendEmailPassword,
-  getTemplatePassword
+  getTemplatePassword,
+  sendEmailBooking,
+  getTemplateBooking
 };
