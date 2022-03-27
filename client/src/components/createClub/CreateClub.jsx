@@ -123,45 +123,57 @@ const CreateClub = () => {
         method="post"
         onSubmit={handleSubmit}
       >
-        <h3>Complete los datos de su establecimiento</h3>
-        {valid.all && showValid && <p className="validation">{valid.all}</p>}
-        <label htmlFor="name">Nombre</label>
-        <input onChange={handleInput} type="text" name="name" />
-        {valid.name && <p className="validation">{valid.name}</p>}
+        <div className="title">
+
+          <h1>Complete los datos de su establecimiento</h1>
+          {valid.all && showValid && <p className="validation">{valid.all}</p>}
+
+        </div>
+        <div className="clubName">
+
+          <label htmlFor="name">Nombre</label>
+          <input onChange={handleInput} type="text" name="name" />
+          {valid.name && <p className="validation">{valid.name}</p>}
+
+        </div>
         <br />
-
-        <label htmlFor="descritption">Description</label>
-        <input onChange={handleInput} type="text" name="description" />
-        {valid.description && showValid && (
-          <p className="validation">{valid.description}</p>
-        )}
+        <div className="description">
+          <label htmlFor="descritption">Description</label>
+          <input onChange={handleInput} type="text" name="description" />
+          {valid.description && showValid && (
+            <p className="validation">{valid.description}</p>
+          )}
+        </div>
         <br />
-
-        <label htmlFor="ciudad">Ciudad</label>
-        <select name="ciudad" onChange={handleInput}>
-          <option value="">Seleccionar ciudad</option>
-          <option value="Mercedes">Mercedes</option>
-          <option value="Goya">Goya</option>
-          <option value="Tucuman">Tucuman</option>
-          <option value="La Rioja">La Rioja</option>
-          <option value="Corrientes">Corrientes</option>
-        </select>
-
+        <div className="address">
+          <label htmlFor="ciudad">Ciudad</label>
+          <select name="ciudad" onChange={handleInput}>
+            <option value="">Seleccionar ciudad</option>
+            <option value="Mercedes">Mercedes</option>
+            <option value="Goya">Goya</option>
+            <option value="Tucuman">Tucuman</option>
+            <option value="La Rioja">La Rioja</option>
+            <option value="Corrientes">Corrientes</option>
+          </select>
+          
+        </div>    
         <br />
-
-        <label htmlFor="location">Location</label>
-        <input
-          onChange={(e) => {
-            handleInput(e);
-            setLocation(e.target.value);
-          }}
-          type="text"
-          name="location"
-        />
-        <button onClick={findMap}>find map</button>
-        {valid.location && showValid && (
-          <p className="validation">{valid.location}</p>
-        )}
+        <div className="location">
+          
+          <label htmlFor="location">Location</label>
+          <input
+            onChange={(e) => {
+              handleInput(e);
+              setLocation(e.target.value);
+            }}
+            type="text"
+            name="location"
+          />
+          <button onClick={findMap}>find map</button>
+          {valid.location && showValid && (
+            <p className="validation">{valid.location}</p>
+          )}
+        </div>    
         <br />
 
         {position.lat && (
@@ -177,56 +189,73 @@ const CreateClub = () => {
             ></Marker>
           </GoogleMap>
         )}
-        <label htmlFor="openHour">horario apertura</label>
-        <select onChange={(e) => handleInput(e)} type="text" name="openHour">
-          <option value="5">5am</option>
-          <option value="6">6am</option>
-          <option value="7">7am</option>
-          <option value="8">8am</option>
-          <option value="9">9am</option>
-          <option value="10">10am</option>
-          <option value="11">11m</option>
-          <option value="12">12pm</option>
-          <option value="13">1pm</option>
-          <option value="14">2pm</option>
-          <option value="15">3pm</option>
-          <option value="16">4pm</option>
-          <option value="17">5am</option>
-        </select>
-        <label htmlFor="closeHour">horario cierre</label>
-        <select onChange={(e) => handleInput(e)} type="text" name="closeHour">
-          <option value="18">6pm</option>
-          <option value="19">7pm</option>
-          <option value="20">8pm</option>
-          <option value="21">9pm</option>
-          <option value="22">10pm</option>
-          <option value="23">11pm</option>
-          <option value="0">12am</option>
-        </select>
+
+        <div className="openHours">
+
+          <label htmlFor="openHour">horario apertura</label>
+          <select onChange={(e) => handleInput(e)} type="text" name="openHour">
+            <option value="5">5am</option>
+            <option value="6">6am</option>
+            <option value="7">7am</option>
+            <option value="8">8am</option>
+            <option value="9">9am</option>
+            <option value="10">10am</option>
+            <option value="11">11m</option>
+            <option value="12">12pm</option>
+            <option value="13">1pm</option>
+            <option value="14">2pm</option>
+            <option value="15">3pm</option>
+            <option value="16">4pm</option>
+            <option value="17">5am</option>
+          </select>
+          <label htmlFor="closeHour">horario cierre</label>
+          <select onChange={(e) => handleInput(e)} type="text" name="closeHour">
+            <option value="18">6pm</option>
+            <option value="19">7pm</option>
+            <option value="20">8pm</option>
+            <option value="21">9pm</option>
+            <option value="22">10pm</option>
+            <option value="23">11pm</option>
+            <option value="0">12am</option>
+          </select>
+
+        </div>
         <br />
+        <div className="imageInput">
 
-        <label htmlFor="image">suba una imagen</label>
-        <input
-          name="image"
-          type="file"
-          accept="image/png, image/gif, image/jpeg"
-          onChange={(e) => setFile(e.target.files[0])}
-        ></input>
+          <label htmlFor="image">suba una imagen</label>
+          <input
+            name="image"
+            type="file"
+            accept="image/png, image/gif, image/jpeg"
+            onChange={(e) => setFile(e.target.files[0])}
+          ></input>
 
-        {input.fields &&
-          input.fields.map((field, i) => (
-            <div className="field" key={i}>
-              <h3>cancha {i + 1}</h3>
-              <p>tamaño: {field.players}</p>
-              <p>precio: {field.price}</p>
-            </div>
-          ))}
-        <p>agregue sus canchas</p>
-        {valid.fields && showValid && (
-          <p className="validation">{valid.fields}</p>
-        )}
-        <FieldForm handleInput={fieldInput} />
-
+        </div>
+        <br />
+        <div className="fields">
+            
+          {input.fields &&
+            input.fields.map((field, i) => (
+              <div className="field" key={i}>
+                <h3>cancha {i + 1}</h3>
+                <p>tamaño: {field.players}</p>
+                <p>precio: {field.price}</p>
+              </div>
+            ))}
+            
+        </div>
+        <br />
+        <div className="fieldInput">
+          
+          <h4>agregue sus canchas</h4>
+          {valid.fields && showValid && (
+            <p className="validation">{valid.fields}</p>
+          )}
+          <FieldForm handleInput={fieldInput} />
+        
+        </div>  
+        <br />
         <button type="submit">guardar</button>
       </form>
     </div>

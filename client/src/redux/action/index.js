@@ -13,7 +13,7 @@ export const CLEAN_STATE = "CLEAN_STATE";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const GET_PASSWORD = "GET_PASSWORD";
 export const RESET_PASSWORD = "RESET_PASSWORD";
-
+export const LOCATION_FILTER = "LOCATION_FILTER";
 
 export const get_club_detail = (clubName) => async (dispatch) => {
   try {
@@ -101,10 +101,9 @@ export const order_price_clubs = (order) => {
   return { type: ORDER_PRICE_CLUBS, payload: order };
 };
 
-
-export const clean_state = (payload) =>{
-  return{ type: CLEAN_STATE, payload:{}}
-}
+export const clean_state = (payload) => {
+  return { type: CLEAN_STATE, payload: {} };
+};
 
 export const passForgotten = (email) => async (dispatch) => {
   try {
@@ -123,15 +122,15 @@ export const passForgotten = (email) => async (dispatch) => {
   }
 }; */
 
-
 export const resetPass = (password) => async (dispatch) => {
   try {
-    
-    let newPass = await axios.put(`/resetpassword/`,password);
+    let newPass = await axios.put(`/resetpassword/`, password);
     dispatch({ type: RESET_PASSWORD, payload: newPass.data });
   } catch (error) {
     console.log(error);
   }
 };
 
-
+export const locationFilter = (e) => {
+  return { type: LOCATION_FILTER, payload: e };
+};
