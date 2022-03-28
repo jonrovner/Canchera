@@ -16,12 +16,14 @@ const OrderPrice = () => {
       dispatch(locationFilter("Corrientes"));
     } else if (e.target.value === "All") {
       dispatch(locationFilter("All"));
+    } else if (e.target.value === "Mercedes") {
+      dispatch(locationFilter("Mercedes"));
     }
   };
 
   return (
     <div className={style.contenedor}>
-      <label htmlFor="orderBy">Order By Price:</label>
+      <label htmlFor="orderBy">Filtrar por ciudad:</label>
       <select
         data-testid="select-input"
         className={style.mainSelect}
@@ -35,6 +37,7 @@ const OrderPrice = () => {
         </option>
         <option value="All">Todos los clubes</option>
         <option value="La Rioja">La Rioja</option>
+        <option value="Mercedes">Mercedes</option>
         <option value="Corrientes">Corrientes</option>
         <option value="Tucuman">Tucuman</option>
         <option value="Goya">Goya</option>
