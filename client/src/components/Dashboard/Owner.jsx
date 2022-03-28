@@ -12,6 +12,7 @@ import {
 import "./style/owner.css";
 import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
 import { useNavigate } from "react-router";
+import { NavLink } from 'react-router-dom';
 function Owner({ id, name, email, rol }) {
   
   const navigate = useNavigate()
@@ -89,14 +90,11 @@ function Owner({ id, name, email, rol }) {
   return (
     <div>
       <h1>Bienvenido {name}</h1>
-      <div key={id}>
-        <h1>Datos</h1>
-        <p>Name: {name}</p>
-        <p>Email: {email}</p>
-        <p>Rol: {rol}</p>
-      </div>
+      
       <div>
-        <a href="/createClub"> create club</a>
+        <NavLink to="/createClub">
+          <button > create club</button>
+        </NavLink>
       </div>
 
         {
