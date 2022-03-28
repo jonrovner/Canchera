@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   let user = useSelector((state) => state.user);
   if (user.name) {
+    user.name = user.name.split(" ").shift();
     user.name = user.name[0].toUpperCase() + user.name.slice(1);
   }
 
@@ -91,14 +92,14 @@ const Navbar = () => {
           <NavLink exact="true" to="/signup/owner">
             <p>Sos Dueño?</p>
           </NavLink>
-          <NavLink exact="true" to="/contactUs">
-            <p>Contacto</p>
+          <NavLink exact="true" to="/dashboard">
+            <p>Dashboard</p>
           </NavLink>
         </div>
         <div className={styles.user}>
           {typeof user.email === "string" ? (
             <div>
-              <NavLink to="dashboard">Hola {user.name} 👋</NavLink>
+              <p>Hola {user.name} 👋</p>
               <BotonLogout />
             </div>
           ) : (
