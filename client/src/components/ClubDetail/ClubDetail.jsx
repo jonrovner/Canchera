@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import FieldCalendar from "./FieldCalendar/FieldCalendar.jsx";
-import { setHours, setMinutes, setSeconds, addDays, subDays, isToday } from "date-fns";
+import {
+  setHours,
+  setMinutes,
+  setSeconds,
+  addDays,
+  subDays,
+  isToday,
+} from "date-fns";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { get_club_detail, set_payment_id } from "../../redux/action/index.js";
+import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./clubDetail.css";
 import axios from "axios";
@@ -12,8 +19,6 @@ const Clubdetail = () => {
   //const navigate = useNavigate()
   const params = useParams();
   const dispatch = useDispatch();
-
-  console.log(params.clubName.replaceAll("-", " "));
 
   //carga los detalles del club en el state
   useEffect(() => {
@@ -24,8 +29,9 @@ const Clubdetail = () => {
   const user = useSelector((state) => state.user);
   const position = club.latitude && { lat: club.latitude, lng: club.longitude };
   const [price, setPrice] = useState(0);
-  const location = club.street+" "+club.num+" "+club.ciudad+" "+club.province
-  
+  const location =
+    club.street + " " + club.num + " " + club.ciudad + " " + club.province;
+
   // para armar el calendario, creo un array de 14 fechas a partir de hoy
   const now = new Date();
   const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
@@ -35,28 +41,28 @@ const Clubdetail = () => {
     days[i] = addDays(today, i);
   }
   const handleNextDay = () => {
-    if (selectedDay.toString() === days[days.length-1].toString()){
-      return
+    if (selectedDay.toString() === days[days.length - 1].toString()) {
+      return;
     } else {
-      setSelectedDay(selectedDay => addDays(selectedDay, 1))
+      setSelectedDay((selectedDay) => addDays(selectedDay, 1));
     }
-  }
+  };
 
   const handlePrevDay = () => {
-    if (selectedDay.toString() === days[0].toString()){
-      return
+    if (selectedDay.toString() === days[0].toString()) {
+      return;
     } else {
-      setSelectedDay(selectedDay => subDays(selectedDay, 1))
+      setSelectedDay((selectedDay) => subDays(selectedDay, 1));
     }
-  }
-  
+  };
+
   //para armar la reserva
-  const [reservationDetail, setReservationDetail] = useState({})
+  const [reservationDetail, setReservationDetail] = useState({});
   const [selectedDates, setSelectedDates] = useState([]);
-  useEffect(()=>{
-    setReservationDetail({'hours':selectedDates.length, 'price': price})
-  },[selectedDates, price]) 
-  
+  useEffect(() => {
+    setReservationDetail({ hours: selectedDates.length, price: price });
+  }, [selectedDates, price]);
+
   //cuando el usuario selecciona una hora en el calendar
   const handleHourClick = (e, date, fieldId, fieldPrice) => {
     let existent = selectedDates.find(
@@ -72,29 +78,32 @@ const Clubdetail = () => {
       ]);
       setPrice((price) => price - fieldPrice);
       e.target.classList.remove("selected");
-    }    
-  };  
+    }
+  };
 
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
     try {
       const mpResponse = await axios.post("/checkout", { price });
-      
+
       if (mpResponse.data.id) {
+        const bookingDetails = {
+          toPost: { userId: user.id, dates: selectedDates },
+          payment_id: mpResponse.data.id,
+        };
 
-      const bookingDetails = {
-        toPost: {userId: user.id, dates: selectedDates},
-        payment_id: mpResponse.data.id
+        window.localStorage.setItem(
+          "booking_details",
+          JSON.stringify(bookingDetails)
+        );
+        createCheckoutButton(mpResponse.data.id);
       }
+    } catch (err) {
+      console.log(err);
+    }
 
-      window.localStorage.setItem('booking_details', JSON.stringify(bookingDetails))
-      createCheckoutButton(mpResponse.data.id)  
-
-    }}catch(err){console.log(err)}
-    
-    
-  /*   const toPost = { userId: user.id, dates: selectedDates };
+    /*   const toPost = { userId: user.id, dates: selectedDates };
     const reservation = await axios.post(`/booking`, toPost);
     if (reservation.data.length) {
       try {
@@ -116,19 +125,16 @@ const Clubdetail = () => {
     bounds.extend(position);
     map.fitBounds(bounds);
   };
-  //console.log('user : ', user.id)
-  //console.log('selected', selectedDates)
-  console.log("club detail", club);
 
   const createCheckoutButton = (preference) => {
-        var script = document.createElement("script");
-        script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-        script.type = "text/javascript";
-        script.dataset.preferenceId = preference;
-        document.getElementById("checkout-btn").innerHTML = "";
-        document.querySelector("#checkout-btn").appendChild(script);
-    }
-   
+    var script = document.createElement("script");
+    script.src =
+      "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+    script.type = "text/javascript";
+    script.dataset.preferenceId = preference;
+    document.getElementById("checkout-btn").innerHTML = "";
+    document.querySelector("#checkout-btn").appendChild(script);
+  };
 
   return (
     <div className="clubDetails">
@@ -145,7 +151,7 @@ const Clubdetail = () => {
               center={position}
               zoom={18}
               mapContainerStyle={{ width: "50vw", height: "40vh" }}
-              options={{ mapId: "f8e61b002a1322a0"}}
+              options={{ mapId: "f8e61b002a1322a0" }}
             >
               <Marker
                 key={club.name}
@@ -162,16 +168,21 @@ const Clubdetail = () => {
           <p>Seleccione clickeando las horas que desea reservar</p>
 
           <div className="calendarControls">
-
-            <div className="button" onClick={handlePrevDay}>⏪</div>
-            <p>{isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}</p>
-            <div className="button" onClick={handleNextDay}>⏩</div>
-
+            <div className="button" onClick={handlePrevDay}>
+              ⏪
+            </div>
+            <p>
+              {isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}
+            </p>
+            <div className="button" onClick={handleNextDay}>
+              ⏩
+            </div>
           </div>
           {club &&
             club.Fields &&
-            club.Fields.map((field) => (
+            club.Fields.map((field, i) => (
               <FieldCalendar
+                key={i}
                 day={selectedDay}
                 open={club.openHour}
                 close={club.closeHour}
@@ -185,15 +196,14 @@ const Clubdetail = () => {
               />
             ))}
 
-              <div className="reservationDetails">
-                <p>detalles de su reserva:</p>
-                <p>{reservationDetail.hours} horas reservadas</p>
-                <p>total: $ {reservationDetail.price}</p>
-                 <div id={"checkout-btn"}>
-                   <button onClick={() => handleReservation()}>Confirmar</button>
-                </div> 
-              </div>               
-                
+          <div className="reservationDetails">
+            <p>detalles de su reserva:</p>
+            <p>{reservationDetail.hours} horas reservadas</p>
+            <p>total: $ {reservationDetail.price}</p>
+            <div id={"checkout-btn"}>
+              <button onClick={() => handleReservation()}>Confirmar</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

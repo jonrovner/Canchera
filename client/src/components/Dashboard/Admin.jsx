@@ -10,7 +10,7 @@ function Admin({ user }) {
 
   useEffect(() => {
     dispatch(get_all_user());
-  }, []);
+  }, [dispatch]);
 
   let allUsers = useSelector((state) => state.allUsers);
 

@@ -5,7 +5,11 @@ import style from "./CardClub.module.scss";
 
 const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
   return (
-    <Link key={id} className={style.link} to={`/club/${name.replaceAll(" ", "-")}`}>
+    <Link
+      key={id}
+      className={style.link}
+      to={`/club/${name.replaceAll(" ", "-")}`}
+    >
       <div className={style.contenedor}>
         <div className={style.divImg}>
           <img className={style.img} src={img} alt="not found" />
@@ -17,10 +21,8 @@ const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
             <span>
               Horario: {openHour}am-{closeHour}pm
             </span>
-            {Fields?.map((f) => (
-              <div>
-                <li>Futbol {f.players}</li>
-              </div>
+            {Fields?.map((f, i) => (
+              <li key={i}>Futbol {f.players}</li>
             ))}
           </div>
         </div>
