@@ -1,59 +1,38 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { useNavigate } from 'react-router-dom';
-
+import React from 'react';
 import User from "./User";
 import Owner from "./Owner";
 import Admin from "./Admin";
-
+import { useSelector } from 'react-redux';
 
 import Navbar from '../NavBar/NavBar';
-import { clean_state, get_users_email } from '../../redux/action';
-
 
 
 function Dashboard() {
-
-    const dispatch = useDispatch();
-    
-    // useEffect(() =>{
-    //     dispatch(get_users_email())
-    // }, [dispatch])
-
     const user = useSelector(state => state.user)
-    let navigate = useNavigate();
-
-
-  
-    
-    // function onSubmit(e){
-    //     navigate('/login')
-    // }
-   
     
     return ( 
         <div>
             <Navbar/>
-
             <h1>Dashboard</h1> 
             {
-
                 user.rol === 'user' ?  
-                <User
-                    id = {user.id}                        
-                    name = {user.name}
-                    email = {user.email}
-                    rol = {user.rol}
-                />
-                     
+                <div>
+                    <User
+                        id = {user.id}                        
+                        name = {user.name}
+                        email = {user.email}
+                        rol = {user.rol}
+                    />                   
+                </div> 
                 : user.rol === 'owner' ? 
-                <Owner
-                    id = {user.id}                        
-                    name = {user.name}
-                    email = {user.email}
-                    rol = {user.rol}
-                /> 
+                <div>
+                    <Owner
+                        id = {user.id}                        
+                        name = {user.name}
+                        email = {user.email}
+                        rol = {user.rol}
+                    />
+                </div>
                 : user.rol === 'admin' ? 
                 <Admin
                     id = {user.id}                        
