@@ -4,15 +4,17 @@ import { Model, UUIDV4 } from "sequelize";
 interface ClubAttributes {
   name: string;
   description: string;
-  location: string;
+  ciudad: string;
+  street: string;
+  num: number;
+  province: string;
   openHour: number;
   closeHour: number;
   image: string;
   score: string;
   latitude: number;
   longitude: number;
-  lowestPrice: number;
-  ciudad: string;
+  lowestPrice: number;  
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -24,15 +26,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
     name!: string;
     description!: string;
-    location!: string;
+    ciudad!: string;
+    street!: string;
+    num!: number;
+    province!: string;
     openHour!: number;
     closeHour!: number;
     image!: string;
     score!: string;
     latitude!: number;
     longitude!: number;
-    lowestPrice!: number;
-    ciudad!: string;
+    lowestPrice!: number;    
 
     static associate(models: any) {
       // define association here
@@ -57,7 +61,20 @@ module.exports = (sequelize: any, DataTypes: any) => {
       description: {
         type: DataTypes.STRING(1500),
       },
-      location: {
+      street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      num: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      province: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
+      ciudad: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -85,9 +102,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       lowestPrice: {
         type: DataTypes.INTEGER,
       },
-      ciudad: {
-        type: DataTypes.STRING,
-      },
+      
     },
     {
       sequelize,

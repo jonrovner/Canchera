@@ -1,0 +1,12 @@
+.Whatsapp{
+	position: fixed;
+	right: 40px;
+	bottom: 25px;
+	width: 70px;
+	z-index: 1000;
+	display: none;
+}
+.Whatsapp{
+	bottom: 95px;
+	display: block;
+}

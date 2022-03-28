@@ -1,6 +1,7 @@
 import { timeStamp } from "console";
 import { Request, Response, NextFunction } from "express";
-const { Field, Booking } = require('../db.ts');
+const { Field, Booking, User } = require('../db.ts');
+const { sendEmailBooking, getTemplateBooking } = require('../config/email');
 
 
 module.exports = {
@@ -16,6 +17,10 @@ async postBooking(req:Request, res:Response, next:NextFunction){
     if(!userId || dates.length === 0) return res.status(400).json({
         msg:"Faltan datos para poder procesar su reserva"
     });
+
+    const user = await User.findOne({ where:{id:userId} });
+      console.log(user);
+
     const bookings = [];
     for(let i = 0; i < dates.length; i++){
         const newBooking = await Booking.create({
@@ -24,7 +29,11 @@ async postBooking(req:Request, res:Response, next:NextFunction){
             FieldId: dates[i].field
         });
         bookings.push(newBooking);
-    }
+      };
+      
+      const templateBooking = getTemplateBooking(user.name);
+      await sendEmailBooking(user.email, "Reserva realizada", templateBooking);
+      
 
    return res.status(200).json(bookings)      
 

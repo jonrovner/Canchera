@@ -64,6 +64,7 @@ async function dataDB() {
     await User.create(userDB);
     await User.create(ownerDB);
     await User.create(adminDB);
+
   }catch(e){
     console.log("Ya existen esos usuarios en la db"+e)
     }

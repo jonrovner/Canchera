@@ -1,18 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { delete_user, get_all_user, update_user } from "../../redux/action";
 
+function Admin({ user }) {
+  let dispatch = useDispatch();
+  let [data, setData] = useState({
+    rol: "",
+  });
 
-function Admin({id, name, email, rol}) {
-    return (
-        <div>
-            <h1>Bienvenido {name}</h1> 
-            <div key={id}>
-                <h1>Datos</h1>
-                <p>Name: {name}</p>
-                <p>Email: {email}</p>
-                <p>Rol: {rol}</p>
-            </div>         
-        </div>
-    );    
+  useEffect(() => {
+    dispatch(get_all_user());
+  }, []);
+
+  let allUsers = useSelector((state) => state.allUsers);
+
+  const deleteUser = (id) => {
+    dispatch(delete_user(id));
+    window.location.reload();
+  };
+
+  const updateUser = (id) => {
+    dispatch(update_user(id, data));
+    window.location.reload();
+  };
+
+  const handlerInputChange = (e) => {
+    var value = e.target.value;
+    setData({ rol: value });
+  };
+
+  return (
+    <div>
+      <h1>Bienvenido {user.name}</h1>
+      <div key={user.id}>
+        <h1>Datos</h1>
+        <p>Name: {user.name}</p>
+        <p>Email: {user.email}</p>
+        <p>Rol: {user.rol}</p>
+        <ul>
+          {allUsers &&
+            allUsers.map((c) => (
+              <li key={c.id}>
+                Name: {c.name} - Rol: {c.rol}
+                <button onClick={() => deleteUser(c.id)}>delete</button>
+                <button onClick={() => updateUser(c.id)}>update rol</button>
+                <input
+                  onChange={(e) => handlerInputChange(e)}
+                  type="text"
+                  placeholder="nuevo rol"
+                />
+              </li>
+            ))}{" "}
+        </ul>
+      </div>
+    </div>
+  );
 }
 
 export default Admin;

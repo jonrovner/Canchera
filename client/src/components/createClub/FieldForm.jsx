@@ -16,7 +16,7 @@ const FieldForm = ({ handleInput }) => {
 
   return (
     <div>
-      <div>
+      <div className="validations">
         {!valid.valid && valid.players && <p className="validation">{valid.players}</p>} 
         {!valid.valid && valid.surface && <p className="validation">{valid.surface}</p>} 
         {!valid.valid && valid.price && <p className="validation">{valid.price}</p> }
