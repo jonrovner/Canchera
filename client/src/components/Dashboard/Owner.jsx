@@ -85,34 +85,42 @@ function Owner({ id, name, email, rol }) {
 
       <div>
         <h1>Reservas owner</h1>
-        {club && club.Fields &&
-          club.Fields.map((field) => (
+        {club && club.Fields && (
             <table id="myTable">
-              <tr className="header">
-                <th>Nombre</th>
-                <th>Cancha</th>
-                <th>Precio</th>
-                <th>Reservas</th>
-                
-              </tr>
-              <tr>
-                <td>{field.ClubName}</td>
-                <td>{field.id}</td>
-                <td>{field.price}</td>
-                <td>
-                  <ul>
-                  {
-                  field.Bookings.length && field.Bookings.map(booking => (
-                    <li>{booking.time}</li>
-                  ))
+            <tr className="header">
+              <th>Nombre</th>
+              <th>Cancha</th>
+              <th>Precio</th>
+              <th>Reservas</th>
+              
+            </tr>
+            {club.Fields.map((field) => (
+            
+            <tr>
+              <td>{field.ClubName}</td>
+              <td>{field.id}</td>
+              <td>{field.price}</td>
+              <td>
+                <ul>
+                {
+                field.Bookings.length && field.Bookings.map(booking => (
+                  <li>{booking.time}</li>
+                ))
 
-                  }
-                  </ul>
-                  </td>
-                
-              </tr>
-            </table>
-          ))}
+                }
+                </ul>
+                </td>
+              
+            </tr>
+            ))}
+
+          </table>
+
+
+        )
+          
+          
+          }
 
           {
             club && club.Fields && club.Fields.map( field => (
