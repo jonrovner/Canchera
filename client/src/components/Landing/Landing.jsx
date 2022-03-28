@@ -52,6 +52,8 @@ const Landing = () => {
           </div>
         </section>
 
+        <Map />
+
         <Slider />
 
         <section loading="lazy" className={styles.host}>
@@ -60,18 +62,19 @@ const Landing = () => {
               <span>Moderniza</span> tu establecimiento.
             </h2>
             <p>
-              Sos dueño de un establecimiento o club? Aplica para ser un Dueño
+              Tenes un establecimiento o club? Aplica para pertenecer a la
+              comunidad
               <span> Canchera</span>, moderniza tu negocio y multiplica tu
               alcance. Utiliza mejor tu tiempo y lleva un control de las
               reservas y canchas.
             </p>
             <Link to={"/clubs"}>
-              <button>Aplicar como Dueño</button>
+              <button>Sumate Canchera!</button>
             </Link>
           </div>
         </section>
       </div>
-      <Map />
+
       <br />
       <Whatsapp />
       <Footer />
