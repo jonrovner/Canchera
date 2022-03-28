@@ -1,0 +1,24 @@
+.Dashboard .switch {
+  color: #dcdaee;
+  width: 1100px;
+  margin: auto;
+  padding: 100px;
+}
+
+.Admin .users li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.Admin .users .delete {
+  color: #ca3a01;
+  font-size: 40px;
+  display: inline;
+  cursor: pointer;
+}
+/*# sourceMappingURL=Dashboard.module.css.map */
