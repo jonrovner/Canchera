@@ -7,6 +7,7 @@ import {
   addDays,
   subDays,
   isToday,
+  format
 } from "date-fns";
 import "./style/owner.css";
 import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
@@ -115,18 +116,20 @@ function Owner({ id, name, email, rol }) {
               <th>Precio</th>
               <th>Reservas</th>
             </tr>
-            {club.Fields.map((field) => (
-              <tr>
-                <td>{field.ClubName}</td>
-                <td>{field.id}</td>
-                <td>{field.price}</td>
-                <td>
-                  <ul>
-                    {field.Bookings.length &&
-                      field.Bookings.map((booking) => (
-                        <li>{booking.time.toString()}</li>
-                      ))}
-                  </ul>
+            {club.Fields.map((field) => (       
+            <tr>
+              <td>{field.ClubName}</td>
+              <td>{field.id}</td>
+              <td>{field.price}</td>
+              <td>
+                <ul>
+                {
+                field.Bookings.length && field.Bookings.map(booking => (
+                  <li>{new Date(booking.time).toLocaleString()}</li>
+                ))
+
+                }
+                </ul>
                 </td>
               </tr>
             ))}
