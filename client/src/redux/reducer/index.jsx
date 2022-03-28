@@ -10,6 +10,9 @@ import {
   GET_CLUB_DETAIL,
   CLEAN_STATE,
   LOCATION_FILTER,
+  GET_ALL_USER,
+  DELETE_USER,
+  UPDATE_USER,
 } from "../action/index";
 import { order } from "./metodos/order";
 const initialState = {
@@ -17,6 +20,9 @@ const initialState = {
   cancha: [],
   usersignin: [],
   user: {},
+  deleteUser: [],
+  updateUser: [],
+  allUsers: [],
   usersConect: [],
   clubDetail: {},
   clubCopia: [],
@@ -38,24 +44,49 @@ function rootReducer(state = initialState, { type, payload }) {
         clubCopia: payload,
       };
     }
+
+    case GET_ALL_USER: {
+      return {
+        ...state,
+        allUsers: payload,
+      };
+    }
+
+    case DELETE_USER: {
+      return {
+        ...state,
+        deleteUser: payload,
+      };
+    }
+
+    case UPDATE_USER: {
+      return {
+        ...state,
+        updateUser: payload,
+      };
+    }
+
     case POST_USERS_SIGNIN: {
       return {
         ...state,
         usersignin: payload,
       };
     }
+
     case GET_USERS_EMAIL: {
       return {
         ...state,
         user: payload,
       };
     }
+
     case LOAD_STATE_USER: {
       return {
         ...state,
         usersConect: [...state.usersConect, payload],
       };
     }
+
     case CLEAR_STATE_USER: {
       /*   let filtrados = state.usersConect.filter((u) => u.email !== payload); */
 
@@ -64,6 +95,7 @@ function rootReducer(state = initialState, { type, payload }) {
         user: [],
       };
     }
+
     case SET_USER: {
       return {
         ...state,
@@ -93,6 +125,7 @@ function rootReducer(state = initialState, { type, payload }) {
         user: payload,
       };
     }
+
     case LOCATION_FILTER: {
       const club = state.clubCopia;
       let meta = club.filter((e) => e.ciudad === payload);
