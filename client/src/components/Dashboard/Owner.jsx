@@ -1,6 +1,15 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import {
+  setHours,
+  setMinutes,
+  setSeconds,
+  addDays,
+  subDays,
+ 
+} from "date-fns";
 import "./style/owner.css";
+import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
 
 function Owner({ id, name, email, rol }) {
 
@@ -19,6 +28,30 @@ function Owner({ id, name, email, rol }) {
   useEffect(()=>{    
     setClub(owner.Club)
   },[setClub, owner.Club])
+
+
+  const now = new Date();
+  const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
+  const [selectedDay, setSelectedDay] = useState(today);
+  const days = [today];
+  for (let i = 1; i < 15; i++) {
+    days[i] = addDays(today, i);
+  }
+  const handleNextDay = () => {
+    if (selectedDay.toString() === days[days.length - 1].toString()) {
+      return;
+    } else {
+      setSelectedDay((selectedDay) => addDays(selectedDay, 1));
+    }
+  };
+
+  const handlePrevDay = () => {
+    if (selectedDay.toString() === days[0].toString()) {
+      return;
+    } else {
+      setSelectedDay((selectedDay) => subDays(selectedDay, 1));
+    }
+  };
 
   console.log('owner: ', owner)
   console.log('club: ', club)
@@ -80,6 +113,24 @@ function Owner({ id, name, email, rol }) {
               </tr>
             </table>
           ))}
+
+          {
+            club && club.Fields && club.Fields.map( field => (
+              <FieldCalendar 
+              day={today}
+              close={club.closeHour}
+              open={club.openHour}
+              players={field.players}
+              bookings={field.Bookings}
+              price={field.price}
+              handleClick={()=>{}}
+              fieldId={field.id}
+              surface={field.surface}
+              
+              />
+
+            ))
+          }
       </div>
 
       {/* <div>
