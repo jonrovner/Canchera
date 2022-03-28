@@ -58,7 +58,6 @@ export const update_user = (id, data) => async (dispatch) => {
 export const get_all_clubes = () => async (dispatch) => {
   try {
     let clubes = await axios.get(`/club`);
-    console.log(clubes.data);
     return dispatch({ type: GET_ALL_CLUBES, payload: clubes.data });
   } catch (error) {
     console.log(error);

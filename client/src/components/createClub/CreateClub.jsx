@@ -4,10 +4,10 @@ import FieldForm from "./FieldForm";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import "./createClub.css";
+//import "./createClub.css";
 import { validate } from "./validation";
 import { useNavigate } from "react-router";
-import { cities } from "./ar.js";
+//import { cities } from "./ar.js";
 
 const CreateClub = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const CreateClub = () => {
   });
   const [file, setFile] = useState(null);
 
-  const [filterCities, setFilterCities] = useState([]);
+  //const [filterCities, setFilterCities] = useState([]);
 
   useEffect(() => {
     setValid(validate(input));
@@ -45,7 +45,6 @@ const CreateClub = () => {
   const [position, setPosition] = useState({});
 
   const user = useSelector((state) => state.user);
-  console.log("user : ", user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,11 +62,9 @@ const CreateClub = () => {
 
       formData.append("data", JSON.stringify(toPost));
       formData.append("image", file);
-      console.log("formData: ", formData);
       axios
         .post("/club", formData)
         .then((res) => {
-          console.log("res data : ", res.data);
           if (res.data.name) {
             navigate("/clubs");
           }
@@ -87,20 +84,28 @@ const CreateClub = () => {
   };
 
   const findMap = (e) => {
+    console.log(e)
     e.preventDefault();
 
-    if (!input.city || !input.street || !input.num || !input.province) {
+    if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
-    const queryString = `${input.street}+${input.num}+${input.city}+${input.province}+Argentina`;
+    let queryString
+    if (Number(input.street) == input.street ){
+      
+      queryString = `calle ${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
+     
+    } else {
 
-    console.log("querystring is", queryString);
+      queryString = `${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
+    }
+    
     axios
       .get(
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
-        console.log(res.data);
+        
         setInput({
           ...input,
           latitude: res.data[0].lat,
@@ -135,7 +140,7 @@ const CreateClub = () => {
     <div className="createClub">
       <form
         action="/club"
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
         method="post"
         onSubmit={handleSubmit}
       >
@@ -159,8 +164,13 @@ const CreateClub = () => {
         <br />
         <div className="address">
           <label htmlFor="ciudad">Ciudad</label>
-          <select type="text" name="ciudad" onChange={handleInput}>
-            <option value="null" disabled selected>
+          <select
+            defaultValue={"null"}
+            type="text"
+            name="ciudad"
+            onChange={handleInput}
+          >
+            <option value="null" disabled>
               Elegir ciudad
             </option>
             <option value="Mercedes">Mercedes</option>
@@ -181,7 +191,7 @@ const CreateClub = () => {
         </div>
         <br />
         <div className="location">
-          <button onClick={findMap}>find map</button>
+          <button onClick={(e) => findMap(e) }>find map</button>
         </div>
         <br />
 

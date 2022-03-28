@@ -40,7 +40,7 @@
 
 .Landing .content .hero {
   color: #d0cbff;
-  height: 80vh;
+  min-height: 80vh;
   gap: 30px;
   position: relative;
 }
@@ -79,7 +79,8 @@
 }
 
 .Landing .content .hero .images {
-  height: 100%;
+  width: 40%;
+  height: 90%;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#00C49A), to(#ffffff00));
   background-image: linear-gradient(to bottom, #00C49A, #ffffff00);
   border-radius: 500px 500px 0px 0px;
@@ -95,7 +96,7 @@
   width: 100%;
   padding: 0px;
   overflow: hidden;
-  height: 80vh;
+  min-height: 630px;
   position: relative;
   -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
           box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);

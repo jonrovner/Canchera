@@ -10,11 +10,7 @@ import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
-  console.log("clubes: ", clubes);
   const [activeMarker, setActiveMarker] = useState(null);
-  const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
-  const [ciudad, setCiudad] = useState("Goya");
-  const [zoom, setZoom] = useState(4);
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -29,28 +25,9 @@ const ListClubs = () => {
     dispatch(get_all_clubes());
   }, [dispatch]);
 
-  var clubXciudad = [];
-  clubXciudad = clubes.filter((club) => club.ciudad === ciudad);
-
   const positions =
     clubes &&
     clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
-
-  const handleSelect = (e) => {
-    setCiudad(e.target.value);
-    clubXciudad = clubes.filter((club) => club.ciudad === e.target.value);
-
-    if (clubXciudad.length) {
-      let lat = clubXciudad[0].latitude;
-      let lng = clubXciudad[0].longitude;
-      let newPos = { lat: lat, lng: lng };
-      setMapPos(newPos);
-      setZoom(14);
-    } else {
-      setMapPos({ lat: -32.9632, lng: -61.409 });
-      setZoom(4);
-    }
-  };
 
   return (
     <div className={style.contenedorGral}>
@@ -78,8 +55,8 @@ const ListClubs = () => {
         <GoogleMap
           //onLoad={handleOnLoad}
           onClick={() => setActiveMarker(null)}
-          center={mapPos}
-          zoom={zoom}
+          center={{ lat: -32.9632, lng: -61.409 }}
+          zoom={4}
           mapContainerStyle={{ width: "70vw", height: "100vh" }}
         >
           {clubes.map((club, index) => (

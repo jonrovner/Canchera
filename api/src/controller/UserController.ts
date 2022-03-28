@@ -70,10 +70,11 @@ module.exports = {
 
       const user = await User.findOne({ where:{ id:id } });
       if(!user) return res.status(400).json({ msg :"No se encuentra en nuestra base de datos"});
-
-    await user.update({
+    
+      await user.update({
      ...user,
        rol:rol
+      
     });
 
       return res.status(200).json({ msg:"Usuario modificado con exito" });

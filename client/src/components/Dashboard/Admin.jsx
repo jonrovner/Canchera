@@ -10,17 +10,17 @@ function Admin({ user }) {
 
   useEffect(() => {
     dispatch(get_all_user());
-  }, []);
+  }, [dispatch]);
 
   let allUsers = useSelector((state) => state.allUsers);
 
-  const deleteUser = (id) => {
-    dispatch(delete_user(id));
+  const deleteUser = async (id) => {
+    await dispatch(delete_user(id));
     window.location.reload();
-  };
+  }; 
 
-  const updateUser = (id) => {
-    dispatch(update_user(id, data));
+  const updateUser = async (id) => {
+    await dispatch(update_user(id, data));
     window.location.reload();
   };
 

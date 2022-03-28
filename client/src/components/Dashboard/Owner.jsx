@@ -1,12 +1,60 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+import {
+  setHours,
+  setMinutes,
+  setSeconds,
+  addDays,
+  subDays,
+ 
+} from "date-fns";
 import "./style/owner.css";
+import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
 
 function Owner({ id, name, email, rol }) {
-  const user = useSelector((state) => state.user);
-  const clubes = useSelector((state) => state.clubDetail);
 
-  let boo = user.Bookings;
+  const [owner, setOwner] = useState({})
+  const [club, setClub] = useState({})
+
+  useEffect(()=>{
+      const getOwner = (email) =>{
+        axios.get(`/owner?email=${email}`)
+        .then( res => setOwner(res.data))
+      }
+      getOwner(email)
+
+  },[email])
+  
+  useEffect(()=>{    
+    setClub(owner.Club)
+  },[setClub, owner.Club])
+
+
+  const now = new Date();
+  const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
+  const [selectedDay, setSelectedDay] = useState(today);
+  const days = [today];
+  for (let i = 1; i < 15; i++) {
+    days[i] = addDays(today, i);
+  }
+  const handleNextDay = () => {
+    if (selectedDay.toString() === days[days.length - 1].toString()) {
+      return;
+    } else {
+      setSelectedDay((selectedDay) => addDays(selectedDay, 1));
+    }
+  };
+
+  const handlePrevDay = () => {
+    if (selectedDay.toString() === days[0].toString()) {
+      return;
+    } else {
+      setSelectedDay((selectedDay) => subDays(selectedDay, 1));
+    }
+  };
+
+  console.log('owner: ', owner)
+  console.log('club: ', club)
 
   return (
     <div>
@@ -20,27 +68,69 @@ function Owner({ id, name, email, rol }) {
       <div>
         <a href="/createClub"> create club</a>
       </div>
+
+        {
+          club && 
+      (<div>
+            
+            <h3>Datos de su club </h3>
+            <p>Nombre: {club.name}</p>
+            <p>Descripción: {club.description}</p>
+            <p>Dirección: {`${club.street} ${club.num} ${club.ciudad}`}</p>
+            <p>Horario: {`de ${club.openHour} a ${club.closeHour} hs`}</p>
+
+          <button>editar</button>
+      </div>)
+        }
+
       <div>
         <h1>Reservas owner</h1>
-        {boo &&
-          boo.map((b) => (
+        {club && club.Fields &&
+          club.Fields.map((field) => (
             <table id="myTable">
               <tr className="header">
-                <th>Club Name</th>
-                <th>Location</th>
-                <th>Time</th>
-                <th>Price</th>
-                <th>Surface</th>
+                <th>Nombre</th>
+                <th>Cancha</th>
+                <th>Precio</th>
+                <th>Reservas</th>
+                
               </tr>
               <tr>
-                <td>{b.Field.ClubName}</td>
-                <td>{b.Field.Club.location}</td>
-                <td>{b.time}</td>
-                <td>{b.Field.price}</td>
-                <td>{b.Field.surface}</td>
+                <td>{field.ClubName}</td>
+                <td>{field.id}</td>
+                <td>{field.price}</td>
+                <td>
+                  <ul>
+                  {
+                  field.Bookings.length && field.Bookings.map(booking => (
+                    <li>{booking.time}</li>
+                  ))
+
+                  }
+                  </ul>
+                  </td>
+                
               </tr>
             </table>
           ))}
+
+          {
+            club && club.Fields && club.Fields.map( field => (
+              <FieldCalendar 
+              day={today}
+              close={club.closeHour}
+              open={club.openHour}
+              players={field.players}
+              bookings={field.Bookings}
+              price={field.price}
+              handleClick={()=>{}}
+              fieldId={field.id}
+              surface={field.surface}
+              
+              />
+
+            ))
+          }
       </div>
 
       {/* <div>

@@ -7,14 +7,13 @@ import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/Validaciones/validacionesLogIn";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
 
 const Login = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  let UsuarioState = useSelector((state) => state.user);
 
   const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
@@ -51,7 +50,6 @@ const Login = () => {
         );
         let formulario = document.getElementById("formul");
         formulario.reset();
-        console.log("users", users);
         if (users.data.user.rol === "owner") return navigate("/dashboard");
         if (users.data.user.rol === "user") return navigate("/clubs");
         if (users.data.user.rol === "admin") return navigate("/dashboard");
@@ -66,7 +64,6 @@ const Login = () => {
       name: r.profileObj.name.toString(),
       email: r.profileObj.email.toString(),
     };
-    console.log("dato", r);
     let existe = await axios.post("/singup/google", dataGoogle);
     if (!existe.data.message) {
       window.localStorage.setItem("user", JSON.stringify(existe.data.email));
@@ -81,7 +78,6 @@ const Login = () => {
       await dispatch(get_users_email(r.profileObj.email));
       await dispatch(set_user(usuario.data));
       window.localStorage.setItem("user", JSON.stringify(usuario.data.email));
-      console.log("usuario", usuario);
       if (usuario.data.rol === "owner") return navigate("/dashboard");
       if (usuario.data.rol === "user") return navigate("/clubs");
       if (usuario.data.rol === "admin") return navigate("/dashboard");
@@ -103,7 +99,6 @@ const Login = () => {
   return (
     <div className={style.contenedor}>
       <form
-        form
         id="formul"
         className={style.signInForm}
         onSubmit={(e) => {
@@ -163,9 +158,7 @@ const Login = () => {
           />
         </div>
         <div className={style}>
-          <a href="" onClick={handlePass}>
-            Olvidaste tu contraseña?
-          </a>
+          <button onClick={handlePass}>Olvidaste tu contraseña?</button>
         </div>
       </form>
     </div>

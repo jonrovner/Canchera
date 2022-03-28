@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
 import style from "./ResetPassword.module.scss";
 import Modal from "./Modal/Modal";
 
 const ResetPassword = () => {
   const [openModal, setOpenModal] = useState(false);
-  const navigate = useNavigate();
   const { token } = useParams();
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState({
@@ -36,19 +35,17 @@ const ResetPassword = () => {
     if (data.password === confirmPassword.confirmPassword && data.password)
       await axios
         .put(`/resetpassword/${token}`, data)
-        .then((data) => console.log(data))
         .catch((error) => console.log(error));
     setOpenModal(true);
   };
 
   useEffect(() => {
     if (data.password !== confirmPassword.confirmPassword) {
-      console.log("ACA ROMPE", data, confirmPassword);
       setError("Las contraseñas deben ser iguales");
     } else {
       setError("");
     }
-  });
+  }, [data, confirmPassword]);
 
   const disabeledSubmit = useMemo(() => {
     if (error.length === 0) {
