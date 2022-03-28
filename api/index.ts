@@ -64,18 +64,14 @@ async function dataDB() {
     await User.create(userDB);
     await User.create(ownerDB);
     await User.create(adminDB);
-
-  }catch(e){
-    console.log("Ya existen esos usuarios en la db"+e)
-    }
-
+  } catch (e) {
+    console.log("Ya existen esos usuarios en la db" + e);
+  }
 }
 
 // Syncing all the models at once.
 
-
-db.sequelize.sync({ force: false }).then(() => {
-
+db.sequelize.sync({ force: true }).then(() => {
   dataDB();
 
   server.listen(process.env.PORT, () => {
