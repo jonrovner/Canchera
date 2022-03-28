@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useMemo, useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
 import style from "./ResetPassword.module.scss";
+import Modal from "./Modal/Modal";
 
 const ResetPassword = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
   const { token } = useParams();
   const [error, setError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState({
@@ -26,11 +29,6 @@ const ResetPassword = () => {
       ...confirmPassword,
       [e.target.name]: e.target.value,
     });
-    if (data.password !== confirmPassword.confirmPassword) {
-      setError("Las contraseñas deben ser iguales");
-    } else {
-      setError("");
-    }
   };
 
   const onSubmit = async (e) => {
@@ -40,14 +38,24 @@ const ResetPassword = () => {
         .put(`/resetpassword/${token}`, data)
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
+    setOpenModal(true);
   };
 
+  useEffect(() => {
+    if (data.password !== confirmPassword.confirmPassword) {
+      console.log("ACA ROMPE", data, confirmPassword);
+      setError("Las contraseñas deben ser iguales");
+    } else {
+      setError("");
+    }
+  });
+
   const disabeledSubmit = useMemo(() => {
-    if (error.length > 0) {
-      return true;
+    if (error.length === 0) {
+      return false;
     }
 
-    return false;
+    return true;
   }, [error]);
 
   return (
@@ -86,6 +94,7 @@ const ResetPassword = () => {
           disabled={disabeledSubmit}
         />
       </form>
+      {openModal && <Modal closeModal={setOpenModal} />}
     </div>
   );
 };

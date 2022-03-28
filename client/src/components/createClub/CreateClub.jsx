@@ -27,9 +27,11 @@ const CreateClub = () => {
     setValid(validate(input));
   }, [input]);
 
-  useEffect(() => {
+
+  /* useEffect(()=>{
     const findMatch = (word, cities) => {
       const regex = new RegExp(word, "gi");
+
 
       setFilterCities(
         cities.filter((place) => {
@@ -39,6 +41,8 @@ const CreateClub = () => {
     };
     findMatch(input.city, cities);
   }, [input.city]);
+ */
+
 
   const [position, setPosition] = useState({});
 
@@ -86,10 +90,12 @@ const CreateClub = () => {
 
   const findMap = (e) => {
     e.preventDefault();
+
     if (!input.city || !input.street || !input.num || !input.province) {
       return;
     }
     const queryString = `${input.street}+${input.num}+${input.city}+${input.province}+Argentina`;
+
     console.log("querystring is", queryString);
     axios
       .get(
@@ -126,10 +132,8 @@ const CreateClub = () => {
     bounds.extend(position);
     map.fitBounds(bounds);
   };
-  console.log("input is ", input);
 
-  console.log("filtered cities: ", filterCities);
-  //console.log('valid:', valid)
+  
   return (
     <div className="createClub">
       <form
