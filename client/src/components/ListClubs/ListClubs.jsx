@@ -94,13 +94,7 @@ const ListClubs = () => {
                   <div>
                     '{club.name}'
                     <br />
-                    {club.street +
-                      " " +
-                      club.num +
-                      " " +
-                      club.ciudad +
-                      " " +
-                      club.province}
+                    {club.location}
                   </div>
                 </InfoWindow>
               ) : null}
