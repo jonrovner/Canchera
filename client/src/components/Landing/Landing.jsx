@@ -68,8 +68,8 @@ const Landing = () => {
               alcance. Utiliza mejor tu tiempo y lleva un control de las
               reservas y canchas.
             </p>
-            <Link to={"/clubs"}>
-              <button>Sumate Canchera!</button>
+            <Link to={"/signup/owner"}>
+              <button>Sumate a Canchera!</button>
             </Link>
           </div>
         </section>
