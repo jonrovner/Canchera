@@ -4,7 +4,6 @@ import "./style/owner.css";
 
 function Owner({ id, name, email, rol }) {
   const user = useSelector((state) => state.user);
-  const clubes = useSelector((state) => state.clubDetail);
 
   let boo = user.Bookings;
 

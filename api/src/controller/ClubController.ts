@@ -10,7 +10,7 @@ const multerConfig = multer.diskStorage({
     const ext = file.mimetype.split("/").pop();
     let body = JSON.parse(req.body.data);
 
-    cb(null, `${body.name.replace(/ /g, '-')}.${ext}`);
+    cb(null, `${body.name.replace(/ /g, "-")}.${ext}`);
   },
 });
 
@@ -44,14 +44,21 @@ module.exports = {
       score,
       longitude,
       userId,
-      fields      
+      fields,
     } = JSON.parse(req.body.data);
 
-    console.log('body : ', JSON.parse(req.body.data))
+    console.log("body : ", JSON.parse(req.body.data));
 
     try {
-
-      if (!name || !openHour || !closeHour || !ciudad || !street || !num || !province)
+      if (
+        !name ||
+        !openHour ||
+        !closeHour ||
+        !ciudad ||
+        !street ||
+        !num ||
+        !province
+      )
         return res.status(400).json({
           warning: "Faltan datos para poder publicar su club",
         });
@@ -71,26 +78,26 @@ module.exports = {
 
       let image;
       if (req.file) {
-        image = `${url}${name.replace(/ /g, '-')}.${ext}`;
+        image = `${url}${name.replace(/ /g, "-")}.${ext}`;
       } else {
         image = `${url}club-default.jpg`;
       }
 
       if (user && user.rol === "owner") {
         const newClub = await Club.create({
-          name,
+          name: name.trim(),
           description,
           ciudad,
           street,
-          num:Number(num),
-          province,          
+          num: Number(num),
+          province,
           openHour,
           closeHour,
           image,
           score,
           latitude,
           longitude,
-          UserId: userId,          
+          UserId: userId,
           lowestPrice: Math.min(
             ...fields.map((field: any) => Number(field.price))
           ),
@@ -132,7 +139,7 @@ module.exports = {
             "score",
             "latitude",
             "longitude",
-            "lowestPrice"           
+            "lowestPrice",
           ],
           include: {
             model: Field,
@@ -160,7 +167,7 @@ module.exports = {
           "score",
           "latitude",
           "longitude",
-          "lowestPrice"         
+          "lowestPrice",
         ],
         include: {
           model: Field,
@@ -191,7 +198,7 @@ module.exports = {
           "image",
           "score",
           "latitude",
-          "longitude"          
+          "longitude",
         ],
         include: {
           model: Field,
