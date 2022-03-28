@@ -6,13 +6,15 @@ import {
   setSeconds,
   addDays,
   subDays,
+  isToday
  
 } from "date-fns";
 import "./style/owner.css";
 import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
-
+import { useNavigate } from "react-router";
 function Owner({ id, name, email, rol }) {
-
+  
+  const navigate = useNavigate()
   const [owner, setOwner] = useState({})
   const [club, setClub] = useState({})
 
@@ -29,6 +31,7 @@ function Owner({ id, name, email, rol }) {
     setClub(owner.Club)
   },[setClub, owner.Club])
 
+  const [selectedDates, setSelectedDates] = useState([]);
 
   const now = new Date();
   const today = setSeconds(setMinutes(setHours(now, 8), 0), 0);
@@ -52,6 +55,33 @@ function Owner({ id, name, email, rol }) {
       setSelectedDay((selectedDay) => subDays(selectedDay, 1));
     }
   };
+
+  const handleCalendar = (e, date, fieldId) => {
+    let existent = selectedDates.find(
+      (d) => d.time.toString() === date.toString()
+    );
+    if (!existent) {
+      setSelectedDates([...selectedDates, { time: date, field: fieldId }]);
+     
+      e.target.classList.add("selected");
+    } else {
+      setSelectedDates([
+        ...selectedDates.filter((d) => d.time.toString() !== date.toString()),
+      ]);
+      
+      e.target.classList.remove("selected");
+    }
+
+  }
+
+  const handleBlock = async () => {
+    const toPost = {userId: owner.id, dates: selectedDates}
+    
+   const post = await axios.post('/booking', toPost)
+   console.log('booking response: ',post.data)
+   if (post.data.length) window.location.reload()
+    
+  }
 
   console.log('owner: ', owner)
   console.log('club: ', club)
@@ -104,7 +134,7 @@ function Owner({ id, name, email, rol }) {
                 <ul>
                 {
                 field.Bookings.length && field.Bookings.map(booking => (
-                  <li>{booking.time}</li>
+                  <li>{booking.time.toString()}</li>
                 ))
 
                 }
@@ -122,21 +152,34 @@ function Owner({ id, name, email, rol }) {
           
           }
 
+        <div className="calendarControls">
+            <div className="button" onClick={handlePrevDay}>
+              ⏪
+            </div>
+            <p>
+              {isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}
+            </p>
+            <div className="button" onClick={handleNextDay}>
+              ⏩
+            </div>
+          </div>
+
           {
             club && club.Fields && club.Fields.map( field => (
-              <FieldCalendar 
-              day={today}
-              close={club.closeHour}
-              open={club.openHour}
-              players={field.players}
-              bookings={field.Bookings}
-              price={field.price}
-              handleClick={()=>{}}
-              fieldId={field.id}
-              surface={field.surface}
-              
-              />
-
+              <>
+                <FieldCalendar 
+                day={selectedDay}
+                close={club.closeHour}
+                open={club.openHour}
+                players={field.players}
+                bookings={field.Bookings}
+                price={field.price}
+                handleClick={handleCalendar}
+                fieldId={field.id}
+                surface={field.surface}/>
+            
+              <button onClick={handleBlock}>bloquear</button>
+              </>
             ))
           }
       </div>
