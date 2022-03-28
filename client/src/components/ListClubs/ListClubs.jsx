@@ -5,8 +5,7 @@ import { get_all_clubes } from "../../redux/action";
 import CardClub from "../CardClub/CardClub";
 
 import OrderName from "../Order/OrderName";
-import OrderPrice from "../Order/OrderPrice";
-import Map from "../Map/Map";
+import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
 const ListClubs = () => {
@@ -57,7 +56,7 @@ const ListClubs = () => {
     <div className={style.contenedorGral}>
       <div className={style.orders}>
         <OrderName />
-        <OrderPrice />
+        <OrderCiudad />
       </div>
 
       <div className={style.contenedorlistClubMap}>

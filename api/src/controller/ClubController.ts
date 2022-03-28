@@ -34,21 +34,26 @@ module.exports = {
     const {
       name,
       description,
-      location,
+      ciudad,
+      street,
+      num,
+      province,
       openHour,
       closeHour,
       latitude,
       score,
       longitude,
       userId,
-      fields,
-      ciudad,
+      fields      
     } = JSON.parse(req.body.data);
 
+    console.log('body : ', JSON.parse(req.body.data))
+
     try {
-      if (!name || !location || !openHour || !closeHour)
+
+      if (!name || !openHour || !closeHour || !ciudad || !street || !num || !province)
         return res.status(400).json({
-          warning: "Datos necesarios para poder publicar su club",
+          warning: "Faltan datos para poder publicar su club",
         });
 
       const user = await User.findOne({ where: { id: userId } });
@@ -73,17 +78,19 @@ module.exports = {
 
       if (user && user.rol === "owner") {
         const newClub = await Club.create({
-          name: name,
-          description: description,
-          location: location,
-          openHour: openHour,
-          closeHour: closeHour,
-          image: image,
-          score: score,
-          latitude: latitude,
-          longitude: longitude,
-          UserId: userId,
-          ciudad: ciudad,
+          name,
+          description,
+          ciudad,
+          street,
+          num:Number(num),
+          province,          
+          openHour,
+          closeHour,
+          image,
+          score,
+          latitude,
+          longitude,
+          UserId: userId,          
           lowestPrice: Math.min(
             ...fields.map((field: any) => Number(field.price))
           ),
@@ -115,15 +122,17 @@ module.exports = {
           attributes: [
             "name",
             "description",
-            "location",
+            "ciudad",
+            "street",
+            "num",
+            "province",
             "openHour",
             "closeHour",
             "image",
             "score",
             "latitude",
             "longitude",
-            "lowestPrice",
-            "ciudad",
+            "lowestPrice"           
           ],
           include: {
             model: Field,
@@ -141,15 +150,17 @@ module.exports = {
         attributes: [
           "name",
           "description",
-          "location",
+          "ciudad",
+          "street",
+          "num",
+          "province",
           "openHour",
           "closeHour",
           "image",
           "score",
           "latitude",
           "longitude",
-          "lowestPrice",
-          "ciudad",
+          "lowestPrice"         
         ],
         include: {
           model: Field,
@@ -171,14 +182,16 @@ module.exports = {
         attributes: [
           "name",
           "description",
-          "location",
+          "ciudad",
+          "street",
+          "num",
+          "province",
           "openHour",
           "closeHour",
           "image",
           "score",
           "latitude",
-          "longitude",
-          "ciudad",
+          "longitude"          
         ],
         include: {
           model: Field,
