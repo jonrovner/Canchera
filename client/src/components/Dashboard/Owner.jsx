@@ -10,7 +10,7 @@ function Owner({id, name, email, rol}) {
     let boo = user.Bookings;
 
         return (
-            <div>
+            <div> 
                 <h1>Bienvenido {name}</h1> 
                 <div key={id}>
                     <h1>Datos</h1>

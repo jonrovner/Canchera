@@ -32,7 +32,7 @@ function Dashboard() {
                         email = {user.email}
                         rol = {user.rol}
                     />
-                </div>
+                </div> 
                 : user.rol === 'admin' ? 
                 <Admin
                     id = {user.id}                        

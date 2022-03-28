@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 
 function User({id, name, email, rol}) {
-
+ 
     const user = useSelector(state => state.user)
 
     let boo = user.Bookings;
