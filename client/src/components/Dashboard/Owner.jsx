@@ -6,7 +6,8 @@ import {
   setSeconds,
   addDays,
   subDays,
-  isToday
+  isToday,
+  format
  
 } from "date-fns";
 import "./style/owner.css";
@@ -132,7 +133,7 @@ function Owner({ id, name, email, rol }) {
                 <ul>
                 {
                 field.Bookings.length && field.Bookings.map(booking => (
-                  <li>{booking.time.toString()}</li>
+                  <li>{new Date(booking.time).toLocaleString()}</li>
                 ))
 
                 }
