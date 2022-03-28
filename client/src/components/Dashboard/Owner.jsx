@@ -1,11 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import "./style/owner.css";
 
 function Owner({ id, name, email, rol }) {
-  const user = useSelector((state) => state.user);
 
-  let boo = user.Bookings;
+  const [owner, setOwner] = useState({})
+  const [club, setClub] = useState({})
+
+  useEffect(()=>{
+      const getOwner = (email) =>{
+        axios.get(`/owner?email=${email}`)
+        .then( res => setOwner(res.data))
+      }
+      getOwner(email)
+
+  },[email])
+  
+  useEffect(()=>{    
+    setClub(owner.Club)
+  },[setClub, owner.Club])
+
+  console.log('owner: ', owner)
+  console.log('club: ', club)
 
   return (
     <div>
@@ -19,24 +35,48 @@ function Owner({ id, name, email, rol }) {
       <div>
         <a href="/createClub"> create club</a>
       </div>
+
+        {
+          club && 
+      (<div>
+            
+            <h3>Datos de su club </h3>
+            <p>Nombre: {club.name}</p>
+            <p>Descripción: {club.description}</p>
+            <p>Dirección: {`${club.street} ${club.num} ${club.ciudad}`}</p>
+            <p>Horario: {`de ${club.openHour} a ${club.closeHour} hs`}</p>
+
+          <button>editar</button>
+      </div>)
+        }
+
       <div>
         <h1>Reservas owner</h1>
-        {boo &&
-          boo.map((b) => (
+        {club && club.Fields &&
+          club.Fields.map((field) => (
             <table id="myTable">
               <tr className="header">
-                <th>Club Name</th>
-                <th>Location</th>
-                <th>Time</th>
-                <th>Price</th>
-                <th>Surface</th>
+                <th>Nombre</th>
+                <th>Cancha</th>
+                <th>Precio</th>
+                <th>Reservas</th>
+                
               </tr>
               <tr>
-                <td>{b.Field.ClubName}</td>
-                <td>{b.Field.Club.location}</td>
-                <td>{b.time}</td>
-                <td>{b.Field.price}</td>
-                <td>{b.Field.surface}</td>
+                <td>{field.ClubName}</td>
+                <td>{field.id}</td>
+                <td>{field.price}</td>
+                <td>
+                  <ul>
+                  {
+                  field.Bookings.length && field.Bookings.map(booking => (
+                    <li>{booking.time}</li>
+                  ))
+
+                  }
+                  </ul>
+                  </td>
+                
               </tr>
             </table>
           ))}
