@@ -46,9 +46,10 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case GET_ALL_USER: {
+      let filtrado = payload.filter((u) => u.id !== state.user.id);
       return {
         ...state,
-        allUsers: payload,
+        allUsers: filtrado,
       };
     }
 
