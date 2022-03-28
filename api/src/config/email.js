@@ -27,9 +27,9 @@ const sendEmail = async (email, subject, html) => {
     });
   } catch (error) {
     console.log(error);
+  }
 };
-}
-  
+
 const getTemplate = (name, token) => {
   let url;
   if (process.env.NODE_ENV) {
@@ -48,7 +48,7 @@ const getTemplate = (name, token) => {
       `;
 };
 
-const sendEmailPassword = async (email, subject, html) =>{
+const sendEmailPassword = async (email, subject, html) => {
   try {
     await transporter.sendMail({
       from: `Canchera <${email.user}>`, // sender address
@@ -59,15 +59,13 @@ const sendEmailPassword = async (email, subject, html) =>{
     });
   } catch (error) {
     console.log(error);
+  }
 };
 
-};
-
-const getTemplatePassword = (name, token) =>{
-
+const getTemplatePassword = (name, token) => {
   let url;
   if (process.env.NODE_ENV) {
-    url = "https://canchera.vercel.app/";
+    url = "https://canchera.vercel.app";
   } else {
     url = "http://localhost:3000";
   }
@@ -76,13 +74,13 @@ const getTemplatePassword = (name, token) =>{
   <div>
     <h1>${name} es su dia de suerte</h1>
     <p>a solicitado un restablecimiento de contraseña para su cuenta de Heroku. Siga el siguiente enlace para establecer una nueva contraseña:</p>
-    <a href="${url}/resetpassword/${token}">${token}</a>
+    <a href="${url}/resetpassword/${token}">${url}</a>
   </div>
   
-  `
+  `;
 };
 
-const sendEmailBooking = async (email, subject, html) =>{
+const sendEmailBooking = async (email, subject, html) => {
   try {
     await transporter.sendMail({
       from: `Canchera <${email.user}>`, // sender address
@@ -93,19 +91,18 @@ const sendEmailBooking = async (email, subject, html) =>{
     });
   } catch (error) {
     console.log(error);
+  }
 };
 
-};
-
-const getTemplateBooking =  (name ) =>{
+const getTemplateBooking = (name) => {
   return `
   <div>
     <h1>${name} realizaste una reserva</h1>
     <p>Tu reserva fue realizada  con exito </p>
   </div>
   
-  `
-}
+  `;
+};
 
 module.exports = {
   sendEmail,
@@ -113,5 +110,5 @@ module.exports = {
   sendEmailPassword,
   getTemplatePassword,
   sendEmailBooking,
-  getTemplateBooking
+  getTemplateBooking,
 };
