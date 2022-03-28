@@ -24,6 +24,7 @@ const Clubdetail = () => {
   const user = useSelector((state) => state.user);
   const position = club.latitude && { lat: club.latitude, lng: club.longitude };
   const [price, setPrice] = useState(0);
+  const location = club.street+" "+club.num+" "+club.ciudad+" "+club.province
   
   // para armar el calendario, creo un array de 14 fechas a partir de hoy
   const now = new Date();
@@ -136,7 +137,7 @@ const Clubdetail = () => {
           <img src={club.image} alt={club.name} />
           <h1>{club.name}</h1>
           <h4>{club.description}</h4>
-          <h3>{club.location}</h3>
+          <h3>{location}</h3>
 
           {club.latitude && (
             <GoogleMap
