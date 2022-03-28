@@ -27,7 +27,6 @@ const CreateClub = () => {
     setValid(validate(input));
   }, [input]);
 
-
   /* useEffect(()=>{
     const findMatch = (word, cities) => {
       const regex = new RegExp(word, "gi");
@@ -42,7 +41,6 @@ const CreateClub = () => {
     findMatch(input.city, cities);
   }, [input.city]);
  */
-
 
   const [position, setPosition] = useState({});
 
@@ -65,7 +63,7 @@ const CreateClub = () => {
 
       formData.append("data", JSON.stringify(toPost));
       formData.append("image", file);
-
+      console.log("formData: ", formData);
       axios
         .post("/club", formData)
         .then((res) => {
@@ -133,7 +131,6 @@ const CreateClub = () => {
     map.fitBounds(bounds);
   };
 
-  
   return (
     <div className="createClub">
       <form
