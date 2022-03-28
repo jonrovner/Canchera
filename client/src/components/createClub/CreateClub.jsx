@@ -84,18 +84,28 @@ const CreateClub = () => {
   };
 
   const findMap = (e) => {
+    console.log(e)
     e.preventDefault();
 
     if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
-    let queryString = `calle ${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
+    let queryString
+    if (Number(input.street) == input.street ){
+      
+      queryString = `calle ${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
+     
+    } else {
 
+      queryString = `${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
+    }
+    
     axios
       .get(
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
+        
         setInput({
           ...input,
           latitude: res.data[0].lat,
@@ -181,7 +191,7 @@ const CreateClub = () => {
         </div>
         <br />
         <div className="location">
-          <button onClick={findMap}>find map</button>
+          <button onClick={(e) => findMap(e) }>find map</button>
         </div>
         <br />
 
