@@ -158,7 +158,8 @@
   cursor: pointer;
 }
 
-.Navbar .user a p, .Navbar__background .user a p, .Navbar__hidden .user a p {
+.Navbar .user p, .Navbar__background .user p, .Navbar__hidden .user p {
+  color: #dcdaee;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -209,6 +210,32 @@
       -ms-flex-positive: 1;
           flex-grow: 1;
   display: block;
+}
+
+.Navbar__background .user, .Navbar__hidden .user {
+  min-width: 111px;
+  text-align: center;
+}
+
+.Navbar__background .user a, .Navbar__hidden .user a {
+  text-decoration: none;
+  color: #dcdaee;
+  cursor: pointer;
+}
+
+.Navbar__background .user p, .Navbar__hidden .user p {
+  color: #dcdaee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+}
+
+.Navbar__background .user a:hover, .Navbar__hidden .user a:hover {
+  text-decoration: underline;
 }
 
 .Navbar__hidden {

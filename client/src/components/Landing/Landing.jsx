@@ -21,7 +21,7 @@ const Landing = () => {
       <div className={styles.content}>
         <section className={styles.hero}>
           <div className={styles.images}>
-            <img src={hero} alt="" />
+            <img loading="lazy" src={hero} alt="" />
           </div>
           <div className={styles.bgPattern}></div>
           <div className={styles.text}>
@@ -35,7 +35,7 @@ const Landing = () => {
         </section>
         <br />
 
-        <section className={styles.player}>
+        <section loading="lazy" className={styles.player}>
           <div className={styles.text}>
             <h2>
               Un deporte para <span>TODXS</span>.
@@ -51,7 +51,7 @@ const Landing = () => {
 
         <Slider />
 
-        <section className={styles.host}>
+        <section loading="lazy" className={styles.host}>
           <div className={styles.text}>
             <h2>
               <span>Moderniza</span> tu establecimiento.
@@ -68,7 +68,7 @@ const Landing = () => {
       </div>
       <Map />
       <br />
-      <Whatsapp/>
+      <Whatsapp />
       <Footer />
     </div>
   );

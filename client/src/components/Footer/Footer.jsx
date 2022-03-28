@@ -14,6 +14,7 @@ const Footer = () => {
     <div className={styles.Footer}>
       <div className={styles.video}>
         <iframe
+          loading="lazy"
           title="video"
           height="120%"
           src="https://player.vimeo.com/video/291893941?h=b268c1e346&muted=1&autoplay=1&loop=1&transparent=0&background=1&controls=0"
