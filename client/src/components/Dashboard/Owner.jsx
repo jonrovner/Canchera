@@ -133,7 +133,7 @@ function Owner({ id, name, email, rol }) {
                 <ul>
                 {
                 field.Bookings.length && field.Bookings.map(booking => (
-                  <li>{new Date(booking.time).toLocaleString()}</li>
+                  <li>{`${new Date(booking.time).toLocaleString()} usuario: ${booking.User.name} ${(booking.User.name === 'owner') ? '' : `email: ' ${booking.User.email} `}`}</li>
                 ))
 
                 }
