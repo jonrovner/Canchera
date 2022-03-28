@@ -140,10 +140,13 @@
   padding-top: 0px;
 }
 
-.Landing .content .player .text button, .Landing .content .host .text button {
-  color: #140027;
+.Landing .content .player .text a, .Landing .content .host .text a {
   position: absolute;
   bottom: 0;
+}
+
+.Landing .content .player .text a button, .Landing .content .host .text a button {
+  color: #140027;
   font-size: 30px;
   background-color: #dcdaeeb0;
   border: none;
@@ -156,7 +159,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.Landing .content .player .text button:hover, .Landing .content .host .text button:hover {
+.Landing .content .player .text a button:hover, .Landing .content .host .text a button:hover {
   background-color: #00C49A;
   -webkit-transform: scale(105%);
           transform: scale(105%);

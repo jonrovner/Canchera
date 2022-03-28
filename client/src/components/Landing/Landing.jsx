@@ -4,7 +4,7 @@ import Slider from "../Slider/Slider";
 import Footer from "../Footer/Footer";
 import Map from "../Map/Map.jsx";
 import Whatsapp from "../Whatsapp/Whatsapp";
-
+import { Link } from "react-router-dom";
 import hero from "../../assets/hero.png";
 
 const Landing = () => {
@@ -45,7 +45,10 @@ const Landing = () => {
               apoyar a minorias. Lorem ipsum dolor sit amet consectetur
               adipisicing elit. Ipsum magnam min
             </p>
-            <button>Buscar una cancha</button>
+
+            <Link to={"/clubs"}>
+              <button>Buscar una cancha</button>
+            </Link>
           </div>
         </section>
 
@@ -62,7 +65,9 @@ const Landing = () => {
               alcance. Utiliza mejor tu tiempo y lleva un control de las
               reservas y canchas.
             </p>
-            <button>Aplicar como Dueño</button>
+            <Link to={"/clubs"}>
+              <button>Aplicar como Dueño</button>
+            </Link>
           </div>
         </section>
       </div>
