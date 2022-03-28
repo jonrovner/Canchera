@@ -10,7 +10,7 @@ import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
-
+  console.log("clubes: ", clubes);
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
   const [ciudad, setCiudad] = useState("Goya");
@@ -66,7 +66,9 @@ const ListClubs = () => {
               key={i}
               name={c.name}
               img={c.image}
-              location={c.location}
+              location={
+                c.street + " " + c.num + " " + c.ciudad + " " + c.province
+              }
               openHour={c.openHour}
               closeHour={c.closeHour}
               Fields={c.Fields}

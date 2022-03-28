@@ -54,6 +54,7 @@ const Login = () => {
         console.log("users", users);
         if (users.data.user.rol === "owner") return navigate("/dashboard");
         if (users.data.user.rol === "user") return navigate("/clubs");
+        if (users.data.user.rol === "admin") return navigate("/dashboard");
       }
     } else {
       setOpenModalError(true);
@@ -72,6 +73,7 @@ const Login = () => {
       await dispatch(set_user(existe.data));
       if (existe.data.rol === "owner") return navigate("/dashboard");
       if (existe.data.rol === "user") return navigate("/clubs");
+      if (existe.data.rol === "admin") return navigate("/dashboard");
       let formulario = document.getElementById("formul");
       formulario.reset();
     } else {
@@ -82,6 +84,7 @@ const Login = () => {
       console.log("usuario", usuario);
       if (usuario.data.rol === "owner") return navigate("/dashboard");
       if (usuario.data.rol === "user") return navigate("/clubs");
+      if (usuario.data.rol === "admin") return navigate("/dashboard");
     }
   };
 
