@@ -134,7 +134,6 @@ function Owner({ id, name, email, rol }) {
                               : `email: ' ${booking.User.email} `
                           }`}</li>
 
-                          <li>{new Date(booking.time).toLocaleString()}</li>
                         </>
                       ))}
                   </ul>
