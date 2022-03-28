@@ -2,22 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styles from "./Dashboard.module.css";
 
-function User({ id, name, email, rol }) {
+function User({ name }) {
   const user = useSelector((state) => state.user);
-
   let boo = user.Bookings;
   return (
     <div>
       <h1>Bienvenido {name}</h1>
-      {/* <div key={id}>
-                <h1>Datos</h1>
-                <p>Name: {name}</p>
-                <p>Email: {email}</p>
-                <p>Rol: {rol}</p>
-            </div>     */}
       <div>
         <h1>Reservas</h1>
-
         <table id="myTable">
           <tr className={styles.header}>
             <th>Club Name</th>
