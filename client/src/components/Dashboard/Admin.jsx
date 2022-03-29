@@ -3,11 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { delete_user, get_all_user, update_user } from "../../redux/action";
 import { TiDelete } from "react-icons/ti";
 import styles from "./Dashboard.module.css";
+import Modal from "./Modal/Modal";
 
 function Admin({ user }) {
   let dispatch = useDispatch();
   let [data, setData] = useState({
     rol: "",
+  });
+  const [openModal, setOpenModal] = useState({
+    modal: false,
+    name: "",
+    id: "",
   });
 
   useEffect(() => {
@@ -15,11 +21,6 @@ function Admin({ user }) {
   }, [dispatch]);
 
   let allUsers = useSelector((state) => state.allUsers);
-
-  const deleteUser = async (id) => {
-    await dispatch(delete_user(id));
-    window.location.reload();
-  };
 
   const updateUser = async (id) => {
     await dispatch(update_user(id, data));
@@ -53,11 +54,20 @@ function Admin({ user }) {
                 </select>
                 <TiDelete
                   className={styles.delete}
-                  onClick={() => deleteUser(c.id)}
+                  onClick={() =>
+                    setOpenModal({ modal: true, name: c.name, id: c.id })
+                  }
                 />
               </li>
             ))}{" "}
         </ul>
+        {openModal && (
+          <Modal
+            id={openModal.id}
+            name={openModal.name}
+            closeModal={setOpenModal}
+          />
+        )}
       </div>
     </div>
   );
