@@ -1,3 +1,4 @@
+import { filter } from "../../utils/filter";
 import {
   POST_USERS_SIGNIN,
   GET_USERS_EMAIL,
@@ -25,7 +26,6 @@ const initialState = {
   allUsers: [],
   usersConect: [],
   clubDetail: {},
-  clubCopia: [],
 };
 
 function rootReducer(state = initialState, { type, payload }) {
@@ -41,7 +41,6 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         clubes: payload,
-        clubCopia: payload,
       };
     }
 
@@ -89,8 +88,6 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case CLEAR_STATE_USER: {
-      /*   let filtrados = state.usersConect.filter((u) => u.email !== payload); */
-
       return {
         ...state,
         user: [],
@@ -128,11 +125,11 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case LOCATION_FILTER: {
-      const club = state.clubCopia;
-      let meta = club.filter((e) => e.ciudad === payload);
+      let filtered = filter(state.clubes, payload);
+
       return {
         ...state,
-        clubes: payload === "All" ? state.clubCopia : meta,
+        clubes: filtered,
       };
     }
 
