@@ -5,7 +5,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 import styles from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { locationFilter } from "../../redux/action";
+import { locationFilter, get_all_clubes } from "../../redux/action";
 
 const Navbar = () => {
   let navigate = useNavigate();
@@ -45,6 +45,7 @@ const Navbar = () => {
 
     // aca ya esta listo para ir a /clubs y filtrar segun lo pedido.
     console.log(input);
+    await dispatch(get_all_clubes());
     await dispatch(locationFilter(input));
     navigate("/clubs");
   };
