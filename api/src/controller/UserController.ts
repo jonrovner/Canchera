@@ -64,18 +64,31 @@ module.exports = {
   async updateUser(req:Request, res:Response, next:NextFunction){
     
     const { id } = req.params;
-    const { rol } = req.body;
+    const { rol, authorized } = req.body;
 
     try {
 
       const user = await User.findOne({ where:{ id:id } });
       if(!user) return res.status(400).json({ msg :"No se encuentra en nuestra base de datos"});
-    
-      await user.update({
-     ...user,
-       rol:rol
       
-    });
+      if(rol && !authorized) {
+
+        await user.update({
+          ...user,
+          rol        
+        });
+      }else if(authorized && !rol){
+        await user.update({
+          ...user,
+          authorized          
+        });
+      }else {
+        await user.update({
+          ...user,
+          authorized, 
+          rol         
+        });
+      }
 
       return res.status(200).json({ msg:"Usuario modificado con exito" });
       
@@ -107,7 +120,7 @@ module.exports = {
  async getAllUsers(req:Request, res:Response, next:NextFunction){    
   try {
     const user = await User.findAll({
-      attributes:['id','name', 'rol']
+      attributes:['id','name', 'rol', "authorized"]
     });
 
     return res.status(200).json(user)
