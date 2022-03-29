@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import BotonLogout from "../BotonLogout/BotonLogout";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import styles from "./NavBar.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { locationFilter, get_all_clubes } from "../../redux/action";
 
 const Navbar = () => {
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
   let user = useSelector((state) => state.user);
   if (user.name) {
     user.name = user.name.split(" ").shift();
@@ -32,11 +35,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
-  const handleSubmit = (e) => {
+  const onChange = async (e) => {
+    e.preventDefault();
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // aca ya esta listo para ir a /clubs y filtrar segun lo pedido.
     console.log(input);
+    await dispatch(get_all_clubes());
+    await dispatch(locationFilter(input));
+    navigate("/clubs");
   };
 
   return (
@@ -57,7 +68,7 @@ const Navbar = () => {
         <div className={styles.searchBar}>
           <form action="" onSubmit={handleSubmit}>
             <input
-              onChange={(e) => setInput({ ...input, ciudad: e.target.value })}
+              onChange={(e) => onChange(e)}
               className={styles.ciudad}
               name="ciudad"
               type="text"
@@ -65,7 +76,7 @@ const Navbar = () => {
               value={input.ciudad}
             />
             <input
-              onChange={(e) => setInput({ ...input, size: e.target.value })}
+              onChange={(e) => onChange(e)}
               className={styles.size}
               name="size"
               type="number"
@@ -73,7 +84,7 @@ const Navbar = () => {
               value={input.size}
             />
             <input
-              onChange={(e) => setInput({ ...input, clubName: e.target.value })}
+              onChange={(e) => onChange(e)}
               className={styles.clubName}
               name="clubName"
               type="text"

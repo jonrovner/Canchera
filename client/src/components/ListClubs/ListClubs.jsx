@@ -7,6 +7,7 @@ import CardClub from "../CardClub/CardClub";
 import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import Navbar from "../NavBar/NavBar";
 
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
@@ -30,56 +31,65 @@ const ListClubs = () => {
     clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
 
   return (
-    <div className={style.contenedorGral}>
-      <div className={style.orders}>
-        <OrderName />
-        <OrderCiudad />
-      </div>
-
-      <div className={style.contenedorlistClubMap}>
-        <div className={style.contenedor}>
-          {clubes.map((c, i) => (
-            <CardClub
-              key={i}
-              name={c.name}
-              img={c.image}
-              location={
-                c.street + " " + c.num + " " + c.ciudad + " " + c.province
-              }
-              openHour={c.openHour}
-              closeHour={c.closeHour}
-              Fields={c.Fields}
-            />
-          ))}
+    <>
+      <Navbar />
+      <div className={style.contenedorGral}>
+        <div className={style.orders}>
+          <OrderName />
+          <OrderCiudad />
         </div>
-        <GoogleMap
-          //onLoad={handleOnLoad}
-          onClick={() => setActiveMarker(null)}
-          center={{ lat: -32.9632, lng: -61.409 }}
-          zoom={4}
-          mapContainerStyle={{ width: "70vw", height: "100vh" }}
-        >
-          {clubes.map((club, index) => (
-            <Marker
-              key={index}
-              position={positions[index]}
-              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
-              onClick={() => handleActiveMarker(club.name)}
-            >
-              {activeMarker === club.name ? (
-                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                  <div>
-                    '{club.name}'
-                    <br />
-                    {club.location}
-                  </div>
-                </InfoWindow>
-              ) : null}
-            </Marker>
-          ))}
-        </GoogleMap>
+
+        <div className={style.contenedorlistClubMap}>
+          <div className={style.contenedor}>
+            {clubes.length > 0 ? (
+              clubes.map((c, i) => (
+                <CardClub
+                  key={i}
+                  name={c.name}
+                  img={c.image}
+                  location={
+                    c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                  }
+                  openHour={c.openHour}
+                  closeHour={c.closeHour}
+                  Fields={c.Fields}
+                />
+              ))
+            ) : (
+              <p>No se encontraron resultados</p>
+            )}
+          </div>
+          <GoogleMap
+            //onLoad={handleOnLoad}
+            onClick={() => setActiveMarker(null)}
+            center={{ lat: -32.9632, lng: -61.409 }}
+            zoom={4}
+            mapContainerStyle={{ width: "70vw", height: "100vh" }}
+          >
+            {clubes.map((club, index) => (
+              <Marker
+                key={index}
+                position={positions[index]}
+                icon={{
+                  url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
+                }}
+                onClick={() => handleActiveMarker(club.name)}
+              >
+                {activeMarker === club.name ? (
+                  <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                    <div>
+                      '{club.name}'
+                      <br />
+                      {club.location}
+                    </div>
+                  </InfoWindow>
+                ) : null}
+              </Marker>
+            ))}
+          </GoogleMap>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

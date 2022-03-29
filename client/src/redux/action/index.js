@@ -142,6 +142,7 @@ export const passForgotten = (email) => async (dispatch) => {
     console.log(error);
   }
 };
+
 /* export const getPass = (token) => async (dispatch) => {
   try {
     let newPass = await axios.get(`/resetpassword/${token}`);
@@ -160,6 +161,6 @@ export const resetPass = (password) => async (dispatch) => {
   }
 };
 
-export const locationFilter = (e) => {
-  return { type: LOCATION_FILTER, payload: e };
+export const locationFilter = (filter) => async (dispatch) => {
+  return dispatch({ type: LOCATION_FILTER, payload: filter });
 };
