@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { passForgotten } from "../../../redux/action";
 import { Validate } from "../../../utils/Validaciones/validateEmail";
 import style from "./ValidateEmail.module.scss";
+import Modal from "./Modal/Modal";
 import { MdEmail } from "react-icons/md";
 
 const ValidateEmail = () => {
@@ -11,6 +12,7 @@ const ValidateEmail = () => {
   const [data, setData] = useState({
     email: "",
   });
+  const [openModal, setOpenModal] = useState(false);
 
   const handleOnChange = (e) => {
     setData({
@@ -24,6 +26,7 @@ const ValidateEmail = () => {
     e.preventDefault();
     if (data.email) {
       dispatch(passForgotten(data));
+      setOpenModal(true);
     }
   };
 
@@ -66,6 +69,7 @@ const ValidateEmail = () => {
           className={style.boton}
         />
       </form>
+      {openModal && <Modal closeModal={setOpenModal} />}
     </div>
   );
 };
