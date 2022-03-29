@@ -107,7 +107,7 @@ module.exports = {
  async getAllUsers(req:Request, res:Response, next:NextFunction){    
   try {
     const user = await User.findAll({
-      attributes:['id','name', 'rol']
+      attributes:['id','name', 'rol', "authorized"]
     });
 
     return res.status(200).json(user)
