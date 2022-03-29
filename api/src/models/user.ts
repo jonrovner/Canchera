@@ -9,6 +9,7 @@ interface UserAttributes {
   rol: string;
   status: boolean;
   resetPassword:string;
+  authorized: boolean;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -26,6 +27,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     rol!: string;
     status!: boolean;
     resetPassword!: string;
+    authorized!: boolean;
     static associate(models: any) {
       // define association here   
        User.hasOne(models.Club);
@@ -74,6 +76,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     resetPassword:{
       type:DataTypes.STRING
+    },
+    authorized:{
+      type: DataTypes.BOOLEAN,
+      defaultValue:false      
     }
    
   }, {
