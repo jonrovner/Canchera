@@ -94,11 +94,16 @@ const sendEmailBooking = async (email, subject, html) => {
   }
 };
 
-const getTemplateBooking = (name) => {
+const getTemplateBooking = (name, times, club) => {
+  
   return `
-  <div>
-    <h1>${name} realizaste una reserva</h1>
-    <p>Tu reserva fue realizada  con exito </p>
+  <div style="font-weight:bold">
+    <h1>${name} realizaste una reserva!!</h1>
+    <hr>
+    <h3 style="font-size:24px><span style="color:"blue"">${club} </span> te espera</h3>
+    <img src="http://canchera.herokuapp.com/images/club-default.jpg" style="border:"3px solid blue"; width="45%">
+    <p style="font-size:24px; font-weight:bold">Tu reserva  ${times}</p>
+    
   </div>
   
   `;
