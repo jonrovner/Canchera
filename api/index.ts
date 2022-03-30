@@ -71,7 +71,7 @@ async function dataDB() {
 
 // Syncing all the models at once.
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   dataDB();
 
   server.listen(process.env.PORT, () => {
