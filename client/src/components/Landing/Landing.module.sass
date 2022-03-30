@@ -1,3 +1,5 @@
+@import '../CSScommons/commons'
+
 .Landing
     width: 100%
     display: flex
@@ -15,7 +17,7 @@
             padding: 40px
             margin-block: 40px
         .hero
-            color: #d0cbff
+            color: $color-text
             min-height: 80vh
             gap: 30px
             position: relative
@@ -23,7 +25,6 @@
                 width: 70%
                 position: relative
                 h1
-                    color: #dcdaee
                     font-size: 70px
                     font-weight: 700
                     line-height: 1.1
@@ -31,13 +32,13 @@
                 p
                     font-size: 23px
                     span
-                        color: #00C49A
+                        color: $color-detail
                         font-family: 'Pattaya', sans-serif
             .bgPattern
                 position: absolute
                 width: 300px
                 height: 500px
-                background-image: radial-gradient(#00C49A 2px, transparent 2px)
+                background-image: radial-gradient($color-detail 2px, transparent 2px)
                 background-size: 32px 32px
                 background-color: transparent
                 top: 100px
@@ -45,24 +46,24 @@
             .images
                 width: 40%
                 height: 90%
-                background-image: linear-gradient(to bottom, #00C49A, #ffffff00)
+                background-image: linear-gradient(to bottom, $color-detail, #ffffff00)
                 border-radius: 500px 500px 0px 0px
                 padding: 30px
                 img
                     width: 100%
         .player, .host
-            color: #140027
+            color: $color-header
             width: 100%
             padding: 0px
             overflow: hidden
             min-height: 630px
             position: relative
-            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
             background-image: url('../../assets/9.jpg')
             background-size: 120%
             text-align: left
-            border-radius: 5px
             margin-block: 80px
+            @include Sombra
+            @include BordeRadio
             .text
                 position: absolute
                 left: 100px
@@ -79,7 +80,7 @@
                     -webkit-backdrop-filter: blur(4px)
                     backdrop-filter: blur(4px)
                     span
-                        color: #00C49A
+                        color: $color-detail
                 p
                     width: 500px
                     font-size: 24px
@@ -92,29 +93,14 @@
                     position: absolute
                     bottom: 0
                     button
-                        color: #140027
-                        font-size: 30px
-                        background-color: #dcdaeeb0
-                        border: none
-                        font-family: "Open Sans", sans-serif
-                        font-weight: 300
-                        padding: 10px
-                        border-radius: 5px
-                        cursor: pointer
-                        transition: all 0.3s ease-in-out
+                        @include botonLanding
                     button:hover
                         color:
-                        background-color: #00C49A
+                        background-color: $color-detail
                         transform: scale(105%)
-                        box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
+                        @include Sombra
         .player::after, .host::after
-            width: 1040px
-            height: 93%
-            content: ''
-            position: absolute
-            left: 30px
-            border: 20px solid #dcdaeeb0
-            box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
+            @include marcoInterno
         .host
             background-image: url('../../assets/13.jpg')
             text-align: right
@@ -131,5 +117,5 @@
                     margin: 0px
                 p
                     span
-                        color: #00C49A
+                        color: $color-detail
                         font-family: 'Pattaya', sans-serif
