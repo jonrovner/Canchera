@@ -1,6 +1,6 @@
 import { timeStamp } from "console";
 import { Request, Response, NextFunction } from "express";
-const { Field, Booking, User } = require('../db.ts');
+const { Field, Booking, User, Club } = require('../db.ts');
 const { sendEmailBooking, getTemplateBooking } = require('../config/email');
 
 
@@ -30,8 +30,23 @@ async postBooking(req:Request, res:Response, next:NextFunction){
         });
         bookings.push(newBooking);
       };
+      const [booking] = [...bookings];
+      const field = await Field.findOne({ where:{ id:booking.FieldId } })
+      const club = await Club.findOne({ where:{ name:field.ClubName } })
+     
       
-      const templateBooking = getTemplateBooking(user.name);
+      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre']
+      let times = bookings.map((booking:any) => {
+       let date = new Date(booking.time);
+       let hora = date.getHours();
+       var dia = date.getDay();
+       let mes = meses[date.getMonth()];
+        
+       return `es el dia ${dia} de ${mes}: a las ${hora}hs ⚽⚽ `;
+         
+      } );
+      
+      const templateBooking = getTemplateBooking(user.name, times, club.name, club.image );
       await sendEmailBooking(user.email, "Reserva realizada", templateBooking);
       
 
