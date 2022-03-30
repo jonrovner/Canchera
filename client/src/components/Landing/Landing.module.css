@@ -39,7 +39,7 @@
 }
 
 .Landing .content .hero {
-  color: #d0cbff;
+  color: #dcdaee;
   min-height: 80vh;
   gap: 30px;
   position: relative;
@@ -51,7 +51,6 @@
 }
 
 .Landing .content .hero .text h1 {
-  color: #dcdaee;
   font-size: 70px;
   font-weight: 700;
   line-height: 1.1;
@@ -98,13 +97,13 @@
   overflow: hidden;
   min-height: 630px;
   position: relative;
-  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
-          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
   background-image: url("../../assets/9.jpg");
   background-size: 120%;
   text-align: left;
-  border-radius: 5px;
   margin-block: 80px;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .Landing .content .player .text, .Landing .content .host .text {
@@ -153,10 +152,10 @@
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   padding: 10px;
-  border-radius: 5px;
   cursor: pointer;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  border-radius: 5px;
 }
 
 .Landing .content .player .text a button:hover, .Landing .content .host .text a button:hover {
