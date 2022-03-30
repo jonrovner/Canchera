@@ -1,0 +1,31 @@
+$color-text: #dcdaee
+$color-detail: #00C49A
+$color-header: #140027
+$color-bordeInterno: #dcdaeeb0
+
+@mixin Sombra
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2)
+
+@mixin BordeRadio
+    border-radius: 5px
+
+@mixin botonLanding
+    color: $color-header
+    font-size: 30px
+    background-color: #dcdaeeb0
+    border: none
+    font-family: "Open Sans", sans-serif
+    font-weight: 300
+    padding: 10px
+    cursor: pointer
+    transition: all 0.3s ease-in-out
+    @include BordeRadio
+
+@mixin marcoInterno($color: $color-bordeInterno)
+    width: 1040px
+    height: 93%
+    content: ''
+    position: absolute
+    left: 30px
+    border: 20px solid $color
+    @include Sombra
