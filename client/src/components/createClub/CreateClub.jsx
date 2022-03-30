@@ -3,10 +3,10 @@ import FieldForm from "./FieldForm";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import axios from "axios";
-//import "./createClub.css";
 import { validate } from "./validation";
 import { useNavigate } from "react-router";
 import { cities } from "./ar.js";
+import styles from "./createClub.module.css";
 
 const CreateClub = () => {
   const navigate = useNavigate();
@@ -148,32 +148,35 @@ const CreateClub = () => {
   };
 
   return (
-    <div className="createClub">
+    <div className={styles.CreateClub}>
+      
+        <div className={styles.title}>
+          <h1>Complete los datos de su establecimiento</h1>
+          {valid.all && showValid && <p className={styles.validation}>{valid.all}</p>}
+        </div>
+      
       <form
+        className={styles.createForm}
         action="/club"
         encType="multipart/form-data"
         method="post"
         onSubmit={handleSubmit}
       >
-        <div className="title">
-          <h1>Complete los datos de su establecimiento</h1>
-          {valid.all && showValid && <p className="validation">{valid.all}</p>}
-        </div>
-        <div className="clubName">
-          <label htmlFor="name">Nombre</label>
+        <div className={styles.clubName}>
+          <label className={styles.inputLabel} htmlFor="name">Nombre</label>
           <input onChange={handleInput} type="text" name="name" />
-          {valid.name && <p className="validation">{valid.name}</p>}
+          {valid.name && <p className={styles.validation}>{valid.name}</p>}
         </div>
         <br />
-        <div className="description">
+        <div className={styles.description}>
           <label htmlFor="descritption">Description</label>
           <input onChange={handleInput} type="text" name="description" />
           {valid.description && showValid && (
-            <p className="validation">{valid.description}</p>
+            <p className={styles.validation}>{valid.description}</p>
           )}
         </div>
         <br />
-        <div className="address">
+        <div className={styles.address}>
           <label htmlFor="ciudad">Ciudad</label>
           <input type="text" name="ciudad" onChange={handleInput} list="cityname"/>
           <datalist id="cityname">
@@ -199,7 +202,7 @@ const CreateClub = () => {
           <input type="text" name="province" onChange={handleInput} />
         </div>
         <br />
-        <div className="location">
+        <div className={styles.location}>
           <button onClick={(e) => findMap(e) }>find map</button>
         </div>
         <br />
@@ -218,7 +221,7 @@ const CreateClub = () => {
           </GoogleMap>
         )}
 
-        <div className="openHours">
+        <div className={styles.openHours}>
           <label htmlFor="openHour">horario apertura</label>
           <select onChange={(e) => handleInput(e)} type="text" name="openHour">
             <option value="5">5am</option>
@@ -247,7 +250,7 @@ const CreateClub = () => {
           </select>
         </div>
         <br />
-        <div className="imageInput">
+        <div className={styles.imageInput}>
           <label htmlFor="image">suba una imagen</label>
           <input
             name="image"
@@ -257,10 +260,10 @@ const CreateClub = () => {
           ></input>
         </div>
         <br />
-        <div className="fields">
+        <div className={styles.fields}>
           {input.fields &&
             input.fields.map((field, i) => (
-              <div className="field" key={i}>
+              <div className={styles.field} key={i}>
                 <h3>cancha {i + 1}</h3>
                 <p>tamaño: {field.players}</p>
                 <p>precio: {field.price}</p>
@@ -268,10 +271,10 @@ const CreateClub = () => {
             ))}
         </div>
         <br />
-        <div className="fieldInput">
+        <div className={styles.fieldInput}>
           <h4>agregue sus canchas</h4>
           {valid.fields && showValid && (
-            <p className="validation">{valid.fields}</p>
+            <p className={styles.validation}>{valid.fields}</p>
           )}
           <FieldForm handleInput={fieldInput} />
         </div>
