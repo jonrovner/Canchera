@@ -61,7 +61,7 @@ function Admin({ user }) {
               </li>
             ))}{" "}
         </ul>
-        {openModal && (
+        {openModal.modal && (
           <Modal
             id={openModal.id}
             name={openModal.name}
