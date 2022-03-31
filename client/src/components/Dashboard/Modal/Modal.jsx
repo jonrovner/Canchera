@@ -7,7 +7,6 @@ const Modal = ({ id, name, closeModal }) => {
   let dispatch = useDispatch();
   const handlerConfirm = async () => {
     await dispatch(delete_user(id));
-    alert(`${name} eliminado.`);
     window.location.reload();
   };
   return (

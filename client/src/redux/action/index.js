@@ -17,6 +17,7 @@ export const LOCATION_FILTER = "LOCATION_FILTER";
 export const GET_ALL_USER = "GET_ALL_USER";
 export const DELETE_USER = "DELETE_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const INVITACION = "INVITACION";
 
 export const get_club_detail = (clubName) => async (dispatch) => {
   try {
@@ -163,4 +164,13 @@ export const resetPass = (password) => async (dispatch) => {
 
 export const locationFilter = (filter) => async (dispatch) => {
   return dispatch({ type: LOCATION_FILTER, payload: filter });
+};
+
+export const invitacion = (id, data) => async () => {
+  console.log("Data enviada:", data);
+  try {
+    await axios.post(`/booking/sendEmial/${id}`, data);
+  } catch (e) {
+    console.log(e);
+  }
 };
