@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import FieldForm from "./FieldForm";
-//import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useSelector } from "react-redux";
 import axios from "axios";
 //import "./createClub.css";
 import { validate } from "./validation";
 import { useNavigate } from "react-router";
-//import { cities } from "./ar.js";
+import { cities } from "./ar.js";
 
 const CreateClub = () => {
   const navigate = useNavigate();
@@ -20,27 +19,39 @@ const CreateClub = () => {
     closeHour: "18",
   });
   const [file, setFile] = useState(null);
-
-  //const [filterCities, setFilterCities] = useState([]);
+  const [filterCities, setFilterCities] = useState([]);
+  const [showCities, setShowCities] = useState(false)
 
   useEffect(() => {
     setValid(validate(input));
   }, [input]);
 
-  /* useEffect(()=>{
+  useEffect(()=>{
+    if (input.ciudad && input.ciudad.length > 0){
+      setShowCities(true)
+    }
+    if (!input.ciudad || input.ciudad.length < 1 ){
+      setShowCities(false)
+    }
+  },[input.ciudad])
+
+   useEffect(()=>{
     const findMatch = (word, cities) => {
       const regex = new RegExp(word, "gi");
 
-
       setFilterCities(
         cities.filter((place) => {
-          return place.city.match(regex) || place.admin_name.match(regex);
+          return place.city.match(regex);
         })
       );
     };
-    findMatch(input.city, cities);
-  }, [input.city]);
- */
+    if (input.ciudad && input.ciudad.length){
+
+      findMatch(input.ciudad, cities);
+    }
+  }, [input.ciudad]);
+ 
+  console.log('filer cities', filterCities)
 
   const [position, setPosition] = useState({});
 
@@ -164,21 +175,19 @@ const CreateClub = () => {
         <br />
         <div className="address">
           <label htmlFor="ciudad">Ciudad</label>
-          <select
-            defaultValue={"null"}
-            type="text"
-            name="ciudad"
-            onChange={handleInput}
-          >
-            <option value="null" disabled>
-              Elegir ciudad
-            </option>
-            <option value="Mercedes">Mercedes</option>
-            <option value="Goya">Goya</option>
-            <option value="Tucumán">Tucumán</option>
-            <option value="Corrientes">Corrientes</option>
-            <option value="La Rioja">La Rioja</option>
-          </select>
+          <input type="text" name="ciudad" onChange={handleInput} list="cityname"/>
+          <datalist id="cityname">
+            {
+              filterCities.length && showCities &&
+                filterCities.slice(0,10).map( city => (
+                  <option value={city.city} />
+                    
+                ))
+              
+            }
+          </datalist>
+
+          
 
           <label htmlFor="street">Calle</label>
           <input type="text" name="street" onChange={handleInput} />
