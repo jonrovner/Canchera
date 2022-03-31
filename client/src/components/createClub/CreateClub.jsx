@@ -9,7 +9,7 @@ import { cities, provinces } from "./ar.js";
 import styles from "./createClub.module.css";
 
 const CreateClub = () => {
-  console.log('prov', provinces)
+  console.log("prov", provinces);
   const navigate = useNavigate();
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
@@ -21,22 +21,22 @@ const CreateClub = () => {
   });
   const [file, setFile] = useState(null);
   const [filterCities, setFilterCities] = useState([]);
-  const [showCities, setShowCities] = useState(false)
+  const [showCities, setShowCities] = useState(false);
 
   useEffect(() => {
     setValid(validate(input));
   }, [input]);
 
-  useEffect(()=>{
-    if (input.ciudad && input.ciudad.length > 0){
-      setShowCities(true)
+  useEffect(() => {
+    if (input.ciudad && input.ciudad.length > 0) {
+      setShowCities(true);
     }
-    if (!input.ciudad || input.ciudad.length < 1 ){
-      setShowCities(false)
+    if (!input.ciudad || input.ciudad.length < 1) {
+      setShowCities(false);
     }
-  },[input.ciudad])
+  }, [input.ciudad]);
 
-   useEffect(()=>{
+  useEffect(() => {
     const findMatch = (word, cities) => {
       const regex = new RegExp(word, "gi");
 
@@ -46,13 +46,14 @@ const CreateClub = () => {
         })
       );
     };
-    if (input.ciudad && input.ciudad.length){
-
+    if (input.ciudad && input.ciudad.length) {
       findMatch(input.ciudad, cities);
     }
   }, [input.ciudad]);
- 
+
   const [position, setPosition] = useState({});
+  const defaultPos = { lat: -32.9632, lng: -61.409 };
+  const [zoom, setZoom] = useState(4);
 
   const user = useSelector((state) => state.user);
 
@@ -93,25 +94,22 @@ const CreateClub = () => {
     setInput({ ...input, fields: [...input.fields, field] });
   };
 
-  const findMap = (e) => {  
-
+  const findMap = (e) => {
     if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
-    let queryString
-    if (Number(input.street) == input.street ){
+    let queryString;
+    if (Number(input.street) == input.street) {
       queryString = `calle ${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
-
     } else {
       queryString = `${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
     }
-    
+
     axios
       .get(
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
-        
         setInput({
           ...input,
           latitude: res.data[0].lat,
@@ -121,6 +119,7 @@ const CreateClub = () => {
           return setValid({ ...valid, map: "ingrese una dirección válida" });
         }
 
+        setZoom(13);
         setPosition({
           lat: Number(res.data[0].lat),
           lng: Number(res.data[0].lon),
@@ -143,12 +142,13 @@ const CreateClub = () => {
 
   return (
     <div className={styles.CreateClub}>
-      
-        <div className={styles.title}>
-          <h1>Complete los datos de su establecimiento</h1>
-          {valid.all && showValid && <p className={styles.validation}>{valid.all}</p>}
-        </div>
-      
+      <div className={styles.title}>
+        <h1>Complete los datos de su establecimiento</h1>
+        {valid.all && showValid && (
+          <p className={styles.validation}>{valid.all}</p>
+        )}
+      </div>
+
       <form
         className={styles.createForm}
         action="/club"
@@ -157,14 +157,22 @@ const CreateClub = () => {
         onSubmit={handleSubmit}
       >
         <div className={styles.clubName}>
-          <label className={styles.inputLabel} htmlFor="name">Nombre</label>
+          <label className={styles.inputLabel} htmlFor="name">
+            Nombre
+          </label>
           <input onChange={handleInput} type="text" name="name" />
           {valid.name && <p className={styles.validation}>{valid.name}</p>}
         </div>
         <br />
         <div className={styles.description}>
           <label htmlFor="descritption">Description</label>
-          <input onChange={handleInput} type="text" name="description" />
+          <textarea
+            onChange={handleInput}
+            name="description"
+            cols="30"
+            rows="3"
+          ></textarea>
+          {/* <input onChange={handleInput} type="text" name="description" /> */}
           {valid.description && showValid && (
             <p className={styles.validation}>{valid.description}</p>
           )}
@@ -172,16 +180,19 @@ const CreateClub = () => {
         <br />
         <div className={styles.address}>
           <label htmlFor="ciudad">Ciudad</label>
-          <input type="text" name="ciudad" onChange={handleInput} list="cityname"/>
-            <datalist id="cityname">
-              {
-                filterCities.length && showCities &&
-                filterCities.slice(0,10)
-                  .map( city => (
-                    <option value={city.city} />                      
-                  ))                
-              }
-            </datalist>
+          <input
+            type="text"
+            name="ciudad"
+            onChange={handleInput}
+            list="cityname"
+          />
+          <datalist id="cityname">
+            {filterCities.length &&
+              showCities &&
+              filterCities
+                .slice(0, 10)
+                .map((city) => <option value={city.city} />)}
+          </datalist>
 
           <label htmlFor="street">Calle</label>
           <input type="text" name="street" onChange={handleInput} />
@@ -190,32 +201,32 @@ const CreateClub = () => {
           <input type="text" name="num" onChange={handleInput} />
 
           <label htmlFor="province">Provincia</label>
-          <input type="text" name="province" onChange={handleInput} list="provinceList"/>
+          <input
+            type="text"
+            name="province"
+            onChange={handleInput}
+            list="provinceList"
+          />
           <datalist id="provinceList">
-              {
-                provinces && provinces
-                  .map( p => (
-                    <option value={p} />                      
-                  ))                
-              }
-            </datalist>
+            {provinces && provinces.map((p) => <option value={p} />)}
+          </datalist>
         </div>
         <br />
         <div className={styles.location}>
-          <button onClick={(e) => findMap(e) }>find map</button>
+          <button onClick={(e) => findMap(e)}>find map</button>
         </div>
         <br />
 
-        {position.lat && (
+        {defaultPos.lat && (
           <GoogleMap
-            onLoad={handleOnLoad}
-            center={position}
-            zoom={7}
+            //onLoad={handleOnLoad}
+            center={position.lat ? position : defaultPos}
+            zoom={zoom}
             mapContainerStyle={{ width: "50vw", height: "40vh" }}
           >
             <Marker
               position={position}
-              icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
             ></Marker>
           </GoogleMap>
         )}
