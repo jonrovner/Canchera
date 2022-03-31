@@ -17,6 +17,7 @@ function User({ id, name }) {
     window.location.reload();
   };
 
+  console.log("open: ", openModal);
   return (
     <div>
       <h1>Bienvenido {name}</h1>
@@ -59,7 +60,7 @@ function User({ id, name }) {
               </tr>
             ))}
         </table>
-        {openModal && (
+        {openModal.modal && (
           <Modal
             id={openModal.id}
             name={openModal.name}

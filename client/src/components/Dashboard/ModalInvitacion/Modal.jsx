@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { delete_user } from "../../../redux/action";
+import { delete_user, invitacion } from "../../../redux/action";
 import style from "./Modal.module.scss";
 
 const Modal = ({ id, name, closeModal }) => {
   let dispatch = useDispatch();
   const [input, setInput] = useState("");
-  const [friends, setFriends] = useState([]); //['nico@gmail.com', 'eze@gmail.com' ]
+  const [friends, setFriends] = useState({
+    emails: [],
+  }); /*{
+          emails: ['nico@gmail.com', 'eze@gmail.com']
+        }*/
 
   const handlerConfirm = async () => {
-    //await dispatch(delete_user(id));
-    //dispatch(postInvitacion(friends))
-    alert(`datos de ${name} ${id} ${friends} enviados.`);
+    dispatch(invitacion(id, friends));
     closeModal(false);
   };
 
-  const handlerFriends = (e) => {
-    setFriends([...friends, input]);
+  const handlerFriends = () => {
+    setFriends({ emails: [...friends.emails, input] });
     document.getElementById("friends").value = "";
   };
 
@@ -46,7 +48,7 @@ const Modal = ({ id, name, closeModal }) => {
             Agregar amigo
           </button>
           <ul>
-            {friends?.map((f) => (
+            {friends.emails?.map((f) => (
               <li>{f}</li>
             ))}
           </ul>
