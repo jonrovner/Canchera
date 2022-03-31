@@ -4,7 +4,6 @@ export const validate = (input) => {
   if (
     !input.name ||
     !input.description ||
-    !input.location ||
     !input.openHour ||
     !input.closeHour ||
     !input.latitude ||
@@ -17,10 +16,7 @@ export const validate = (input) => {
   }
   if (input.description && input.description.length < 10) {
     valid.description = "intente una descripción más completa";
-  }
-  if (input.location && typeof input.location !== "string") {
-    valid.location = "ingrese una dirección valida";
-  }
+  }  
   if (input.fields && input.fields.length < 1) {
     valid.fields = "debe ingresar al menos una cancha";
   } else {
