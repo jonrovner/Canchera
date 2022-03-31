@@ -1,7 +1,9 @@
 import { timeStamp } from "console";
 import { Request, Response, NextFunction } from "express";
+import { DATE, Op } from "sequelize";
 const { Field, Booking, User, Club } = require('../db.ts');
-const { sendEmailBooking, getTemplateBooking } = require('../config/email');
+const { sendEmailBooking, getTemplateBooking, sendEmailInvitation, getTemplateInvitation } = require('../config/email');
+const mercadopago = require("mercadopago");
 
 
 module.exports = {
@@ -35,18 +37,21 @@ async postBooking(req:Request, res:Response, next:NextFunction){
       const club = await Club.findOne({ where:{ name:field.ClubName } })
      
       
-      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre']
+      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre'];
+
       let times = bookings.map((booking:any) => {
        let date = new Date(booking.time);
        let hora = date.getHours();
-       var dia = date.getDay();
+       let dia = date.getDate();
        let mes = meses[date.getMonth()];
-        
-       return `es el dia ${dia} de ${mes}: a las ${hora}hs ⚽⚽ `;
+       return ` Dia ${dia} de ${mes}: a las ${hora}hs ⚽⚽`;
          
-      } );
+      }); 
+
       
-      const templateBooking = getTemplateBooking(user.name, times, club.name, club.image );
+     
+      const templateBooking = getTemplateBooking(user.name, "<ul style='font-size:24px'; 'font-weight:bold'><li>"+times.join("</li><li>")+"</li></ul>", club.name );
+   
       await sendEmailBooking(user.email, "Reserva realizada", templateBooking);
       
 
@@ -98,6 +103,48 @@ async getBookings(req:Request, res:Response, next:NextFunction){
 
   },
 
+  async bookingInvitation( req:Request, res:Response, next:NextFunction ){
+     
+    const { emails } = req.body;
+    const { id } = req.params; 
+    try {
+      
+      const user = await User.findOne({ where:{ id:id } })
+      const bookings = await Booking.findAll({ where:{ UserId:id }});
+      console.log(bookings);
+      
+      const [booking] = [...bookings];
+      
+      const field = await Field.findOne( {where:{id:booking.FieldId }});
+      const club = await Club.findOne({ where:{ name:field.ClubName } });
+
+      
+      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre']
+      
+      let times = bookings.map((booking:any) =>{
+        let date = new Date(booking.time);
+       let hora = date.getHours();
+       var dia = date.getDate();
+       let mes = meses[date.getMonth()];
+        
+       return `Dia ${dia} de ${mes}: a las ${hora}hs ⚽⚽`;
+      }); 
+      
+      
+      await emails.forEach((email:any) => {
+       
+      let template = getTemplateInvitation(user.name, "<ul style='font-size:24px'; 'font-weight:bold'><li>"+times.join("</li><li>")+"</li></ul>", club.name );
+        sendEmailInvitation(email, "Invitacion de Juego", template);
+        
+      });
+      
+      return res.status(200).json({ msg:"invitaciones enviadas" });
+
+    } catch (error) {
+      next(error);
+    }
+
+  }
 
 }
 

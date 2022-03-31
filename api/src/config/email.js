@@ -102,7 +102,34 @@ const getTemplateBooking = (name, times, club) => {
     <hr>
     <h3 style="font-size:24px><span style="color:"blue"">${club} </span> te espera</h3>
     <img src="http://canchera.herokuapp.com/images/club-default.jpg" style="border:"3px solid blue"; width="45%">
-    <p style="font-size:24px; font-weight:bold">Tu reserva  ${times}</p>
+    <p style="font-size:24px; font-weight:bold">Tu reserva ${times}</p> 
+  </div>
+  
+  `;
+};
+
+const sendEmailInvitation = async (email, subject, html) => {
+  try {
+    await transporter.sendMail({
+      from: `Canchera <${email.user}>`, // sender address
+      to: email, // list of receivers
+      subject, // Subject line
+      text: "Gracias por seguir confiando en Canchera", // plain text body
+      html,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getTemplateInvitation = (name, times, club) => {
+  
+  return `
+  <div style="font-weight:bold">
+    <h1>${name} te invito a jugar en el Club ${club} !!</h1>
+    <hr>
+    <img src="http://canchera.herokuapp.com/images/club-default.jpg" style="border:"3px solid blue"; width="45%">
+    <p style="font-size:24px; font-weight:bold">Reservas:${times} </p>
     
   </div>
   
@@ -116,4 +143,6 @@ module.exports = {
   getTemplatePassword,
   sendEmailBooking,
   getTemplateBooking,
+  sendEmailInvitation,
+  getTemplateInvitation
 };
