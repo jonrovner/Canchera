@@ -13,11 +13,16 @@ function User({ id, name }) {
     id: "",
   });
 
+  const refresh = () => {
+    window.location.reload();
+  };
+
   return (
     <div>
       <h1>Bienvenido {name}</h1>
       <div>
         <h1>Reservas</h1>
+        <button onClick={() => refresh()}>Refresh</button>
         <table id="myTable">
           <tr className={styles.header}>
             <th>Club Name</th>
@@ -32,7 +37,13 @@ function User({ id, name }) {
             boo.map((b) => (
               <tr>
                 <td>{b.Field.ClubName}</td>
-                <td>{b.Field.Club.location}</td>
+                <td>
+                  {b.Field.Club.street +
+                    " " +
+                    b.Field.Club.num +
+                    ", " +
+                    b.Field.Club.ciudad}
+                </td>
                 <td>{b.time}</td>
                 <td>{b.Field.price}</td>
                 <td>{b.Field.surface}</td>
@@ -47,14 +58,14 @@ function User({ id, name }) {
                 </td>
               </tr>
             ))}
-          {openModal && (
-            <Modal
-              id={openModal.id}
-              name={openModal.name}
-              closeModal={setOpenModal}
-            />
-          )}
         </table>
+        {openModal && (
+          <Modal
+            id={openModal.id}
+            name={openModal.name}
+            closeModal={setOpenModal}
+          />
+        )}
       </div>
     </div>
   );
