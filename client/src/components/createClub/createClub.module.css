@@ -3,24 +3,23 @@
     height: 100vh;
     padding-top: 3rem;
     
-    
-    
 }
-.createClub form{
-    margin: 2rem;
+
+Form{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
 }
-.title{
+
+.title {
     margin-bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 
 .imageInput input{
     padding-left: 2rem;
@@ -39,6 +38,7 @@
 .fields{
     width: 80%;
 }
+
 .field{
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -49,10 +49,12 @@
     background-color: #dcdaee;
     border-radius: 50px;
 }
+
 label{
     color: #d0cbff;
     margin-right: 1rem;
 }
+
 #map{
     height: 200px;
 }
@@ -62,9 +64,8 @@ label{
     justify-content: center;
     align-items: center;
 }
-.fieldInput{
+.fieldInput{  
    
-    font-weight: bold;
     margin-bottom: 1rem;
 }
 .fieldInput h4{
@@ -81,17 +82,18 @@ label{
     margin-bottom: 1rem;
     
 }
-input {
+ input {
     border-radius: 50px;
     background-color: #dcdaee;
     height: 2rem;
     border:none;
 }
-h1{
+ h1{
+     padding-top: 2rem;
    color: #dcdaee;
     margin-bottom: 1rem;
 }
-button{
+.createClub button{
     margin-left: 1rem;
     border-radius: 50px;
     background-color: #dcdaee;
@@ -99,7 +101,7 @@ button{
     border:none;
 
 }
-select{
+.createClub select{
     margin-left: 1rem;
     border-radius: 50px;
     background-color: #dcdaee;
