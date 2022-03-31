@@ -226,7 +226,7 @@ const CreateClub = () => {
           >
             <Marker
               position={position}
-              icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
             ></Marker>
           </GoogleMap>
         )}
