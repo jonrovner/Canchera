@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { delete_user, invitacion } from "../../../redux/action";
+import { Validate } from "../../../utils/Validaciones/validateEmail";
 import style from "./Modal.module.scss";
 
 const Modal = ({ id, name, closeModal }) => {
   let dispatch = useDispatch();
+  const [error, setError] = useState({});
   const [input, setInput] = useState("");
   const [friends, setFriends] = useState({
     emails: [],
@@ -13,19 +15,31 @@ const Modal = ({ id, name, closeModal }) => {
         }*/
 
   const handlerConfirm = async () => {
-    dispatch(invitacion(id, friends));
-    closeModal(false);
+    if (friends.emails.length > 0) {
+      dispatch(invitacion(id, friends));
+      closeModal(false);
+    }
   };
 
   const handlerFriends = () => {
-    setFriends({ emails: [...friends.emails, input] });
-    document.getElementById("friends").value = "";
+    if (input.length > 0) {
+      setFriends({ emails: [...friends.emails, input] });
+      document.getElementById("friends").value = "";
+    }
   };
 
   const handlerInputChange = (e) => {
     setInput(e.target.value);
+    setError(Validate({ [e.target.name]: e.target.value }));
   };
 
+  const disabeledSubmit = useMemo(() => {
+    if (error.email) {
+      return true;
+    }
+
+    return false;
+  }, [error]);
   return (
     <div className={style.modalBackground}>
       <div className={style.modalContainer}>
@@ -35,12 +49,15 @@ const Modal = ({ id, name, closeModal }) => {
           <input
             type="text"
             id="friends"
+            name="email"
             onChange={(e) => {
               handlerInputChange(e);
             }}
             placeholder="amigoinvitado@gmail.com"
           />
+          {error.email && <p>{error.email}</p>}
           <button
+            disabled={disabeledSubmit}
             onClick={(e) => {
               handlerFriends(e);
             }}
