@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { validate } from "./validation";
 import { useNavigate } from "react-router";
-import { cities } from "./ar.js";
+import { cities, provinces } from "./ar.js";
 import styles from "./createClub.module.css";
 
 const CreateClub = () => {
+  console.log('prov', provinces)
   const navigate = useNavigate();
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
@@ -51,8 +52,6 @@ const CreateClub = () => {
     }
   }, [input.ciudad]);
  
-  console.log('filer cities', filterCities)
-
   const [position, setPosition] = useState({});
 
   const user = useSelector((state) => state.user);
@@ -94,20 +93,16 @@ const CreateClub = () => {
     setInput({ ...input, fields: [...input.fields, field] });
   };
 
-  const findMap = (e) => {
-    console.log(e)
-    e.preventDefault();
+  const findMap = (e) => {  
 
     if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
     let queryString
     if (Number(input.street) == input.street ){
-      
       queryString = `calle ${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
-     
-    } else {
 
+    } else {
       queryString = `${input.street}+${input.num}+${input.ciudad}+${input.province}+Argentina`;
     }
     
@@ -137,10 +132,9 @@ const CreateClub = () => {
           latitude: "34.60",
           longitude: "58.38",
         }));
-
-        //return setValid({...valid, map: 'ingrese una dirección válida'})
       });
   };
+
   const handleOnLoad = (map) => {
     const bounds = new window.google.maps.LatLngBounds();
     bounds.extend(position);
@@ -179,18 +173,15 @@ const CreateClub = () => {
         <div className={styles.address}>
           <label htmlFor="ciudad">Ciudad</label>
           <input type="text" name="ciudad" onChange={handleInput} list="cityname"/>
-          <datalist id="cityname">
-            {
-              filterCities.length && showCities &&
-                filterCities.slice(0,10).map( city => (
-                  <option value={city.city} />
-                    
-                ))
-              
-            }
-          </datalist>
-
-          
+            <datalist id="cityname">
+              {
+                filterCities.length && showCities &&
+                filterCities.slice(0,10)
+                  .map( city => (
+                    <option value={city.city} />                      
+                  ))                
+              }
+            </datalist>
 
           <label htmlFor="street">Calle</label>
           <input type="text" name="street" onChange={handleInput} />
@@ -199,7 +190,15 @@ const CreateClub = () => {
           <input type="text" name="num" onChange={handleInput} />
 
           <label htmlFor="province">Provincia</label>
-          <input type="text" name="province" onChange={handleInput} />
+          <input type="text" name="province" onChange={handleInput} list="provinceList"/>
+          <datalist id="provinceList">
+              {
+                provinces && provinces
+                  .map( p => (
+                    <option value={p} />                      
+                  ))                
+              }
+            </datalist>
         </div>
         <br />
         <div className={styles.location}>

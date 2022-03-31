@@ -6149,3 +6149,4 @@ export const cities = [
     "population_proper": ""
   }
 ]
+export const provinces = [...new Set(cities.map( c => c.admin_name))]
