@@ -19,8 +19,11 @@ const FieldForm = ({ handleInput }) => {
           onChange={(e) =>
             setField({ ...field, [e.target.name]: e.target.value })
           }
+          defaultValue=""
         >
-          <option value="">tamaño</option>
+          <option value="" disabled>
+            tamaño
+          </option>
           <option value="5">5</option>
           <option value="9">9</option>
           <option value="11">11</option>
@@ -36,8 +39,11 @@ const FieldForm = ({ handleInput }) => {
           onChange={(e) =>
             setField({ ...field, [e.target.name]: e.target.value })
           }
+          defaultValue=""
         >
-          <option value="">superficie</option>
+          <option value="" disabled>
+            superficie
+          </option>
           <option value="cemento">cemento</option>
           <option value="sintetico">sintético</option>
           <option value="cesped">césped</option>
