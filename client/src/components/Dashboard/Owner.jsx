@@ -14,11 +14,18 @@ import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import styles from "./Dashboard.module.css";
+import Modal from "./ModalEditarClub/Modal";
 
 function Owner({ id, name, email, rol }) {
   const navigate = useNavigate();
   const [owner, setOwner] = useState({});
   const [club, setClub] = useState({});
+
+  const [openModal, setOpenModal] = useState({
+    modal: false,
+    name: "",
+    id: "",
+  });
 
   useEffect(() => {
     const getOwner = (email) => {
@@ -81,8 +88,9 @@ function Owner({ id, name, email, rol }) {
     if (post.data.length) window.location.reload();
   };
 
-  console.log("owner: ", owner);
-  console.log("club: ", club);
+  const handlerUpdateClub = (club) => {
+    alert(`Abrir modal, Datos: ${club.name}`);
+  };
 
   return (
     <div>
@@ -100,9 +108,9 @@ function Owner({ id, name, email, rol }) {
           <p>Nombre: {club.name}</p>
           <p>Descripción: {club.description}</p>
           <p>Dirección: {`${club.street} ${club.num} ${club.ciudad}`}</p>
-          <p>Horario: {`de ${club.openHour} a ${club.closeHour} hs`}</p>
+          <p>Horario: {`de ${club.openHour} hs a ${club.closeHour} hs`}</p>
 
-          <button>editar</button>
+          <button onClick={() => handlerUpdateClub(club)}>editar</button>
         </div>
       )}
 
@@ -133,7 +141,6 @@ function Owner({ id, name, email, rol }) {
                               ? ""
                               : `email: ' ${booking.User.email} `
                           }`}</li>
-
                         </>
                       ))}
                   </ul>
