@@ -123,6 +123,13 @@ const sendEmailInvitation = async (email, subject, html) => {
 };
 
 const getTemplateInvitation = (name, times, club) => {
+
+  let url;
+  if (process.env.NODE_ENV) {
+    url = "https://canchera.vercel.app";
+  } else {
+    url = "http://localhost:3000";
+  }  
   
   return `
   <div style="font-weight:bold">
@@ -130,6 +137,9 @@ const getTemplateInvitation = (name, times, club) => {
     <hr>
     <img src="http://canchera.herokuapp.com/images/club-default.jpg" style="border:"3px solid blue"; width="45%">
     <p style="font-size:24px; font-weight:bold">Reservas:${times} </p>
+    <hr>
+    <p style="font-size:20px; font-weight:bold"> Se parte de la comunidad de Canchera</p>
+    <a href="${url}/signup/user">Se parte de Canchera</a>
     
   </div>
   

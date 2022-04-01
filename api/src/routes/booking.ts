@@ -8,6 +8,6 @@ router.get('/booking/:clubName', BookingController.getBookings);
 
 router.delete('/booking/:userId', BookingController.deleteBooking );
 
-router.post('/booking/sendEmial/:id', BookingController.bookingInvitation);
+router.post('/booking/sendEmial/:bookingId', BookingController.bookingInvitation);
 
 module.exports = router;
