@@ -16,6 +16,7 @@ const Modal = ({ id, name, closeModal }) => {
 
   const handlerConfirm = async () => {
     if (friends.emails.length > 0) {
+      //alert(`${id}, ${name}, ${friends.emails}`);
       dispatch(invitacion(id, friends));
       closeModal(false);
     }
