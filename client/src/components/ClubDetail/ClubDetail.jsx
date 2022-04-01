@@ -8,7 +8,7 @@ import {
   subDays,
   isToday,
 } from "date-fns";
-import { useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
@@ -19,6 +19,7 @@ const Clubdetail = () => {
   //const navigate = useNavigate()
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //carga los detalles del club en el state
   useEffect(() => {
@@ -84,23 +85,27 @@ const Clubdetail = () => {
   //on submit
   const handleReservation = async () => {
     // console.log('you selected dates', selectedDates)
-    try {
-      const mpResponse = await axios.post("/checkout", { price });
+    if (typeof user.email === "string") {
+      try {
+        const mpResponse = await axios.post("/checkout", { price });
 
-      if (mpResponse.data.id) {
-        const bookingDetails = {
-          toPost: { userId: user.id, dates: selectedDates },
-          payment_id: mpResponse.data.id,
-        };
+        if (mpResponse.data.id) {
+          const bookingDetails = {
+            toPost: { userId: user.id, dates: selectedDates },
+            payment_id: mpResponse.data.id,
+          };
 
-        window.localStorage.setItem(
-          "booking_details",
-          JSON.stringify(bookingDetails)
-        );
-        createCheckoutButton(mpResponse.data.id);
+          window.localStorage.setItem(
+            "booking_details",
+            JSON.stringify(bookingDetails)
+          );
+          createCheckoutButton(mpResponse.data.id);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      navigate("/login");
     }
 
     /*   const toPost = { userId: user.id, dates: selectedDates };
