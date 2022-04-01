@@ -8,14 +8,18 @@ import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
 const ListClubs = () => {
-  let clubes = useSelector((state) => state.clubes);
+  let dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(get_all_clubes());
+  }, [dispatch]);
+
   const [filterClubs, setFilterClubs] = useState([])
+  let clubes = useSelector((state) => state.clubes);
   
   useEffect(()=>{
     setFilterClubs([...clubes])
   }, [clubes])
-  console.log("clubes: ", clubes);
-
 
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
@@ -29,11 +33,7 @@ const ListClubs = () => {
     setActiveMarker(marker);
   };
 
-  let dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(get_all_clubes());
-  }, [dispatch]);
+  
 
   var clubXciudad = [];
   clubXciudad = clubes.filter((club) => club.ciudad === ciudad);
