@@ -100,14 +100,17 @@ module.exports = {
 
  async deleteUser (req:Request, res:Response, next:NextFunction){
     const { id } = req.params;
-
     try {
 
         const userDelete = await User.findOne( { where:{ id:id } } );
-         
-        if(!userDelete) res.status(400).json({ msg:"Usuario no encontrado o ya eliminado" });
-
-       await userDelete.destroy();
+          
+        if(userDelete.rol === "owner"){
+          await Club.destroy({
+            where:{ UserId:userDelete.id }
+          })
+          await userDelete.destroy()
+        }
+        await userDelete.destroy();
 
        return res.status(200).json({ msg: "Usuario elimindo" });
       

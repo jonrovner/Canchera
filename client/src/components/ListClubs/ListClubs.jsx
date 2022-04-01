@@ -16,10 +16,7 @@ const ListClubs = () => {
 
   let clubes = useSelector((state) => state.clubes);
   const [filterClubs, setFilterClubs] = useState([])  
-  
-  useEffect(()=>{
-    setFilterClubs([...clubes])
-  }, [clubes])
+  let intialClubes = clubes.map(club => ({...club, pos:{lat:club.latitude, lng:club.longitude}}))
 
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
@@ -32,7 +29,6 @@ const ListClubs = () => {
     }
     setActiveMarker(marker);
   };
-
 
   var clubXciudad = [];
   clubXciudad = clubes.filter((club) => club.ciudad === ciudad);
@@ -60,11 +56,23 @@ const ListClubs = () => {
   console.log('filtered clubes: ', filterClubs)
   
   const [mapFilter, setMapFilter] = useState(false)
+  
   const handleMapFilter = () => {
     setMapFilter(!mapFilter)
   }
+  const [mapBounds, setMapBounds] = useState({})
+
+  useEffect(()=> {
+    
+    if(clubes.length && mapBounds.zb){
+      let filtered = intialClubes.filter( club => 
+        mapBounds.contains(club.pos)
+      )   
+      
+      setFilterClubs(filtered)
+    }
+  },[mapBounds])
   
-  console.log('mapFilter is : ', mapFilter )
   
   return (
     <div className={style.contenedorGral}>
@@ -118,10 +126,8 @@ const ListClubs = () => {
           onLoad={ map => {
             map.addListener('bounds_changed', () => { 
              let newBounds = map.getBounds()
-             console.log('filtering!')
-             clubes && setFilterClubs(clubes
-              .map( club => ({...club, pos:{lat:club.latitude, lng: club.longitude}}))
-              .filter( club => newBounds.contains(club.pos)))
+             setMapBounds(newBounds)
+             
             })            
           }}
         >
