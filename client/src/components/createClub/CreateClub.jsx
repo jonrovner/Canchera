@@ -7,6 +7,8 @@ import { validate } from "./validation";
 import { useNavigate } from "react-router";
 import { cities, provinces } from "./ar.js";
 import styles from "./createClub.module.css";
+import Navbar from "../NavBar/NavBarSinSearch";
+import Footer from "../Footer/FooterNoVideo";
 
 const CreateClub = () => {
   console.log("prov", provinces);
@@ -52,8 +54,9 @@ const CreateClub = () => {
   }, [input.ciudad]);
 
   const [position, setPosition] = useState({});
-  const defaultPos = { lat: -32.9632, lng: -61.409 };
+  const defaultPos = { lat: -39.9632, lng: -64.409 };
   const [zoom, setZoom] = useState(4);
+  const [fileName, setFileName] = useState("");
 
   const user = useSelector((state) => state.user);
 
@@ -73,6 +76,7 @@ const CreateClub = () => {
 
       formData.append("data", JSON.stringify(toPost));
       formData.append("image", file);
+      console.log(toPost);
       axios
         .post("/club", formData)
         .then((res) => {
@@ -95,6 +99,7 @@ const CreateClub = () => {
   };
 
   const findMap = (e) => {
+    e.preventDefault();
     if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
@@ -140,158 +145,199 @@ const CreateClub = () => {
     map.fitBounds(bounds);
   };
 
+  const handleFile = (e) => {
+    setFileName(`Cargaste ${e.target.files[0].name}`);
+    setFile(e.target.files[0]);
+  };
+
   return (
-    <div className={styles.CreateClub}>
-      <div className={styles.title}>
-        <h1>Complete los datos de su establecimiento</h1>
-        {valid.all && showValid && (
-          <p className={styles.validation}>{valid.all}</p>
-        )}
-      </div>
+    <>
+      <Navbar />
+      <div className={styles.CreateClub}>
+        <div className={styles.content}>
+          <h1>Datos del establecimiento</h1>
 
-      <form
-        className={styles.createForm}
-        action="/club"
-        encType="multipart/form-data"
-        method="post"
-        onSubmit={handleSubmit}
-      >
-        <div className={styles.clubName}>
-          <label className={styles.inputLabel} htmlFor="name">
-            Nombre
-          </label>
-          <input onChange={handleInput} type="text" name="name" />
-          {valid.name && <p className={styles.validation}>{valid.name}</p>}
-        </div>
-        <br />
-        <div className={styles.description}>
-          <label htmlFor="descritption">Description</label>
-          <textarea
-            onChange={handleInput}
-            name="description"
-            cols="30"
-            rows="3"
-          ></textarea>
-          {/* <input onChange={handleInput} type="text" name="description" /> */}
-          {valid.description && showValid && (
-            <p className={styles.validation}>{valid.description}</p>
-          )}
-        </div>
-        <br />
-        <div className={styles.address}>
-          <label htmlFor="ciudad">Ciudad</label>
-          <input
-            type="text"
-            name="ciudad"
-            onChange={handleInput}
-            list="cityname"
-          />
-          <datalist id="cityname">
-            {filterCities.length &&
-              showCities &&
-              filterCities
-                .slice(0, 10)
-                .map((city) => <option value={city.city} />)}
-          </datalist>
-
-          <label htmlFor="street">Calle</label>
-          <input type="text" name="street" onChange={handleInput} />
-
-          <label htmlFor="num">Número</label>
-          <input type="text" name="num" onChange={handleInput} />
-
-          <label htmlFor="province">Provincia</label>
-          <input
-            type="text"
-            name="province"
-            onChange={handleInput}
-            list="provinceList"
-          />
-          <datalist id="provinceList">
-            {provinces && provinces.map((p) => <option value={p} />)}
-          </datalist>
-        </div>
-        <br />
-        <div className={styles.location}>
-          <button onClick={(e) => findMap(e)}>find map</button>
-        </div>
-        <br />
-
-        {defaultPos.lat && (
-          <GoogleMap
-            //onLoad={handleOnLoad}
-            center={position.lat ? position : defaultPos}
-            zoom={zoom}
-            mapContainerStyle={{ width: "50vw", height: "40vh" }}
+          <form
+            action="/club"
+            encType="multipart/form-data"
+            method="post"
+            onSubmit={handleSubmit}
           >
-            <Marker
-              position={position}
-              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
-            ></Marker>
-          </GoogleMap>
-        )}
+            <div className={styles.top}>
+              <div className={styles.clubName}>
+                <label htmlFor="name">Nombre</label>
+                <input
+                  onChange={handleInput}
+                  type="text"
+                  name="name"
+                  placeholder="La Cañada ..."
+                />
+                {valid.name && <p className={styles.error}>{valid.name}</p>}
 
-        <div className={styles.openHours}>
-          <label htmlFor="openHour">horario apertura</label>
-          <select onChange={(e) => handleInput(e)} type="text" name="openHour">
-            <option value="5">5am</option>
-            <option value="6">6am</option>
-            <option value="7">7am</option>
-            <option value="8">8am</option>
-            <option value="9">9am</option>
-            <option value="10">10am</option>
-            <option value="11">11m</option>
-            <option value="12">12pm</option>
-            <option value="13">1pm</option>
-            <option value="14">2pm</option>
-            <option value="15">3pm</option>
-            <option value="16">4pm</option>
-            <option value="17">5am</option>
-          </select>
-          <label htmlFor="closeHour">horario cierre</label>
-          <select onChange={(e) => handleInput(e)} type="text" name="closeHour">
-            <option value="18">6pm</option>
-            <option value="19">7pm</option>
-            <option value="20">8pm</option>
-            <option value="21">9pm</option>
-            <option value="22">10pm</option>
-            <option value="23">11pm</option>
-            <option value="0">12am</option>
-          </select>
-        </div>
-        <br />
-        <div className={styles.imageInput}>
-          <label htmlFor="image">suba una imagen</label>
-          <input
-            name="image"
-            type="file"
-            accept="image/png, image/gif, image/jpeg"
-            onChange={(e) => setFile(e.target.files[0])}
-          ></input>
-        </div>
-        <br />
-        <div className={styles.fields}>
-          {input.fields &&
-            input.fields.map((field, i) => (
-              <div className={styles.field} key={i}>
-                <h3>cancha {i + 1}</h3>
-                <p>tamaño: {field.players}</p>
-                <p>precio: {field.price}</p>
+                <div className={styles.imageInput}>
+                  <label className={styles.testIMG} htmlFor="image">
+                    Subir imagen
+                  </label>
+                  <small>{fileName}</small>
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    accept="image/png, image/gif, image/jpeg"
+                    onChange={handleFile}
+                  ></input>
+                </div>
               </div>
-            ))}
+
+              <div className={styles.description}>
+                <label htmlFor="description">Description</label>
+                <div>
+                  <textarea
+                    onChange={handleInput}
+                    name="description"
+                    cols="28"
+                    rows="3"
+                    maxLength="1400"
+                  ></textarea>
+                  {/* <input onChange={handleInput} type="text" name="description" /> */}
+                  {valid.description && showValid && (
+                    <p className={styles.error}>{valid.description}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.center}>
+              <div className={styles.address}>
+                <label htmlFor="ciudad">Ciudad</label>
+                <input
+                  type="text"
+                  name="ciudad"
+                  onChange={handleInput}
+                  list="cityname"
+                />
+                <datalist id="cityname">
+                  {filterCities.length &&
+                    showCities &&
+                    filterCities
+                      .slice(0, 10)
+                      .map((city) => <option value={city.city} />)}
+                </datalist>
+
+                <label htmlFor="street">Calle</label>
+                <input type="text" name="street" onChange={handleInput} />
+
+                <label htmlFor="num">Número</label>
+                <input type="text" name="num" onChange={handleInput} />
+
+                <label htmlFor="province">Provincia</label>
+                <input
+                  type="text"
+                  name="province"
+                  onChange={handleInput}
+                  list="provinceList"
+                />
+                <datalist id="provinceList">
+                  {provinces && provinces.map((p) => <option value={p} />)}
+                </datalist>
+
+                {valid.all && showValid && (
+                  <p className={styles.error}>{valid.all}</p>
+                )}
+                <button className={styles.findMap} onClick={(e) => findMap(e)}>
+                  Buscar en Mapa
+                </button>
+
+                <div className={styles.openHours}>
+                  <div>
+                    <label htmlFor="openHour">horario apertura</label>
+                    <select
+                      onChange={(e) => handleInput(e)}
+                      type="text"
+                      name="openHour"
+                    >
+                      <option value="5">5am</option>
+                      <option value="6">6am</option>
+                      <option value="7">7am</option>
+                      <option value="8">8am</option>
+                      <option value="9">9am</option>
+                      <option value="10">10am</option>
+                      <option value="11">11m</option>
+                      <option value="12">12pm</option>
+                      <option value="13">1pm</option>
+                      <option value="14">2pm</option>
+                      <option value="15">3pm</option>
+                      <option value="16">4pm</option>
+                      <option value="17">5am</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="closeHour">horario cierre</label>
+                    <select
+                      onChange={(e) => handleInput(e)}
+                      type="text"
+                      name="closeHour"
+                    >
+                      <option value="18">6pm</option>
+                      <option value="19">7pm</option>
+                      <option value="20">8pm</option>
+                      <option value="21">9pm</option>
+                      <option value="22">10pm</option>
+                      <option value="23">11pm</option>
+                      <option value="0">12am</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.map}>
+                {defaultPos.lat && (
+                  <GoogleMap
+                    //onLoad={handleOnLoad}
+                    center={position.lat ? position : defaultPos}
+                    zoom={zoom}
+                    mapContainerStyle={{ width: "300px", height: "400px" }}
+                  >
+                    <Marker
+                      position={position}
+                      icon={{
+                        url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
+                      }}
+                    ></Marker>
+                  </GoogleMap>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.bottom}>
+              <div className={styles.fieldInput}>
+                <h2>Canchas del establecimiento</h2>
+                {valid.fields && showValid && (
+                  <p className={styles.error}>{valid.fields}</p>
+                )}
+                <FieldForm handleInput={fieldInput} />
+              </div>
+
+              <div className={styles.fields}>
+                {input.fields &&
+                  input.fields.map((field, i) => (
+                    <div className={styles.field} key={i}>
+                      <h3>cancha {i + 1}</h3>
+                      <p>tamaño: {field.players}</p>
+                      <p>superficie: {field.surface}</p>
+                      <p>precio: {field.price}</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <button className={styles.Submit} type="submit" disabled={false}>
+              Guardar
+            </button>
+          </form>
         </div>
-        <br />
-        <div className={styles.fieldInput}>
-          <h4>agregue sus canchas</h4>
-          {valid.fields && showValid && (
-            <p className={styles.validation}>{valid.fields}</p>
-          )}
-          <FieldForm handleInput={fieldInput} />
-        </div>
-        <br />
-        <button type="submit">guardar</button>
-      </form>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

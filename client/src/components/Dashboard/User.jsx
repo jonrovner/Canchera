@@ -46,7 +46,7 @@ function User({ id, name }) {
             <th>Invitar</th>
           </tr>
           {user &&
-            boo.length &&
+            boo &&
             boo.map((b) => (
               <tr>
                 <td>{b.ClubName}</td>
