@@ -60,6 +60,7 @@ try {
         })
     };
 
+
     for (let i = 1; i <= 3; i++){
         await User.findOrCreate({ 
             where: {
@@ -75,8 +76,8 @@ try {
 // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------   
     for (let i = 1; i < 3; i++) {
         
-        let idOwner = i;
-        
+        let idOwner = i;        
+
         const [ownerCreated, created] = await User.findOrCreate({
             where: {
              name: `Owner ${idOwner}`,
@@ -87,7 +88,7 @@ try {
              authorized: true,
             }      
            });
-           
+
         if(created) {
 
             for (let j = 1; j < 3; j++) {     
@@ -131,6 +132,7 @@ try {
             
             }
             }  
+
     };                       
     
 // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------   
@@ -685,20 +687,10 @@ try {
         console.log("Se ha producido este error "+e)
     }
                 
+
+
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
