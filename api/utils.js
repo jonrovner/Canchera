@@ -408,8 +408,8 @@ try {
                     openHour: 6,
                     closeHour: 22,
                     image: `${url}/images/${index}.jpeg`,
-                    latitude: -54.8072 + latArray[index],
-                    longitude: -68.3044 + lonArray[index],
+                    latitude: -54.8022 + latArray[index],
+                    longitude: -68.3094 + lonArray[index],
                     UserId: ownerCreated.dataValues.id
                 }    
             })

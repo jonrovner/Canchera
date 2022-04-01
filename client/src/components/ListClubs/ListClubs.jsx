@@ -10,20 +10,16 @@ import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
 const ListClubs = () => {
   let dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(get_all_clubes());
   }, [dispatch]);
 
-
   let clubes = useSelector((state) => state.clubes);
-  const [filterClubs, setFilterClubs] = useState([])
+  const [filterClubs, setFilterClubs] = useState([])  
   
   useEffect(()=>{
     setFilterClubs([...clubes])
   }, [clubes])
-  console.log("clubes: ", clubes);
-
 
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
@@ -37,7 +33,6 @@ const ListClubs = () => {
     setActiveMarker(marker);
   };
 
-  
 
   var clubXciudad = [];
   clubXciudad = clubes.filter((club) => club.ciudad === ciudad);

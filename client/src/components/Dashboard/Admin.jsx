@@ -9,6 +9,7 @@ function Admin({ user }) {
   let dispatch = useDispatch();
   let [data, setData] = useState({
     rol: "",
+    authorized: null,
   });
   const [openModal, setOpenModal] = useState({
     modal: false,
@@ -28,9 +29,14 @@ function Admin({ user }) {
   };
 
   const handlerInputChange = (e) => {
-    var value = e.target.value;
+    
     console.log(e.target.value);
-    setData({ rol: value });
+    console.log(e.target.name);
+    
+    setData({ 
+      ...data,
+      [e.target.name]: e.target.value 
+    });
   };
 
   return (
@@ -41,17 +47,27 @@ function Admin({ user }) {
           {allUsers &&
             allUsers.map((c) => (
               <li key={c.id}>
-                Nombre: {c.name} - Rol: {c.rol}
-                <button onClick={() => updateUser(c.id)}>Cambiar rol</button>
+                Nombre: {c.name} - Rol: {c.rol} {c.rol === "owner" ? c.authorized === true ? ` - Estado: Autorizado` : ` - Estado: Bloqueado` : ""} 
                 <select
-                  name="newRol"
-                  defaultValue={c.rol}
+                  name="rol"
+                  defaultValue=""
                   onChange={handlerInputChange}
                 >
+                  <option disabled value="">Nuevo Rol</option>
                   <option value="user">User</option>
                   <option value="owner">Owner</option>
                   <option value="admin">Admin</option>
                 </select>
+                {c.rol === "owner" && <select
+                  name="authorized"
+                  defaultValue=""
+                  onChange={handlerInputChange}
+                >
+                  <option disabled value="">Nuevo Estado</option>
+                  <option value="true">Autorizar</option>
+                  <option value="false">Bloqueado</option>                  
+                </select>}
+                <button onClick={() => updateUser(c.id)}>Actualizar</button>
                 <TiDelete
                   className={styles.delete}
                   onClick={() =>
