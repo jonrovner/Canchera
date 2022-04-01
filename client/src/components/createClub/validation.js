@@ -15,8 +15,8 @@ export const validate = (input) => {
     valid.name = "debe tener al menos 4 letras";
   }
   if (input.description && input.description.length < 10) {
-    valid.description = "intente una descripción más completa";
-  }  
+    valid.description = "una descripción más completa";
+  }
   if (input.fields && input.fields.length < 1) {
     valid.fields = "debe ingresar al menos una cancha";
   } else {
@@ -26,15 +26,17 @@ export const validate = (input) => {
 };
 
 export const validateField = (field) => {
-  let valid = {};
+  let valid = {
+    valid: false,
+  };
   if (!field.players || field.players === "") {
-    valid.players = "debe elegir un tamaño";
+    valid.players = "Elegir tamaño";
   }
   if (!field.surface || field.surface === "") {
-    valid.surface = "debe elegir una superficie";
+    valid.surface = "Elegir superficie";
   }
   if (!field.price || field.price === "") {
-    valid.price = "debe ingresar un precio válido";
+    valid.price = "Ingrese un precio";
   } else {
     valid.valid = true;
   }

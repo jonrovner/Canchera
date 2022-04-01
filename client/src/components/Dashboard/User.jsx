@@ -19,7 +19,7 @@ function User({ name }) {
             <th>Surface</th>
           </tr>
           {user &&
-            boo.length &&
+            boo &&
             boo.map((b) => (
               <tr>
                 <td>{b.Field.ClubName}</td>

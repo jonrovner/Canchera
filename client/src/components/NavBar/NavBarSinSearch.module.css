@@ -1,0 +1,96 @@
+.Navbar {
+  color: #dcdaee;
+  height: 90px;
+  width: 100%;
+  z-index: 10;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  background: linear-gradient(135deg, #001d2f00 25%, transparent 25%) -32px 0, linear-gradient(225deg, #001d2f00 25%, transparent 25%) -32px 0, linear-gradient(315deg, #001d2f00 25%, transparent 25%), linear-gradient(45deg, #001d2f00 25%, transparent 25%);
+  background-size: 64px 64px;
+  background-color: #00233800;
+}
+
+.Navbar .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  width: 1200px;
+  margin: auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.Navbar .logo {
+  color: #00C49A;
+  text-decoration: none;
+}
+
+.Navbar .logo h2 {
+  font-family: 'Pattaya', sans-serif;
+  font-size: 50px;
+}
+
+.Navbar .navLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.Navbar .navLinks a {
+  text-decoration: none;
+  color: #dcdaee;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.Navbar .navLinks a p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+}
+
+.Navbar .navLinks a:hover {
+  text-decoration: underline;
+}
+
+.Navbar .user {
+  min-width: 111px;
+  text-align: center;
+}
+
+.Navbar .user a {
+  text-decoration: none;
+  color: #dcdaee;
+  cursor: pointer;
+}
+
+.Navbar .user p {
+  color: #dcdaee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+}
+
+.Navbar .user a:hover {
+  text-decoration: underline;
+}
+/*# sourceMappingURL=NavBarSinSearch.module.css.map */

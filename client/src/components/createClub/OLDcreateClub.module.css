@@ -1,0 +1,105 @@
+.CreateClub {
+  height: 100%;
+  padding-top: 3rem;
+}
+
+.CreateClub Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.CreateClub .title {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.CreateClub .imageInput input {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.CreateClub .imageInput input::-webkit-file-upload-button {
+  border: none;
+  border-radius: 15px;
+}
+
+.CreateClub .address {
+  display: flex;
+  flex-direction: column;
+}
+.CreateClub .fields {
+  width: 80%;
+}
+
+.CreateClub .field {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #dcdaee;
+  border-radius: 50px;
+}
+
+.CreateClub label {
+  color: #d0cbff;
+  margin-right: 1rem;
+}
+
+.CreateClub #map {
+  height: 200px;
+}
+.CreateClub .fieldInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.CreateClub .fieldInput {
+  margin-bottom: 1rem;
+}
+.CreateClub .fieldInput h4 {
+  color: #dcdaee;
+  margin-bottom: 1rem;
+}
+.CreateClub .validations {
+  display: flex;
+  gap: 1rem;
+}
+.CreateClub .validation {
+  color: yellow;
+  font-size: small;
+  margin-bottom: 1rem;
+}
+.CreateClub input {
+  border-radius: 50px;
+  background-color: #dcdaee;
+  height: 2rem;
+  border: none;
+}
+.CreateClub h1 {
+  padding-top: 2rem;
+  color: #dcdaee;
+  margin-bottom: 1rem;
+}
+.CreateClub button {
+  margin-left: 1rem;
+  border-radius: 50px;
+  background-color: #dcdaee;
+  height: 2rem;
+  border: none;
+}
+.CreateClub select {
+  margin-left: 1rem;
+  border-radius: 50px;
+  background-color: #dcdaee;
+  height: 2rem;
+  border: none;
+}
