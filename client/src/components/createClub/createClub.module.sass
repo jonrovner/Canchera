@@ -1,0 +1,187 @@
+@import '../CSScommons/commons'
+
+.CreateClub
+    margin: auto
+    padding-block: 50px
+    width: 800px
+    color: $color-header
+    .content
+        background-color: peru
+        display: flex
+        flex-direction: column
+        align-items: center
+        width: 100%
+        padding-block: 50px
+        background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0, linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0, linear-gradient(315deg, #f3faff 25%, transparent 25%), linear-gradient(45deg, #e0f3ff 25%, transparent 25%)
+        background-size: 64px 64px
+        background-color: #ecf9ff
+        position: relative
+        label
+            font-weight: 500
+            border-bottom: 1px solid #a2d4ff
+            width: min-content
+            white-space: nowrap
+        input[type="file"]
+            display: none
+        input[type="text"], input[type="number"], select
+            background-color: transparent
+            border: none
+            border-bottom: 2px solid #a1a1a1
+            font-weight: 500
+        input[type="text"]::placeholder
+            color: #c2c2c2
+            font-weight: 300
+        .testIMG
+            @include botonLanding
+            margin: auto
+            margin-top: 15px
+            font-size: 18px
+            display: inline-block
+            font-weight: 500
+            padding: 6px 12px
+            cursor: pointer
+            background-color: #a2d4ff
+            color: $color-header
+        .testIMG:hover
+            background-color: $color-detail
+        .error
+            color: #ff0000
+            font-weight: 500
+            font-size: small
+        form
+            display: flex
+            flex-direction: column
+            align-items: center
+            width: 100%
+            .top
+                display: flex
+                align-items: center
+                width: 100%
+                justify-content: space-evenly
+                .error
+                    position: absolute
+                    width: 300px
+                .clubName
+                    text-align: center
+                    width: 300px
+                    display: flex
+                    flex-direction: column
+                    padding: 20px
+                    position: relative
+                    .error
+                        top: 25px
+                        left: 100px
+                    input
+                        width: 100%
+                    .imageInput
+                        display: flex
+                        flex-direction: column
+                .description
+                    width: 300px
+                    position: relative
+                    .error
+                        top: 5px
+                        left: 100px
+                    textarea
+                        width: 100%
+                        height: 96px
+                        background-color: #ffffffe8
+                        border: none
+                        resize: vertical
+            .center
+                display: flex
+                align-items: center
+                justify-content: space-evenly
+                width: 100%
+                margin-block: 20px
+                .address
+                    display: flex
+                    flex-direction: column
+                    width: 300px
+                    padding-inline: 20px
+                    position: relative
+                    .error
+                        position: absolute
+                        width: 300px
+                        bottom: 125px
+                        left: 35px
+                .map
+                    @include Sombra
+                .findMap
+                    @include botonLanding
+                    background-color: #a2d4ff
+                    font-size: 18px
+                    width: 80%
+                    margin: auto
+                    margin-block: 20px
+                    padding: 8px
+                    font-weight: 500
+                    color: $color-header
+                .findMap:hover
+                    background-color: $color-detail
+                .openHours
+                    display: flex
+                    gap: 10px
+                    flex-direction: column
+                    div
+                        margin: auto
+                        width: 80%
+                        display: flex
+                        justify-content: space-between
+
+            .bottom
+                display: flex
+                flex-direction: column
+                .fields
+                    display: flex
+                    flex-direction: column
+                    .field
+                        display: flex
+                        gap: 20px
+            .Submit
+                @include botonLanding
+                background-color: #a2d4ff
+                width: 250px
+                margin-top: 30px
+                font-weight: 500
+                color: $color-header
+            .Submit:hover
+                background-color: $color-detail
+    .content::before
+        @include marcoInterno(#a2d4ff)
+        width: 100%
+        margin: auto
+        left: 0
+        top: 0
+        height: 100%
+        pointer-events: none
+
+.crearCancha
+    display: flex
+    align-items: flex-end
+    gap: 20px
+    justify-content: center
+    margin-bottom: 15px
+    .error
+        position: absolute
+        width: 150px
+        top: 55px
+    div
+        display: flex
+        flex-direction: column
+        position: relative
+        input
+            width: 80px
+            padding: 0
+            margin: 0
+        select
+            height: 28px
+    button
+        @include botonLanding
+        background-color: #a2d4ff
+        font-size: 16px
+        padding: 2px 10px
+        font-weight: 500
+        color: $color-header
+    button:hover
+        background-color: $color-detail

@@ -5,7 +5,9 @@ import Admin from "./Admin";
 import { useSelector } from "react-redux";
 import styles from "./Dashboard.module.css";
 
-import Navbar from "../NavBar/NavBar";
+import Navbar from "../NavBar/NavBar"; 
+import Loader from "../Loader/Loader";
+
 
 function Dashboard() {
   const user = useSelector((state) => state.user);
@@ -31,7 +33,7 @@ function Dashboard() {
         ) : user.rol === "admin" ? (
           <Admin user={user} />
         ) : (
-          <p>Cargando... </p>
+          <Loader/>
         )}
       </div>
     </div>
