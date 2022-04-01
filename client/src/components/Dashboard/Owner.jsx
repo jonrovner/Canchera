@@ -23,8 +23,7 @@ function Owner({ id, name, email, rol }) {
 
   const [openModal, setOpenModal] = useState({
     modal: false,
-    name: "",
-    id: "",
+    club: {},
   });
 
   useEffect(() => {
@@ -89,7 +88,12 @@ function Owner({ id, name, email, rol }) {
   };
 
   const handlerUpdateClub = (club) => {
-    alert(`Abrir modal, Datos: ${club.name}`);
+    setOpenModal({ modal: true, club: club });
+    //alert(`Abrir modal, Datos: ${club.name}`);
+  };
+
+  const refresh = () => {
+    window.location.reload();
   };
 
   return (
@@ -111,11 +115,13 @@ function Owner({ id, name, email, rol }) {
           <p>Horario: {`de ${club.openHour} hs a ${club.closeHour} hs`}</p>
 
           <button onClick={() => handlerUpdateClub(club)}>editar</button>
+          <button onClick={() => refresh()}>refresh</button>
         </div>
       )}
 
       <div>
         <h1>Reservas owner</h1>
+
         {club && club.Fields && (
           <table id="myTable">
             <tr className={styles.header}>
@@ -182,6 +188,9 @@ function Owner({ id, name, email, rol }) {
             </>
           ))}
       </div>
+      {openModal.modal && (
+        <Modal club={openModal.club} closeModal={setOpenModal} />
+      )}
 
       {/* <div>
                      <h1>Clubes</h1>

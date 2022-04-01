@@ -1,3 +1,5 @@
+
+
 .modalBackground {
   /* width: 50%;
   height: 50%; */
@@ -7,17 +9,20 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 5rem;
+  
   .modalContainer {
     position: absolute;
-    width: 25rem;
-    height: 15rem;
+    width: auto;
+    min-height: 90vh;
+    height: auto;
     border-radius: 12px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
+    
 
     .title {
       display: inline-block;
@@ -34,6 +39,402 @@
       font-size: 1.7rem;
       text-align: center;
     }
+    .content {
+      background-color: peru;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+      padding-block: 50px;
+      background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0, linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0, linear-gradient(315deg, #f3faff 25%, transparent 25%), linear-gradient(45deg, #e0f3ff 25%, transparent 25%);
+      background-size: 64px 64px;
+      background-color: #ecf9ff;
+      position: relative;
+    }
+
+    .content label {
+      font-weight: 500;
+      border-bottom: 1px solid #a2d4ff;
+      width: -webkit-min-content;
+      width: -moz-min-content;
+      width: min-content;
+      white-space: nowrap;
+    }
+
+    .content input[type="file"] {
+      display: none;
+    }
+
+    .content input[type="text"],
+    .content input[type="number"],
+    .content select {
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #a1a1a1;
+      font-weight: 500;
+    }
+
+    .content input[type="text"]::-webkit-input-placeholder {
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+
+    .content input[type="text"]:-ms-input-placeholder {
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+
+    .content input[type="text"]::-ms-input-placeholder {
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+
+    .content input[type="text"]::placeholder {
+      color: #c2c2c2;
+      font-weight: 300;
+    }
+
+    .content .testIMG {
+      color: #140027;
+      font-size: 30px;
+      background-color: #dcdaeeb0;
+      border: none;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      padding: 10px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      border-radius: 5px;
+      margin: auto;
+      margin-top: 15px;
+      font-size: 18px;
+      display: inline-block;
+      font-weight: 500;
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #a2d4ff;
+      color: #140027;
+    }
+
+    .content .testIMG:hover {
+      background-color: #00C49A;
+    }
+
+    .content .error {
+      color: #ff0000;
+      font-weight: 500;
+      font-size: small;
+    }
+
+    .content form {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .content form .top {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: 100%;
+      -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+      justify-content: space-evenly;
+    }
+
+    .content form .top .error {
+      position: absolute;
+      width: 300px;
+    }
+
+    .content form .top .clubName {
+      text-align: center;
+      width: 300px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      padding: 20px;
+      position: relative;
+    }
+
+    .content form .top .clubName .error {
+      top: 25px;
+      left: 100px;
+    }
+
+    .content form .top .clubName input {
+      width: 100%;
+    }
+
+    .content form .top .clubName .imageInput {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .content form .top .description {
+      width: 300px;
+      position: relative;
+    }
+
+    .content form .top .description .error {
+      top: 5px;
+      left: 100px;
+    }
+
+    .content form .top .description textarea {
+      width: 100%;
+      height: 96px;
+      background-color: #ffffffe8;
+      border: none;
+      resize: vertical;
+    }
+
+    .content form .center {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+      justify-content: space-evenly;
+      width: 100%;
+      margin-block: 20px;
+    }
+
+    .content form .center .address {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      width: 300px;
+      padding-inline: 20px;
+      position: relative;
+    }
+
+    .content form .center .address .error {
+      position: absolute;
+      width: 300px;
+      bottom: 125px;
+      left: 35px;
+    }
+
+    .content form .center .map {
+      -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .content form .center .findMap {
+      color: #140027;
+      font-size: 30px;
+      background-color: #dcdaeeb0;
+      border: none;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      padding: 10px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      border-radius: 5px;
+      background-color: #a2d4ff;
+      font-size: 18px;
+      width: 80%;
+      margin: auto;
+      margin-block: 20px;
+      padding: 8px;
+      font-weight: 500;
+      color: #140027;
+    }
+
+    .content form .center .findMap:hover {
+      background-color: #00C49A;
+    }
+
+    .content form .center .openHours {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 10px;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .content form .center .openHours div {
+      margin: auto;
+      width: 80%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+    }
+
+    .content form .bottom {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .content form .bottom .fields {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+    .content form .bottom .fields .field {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      gap: 20px;
+    }
+
+    .content form .Submit {
+      color: #140027;
+      font-size: 30px;
+      background-color: #dcdaeeb0;
+      border: none;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      padding: 10px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      border-radius: 5px;
+      background-color: #a2d4ff;
+      width: 250px;
+      margin-top: 30px;
+      font-weight: 500;
+      color: #140027;
+    }
+
+    .content form .Submit:hover {
+      background-color: #00C49A;
+    }
+
+    .content::before {
+      width: 1040px;
+      height: 93%;
+      content: '';
+      position: absolute;
+      left: 30px;
+      border: 20px solid #a2d4ff;
+      -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+      box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      margin: auto;
+      left: 0;
+      top: 0;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .crearCancha {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: end;
+      -ms-flex-align: end;
+      align-items: flex-end;
+      gap: 20px;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .crearCancha .error {
+      position: absolute;
+      width: 150px;
+      top: 55px;
+    }
+
+    .crearCancha div {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .crearCancha div input {
+      width: 80px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .crearCancha div select {
+      height: 28px;
+    }
+
+    .crearCancha button {
+      color: #140027;
+      font-size: 30px;
+      background-color: #dcdaeeb0;
+      border: none;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      padding: 10px;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      border-radius: 5px;
+      background-color: #a2d4ff;
+      font-size: 16px;
+      padding: 2px 10px;
+      font-weight: 500;
+      color: #140027;
+    }
+
+    .crearCancha button:hover {
+      background-color: #00C49A;
+    }
+
     .botones {
       display: flex;
       button {
