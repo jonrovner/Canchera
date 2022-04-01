@@ -3,15 +3,24 @@ import style from "./ListClubs.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { get_all_clubes } from "../../redux/action";
 import CardClub from "../CardClub/CardClub";
-
 import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
-import Navbar from "../NavBar/NavBar";
 
 const ListClubs = () => {
   let clubes = useSelector((state) => state.clubes);
+  const [filterClubs, setFilterClubs] = useState([])
+  
+  useEffect(()=>{
+    setFilterClubs([...clubes])
+  }, [clubes])
+  console.log("clubes: ", clubes);
+
+
   const [activeMarker, setActiveMarker] = useState(null);
+  const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
+  const [ciudad, setCiudad] = useState("Goya");
+  const [zoom, setZoom] = useState(4);
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -26,70 +35,114 @@ const ListClubs = () => {
     dispatch(get_all_clubes());
   }, [dispatch]);
 
+  var clubXciudad = [];
+  clubXciudad = clubes.filter((club) => club.ciudad === ciudad);
+
   const positions =
     clubes &&
     clubes.map((club) => ({ lat: club.latitude, lng: club.longitude }));
 
-  return (
-    <>
-      <Navbar />
-      <div className={style.contenedorGral}>
-        <div className={style.orders}>
-          <OrderName />
-          <OrderCiudad />
-        </div>
+  const handleSelect = (e) => {
+    setCiudad(e.target.value);
+    clubXciudad = clubes.filter((club) => club.ciudad === e.target.value);
 
-        <div className={style.contenedorlistClubMap}>
-          <div className={style.contenedor}>
-            {clubes.length > 0 ? (
-              clubes.map((c, i) => (
-                <CardClub
-                  key={i}
-                  name={c.name}
-                  img={c.image}
-                  location={
-                    c.street + " " + c.num + " " + c.ciudad + " " + c.province
-                  }
-                  openHour={c.openHour}
-                  closeHour={c.closeHour}
-                  Fields={c.Fields}
-                />
-              ))
-            ) : (
-              <p>No se encontraron resultados</p>
-            )}
-          </div>
-          <GoogleMap
-            //onLoad={handleOnLoad}
-            onClick={() => setActiveMarker(null)}
-            center={{ lat: -32.9632, lng: -61.409 }}
-            zoom={4}
-            mapContainerStyle={{ width: "70vw", height: "100vh" }}
-          >
-            {clubes.map((club, index) => (
-              <Marker
-                key={index}
-                position={positions[index]}
-                icon={{
-                  url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
-                }}
-                onClick={() => handleActiveMarker(club.name)}
-              >
-                {activeMarker === club.name ? (
-                  <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                    <div>
-                      '{club.name}'
-                      <br />
-                      {club.location}
-                    </div>
-                  </InfoWindow>
-                ) : null}
-              </Marker>
-            ))}
-          </GoogleMap>
-        </div>
+    if (clubXciudad.length) {
+      let lat = clubXciudad[0].latitude;
+      let lng = clubXciudad[0].longitude;
+      let newPos = { lat: lat, lng: lng };
+      setMapPos(newPos);
+      setZoom(14);
+    } else {
+      setMapPos({ lat: -32.9632, lng: -61.409 });
+      setZoom(4);
+    }
+  };
+
+  console.log('filtered clubes: ', filterClubs)
+  const [mapFilter, setMapFilter] = useState(false)
+  const handleMapFilter = () => {
+    setMapFilter(!mapFilter)
+  }
+  console.log('mapFilter is : ', mapFilter )
+  return (
+    <div className={style.contenedorGral}>
+      <div className={style.orders}>
+        <OrderName />
+        <OrderCiudad />
+        <label>
+          <input type="checkbox" onClick={handleMapFilter} /> Usar mapa como filtro 
+          </label>
       </div>
-    </>
+
+      <div className={style.contenedorlistClubMap}>
+        <div className={style.contenedor}>
+
+
+          { mapFilter 
+          
+          ? filterClubs.map((c, i) => (
+            <CardClub
+              key={i}
+              name={c.name}
+              img={c.image}
+              location={
+                c.street + " " + c.num + " " + c.ciudad + " " + c.province
+              }
+              openHour={c.openHour}
+              closeHour={c.closeHour}
+              Fields={c.Fields}
+            />
+          )) : clubes.map((c, i) => (
+            <CardClub
+              key={i}
+              name={c.name}
+              img={c.image}
+              location={
+                c.street + " " + c.num + " " + c.ciudad + " " + c.province
+              }
+              openHour={c.openHour}
+              closeHour={c.closeHour}
+              Fields={c.Fields}
+            />
+          ))
+
+          }
+        </div>
+        <GoogleMap
+          onClick={() => setActiveMarker(null)}
+          center={mapPos}
+          zoom={zoom}
+          mapContainerStyle={{ width: "70vw", height: "100vh" }}
+          onLoad={ map => {
+            map.addListener('bounds_changed', () => { 
+             let newBounds = map.getBounds()
+             setFilterClubs(clubes
+              .map( club => ({...club, pos:{lat:club.latitude, lng: club.longitude}}))
+              .filter( club => newBounds.contains(club.pos)))
+            })            
+          }}
+        >
+          {clubes.map((club, index) => (
+            <Marker
+              key={index}
+              position={positions[index]}
+              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
+              onClick={() => handleActiveMarker(club.name)}
+            >
+              {activeMarker === club.name ? (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <div>
+                    '{club.name}'
+                    <br />
+                    {club.location}
+                  </div>
+                </InfoWindow>
+              ) : null}
+            </Marker>
+          ))}
+        </GoogleMap>
+      </div>
+    </div>
   );
 };
 
