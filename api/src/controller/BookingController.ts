@@ -33,6 +33,7 @@ async postBooking(req:Request, res:Response, next:NextFunction){
         bookings.push(newBooking);
       };
       const [booking] = [...bookings];
+      
       const field = await Field.findOne({ where:{ id:booking.FieldId } })
       const club = await Club.findOne({ where:{ name:field.ClubName } })
      
@@ -53,6 +54,7 @@ async postBooking(req:Request, res:Response, next:NextFunction){
       const templateBooking = getTemplateBooking(user.name, "<ul style='font-size:24px'; 'font-weight:bold'><li>"+times.join("</li><li>")+"</li></ul>", club.name );
    
       await sendEmailBooking(user.email, "Reserva realizada", templateBooking);
+      console.log("aqui",bookings);
       
 
    return res.status(200).json(bookings)      
@@ -106,14 +108,16 @@ async getBookings(req:Request, res:Response, next:NextFunction){
   async bookingInvitation( req:Request, res:Response, next:NextFunction ){
      
     const { emails } = req.body;
-    const { id } = req.params; 
+    const { bookingId } = req.params; 
     try {
       
-      const user = await User.findOne({ where:{ id:id } })
-      const bookings = await Booking.findAll({ where:{ UserId:id }});
-      console.log(bookings);
-      
+      const bookings = await Booking.findAll({ where:{ id:bookingId }});
+
       const [booking] = [...bookings];
+      
+
+      const user = await User.findOne({ where:{ id:booking.UserId } })
+      
       
       const field = await Field.findOne( {where:{id:booking.FieldId }});
       const club = await Club.findOne({ where:{ name:field.ClubName } });
