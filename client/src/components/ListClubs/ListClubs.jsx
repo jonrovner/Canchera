@@ -7,15 +7,15 @@ import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 
+
 const ListClubs = () => {
   let dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(get_all_clubes());
   }, [dispatch]);
 
-  const [filterClubs, setFilterClubs] = useState([])
   let clubes = useSelector((state) => state.clubes);
+  const [filterClubs, setFilterClubs] = useState([])  
   
   useEffect(()=>{
     setFilterClubs([...clubes])
@@ -33,7 +33,6 @@ const ListClubs = () => {
     setActiveMarker(marker);
   };
 
-  
 
   var clubXciudad = [];
   clubXciudad = clubes.filter((club) => club.ciudad === ciudad);
@@ -59,11 +58,14 @@ const ListClubs = () => {
   };
 
   console.log('filtered clubes: ', filterClubs)
+  
   const [mapFilter, setMapFilter] = useState(false)
   const handleMapFilter = () => {
     setMapFilter(!mapFilter)
   }
+  
   console.log('mapFilter is : ', mapFilter )
+  
   return (
     <div className={style.contenedorGral}>
       <div className={style.orders}>
@@ -116,7 +118,8 @@ const ListClubs = () => {
           onLoad={ map => {
             map.addListener('bounds_changed', () => { 
              let newBounds = map.getBounds()
-             setFilterClubs(clubes
+             console.log('filtering!')
+             clubes && setFilterClubs(clubes
               .map( club => ({...club, pos:{lat:club.latitude, lng: club.longitude}}))
               .filter( club => newBounds.contains(club.pos)))
             })            
