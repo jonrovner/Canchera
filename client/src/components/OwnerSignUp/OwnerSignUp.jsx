@@ -7,7 +7,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/Validaciones/validaciones";
-import heroIMG from "../../assets/14.jpeg";
+import heroIMG from "../../assets/ownerfield.jpg";
 
 const OwnerSignUp = () => {
   const [openModal, setOpenModal] = useState(false);

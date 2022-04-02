@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import style from "./UserSignUp.module.scss";
+import styles from "./UserSignUp.module.css";
 import axios from "axios";
 import { Validate } from "../../utils/Validaciones/validaciones";
 import Modal from "./Modal/Modal";
@@ -86,17 +86,17 @@ const UserSignUp = () => {
   }, [error]);
 
   return (
-    <div className={style.contenedor}>
+    <div className={styles.contenedor}>
       <form
         id="formul"
-        className={style.signInForm}
+        className={styles.signInForm}
         onSubmit={(e) => {
           onSubmit(e);
         }}
       >
-        <h2 className={style.title}>Register User</h2>
-        <div className={style.inputField}>
-          <FaUserAlt className={style.fasFaUser} />
+        <h2 className={styles.title}>Register User</h2>
+        <div className={styles.inputField}>
+          <FaUserAlt className={styles.fasFaUser} />
           <input
             autoComplete="off"
             type="text"
@@ -106,11 +106,11 @@ const UserSignUp = () => {
             onChange={(e) => handlerInputChange(e)}
           />
         </div>
-        <div className={style.containerError}>
-          {error.name && <p className={style.error}>{error.name}</p>}
+        <div className={styles.containerError}>
+          {error.name && <p className={styles.error}>{error.name}</p>}
         </div>
-        <div className={style.inputField}>
-          <MdEmail className={style.fasFaUser} />
+        <div className={styles.inputField}>
+          <MdEmail className={styles.fasFaUser} />
           <input
             autoComplete="off"
             type="text"
@@ -120,11 +120,11 @@ const UserSignUp = () => {
             onChange={(e) => handlerInputChange(e)}
           />
         </div>
-        <div className={style.containerError}>
-          {error.email && <p className={style.error}>{error.email}</p>}
+        <div className={styles.containerError}>
+          {error.email && <p className={styles.error}>{error.email}</p>}
         </div>
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
+        <div className={styles.inputField}>
+          <RiLockPasswordFill className={styles.fasFaUser} />
           <input
             autoComplete="off"
             type="password"
@@ -134,11 +134,11 @@ const UserSignUp = () => {
             onChange={(e) => handlerInputChange(e)}
           />
         </div>
-        <div className={style.containerError}>
-          {error.password && <p className={style.error}>{error.password}</p>}
+        <div className={styles.containerError}>
+          {error.password && <p className={styles.error}>{error.password}</p>}
         </div>
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
+        <div className={styles.inputField}>
+          <RiLockPasswordFill className={styles.fasFaUser} />
           <input
             autoComplete="off"
             type="password"
@@ -148,23 +148,23 @@ const UserSignUp = () => {
             onChange={(e) => handlerInputChange(e)}
           />
         </div>
-        <div className={style.containerError}>
+        <div className={styles.containerError}>
           {error.confirmPassword && (
-            <p className={style.error}>{error.confirmPassword}</p>
+            <p className={styles.error}>{error.confirmPassword}</p>
           )}
         </div>
         <div>
           <input
             type="submit"
-            className={style.boton}
+            className={styles.boton}
             disabled={disabeledSubmit}
             value="Register"
           />
           {openModal && <Modal closeModal={setOpenModal} />}
           {openModalError && <ModalError closeModal={setOpenModalError} />}
         </div>
-        <p className={style.socialText}>O inicia con tu red social favorita</p>
-        <div className={style.socialMedia}>
+        <p className={styles.socialText}>O inicia con tu red social favorita</p>
+        <div className={styles.socialMedia}>
           <GoogleLogin
             clientId="78433659675-c72pqgtd1614q2nhb5sqk42f52de5cqg.apps.googleusercontent.com"
             buttonText="Sign In with Google"
