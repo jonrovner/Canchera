@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import { useDispatch } from "react-redux";
-import { delete_user } from "../../../redux/action";
-import style from "./Modal.module.scss";
-
-const Modal = ({ id, name, closeModal }) => {
-  let dispatch = useDispatch();
-  const handlerConfirm = async () => {
-    await dispatch(delete_user(id));
-    window.location.reload();
-  };
-=======
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -181,17 +168,10 @@ const Modal = ({ club, closeModal }) => {
     });
   };
 
->>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
   return (
     <div className={style.modalBackground}>
       <div className={style.modalContainer}>
         <div className={style.body}>
-<<<<<<< HEAD
-          <span>Seguro que desea eliminar la cuenta de "{name}"?</span>
-          <div className={style.botones}>
-            <button onClick={handlerConfirm}>Confirmar</button>
-            <button onClick={() => closeModal(false)}>Cancelar</button>
-=======
           <div className={style.CreateClub}>
             <div className={style.content}>
               <h1>Editar datos del club: {club.name}</h1>
@@ -449,7 +429,6 @@ const Modal = ({ club, closeModal }) => {
                 </div>
               </form>
             </div>
->>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
           </div>
         </div>
       </div>
