@@ -49,6 +49,7 @@ const FieldCalendar = ({day, close, open, players, bookings, price, handleClick,
                             }
                             else{
                                 console.log('hour is not reserved')
+                                handleClick(e, date, fieldId, price)    
                             }
                         }
                         else {
