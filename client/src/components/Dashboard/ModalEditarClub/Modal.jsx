@@ -189,6 +189,7 @@ const Modal = ({ club, closeModal }) => {
                       onChange={handleInput}
                       type="text"
                       name="name"
+                      disabled
                       defaultValue={club.name}
                       placeholder={club.name}
                     />

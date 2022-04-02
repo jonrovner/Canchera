@@ -251,10 +251,10 @@ module.exports = {
         ),
       });
 
-      console.log(fields);
+    
 
       for (let i = 0; i < fields.length; i++) {
-        await Field.update(
+        await  Field.update(
           {
             players: fields[i].players,
             price: fields[i].price,
@@ -262,10 +262,11 @@ module.exports = {
             light: fields[i].light,
             surface: fields[i].surface,
           },
-          { where: { ClubName: newClub.name } }
+           { where: { id: fields[i].id } } 
         );
-      }
-      console.log(fields);
+      } 
+    
+      
 
       return res.json({ newClub, fields });
     } catch (error) {
