@@ -27,7 +27,7 @@ const Modal = ({ club, closeModal }) => {
     num: club.num,
     province: club.province,
   });
-  console.log("canchas: ", field);
+  console.log("input: ", input.fields);
   useEffect(() => {
     findMap();
   }, []);
@@ -145,6 +145,27 @@ const Modal = ({ club, closeModal }) => {
 
   const fieldInput = (canchas) => {
     setInput({ ...input, fields: [...input.fields, canchas] });
+  };
+  const handlerFields = (e, i) => {
+    /* setField({
+      ...field,
+    }); */
+
+    setInput({
+      ...input,
+      fields: input.fields.map((f, j) => {
+        if (j === i) {
+          f = {
+            ...f,
+            [e.target.name]: +e.target.value ? +e.target.value : e.target.value,
+          };
+        }
+        return f;
+      }) /* (input.fields[i] = {
+        ...input.fields[i],
+        [e.target.name]: e.target.value,
+      }), */,
+    });
   };
 
   return (
@@ -340,12 +361,7 @@ const Modal = ({ club, closeModal }) => {
                           <label htmlFor="players">Tamaño</label>
                           <select
                             name="players"
-                            onChange={(e) =>
-                              setField({
-                                ...field,
-                                [e.target.name]: e.target.value,
-                              })
-                            }
+                            onChange={(e) => handlerFields(e, i)}
                             defaultValue={f.players}
                           >
                             <option value="" disabled>
@@ -363,12 +379,7 @@ const Modal = ({ club, closeModal }) => {
                           <label htmlFor="players">Superficie</label>
                           <select
                             name="surface"
-                            onChange={(e) =>
-                              setField({
-                                ...field,
-                                [e.target.name]: e.target.value,
-                              })
-                            }
+                            onChange={(e) => handlerFields(e, i)}
                             defaultValue={f.surface}
                           >
                             <option value="" disabled>
@@ -389,12 +400,7 @@ const Modal = ({ club, closeModal }) => {
                             name="price"
                             defaultValue={f.price}
                             placeholder={f.price}
-                            onChange={(e) =>
-                              setField({
-                                ...field,
-                                [e.target.name]: e.target.value,
-                              })
-                            }
+                            onChange={(e) => handlerFields(e, i)}
                           />
                           {!valid.valid && valid.price && (
                             <p className={style.error}>{valid.price}</p>
