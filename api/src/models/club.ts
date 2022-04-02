@@ -11,10 +11,11 @@ interface ClubAttributes {
   openHour: number;
   closeHour: number;
   image: string;
-  score: string;
+  score: number;
   latitude: number;
   longitude: number;
-  lowestPrice: number;  
+  lowestPrice: number;
+  totalRatings: number;  
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -33,10 +34,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
     openHour!: number;
     closeHour!: number;
     image!: string;
-    score!: string;
+    score!: number;
     latitude!: number;
     longitude!: number;
-    lowestPrice!: number;    
+    lowestPrice!: number;
+    totalRatings!: number;     
 
     static associate(models: any) {
       // define association here
@@ -90,9 +92,9 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.STRING,
       },
       score: {
-        type: DataTypes.ENUM,
-        values: ["1", "2", "3", "4", "5"],
-      },
+        type: DataTypes.FLOAT,
+                               
+      },                                                          
       latitude: {
         type: DataTypes.FLOAT,
       },
@@ -101,6 +103,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       lowestPrice: {
         type: DataTypes.INTEGER,
+      },
+      totalRatings: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       
     },
