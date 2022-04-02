@@ -23,12 +23,7 @@ function Owner({ id, name, email, rol }) {
 
   const [openModal, setOpenModal] = useState({
     modal: false,
-<<<<<<< HEAD
-    name: "",
-    id: "",
-=======
     club: {},
->>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
   });
 
   useEffect(() => {
