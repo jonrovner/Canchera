@@ -14,11 +14,17 @@ import FieldCalendar from "../ClubDetail/FieldCalendar/FieldCalendar";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import styles from "./Dashboard.module.css";
+import Modal from "./ModalEditarClub/Modal";
 
 function Owner({ id, name, email, rol }) {
   const navigate = useNavigate();
   const [owner, setOwner] = useState({});
   const [club, setClub] = useState({});
+
+  const [openModal, setOpenModal] = useState({
+    modal: false,
+    club: {},
+  });
 
   useEffect(() => {
     const getOwner = (email) => {
@@ -26,7 +32,7 @@ function Owner({ id, name, email, rol }) {
     };
     getOwner(email);
   }, [email]);
-
+  console.log("getOwner: ", owner);
   useEffect(() => {
     setClub(owner.Club);
   }, [setClub, owner.Club]);
@@ -57,7 +63,6 @@ function Owner({ id, name, email, rol }) {
   };
 
   const handleCalendar = (e, date, fieldId) => {
-    
     let existent = selectedDates.find(
       (d) => d.time.toString() === date.toString()
     );
@@ -81,20 +86,32 @@ function Owner({ id, name, email, rol }) {
     console.log("booking response: ", post.data);
     if (post.data.length) window.location.reload();
   };
-  const [bookingDetail, setBookingDetail] = useState({detail:{}, show: false})
-  
+  const [bookingDetail, setBookingDetail] = useState({
+    detail: {},
+    show: false,
+  });
+
   const handleInfo = (e, fieldId, booking) => {
-    e.preventDefault()
-    console.log('handling info booking: ', booking)
-    setBookingDetail({show: true, detail:{fieldId,booking} })
+    e.preventDefault();
+    console.log("handling info booking: ", booking);
+    setBookingDetail({ show: true, detail: { fieldId, booking } });
+  };
 
-  }
+  const handlerUpdateClub = (club) => {
+    setOpenModal({ modal: true, club: club });
+    //alert(`Abrir modal, Datos: ${club.name}`);
+  };
+
+  const refresh = () => {
+    window.location.reload();
+  };
+
   const closeInfo = () => {
-    setBookingDetail({detail:{}, show: false})
-  }
+    setBookingDetail({ detail: {}, show: false });
+  };
 
-  console.log('booking detail', bookingDetail)
-  console.log('club: ', club)
+  console.log("booking detail", bookingDetail);
+  console.log("club: ", club);
   return (
     <div>
       <h1>Bienvenido {name}</h1>
@@ -111,29 +128,41 @@ function Owner({ id, name, email, rol }) {
           <p>Nombre: {club.name}</p>
           <p>Descripción: {club.description}</p>
           <p>Dirección: {`${club.street} ${club.num} ${club.ciudad}`}</p>
-          <p>Horario: {`de ${club.openHour} a ${club.closeHour} hs`}</p>
+          <p>Horario: {`de ${club.openHour} hs a ${club.closeHour} hs`}</p>
 
-          <button>editar</button>
+          <button onClick={() => handlerUpdateClub(club)}>editar</button>
+          <button onClick={() => refresh()}>refresh</button>
         </div>
       )}
 
       <div>
         <h1>Reservas owner</h1>
-        {bookingDetail.show && <div className="bookingDetail" >
-          
+        {bookingDetail.show && (
+          <div className="bookingDetail">
             <div>
               <h5>Detalles de reserva</h5>
-               <p>Usuario: {bookingDetail.detail.booking.User.name}</p>
-               <p>email: {bookingDetail.detail.booking.User.email}</p>
-               <p>cancha: {club.Fields.findIndex( field => field.id === bookingDetail.detail.fieldId)+1}</p>
-               <p>hora: {new Date(bookingDetail.detail.booking.time).toLocaleDateString()
-               +" "+
-               new Date(bookingDetail.detail.booking.time).toLocaleTimeString()}</p>
-
+              <p>Usuario: {bookingDetail.detail.booking.User.name}</p>
+              <p>email: {bookingDetail.detail.booking.User.email}</p>
+              <p>
+                cancha:{" "}
+                {club.Fields.findIndex(
+                  (field) => field.id === bookingDetail.detail.fieldId
+                ) + 1}
+              </p>
+              <p>
+                hora:{" "}
+                {new Date(
+                  bookingDetail.detail.booking.time
+                ).toLocaleDateString() +
+                  " " +
+                  new Date(
+                    bookingDetail.detail.booking.time
+                  ).toLocaleTimeString()}
+              </p>
             </div>
-         
-        </div>}
-       
+          </div>
+        )}
+
         <div className="calendarControls">
           <div className="button" onClick={handlePrevDay}>
             ⏪
@@ -145,7 +174,7 @@ function Owner({ id, name, email, rol }) {
             ⏩
           </div>
         </div>
-        
+
         {club &&
           club.Fields &&
           club.Fields.map((field) => (
@@ -161,13 +190,16 @@ function Owner({ id, name, email, rol }) {
                 handleInfo={handleInfo}
                 fieldId={field.id}
                 surface={field.surface}
-                user='owner'
+                user="owner"
               />
 
               <button onClick={handleBlock}>bloquear</button>
             </>
           ))}
       </div>
+      {openModal.modal && (
+        <Modal club={openModal.club} closeModal={setOpenModal} />
+      )}
 
       {/* <div>
                      <h1>Clubes</h1>
