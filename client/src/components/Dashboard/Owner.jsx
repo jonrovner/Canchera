@@ -91,12 +91,6 @@ function Owner({ id, name, email, rol }) {
     show: false,
   });
 
-<<<<<<< HEAD
-  const handlerUpdateClub = (club) => {
-    alert(`Abrir modal, Datos: ${club.name}`);
-  };
-
-=======
   const handleInfo = (e, fieldId, booking) => {
     e.preventDefault();
     console.log("handling info booking: ", booking);
@@ -118,7 +112,6 @@ function Owner({ id, name, email, rol }) {
 
   console.log("booking detail", bookingDetail);
   console.log("club: ", club);
->>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
   return (
     <div>
       <h1>Bienvenido {name}</h1>
@@ -138,49 +131,12 @@ function Owner({ id, name, email, rol }) {
           <p>Horario: {`de ${club.openHour} hs a ${club.closeHour} hs`}</p>
 
           <button onClick={() => handlerUpdateClub(club)}>editar</button>
-<<<<<<< HEAD
-=======
           <button onClick={() => refresh()}>refresh</button>
->>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
         </div>
       )}
 
       <div>
         <h1>Reservas owner</h1>
-<<<<<<< HEAD
-        {club && club.Fields && (
-          <table id="myTable">
-            <tr className={styles.header}>
-              <th>Nombre</th>
-              <th>Cancha</th>
-              <th>Precio</th>
-              <th>Reservas</th>
-            </tr>
-            {club.Fields.map((field) => (
-              <tr>
-                <td>{field.ClubName}</td>
-                <td>{field.id}</td>
-                <td>{field.price}</td>
-                <td>
-                  <ul>
-                    {field.Bookings.length &&
-                      field.Bookings.map((booking) => (
-                        <>
-                          <li>{`${new Date(
-                            booking.time
-                          ).toLocaleString()} usuario: ${booking.User.name} ${
-                            booking.User.name === "owner"
-                              ? ""
-                              : `email: ' ${booking.User.email} `
-                          }`}</li>
-                        </>
-                      ))}
-                  </ul>
-                </td>
-              </tr>
-            ))}
-          </table>
-=======
         {bookingDetail.show && (
           <div className="bookingDetail">
             <div>
@@ -205,7 +161,6 @@ function Owner({ id, name, email, rol }) {
               </p>
             </div>
           </div>
->>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
         )}
 
         <div className="calendarControls">
