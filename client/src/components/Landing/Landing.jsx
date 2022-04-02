@@ -4,6 +4,7 @@ import Slider from "../Slider/Slider";
 import Footer from "../Footer/Footer";
 import Map from "../Map/Map.jsx";
 import Whatsapp from "../Whatsapp/Whatsapp";
+import ScrollButton from "../ScrollButton/ScrollButton";
 import { Link } from "react-router-dom";
 import hero from "../../assets/hero.png";
 
@@ -77,6 +78,7 @@ const Landing = () => {
 
       <br />
       <Whatsapp />
+      <ScrollButton />
       <Footer />
     </div>
   );

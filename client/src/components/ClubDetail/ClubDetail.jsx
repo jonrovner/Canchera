@@ -198,6 +198,7 @@ const Clubdetail = () => {
                 bookings={field.Bookings}
                 surface={field.surface}
                 handleClick={handleHourClick}
+                user='user'
               />
             ))}
 

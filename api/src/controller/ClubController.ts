@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 const { Club, Field, User, Booking } = require("../db.ts");
 import multer from "multer";
 
-
 const multerConfig = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -46,9 +45,9 @@ module.exports = {
       longitude,
       userId,
       fields,
-    } =  JSON.parse(req.body.data) ;
+    } = JSON.parse(req.body.data);
 
-   // console.log("body : ", JSON.parse(req.body.data));
+    // console.log("body : ", JSON.parse(req.body.data));
 
     try {
       if (
@@ -86,7 +85,7 @@ module.exports = {
 
       if (user && user.rol === "owner") {
         const newClub = await Club.create({
-          name: name.trim(),
+          name: name.replace(/-/g, " ").trim(),
           description,
           ciudad,
           street,
@@ -217,8 +216,7 @@ module.exports = {
     }
   },
 
-  async updateClub(req:Request, res:Response, next:NextFunction){
-
+  async updateClub(req: Request, res: Response, next: NextFunction) {
     const { clubName } = req.params;
     const {
       name,
@@ -229,48 +227,49 @@ module.exports = {
       num,
       province,
       openHour,
-      closeHour, 
-      fields
+      closeHour,
+      Fields,
     } = req.body;
 
     try {
-        const club = await Club.findOne({ where:{ name:clubName }});
-  
-        if(!club) return res.status(400).json({ msg:"club no creado" });
-   
-       const newClub = await club.update({
-            name:name,
-            description:description,
-            ciudad:ciudad,
-            street:street,
-            num:num,
-            province:province,
-            openHour:openHour,
-            closeHour:closeHour,
-            image,
-           lowestPrice: Math.min(
-            ...fields?.map((field: any) => Number(field.price))
-          ),
-        }); 
-         
+      const club = await Club.findOne({ where: { name: clubName } });
 
-         for (let i = 0; i < fields.length; i++) {
-           await Field.update({
-            players:fields[i].players,
-            price: fields[i].price,
-            image:fields[i].image,
-            light:fields[i].light,
-            surface:fields[i].surface,
-           },{ where:{ClubName:newClub.name} })
-           
-         };
-        
-        return res.json({ newClub, fields} )
+      if (!club) return res.status(400).json({ msg: "club no creado" });
 
+      const newClub = await club.update({
+        name: name,
+        description: description,
+        ciudad: ciudad,
+        street: street,
+        num: num,
+        province: province,
+        openHour: openHour,
+        closeHour: closeHour,
+        image,
+        lowestPrice: Math.min(
+          ...Fields.map((field: any) => Number(field.price))
+        ),
+      });
+
+      console.log(Fields);
+
+      for (let i = 0; i < Fields.length; i++) {
+        await Field.update(
+          {
+            players: Fields[i].players,
+            price: Fields[i].price,
+            image: Fields[i].image,
+            light: Fields[i].light,
+            surface: Fields[i].surface,
+          },
+          { where: { ClubName: newClub.name } }
+        );
+      }
+      console.log(Fields);
+
+      return res.json({ newClub, Fields });
     } catch (error) {
-      next(error)
+      next(error);
     }
-
-  }
+  },
 };
-
