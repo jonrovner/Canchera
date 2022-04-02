@@ -61,6 +61,8 @@ const OwnerSignUp = () => {
 
   return (
     <div className={styles.SignUp}>
+      <div className={styles.diagonalPattern}></div>
+      <div className={styles.dotPattern}></div>
       <div className={styles.content}>
         <div className={styles.hero}>
           <img src={heroIMG} alt="" />

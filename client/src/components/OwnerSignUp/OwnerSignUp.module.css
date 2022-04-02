@@ -1,3 +1,27 @@
+.dotPattern {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-image: radial-gradient(#00C49A 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-color: transparent;
+  bottom: 0;
+  left: 13%;
+}
+
+.diagonalPattern {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-image: repeating-linear-gradient(45deg, #00C49A 0, #00C49A 2px, transparent 0, transparent 50%);
+  background-size: 32px 32px;
+  background-color: rgba(255, 255, 255, 0);
+  right: 15%;
+  width: 300px;
+  height: 200px;
+  top: 10%;
+}
+
 .SignUp {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -1,3 +1,25 @@
+.diagonalPattern {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-image: repeating-linear-gradient(45deg, #00C49A 0, #00C49A 2px, transparent 0, transparent 50%);
+  background-size: 32px 32px;
+  background-color: rgba(255, 255, 255, 0);
+  top: 100%;
+  right: 70%;
+}
+
+.diagonalPatternDos {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-image: repeating-linear-gradient(45deg, #00C49A 0, #00C49A 2px, transparent 0, transparent 50%);
+  background-size: 32px 32px;
+  background-color: rgba(255, 255, 255, 0);
+  top: 380%;
+  left: 70%;
+}
+
 .Landing {
   width: 100%;
   display: -webkit-box;
@@ -94,7 +116,6 @@
   color: #140027;
   width: 100%;
   padding: 0px;
-  overflow: hidden;
   min-height: 630px;
   position: relative;
   background-image: url("../../assets/9.jpg");
