@@ -11,8 +11,20 @@ import Navbar from "../NavBar/NavBarSinSearch";
 import Footer from "../Footer/FooterNoVideo";
 
 const CreateClub = () => {
-  console.log("prov", provinces);
+
+  const user = useSelector((state) => state.user);
+  console.log("user: ", user);
   const navigate = useNavigate();
+
+  useEffect(() => {
+
+    if (user && user.rol !== 'owner'){
+      navigate('/')
+    }
+  }, [user, navigate])
+  
+
+
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
 
@@ -58,7 +70,6 @@ const CreateClub = () => {
   const [zoom, setZoom] = useState(4);
   const [fileName, setFileName] = useState("");
 
-  const user = useSelector((state) => state.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +81,7 @@ const CreateClub = () => {
 
       const toPost = {
         ...input,
-        score: "3",
+        score: 3,
         userId: user.id,
       };
 

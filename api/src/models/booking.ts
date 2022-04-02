@@ -4,7 +4,8 @@ import { Model } from 'sequelize';
 interface BookingAttributes {
   id: number;
   time: number;
-  paymentPending: boolean;  
+  paymentPending: boolean; 
+  rated: boolean; 
 }
 
 
@@ -19,6 +20,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
     id!: number;
     time!: number;
     paymentPending!: boolean;
+    rated!: boolean;
 
     static associate(models: any) {
       // define association here
@@ -41,7 +43,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
     paymentPending: {
       type: DataTypes.BOOLEAN,
       defaultValue: false     
-    },   
+    }, 
+    rated: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false     
+    }, 
+
   }, {
     sequelize,
     modelName: 'Booking',

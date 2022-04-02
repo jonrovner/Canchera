@@ -36,6 +36,13 @@ function User({ id, name }) {
       <div>
         <h1>Reservas</h1>
         <button onClick={() => refresh()}>Refresh</button>
+        {openModal.modal && (
+          <Modal
+            id={openModal.id}
+            name={openModal.name}
+            closeModal={setOpenModal}
+          />
+        )}
         <table id="myTable">
           <tr className={styles.header}>
             <th>Nombre del Club</th>
@@ -66,13 +73,6 @@ function User({ id, name }) {
               </tr>
             ))}
         </table>
-        {openModal.modal && (
-          <Modal
-            id={openModal.id}
-            name={openModal.name}
-            closeModal={setOpenModal}
-          />
-        )}
       </div>
     </div>
   );

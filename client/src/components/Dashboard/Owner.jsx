@@ -23,8 +23,12 @@ function Owner({ id, name, email, rol }) {
 
   const [openModal, setOpenModal] = useState({
     modal: false,
+<<<<<<< HEAD
     name: "",
     id: "",
+=======
+    club: {},
+>>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
   });
 
   useEffect(() => {
@@ -33,7 +37,7 @@ function Owner({ id, name, email, rol }) {
     };
     getOwner(email);
   }, [email]);
-
+  console.log("getOwner: ", owner);
   useEffect(() => {
     setClub(owner.Club);
   }, [setClub, owner.Club]);
@@ -87,11 +91,39 @@ function Owner({ id, name, email, rol }) {
     console.log("booking response: ", post.data);
     if (post.data.length) window.location.reload();
   };
+  const [bookingDetail, setBookingDetail] = useState({
+    detail: {},
+    show: false,
+  });
 
+<<<<<<< HEAD
   const handlerUpdateClub = (club) => {
     alert(`Abrir modal, Datos: ${club.name}`);
   };
 
+=======
+  const handleInfo = (e, fieldId, booking) => {
+    e.preventDefault();
+    console.log("handling info booking: ", booking);
+    setBookingDetail({ show: true, detail: { fieldId, booking } });
+  };
+
+  const handlerUpdateClub = (club) => {
+    setOpenModal({ modal: true, club: club });
+    //alert(`Abrir modal, Datos: ${club.name}`);
+  };
+
+  const refresh = () => {
+    window.location.reload();
+  };
+
+  const closeInfo = () => {
+    setBookingDetail({ detail: {}, show: false });
+  };
+
+  console.log("booking detail", bookingDetail);
+  console.log("club: ", club);
+>>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
   return (
     <div>
       <h1>Bienvenido {name}</h1>
@@ -111,11 +143,16 @@ function Owner({ id, name, email, rol }) {
           <p>Horario: {`de ${club.openHour} hs a ${club.closeHour} hs`}</p>
 
           <button onClick={() => handlerUpdateClub(club)}>editar</button>
+<<<<<<< HEAD
+=======
+          <button onClick={() => refresh()}>refresh</button>
+>>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
         </div>
       )}
 
       <div>
         <h1>Reservas owner</h1>
+<<<<<<< HEAD
         {club && club.Fields && (
           <table id="myTable">
             <tr className={styles.header}>
@@ -148,6 +185,32 @@ function Owner({ id, name, email, rol }) {
               </tr>
             ))}
           </table>
+=======
+        {bookingDetail.show && (
+          <div className="bookingDetail">
+            <div>
+              <h5>Detalles de reserva</h5>
+              <p>Usuario: {bookingDetail.detail.booking.User.name}</p>
+              <p>email: {bookingDetail.detail.booking.User.email}</p>
+              <p>
+                cancha:{" "}
+                {club.Fields.findIndex(
+                  (field) => field.id === bookingDetail.detail.fieldId
+                ) + 1}
+              </p>
+              <p>
+                hora:{" "}
+                {new Date(
+                  bookingDetail.detail.booking.time
+                ).toLocaleDateString() +
+                  " " +
+                  new Date(
+                    bookingDetail.detail.booking.time
+                  ).toLocaleTimeString()}
+              </p>
+            </div>
+          </div>
+>>>>>>> c140e4f589ffb65893cfaff26c8459ddd1408f56
         )}
 
         <div className="calendarControls">
@@ -174,14 +237,19 @@ function Owner({ id, name, email, rol }) {
                 bookings={field.Bookings}
                 price={field.price}
                 handleClick={handleCalendar}
+                handleInfo={handleInfo}
                 fieldId={field.id}
                 surface={field.surface}
+                user="owner"
               />
 
               <button onClick={handleBlock}>bloquear</button>
             </>
           ))}
       </div>
+      {openModal.modal && (
+        <Modal club={openModal.club} closeModal={setOpenModal} />
+      )}
 
       {/* <div>
                      <h1>Clubes</h1>

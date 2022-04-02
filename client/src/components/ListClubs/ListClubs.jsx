@@ -6,6 +6,8 @@ import CardClub from "../CardClub/CardClub";
 import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import ScrollButton from "../ScrollButton/ScrollButton";
+
 
 
 const ListClubs = () => {
@@ -150,6 +152,7 @@ const ListClubs = () => {
             </Marker>
           ))}
         </GoogleMap>
+        <ScrollButton />
       </div>
     </div>
   );
