@@ -45,7 +45,7 @@ const UserSignUp = () => {
     e.preventDefault();
 
     if (data.name && data.email && data.password && data.confirmPassword) {
-      let existe = await axios.post("/signup/owner", data);
+      let existe = await axios.post("/signup/user", data);
 
       if (!existe.data.error) {
         setOpenModal(true);
@@ -91,6 +91,8 @@ const UserSignUp = () => {
 
   return (
     <div className={styles.SignUp}>
+      {openModal && <Modal closeModal={setOpenModal} />}
+      {openModalError && <ModalError closeModal={setOpenModalError} />}
       <div className={styles.diagonalPattern}></div>
       <div className={styles.dotPattern}></div>
       <div className={styles.content}>
@@ -191,10 +193,7 @@ const UserSignUp = () => {
                   disabled={disabeledSubmit}
                   value="Registrarse"
                 />
-                {openModal && <Modal closeModal={setOpenModal} />}
-                {openModalError && (
-                  <ModalError closeModal={setOpenModalError} />
-                )}
+
                 <p className={styles.socialText}>
                   O inicia con tu red social favorita
                 </p>
