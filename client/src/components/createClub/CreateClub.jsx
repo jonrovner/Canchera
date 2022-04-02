@@ -81,7 +81,7 @@ const CreateClub = () => {
 
       const toPost = {
         ...input,
-        score: "3",
+        score: 3,
         userId: user.id,
       };
 
