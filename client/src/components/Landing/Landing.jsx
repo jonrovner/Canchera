@@ -36,6 +36,7 @@ const Landing = () => {
         </section>
         <br />
 
+        <div className={styles.diagonalPattern}></div>
         <section loading="lazy" className={styles.player}>
           <div className={styles.text}>
             <h2>
@@ -57,6 +58,7 @@ const Landing = () => {
 
         <Slider />
 
+        <div className={styles.diagonalPatternDos}></div>
         <section loading="lazy" className={styles.host}>
           <div className={styles.text}>
             <h2>

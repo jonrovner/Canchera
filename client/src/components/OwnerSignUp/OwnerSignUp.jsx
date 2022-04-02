@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import style from "./OwnerSignUp.module.scss";
+import styles from "./OwnerSignUp.module.css";
 import axios from "axios";
 import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
@@ -7,6 +7,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/Validaciones/validaciones";
+import heroIMG from "../../assets/ownerfield.jpg";
 
 const OwnerSignUp = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -59,84 +60,114 @@ const OwnerSignUp = () => {
   }, [error]);
 
   return (
-    <div className={style.contenedor}>
-      <form
-        id="formul"
-        className={style.signInForm}
-        onSubmit={(e) => {
-          onSubmit(e);
-        }}
-      >
-        <h2 className={style.title}>Register Owner</h2>
-        <div className={style.inputField}>
-          <FaUserAlt className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Name"
-            onChange={(e) => handlerInputChange(e)}
-          />
+    <div className={styles.SignUp}>
+      {openModal && <Modal closeModal={setOpenModal} />}
+      {openModalError && <ModalError closeModal={setOpenModalError} />}
+      <div className={styles.diagonalPattern}></div>
+      <div className={styles.dotPattern}></div>
+      <div className={styles.content}>
+        <div className={styles.hero}>
+          <img src={heroIMG} alt="" />
+
+          <div className={styles.form}>
+            <form
+              id="formul"
+              className={styles.signInForm}
+              onSubmit={(e) => {
+                onSubmit(e);
+              }}
+            >
+              <h2 className={styles.title}>
+                Dueño <span>Canchera</span>
+              </h2>
+              <div className={styles.inputField}>
+                <div className={styles.input}>
+                  <div className={styles.fasFaUser}>
+                    <FaUserAlt />
+                  </div>
+                  <input
+                    autoComplete="off"
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Nombre"
+                    onChange={(e) => handlerInputChange(e)}
+                  />
+                </div>
+                <div className={styles.containerError}>
+                  {error.name && <p className={styles.error}>{error.name}</p>}
+                </div>
+              </div>
+              <div className={styles.inputField}>
+                <div className={styles.input}>
+                  <div className={styles.fasFaUser}>
+                    <MdEmail />
+                  </div>
+                  <input
+                    autoComplete="off"
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={(e) => handlerInputChange(e)}
+                  />
+                </div>
+                <div className={styles.containerError}>
+                  {error.email && <p className={styles.error}>{error.email}</p>}
+                </div>
+              </div>
+              <div className={styles.inputField}>
+                <div className={styles.input}>
+                  <div className={styles.fasFaUser}>
+                    <RiLockPasswordFill />
+                  </div>
+                  <input
+                    autoComplete="off"
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Contraseña"
+                    onChange={(e) => handlerInputChange(e)}
+                  />
+                </div>
+                <div className={styles.containerError}>
+                  {error.password && (
+                    <p className={styles.error}>{error.password}</p>
+                  )}
+                </div>
+              </div>
+              <div className={styles.inputField}>
+                <div className={styles.input}>
+                  <div className={styles.fasFaUser}>
+                    <RiLockPasswordFill />
+                  </div>
+                  <input
+                    autoComplete="off"
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    placeholder="Confirmar contraseña"
+                    onChange={(e) => handlerInputChange(e)}
+                  />
+                </div>
+                <div className={styles.containerError}>
+                  {error.confirmPassword && (
+                    <p className={styles.error}>{error.confirmPassword}</p>
+                  )}
+                </div>
+              </div>
+              <div>
+                <input
+                  type="submit"
+                  className={styles.boton}
+                  disabled={disabeledSubmit}
+                  value="Registrarse"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-        <div className={style.containerError}>
-          {error.name && <p className={style.error}>{error.name}</p>}
-        </div>
-        <div className={style.inputField}>
-          <MdEmail className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="text"
-            name="email"
-            id="email"
-            placeholder="Email"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.email && <p className={style.error}>{error.email}</p>}
-        </div>
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.password && <p className={style.error}>{error.password}</p>}
-        </div>
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.confirmPassword && (
-            <p className={style.error}>{error.confirmPassword}</p>
-          )}
-        </div>
-        <div>
-          <input
-            type="submit"
-            className={style.boton}
-            disabled={disabeledSubmit}
-            value="Register"
-          />
-          {openModal && <Modal closeModal={setOpenModal} />}
-          {openModalError && <ModalError closeModal={setOpenModalError} />}
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

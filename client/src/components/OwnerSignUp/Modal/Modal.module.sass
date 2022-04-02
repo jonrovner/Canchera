@@ -1,0 +1,32 @@
+@import '../../CSScommons/commons'
+
+.modalContainer
+	z-index: 10
+	top: 40%
+	position: absolute
+	border-radius: 12px
+	background-color: white
+	display: flex
+	align-items: center
+	flex-direction: column
+	width: 300px
+	padding: 20px
+	border: 5px solid $color-detail
+	h2
+		span
+			color: $color-detail
+			font-family: 'Pattaya', sans-serif\
+	a
+		@include botonLanding
+		text-decoration: none
+		font-size: 25px
+		font-weight: 500
+		padding: 0 10px
+		background-color: transparent
+		border-bottom: 5px solid $color-detail
+	a:hover
+		background-color: $color-detail
+	p
+		display: inline-block
+		text-align: center
+		margin-top: 10px
