@@ -230,7 +230,7 @@ module.exports = {
       province,
       openHour,
       closeHour, 
-      Fields
+      fields
     } = req.body;
 
     try {
@@ -249,26 +249,23 @@ module.exports = {
             closeHour:closeHour,
             image,
            lowestPrice: Math.min(
-            ...Fields.map((field: any) => Number(field.price))
+            ...fields?.map((field: any) => Number(field.price))
           ),
         }); 
-          
-         console.log(Fields);
          
 
-         for (let i = 0; i < Fields.length; i++) {
+         for (let i = 0; i < fields.length; i++) {
            await Field.update({
-            players:Fields[i].players,
-            price: Fields[i].price,
-            image:Fields[i].image,
-            light:Fields[i].light,
-            surface:Fields[i].surface,
+            players:fields[i].players,
+            price: fields[i].price,
+            image:fields[i].image,
+            light:fields[i].light,
+            surface:fields[i].surface,
            },{ where:{ClubName:newClub.name} })
            
          };
-         console.log(Fields);
         
-        return res.json({ newClub, Fields} )
+        return res.json({ newClub, fields} )
 
     } catch (error) {
       next(error)

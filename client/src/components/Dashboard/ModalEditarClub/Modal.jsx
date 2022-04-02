@@ -5,7 +5,6 @@ import style from "./Modal.module.scss";
 import { cities, provinces } from "../../createClub/ar.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { validate } from "../../createClub/validation";
-import FieldForm from "../../createClub/FieldForm";
 
 const Modal = ({ club, closeModal }) => {
   const user = useSelector((state) => state.user);
@@ -18,11 +17,20 @@ const Modal = ({ club, closeModal }) => {
   const [filterCities, setFilterCities] = useState([]);
   const [showCities, setShowCities] = useState(false);
   const defaultPos = { lat: -39.9632, lng: -64.409 };
+  const [field, setField] = useState({});
   const [input, setInput] = useState({
     fields: club.Fields.map((f) => f),
     openHour: "6",
     closeHour: "18",
+    ciudad: club.ciudad,
+    street: club.street,
+    num: club.num,
+    province: club.province,
   });
+  console.log("canchas: ", field);
+  useEffect(() => {
+    findMap();
+  }, []);
 
   useEffect(() => {
     setValid(validate(input));
@@ -54,6 +62,7 @@ const Modal = ({ club, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    fieldInput(field);
 
     if (!valid.valid) {
       setShowValid(true);
@@ -68,11 +77,14 @@ const Modal = ({ club, closeModal }) => {
 
       formData.append("data", JSON.stringify(toPost));
       formData.append("image", file);
-      console.log(toPost);
+      console.log("toPost: ", toPost);
+      console.log("formData: ", formData);
       axios
-        .post(`/club/${club.name}`, formData)
+        .put(`/club/${club.name}`, toPost)
         .then((res) => {
-          if (res.data.name) {
+          console.log("res: ", res);
+          if (res.data.newClub.name) {
+            closeModal(false);
             window.location.reload();
           }
         })
@@ -91,8 +103,7 @@ const Modal = ({ club, closeModal }) => {
     setFile(e.target.files[0]);
   };
 
-  const findMap = (e) => {
-    e.preventDefault();
+  const findMap = () => {
     if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
@@ -132,8 +143,8 @@ const Modal = ({ club, closeModal }) => {
       });
   };
 
-  const fieldInput = (field) => {
-    setInput({ ...input, fields: [...input.fields, field] });
+  const fieldInput = (canchas) => {
+    setInput({ ...input, fields: [...input.fields, canchas] });
   };
 
   return (
@@ -147,7 +158,7 @@ const Modal = ({ club, closeModal }) => {
               <form
                 action="/club/:clubName"
                 encType="multipart/form-data"
-                method="post"
+                method="put"
                 onSubmit={handleSubmit}
               >
                 <div className={style.top}>
@@ -157,7 +168,7 @@ const Modal = ({ club, closeModal }) => {
                       onChange={handleInput}
                       type="text"
                       name="name"
-                      value={club.name}
+                      defaultValue={club.name}
                       placeholder={club.name}
                     />
                     {valid.name && <p className={style.error}>{valid.name}</p>}
@@ -185,6 +196,7 @@ const Modal = ({ club, closeModal }) => {
                         name="description"
                         cols="28"
                         rows="3"
+                        defaultValue={club.description}
                         maxLength="1400"
                       ></textarea>
                       {/* <input onChange={handleInput} type="text" name="description" /> */}
@@ -203,6 +215,7 @@ const Modal = ({ club, closeModal }) => {
                       name="ciudad"
                       onChange={handleInput}
                       list="cityname"
+                      defaultValue={club.ciudad}
                     />
                     <datalist id="cityname">
                       {filterCities.length &&
@@ -213,15 +226,26 @@ const Modal = ({ club, closeModal }) => {
                     </datalist>
 
                     <label htmlFor="street">Calle</label>
-                    <input type="text" name="street" onChange={handleInput} />
+                    <input
+                      type="text"
+                      defaultValue={club.street}
+                      name="street"
+                      onChange={handleInput}
+                    />
 
                     <label htmlFor="num">Número</label>
-                    <input type="text" name="num" onChange={handleInput} />
+                    <input
+                      type="text"
+                      defaultValue={club.num}
+                      name="num"
+                      onChange={handleInput}
+                    />
 
                     <label htmlFor="province">Provincia</label>
                     <input
                       type="text"
                       name="province"
+                      defaultValue={club.province}
                       onChange={handleInput}
                       list="provinceList"
                     />
@@ -246,6 +270,7 @@ const Modal = ({ club, closeModal }) => {
                           onChange={(e) => handleInput(e)}
                           type="text"
                           name="openHour"
+                          defaultValue={club.openHour}
                         >
                           <option value="5">5am</option>
                           <option value="6">6am</option>
@@ -268,6 +293,7 @@ const Modal = ({ club, closeModal }) => {
                           onChange={(e) => handleInput(e)}
                           type="text"
                           name="closeHour"
+                          defaultValue={club.closeHour}
                         >
                           <option value="18">6pm</option>
                           <option value="19">7pm</option>
@@ -306,19 +332,76 @@ const Modal = ({ club, closeModal }) => {
                     {valid.fields && showValid && (
                       <p className={style.error}>{valid.fields}</p>
                     )}
-                    <FieldForm handleInput={fieldInput} />
-                  </div>
-
-                  <div className={style.fields}>
-                    {input.fields &&
-                      input.fields.map((field, i) => (
-                        <div className={style.field} key={i}>
-                          <h3>cancha {i + 1}</h3>
-                          <p>tamaño: {field.players}</p>
-                          <p>superficie: {field.surface}</p>
-                          <p>precio: {field.price}</p>
+                    {/* <FieldForm handleInput={fieldInput} /> */}
+                    {input.fields.map((f, i) => (
+                      <div>
+                        <h3>Cancha {i + 1} </h3>
+                        <div>
+                          <label htmlFor="players">Tamaño</label>
+                          <select
+                            name="players"
+                            onChange={(e) =>
+                              setField({
+                                ...field,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                            defaultValue={f.players}
+                          >
+                            <option value="" disabled>
+                              tamaño
+                            </option>
+                            <option value="5">5</option>
+                            <option value="9">9</option>
+                            <option value="11">11</option>
+                          </select>
+                          {!valid.valid && valid.players && (
+                            <p className={style.error}>{valid.players}</p>
+                          )}
                         </div>
-                      ))}
+                        <div>
+                          <label htmlFor="players">Superficie</label>
+                          <select
+                            name="surface"
+                            onChange={(e) =>
+                              setField({
+                                ...field,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                            defaultValue={f.surface}
+                          >
+                            <option value="" disabled>
+                              superficie
+                            </option>
+                            <option value="cemento">cemento</option>
+                            <option value="sintetico">sintético</option>
+                            <option value="cesped">césped</option>
+                          </select>
+                          {!valid.valid && valid.surface && (
+                            <p className={style.error}>{valid.surface}</p>
+                          )}
+                        </div>
+                        <div>
+                          <label htmlFor="price">Precio</label>
+                          <input
+                            type="number"
+                            name="price"
+                            defaultValue={f.price}
+                            placeholder={f.price}
+                            onChange={(e) =>
+                              setField({
+                                ...field,
+                                [e.target.name]: e.target.value,
+                              })
+                            }
+                          />
+                          {!valid.valid && valid.price && (
+                            <p className={style.error}>{valid.price}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div>
