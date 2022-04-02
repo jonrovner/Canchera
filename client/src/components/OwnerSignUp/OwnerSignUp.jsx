@@ -61,6 +61,8 @@ const OwnerSignUp = () => {
 
   return (
     <div className={styles.SignUp}>
+      {openModal && <Modal closeModal={setOpenModal} />}
+      {openModalError && <ModalError closeModal={setOpenModalError} />}
       <div className={styles.diagonalPattern}></div>
       <div className={styles.dotPattern}></div>
       <div className={styles.content}>
@@ -161,10 +163,6 @@ const OwnerSignUp = () => {
                   disabled={disabeledSubmit}
                   value="Registrarse"
                 />
-                {openModal && <Modal closeModal={setOpenModal} />}
-                {openModalError && (
-                  <ModalError closeModal={setOpenModalError} />
-                )}
               </div>
             </form>
           </div>
