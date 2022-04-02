@@ -57,6 +57,7 @@ function Owner({ id, name, email, rol }) {
   };
 
   const handleCalendar = (e, date, fieldId) => {
+    
     let existent = selectedDates.find(
       (d) => d.time.toString() === date.toString()
     );
@@ -80,10 +81,20 @@ function Owner({ id, name, email, rol }) {
     console.log("booking response: ", post.data);
     if (post.data.length) window.location.reload();
   };
+  const [bookingDetail, setBookingDetail] = useState({detail:{}, show: false})
+  
+  const handleInfo = (e, fieldId, booking) => {
+    e.preventDefault()
+    console.log('handling info booking: ', booking)
+    setBookingDetail({show: true, detail:{fieldId,booking} })
 
-  console.log("owner: ", owner);
-  console.log("club: ", club);
+  }
+  const closeInfo = () => {
+    setBookingDetail({detail:{}, show: false})
+  }
 
+  console.log('booking detail', bookingDetail)
+  console.log('club: ', club)
   return (
     <div>
       <h1>Bienvenido {name}</h1>
@@ -108,41 +119,21 @@ function Owner({ id, name, email, rol }) {
 
       <div>
         <h1>Reservas owner</h1>
-        {club && club.Fields && (
-          <table id="myTable">
-            <tr className={styles.header}>
-              <th>Nombre</th>
-              <th>Cancha</th>
-              <th>Precio</th>
-              <th>Reservas</th>
-            </tr>
-            {club.Fields.map((field) => (
-              <tr>
-                <td>{field.ClubName}</td>
-                <td>{field.id}</td>
-                <td>{field.price}</td>
-                <td>
-                  <ul>
-                    {field.Bookings.length &&
-                      field.Bookings.map((booking) => (
-                        <>
-                          <li>{`${new Date(
-                            booking.time
-                          ).toLocaleString()} usuario: ${booking.User.name} ${
-                            booking.User.name === "owner"
-                              ? ""
-                              : `email: ' ${booking.User.email} `
-                          }`}</li>
+        {bookingDetail.show && <div className="bookingDetail" >
+          
+            <div>
+              <h5>Detalles de reserva</h5>
+               <p>Usuario: {bookingDetail.detail.booking.User.name}</p>
+               <p>email: {bookingDetail.detail.booking.User.email}</p>
+               <p>cancha: {club.Fields.findIndex( field => field.id === bookingDetail.detail.fieldId)+1}</p>
+               <p>hora: {new Date(bookingDetail.detail.booking.time).toLocaleDateString()
+               +" "+
+               new Date(bookingDetail.detail.booking.time).toLocaleTimeString()}</p>
 
-                        </>
-                      ))}
-                  </ul>
-                </td>
-              </tr>
-            ))}
-          </table>
-        )}
-
+            </div>
+         
+        </div>}
+       
         <div className="calendarControls">
           <div className="button" onClick={handlePrevDay}>
             ⏪
@@ -154,7 +145,7 @@ function Owner({ id, name, email, rol }) {
             ⏩
           </div>
         </div>
-
+        
         {club &&
           club.Fields &&
           club.Fields.map((field) => (
@@ -167,8 +158,10 @@ function Owner({ id, name, email, rol }) {
                 bookings={field.Bookings}
                 price={field.price}
                 handleClick={handleCalendar}
+                handleInfo={handleInfo}
                 fieldId={field.id}
                 surface={field.surface}
+                user='owner'
               />
 
               <button onClick={handleBlock}>bloquear</button>
