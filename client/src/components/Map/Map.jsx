@@ -59,7 +59,7 @@ function Map() {
     <div className={styles.Map}>
       <div className={styles.clubs}>
         <h2>
-          Donde jugar con <span>Canchera</span>!
+          Donde jugar con <span>Canchera</span>
         </h2>
         <div>
           <label htmlFor="ciudades">Clubes en</label>
