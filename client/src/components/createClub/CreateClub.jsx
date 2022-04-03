@@ -13,7 +13,7 @@ import Footer from "../Footer/FooterNoVideo";
 const CreateClub = () => {
 
   const user = useSelector((state) => state.user);
-  console.log("user: ", user);
+  //console.log("user: ", user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +22,6 @@ const CreateClub = () => {
       navigate('/')
     }
   }, [user, navigate])
-  
-
 
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
@@ -130,9 +128,9 @@ const CreateClub = () => {
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
-        console.log('nominatim response', res.data)
+        //console.log('nominatim response', res.data)
         if (!res.data.length) {
-          console.log('no valid map')
+          
           return setValidMap("ingrese una dirección válida")
           
         }
@@ -158,13 +156,7 @@ const CreateClub = () => {
        
       });
   };
-
-  const handleOnLoad = (map) => {
-    const bounds = new window.google.maps.LatLngBounds();
-    bounds.extend(position);
-    map.fitBounds(bounds);
-  };
-
+  
   const handleFile = (e) => {
     setFileName(`Cargaste ${e.target.files[0].name}`);
     setFile(e.target.files[0]);
