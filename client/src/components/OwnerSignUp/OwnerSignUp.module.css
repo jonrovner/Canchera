@@ -117,7 +117,8 @@
   color: #dcdaee;
 }
 
-.SignUp .content form .title span {
+.SignUp .content form .title a {
+  text-decoration: none;
   color: #00C49A;
   font-family: 'Pattaya', sans-serif;
 }

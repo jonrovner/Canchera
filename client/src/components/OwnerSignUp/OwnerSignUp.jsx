@@ -8,6 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/Validaciones/validaciones";
 import heroIMG from "../../assets/ownerfield.jpg";
+import { Link } from "react-router-dom";
 
 const OwnerSignUp = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -78,7 +79,7 @@ const OwnerSignUp = () => {
               }}
             >
               <h2 className={styles.title}>
-                Dueño <span>Canchera</span>
+                Dueño <Link to="/">Canchera</Link>
               </h2>
               <div className={styles.inputField}>
                 <div className={styles.input}>

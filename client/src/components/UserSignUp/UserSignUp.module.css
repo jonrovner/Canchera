@@ -5,8 +5,8 @@
   background-image: radial-gradient(#00C49A 2px, transparent 2px);
   background-size: 32px 32px;
   background-color: transparent;
-  bottom: 0;
-  left: 13%;
+  bottom: 5%;
+  left: -10%;
 }
 
 .diagonalPattern {
@@ -16,10 +16,10 @@
   background-image: repeating-linear-gradient(45deg, #00C49A 0, #00C49A 2px, transparent 0, transparent 50%);
   background-size: 32px 32px;
   background-color: rgba(255, 255, 255, 0);
-  right: 15%;
+  right: -10%;
   width: 300px;
   height: 200px;
-  top: 10%;
+  top: 7%;
 }
 
 .SignUp {
@@ -118,7 +118,8 @@
   color: #dcdaee;
 }
 
-.SignUp .content form .title span {
+.SignUp .content form .title a {
+  text-decoration: none;
   color: #00C49A;
   font-family: 'Pattaya', sans-serif;
 }
