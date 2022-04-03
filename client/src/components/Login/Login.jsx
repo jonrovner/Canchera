@@ -10,6 +10,7 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   let dispatch = useDispatch();
@@ -113,7 +114,7 @@ const Login = () => {
               }}
             >
               <h2 className={styles.title}>
-                <span>Canchera</span> <br /> Bienvenido!
+                <Link to="/">Canchera</Link> <br /> Bienvenido!
               </h2>
 
               <div className={styles.inputField}>

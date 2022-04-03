@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
 import styles from "./ResetPassword.module.sass";
 import Modal from "./Modal/Modal";
+import { Link } from "react-router-dom";
 
 const ResetPassword = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -62,13 +63,10 @@ const ResetPassword = () => {
       <div className={styles.image}></div>
       <div className={styles.form}>
         <form onSubmit={onSubmit}>
-          <h2>Canchera</h2>
+          <Link to="/">Canchera</Link>
           <div>
             <h3> Restablecer Contraseña</h3>
-            <p>
-              Ingresa tu email y te enviaremos un link para restablecer tu
-              contraseña.
-            </p>
+            <p>Ingrese una nueva contraseña, y repitala para confirmar.</p>
           </div>
           <div>
             <div className={styles.inputField}>
