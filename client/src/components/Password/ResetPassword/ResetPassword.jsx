@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { RiLockPasswordFill } from "react-icons/ri";
-import style from "./ResetPassword.module.scss";
+import styles from "./ResetPassword.module.sass";
 import Modal from "./Modal/Modal";
 
 const ResetPassword = () => {
@@ -56,42 +56,52 @@ const ResetPassword = () => {
   }, [error]);
 
   return (
-    <div className={style.contenedor}>
-      <form onSubmit={onSubmit} className={style.signInForm}>
-        <h1 className={style.title}> Restablecer Contraseña</h1>
-        <span>
-          Ingresa tu direccion de email en el campo de abajo y te enviaremos un
-          link para restablecer tu password
-        </span>
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
-          <input
-            type="password"
-            name="password"
-            placeholder="Contraseña Nueva"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirmar Contraseña Nueva"
-            onChange={handleChange}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error && <p className={style.error}>{error}</p>}
-        </div>
-        <input
-          type="submit"
-          value="GUARDAR PASSWORD"
-          className={style.boton}
-          disabled={disabeledSubmit}
-        />
-      </form>
+    <div className={styles.ResetPassword}>
       {openModal && <Modal closeModal={setOpenModal} />}
+      <div className={styles.dotPattern}></div>
+      <div className={styles.image}></div>
+      <div className={styles.form}>
+        <form onSubmit={onSubmit}>
+          <h2>Canchera</h2>
+          <div>
+            <h3> Restablecer Contraseña</h3>
+            <p>
+              Ingresa tu email y te enviaremos un link para restablecer tu
+              contraseña.
+            </p>
+          </div>
+          <div>
+            <div className={styles.inputField}>
+              <RiLockPasswordFill className={styles.fasFaUser} />
+              <input
+                required
+                type="password"
+                name="password"
+                placeholder="Contraseña nueva"
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className={styles.inputField}>
+              <RiLockPasswordFill className={styles.fasFaUser} />
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirmar contraseña"
+                onChange={handleChange}
+              />
+              <div className={styles.containerError}>
+                {error && <p className={styles.error}>{error}</p>}
+              </div>
+            </div>
+          </div>
+          <input
+            type="submit"
+            value="Guardar contraseña"
+            className={styles.boton}
+            disabled={disabeledSubmit}
+          />
+        </form>
+      </div>
     </div>
   );
 };
