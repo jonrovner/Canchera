@@ -6,34 +6,40 @@ import axios from "axios";
 
 function User({ id, name }) {
   const userMail = useSelector((state) => state.user).email;
-  
-  const [bookings, setBookings] = useState([]) 
-  const [user, setUser] = useState({})
-  
-  useEffect(()=>{
-    axios.get(`/user?email=${userMail}`)
-     .then( res => setUser(res.data))
-  }, [userMail])
+  const [disabled, setDisabled] = useState(false);
+
+  const [bookings, setBookings] = useState([]);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    axios.get(`/user?email=${userMail}`).then((res) => setUser(res.data));
+  }, [userMail]);
+
+  console.log(user);
 
   useEffect(() => {
     if (user.name) {
-      if(user.Bookings.length){
-        setBookings(user.Bookings.map((b) => {
-          return {
-            id: b.id,
-            ClubName: b.Field.ClubName,
-            time: new Date(b.time),
-            street: b.Field.Club.street,
-            num: b.Field.Club.num,
-            ciudad: b.Field.Club.ciudad,
-            price: b.Field.price,
-            surface: b.Field.surface,
-          };
-        }))    
-      }  
-    }    
+      if (user.Bookings.length) {
+        setBookings(
+          user.Bookings.map((b) => {
+            return {
+              id: b.id,
+              ClubName: b.Field.ClubName,
+              time: new Date(b.time),
+              street: b.Field.Club.street,
+              num: b.Field.Club.num,
+              ciudad: b.Field.Club.ciudad,
+              price: b.Field.price,
+              surface: b.Field.surface,
+              rated: b.rated,
+              players: b.Field.players,
+            };
+          })
+        );
+      }
+    }
   }, [user]);
- 
+
   const [openModal, setOpenModal] = useState({
     modal: false,
     name: "",
@@ -44,8 +50,18 @@ function User({ id, name }) {
     window.location.reload();
   };
 
-  console.log("user: ", user);
-  console.log("boo: ", bookings);
+  //console.log("actual time", new Date().getTime());
+  /* 
+  console.log("booking time", bookings[0].time.getTime());
+
+  console.log(new Date().getTime() > bookings[0].time.getTime());
+ */
+
+  const handleScore = (bookingId, rating) => {
+    axios.put("/booking/score", { bookingId: bookingId, rating: rating });
+    setDisabled(true);
+  };
+
   return (
     <div>
       <h1>Bienvenido {name}</h1>
@@ -66,6 +82,7 @@ function User({ id, name }) {
             <th>Dia y Hora</th>
             <th>Precio</th>
             <th>Superficie</th>
+            <th>Tamaño</th>
             <th>Invitar</th>
           </tr>
           {user &&
@@ -77,14 +94,52 @@ function User({ id, name }) {
                 <td>{b.time.toString().split("G").shift()}</td>
                 <td>${b.price}</td>
                 <td>{b.surface}</td>
+                <td>{b.players}</td>
                 <td>
-                  <button
-                    onClick={() => {
-                      setOpenModal({ modal: true, name: name, id: b.id });
-                    }}
-                  >
-                    Invitar Amigo
-                  </button>
+                  {new Date().getTime() < b.time.getTime() ? (
+                    <button
+                      onClick={() => {
+                        setOpenModal({ modal: true, name: name, id: b.id });
+                      }}
+                    >
+                      Invitar Amigo
+                    </button>
+                  ) : !b.rated ? (
+                    <ul>
+                      <button
+                        disabled={disabled}
+                        onClick={() => handleScore(b.id, 1)}
+                      >
+                        1
+                      </button>
+                      <button
+                        disabled={disabled}
+                        onClick={() => handleScore(b.id, 2)}
+                      >
+                        2
+                      </button>
+                      <button
+                        disabled={disabled}
+                        onClick={() => handleScore(b.id, 3)}
+                      >
+                        3
+                      </button>
+                      <button
+                        disabled={disabled}
+                        onClick={() => handleScore(b.id, 4)}
+                      >
+                        4
+                      </button>
+                      <button
+                        disabled={disabled}
+                        onClick={() => handleScore(b.id, 5)}
+                      >
+                        5
+                      </button>
+                    </ul>
+                  ) : (
+                    <p>Ya esta loco</p>
+                  )}
                 </td>
               </tr>
             ))}
