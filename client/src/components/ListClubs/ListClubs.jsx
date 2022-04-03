@@ -8,8 +8,6 @@ import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import ScrollButton from "../ScrollButton/ScrollButton";
 
-
-
 const ListClubs = () => {
   let dispatch = useDispatch();
   useEffect(() => {
@@ -17,8 +15,11 @@ const ListClubs = () => {
   }, [dispatch]);
 
   let clubes = useSelector((state) => state.clubes);
-  const [filterClubs, setFilterClubs] = useState([])  
-  let intialClubes = clubes.map(club => ({...club, pos:{lat:club.latitude, lng:club.longitude}}))
+  const [filterClubs, setFilterClubs] = useState([]);
+  let intialClubes = clubes.map((club) => ({
+    ...club,
+    pos: { lat: club.latitude, lng: club.longitude },
+  }));
 
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
@@ -55,82 +56,77 @@ const ListClubs = () => {
     }
   };
 
-  console.log('filtered clubes: ', filterClubs)
-  
-  const [mapFilter, setMapFilter] = useState(false)
-  
-  const handleMapFilter = () => {
-    setMapFilter(!mapFilter)
-  }
-  const [mapBounds, setMapBounds] = useState({})
+  console.log("filtered clubes: ", filterClubs);
 
-  useEffect(()=> {
-    
-    if(clubes.length && mapBounds.zb){
-      let filtered = intialClubes.filter( club => 
+  const [mapFilter, setMapFilter] = useState(false);
+
+  const handleMapFilter = () => {
+    setMapFilter(!mapFilter);
+  };
+  const [mapBounds, setMapBounds] = useState({});
+
+  useEffect(() => {
+    if (clubes.length && mapBounds.zb) {
+      let filtered = intialClubes.filter((club) =>
         mapBounds.contains(club.pos)
-      )   
-      
-      setFilterClubs(filtered)
+      );
+
+      setFilterClubs(filtered);
     }
-  },[mapBounds])
-  
-  
+  }, [mapBounds]);
+
   return (
     <div className={style.contenedorGral}>
       <div className={style.orders}>
         <OrderName />
         <OrderCiudad />
         <label>
-          <input type="checkbox" onClick={handleMapFilter} /> Usar mapa como filtro 
-          </label>
+          <input type="checkbox" onClick={handleMapFilter} /> Usar mapa como
+          filtro
+        </label>
       </div>
 
       <div className={style.contenedorlistClubMap}>
         <div className={style.contenedor}>
-
-
-          { mapFilter 
-          
-          ? filterClubs.map((c, i) => (
-            <CardClub
-              key={i}
-              name={c.name}
-              img={c.image}
-              location={
-                c.street + " " + c.num + " " + c.ciudad + " " + c.province
-              }
-              openHour={c.openHour}
-              closeHour={c.closeHour}
-              Fields={c.Fields}
-            />
-          )) : clubes.map((c, i) => (
-            <CardClub
-              key={i}
-              name={c.name}
-              img={c.image}
-              location={
-                c.street + " " + c.num + " " + c.ciudad + " " + c.province
-              }
-              openHour={c.openHour}
-              closeHour={c.closeHour}
-              Fields={c.Fields}
-            />
-          ))
-
-          }
+          {mapFilter
+            ? filterClubs.map((c, i) => (
+                <CardClub
+                  key={i}
+                  name={c.name}
+                  img={c.image}
+                  location={
+                    c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                  }
+                  openHour={c.openHour}
+                  closeHour={c.closeHour}
+                  Fields={c.Fields}
+                />
+              ))
+            : clubes.map((c, i) => (
+                <CardClub
+                  key={i}
+                  name={c.name}
+                  img={c.image}
+                  location={
+                    c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                  }
+                  openHour={c.openHour}
+                  closeHour={c.closeHour}
+                  Fields={c.Fields}
+                  score={c.score}
+                />
+              ))}
         </div>
         <GoogleMap
           onClick={() => setActiveMarker(null)}
           center={mapPos}
           zoom={zoom}
           mapContainerStyle={{ width: "70vw", height: "100vh" }}
-          onLoad={ map => {
-            map.addListener('bounds_changed', () => { 
-             let newBounds = map.getBounds()
-             setMapBounds(newBounds)
-             
-            })            
+          onLoad={(map) => {
+            map.addListener("bounds_changed", () => {
+              let newBounds = map.getBounds();
+              setMapBounds(newBounds);
+            });
           }}
         >
           {clubes.map((club, index) => (
