@@ -20,6 +20,7 @@ function Owner({ id, name, email, rol }) {
   const navigate = useNavigate();
   const [owner, setOwner] = useState({});
   const [club, setClub] = useState({});
+  const [disabled, setDisabled] = useState(false);
 
   const [openModal, setOpenModal] = useState({
     modal: false,
@@ -35,6 +36,7 @@ function Owner({ id, name, email, rol }) {
   console.log("getOwner: ", owner);
   useEffect(() => {
     setClub(owner.Club);
+    setDisabled(!owner.authorized);
   }, [setClub, owner.Club]);
 
   const [selectedDates, setSelectedDates] = useState([]);
@@ -110,16 +112,23 @@ function Owner({ id, name, email, rol }) {
     setBookingDetail({ detail: {}, show: false });
   };
 
-  console.log("booking detail", bookingDetail);
-  console.log("club: ", club);
+  console.log(owner.authorized, disabled);
+
   return (
     <div>
       <h1>Bienvenido {name}</h1>
 
       <div>
-        <NavLink to="/createClub">
-          <button> create club</button>
-        </NavLink>
+        {!owner.Club && (
+          <>
+            <NavLink to="/createClub">
+              <button disabled={disabled}> create club</button>
+            </NavLink>
+            {disabled && (
+              <p>Para crear club, envie email a dueño@canchera.com</p>
+            )}
+          </>
+        )}
       </div>
 
       {club && (
