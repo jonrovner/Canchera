@@ -11,8 +11,8 @@ module.exports = {
 async postBooking(req:Request, res:Response, next:NextFunction){
 
  const { userId, dates } = req.body
- console.log(userId);
- console.log(dates);
+ console.log("USER ID" + userId);
+ console.log("DATES" + dates);
  
 
  try {
@@ -32,18 +32,19 @@ async postBooking(req:Request, res:Response, next:NextFunction){
         const [book, created] = await Booking.findOrCreate({ 
           where: {
           UserId: userId,
-          },
-          defaults:newBooking
+          time: dates[i].time,
+          FieldId: dates[i].field,
+          }          
         });
         bookings.push(book);
       };
-      const [booking] = [...bookings];
       
-      const field = await Field.findOne({ where:{ id:booking.FieldId } })
+      
+      const field = await Field.findOne({ where:{ id: dates[0].field } })
       const club = await Club.findOne({ where:{ name:field.ClubName } })
      
       
-      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre'];
+      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
       let times = bookings.map((booking:any) => {
        let date = new Date(booking.time);
