@@ -1,5 +1,5 @@
-import React from "react";
-import style from "./ModalError.module.scss";
+/* import React from "react";
+import style from "./ModalError.module.css";
 
 const ModalError = ({ closeModal }) => {
   return (
@@ -17,6 +17,33 @@ const ModalError = ({ closeModal }) => {
         <div className={style.footer}>
           <span>Did you forget your password?</span>
         </div>
+      </div>
+    </div>
+  );
+};
+
+export default ModalError;
+ */
+
+import React from "react";
+import { Link } from "react-router-dom";
+import style from "./ModalError.module.css";
+
+const ModalError = ({ closeModal }) => {
+  return (
+    <div className={style.modalContainer}>
+      <div>
+        <h2>Ups!</h2>
+        <button className={style.cancelBtn} onClick={() => closeModal(false)}>
+          X
+        </button>
+      </div>
+      <p>
+        Los datos no coinciden con una cuenta <span>Canchera</span>.
+      </p>
+      <div>
+        <Link to="/forgotPassword">Olvide mi contraseña</Link>
+        <Link to="/signup/user">Registrate</Link>
       </div>
     </div>
   );

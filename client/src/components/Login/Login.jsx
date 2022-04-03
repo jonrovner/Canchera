@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from "react";
-import style from "./Login.module.scss";
+import React, { useMemo, useState } from "react";
+import styles from "./Login.module.css";
 import axios from "axios";
-import Modal from "./Modal/Modal";
 import ModalError from "./Modal/ModalError";
-import { GoogleLogin } from "react-google-login";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { Validate } from "../../utils/Validaciones/validacionesLogIn";
+import heroIMG from "../../assets/6.jpeg";
+import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { get_users_email, set_user } from "../../redux/action";
 import { useNavigate } from "react-router";
@@ -15,7 +15,6 @@ const Login = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [openModal, setOpenModal] = useState(false);
   const [openModalError, setOpenModalError] = useState(false);
   const [error, setError] = useState({});
   const [data, setData] = useState({
@@ -97,71 +96,93 @@ const Login = () => {
   };
 
   return (
-    <div className={style.contenedor}>
-      <form
-        id="formul"
-        className={style.signInForm}
-        onSubmit={(e) => {
-          onSubmit(e);
-        }}
-      >
-        <h2 className={style.title}>Sign In</h2>
+    <div className={styles.SignUp}>
+      {openModalError && <ModalError closeModal={setOpenModalError} />}
+      <div className={styles.diagonalPattern}></div>
+      <div className={styles.dotPattern}></div>
+      <div className={styles.content}>
+        <div className={styles.hero}>
+          <img src={heroIMG} alt="" />
 
-        <div className={style.inputField}>
-          <MdEmail className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="text"
-            name="email"
-            id="email"
-            placeholder="Email"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.email && <p className={style.error}>{error.email}</p>}
-        </div>
+          <div className={styles.form}>
+            <form
+              id="formul"
+              className={styles.signInForm}
+              onSubmit={(e) => {
+                onSubmit(e);
+              }}
+            >
+              <h2 className={styles.title}>
+                <span>Canchera</span> <br /> Bienvenido!
+              </h2>
 
-        <div className={style.inputField}>
-          <RiLockPasswordFill className={style.fasFaUser} />
-          <input
-            autoComplete="off"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            onChange={(e) => handlerInputChange(e)}
-          />
-        </div>
-        <div className={style.containerError}>
-          {error.password && <p className={style.error}>{error.password}</p>}
-        </div>
+              <div className={styles.inputField}>
+                <div className={styles.input}>
+                  <div className={styles.fasFaUser}>
+                    <MdEmail />
+                  </div>
+                  <input
+                    autoComplete="off"
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={(e) => handlerInputChange(e)}
+                  />
+                </div>
+                <div className={styles.containerError}>
+                  {error.email && <p className={styles.error}>{error.email}</p>}
+                </div>
+              </div>
+              <div className={styles.inputField}>
+                <div className={styles.input}>
+                  <div className={styles.fasFaUser}>
+                    <RiLockPasswordFill />
+                  </div>
+                  <input
+                    autoComplete="off"
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Contraseña"
+                    onChange={(e) => handlerInputChange(e)}
+                  />
+                </div>
+                <div className={styles.containerError}>
+                  {error.password && (
+                    <p className={styles.error}>{error.password}</p>
+                  )}
+                </div>
+              </div>
 
-        <div>
-          <input
-            type="submit"
-            className={style.boton}
-            disabled={disabeledSubmit}
-            value="Sign In"
-          />
-          {openModal && <Modal closeModal={setOpenModal} />}
-          {openModalError && <ModalError closeModal={setOpenModalError} />}
+              <div>
+                <input
+                  type="submit"
+                  className={styles.boton}
+                  disabled={disabeledSubmit}
+                  value="Entrar"
+                />
+              </div>
+              <div className={styles.socialMedia}>
+                <GoogleLogin
+                  clientId="78433659675-c72pqgtd1614q2nhb5sqk42f52de5cqg.apps.googleusercontent.com"
+                  buttonText="Entrar con Google"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  cookiePolicy={"single_host_origin"}
+                />
+              </div>
+              <div>
+                <button className={styles.resetPasswd} onClick={handlePass}>
+                  Olvidaste tu contraseña?
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <p className={style.socialText}>O inicia con tu red social favorita</p>
-        <div className={style.socialMedia}>
-          <GoogleLogin
-            clientId="78433659675-c72pqgtd1614q2nhb5sqk42f52de5cqg.apps.googleusercontent.com"
-            buttonText="Sign In with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={"single_host_origin"}
-          />
-        </div>
-        <div className={style}>
-          <button onClick={handlePass}>Olvidaste tu contraseña?</button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
+
 export default Login;
