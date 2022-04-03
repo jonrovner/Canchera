@@ -11,17 +11,17 @@ import Navbar from "../NavBar/NavBarSinSearch";
 import Footer from "../Footer/FooterNoVideo";
 
 const CreateClub = () => {
-
   const user = useSelector((state) => state.user);
-  //console.log("user: ", user);
+  console.log("user: ", user);
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    if (user && user.rol !== 'owner'){
-      navigate('/')
+    if (user && user.rol !== "owner") {
+      navigate("/");
     }
-  }, [user, navigate])
+
+    !user.authorized && navigate("/");
+  }, [user, navigate]);
 
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
@@ -34,8 +34,6 @@ const CreateClub = () => {
   const [file, setFile] = useState(null);
   const [filterCities, setFilterCities] = useState([]);
   const [showCities, setShowCities] = useState(false);
-
-
 
   useEffect(() => {
     if (input.ciudad && input.ciudad.length > 0) {
@@ -65,7 +63,6 @@ const CreateClub = () => {
   const defaultPos = { lat: -39.9632, lng: -64.409 };
   const [zoom, setZoom] = useState(4);
   const [fileName, setFileName] = useState("");
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,8 +106,8 @@ const CreateClub = () => {
     setInput({ ...input, fields: [...input.fields, field] });
   };
 
-  const [validMap, setValidMap] = useState("")
-  
+  const [validMap, setValidMap] = useState("");
+
   const findMap = (e) => {
     e.preventDefault();
     if (!input.ciudad || !input.street || !input.num || !input.province) {
@@ -130,11 +127,9 @@ const CreateClub = () => {
       .then((res) => {
         //console.log('nominatim response', res.data)
         if (!res.data.length) {
-          
-          return setValidMap("ingrese una dirección válida")
-          
+          return setValidMap("ingrese una dirección válida");
         }
-        setValidMap("")
+        setValidMap("");
         setInput({
           ...input,
           latitude: res.data[0].lat,
@@ -153,10 +148,9 @@ const CreateClub = () => {
           latitude: "34.60",
           longitude: "58.38",
         }));
-       
       });
   };
-  
+
   const handleFile = (e) => {
     setFileName(`Cargaste ${e.target.files[0].name}`);
     setFile(e.target.files[0]);
@@ -169,7 +163,7 @@ const CreateClub = () => {
         <div className={styles.content}>
           <h1>Datos del establecimiento</h1>
           {valid.all && showValid && (
-             <p className={styles.error}>{valid.all}</p>
+            <p className={styles.error}>{valid.all}</p>
           )}
 
           <form
@@ -214,14 +208,16 @@ const CreateClub = () => {
                     rows="3"
                     maxLength="1400"
                   ></textarea>
-                  {valid.description && <p className={styles.error}>{valid.description}</p>}
+                  {valid.description && (
+                    <p className={styles.error}>{valid.description}</p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className={styles.center}>
               <div className={styles.address}>
-              {validMap!=="" && <p className={styles.error}>{validMap}</p>}
+                {validMap !== "" && <p className={styles.error}>{validMap}</p>}
                 <label htmlFor="ciudad">Ciudad</label>
                 <input
                   type="text"
@@ -254,7 +250,6 @@ const CreateClub = () => {
                   {provinces && provinces.map((p) => <option value={p} />)}
                 </datalist>
 
-                
                 <button className={styles.findMap} onClick={(e) => findMap(e)}>
                   Buscar en Mapa
                 </button>
