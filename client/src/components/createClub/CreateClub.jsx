@@ -13,7 +13,7 @@ import Footer from "../Footer/FooterNoVideo";
 const CreateClub = () => {
 
   const user = useSelector((state) => state.user);
-  console.log("user: ", user);
+  //console.log("user: ", user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +22,6 @@ const CreateClub = () => {
       navigate('/')
     }
   }, [user, navigate])
-  
-
 
   const [showValid, setShowValid] = useState(false);
   const [valid, setValid] = useState({});
@@ -37,9 +35,7 @@ const CreateClub = () => {
   const [filterCities, setFilterCities] = useState([]);
   const [showCities, setShowCities] = useState(false);
 
-  useEffect(() => {
-    setValid(validate(input));
-  }, [input]);
+
 
   useEffect(() => {
     if (input.ciudad && input.ciudad.length > 0) {
@@ -105,10 +101,16 @@ const CreateClub = () => {
     setInput((input) => ({ ...input, [name]: value }));
   };
 
+  useEffect(() => {
+    setValid(validate(input));
+  }, [input]);
+
   const fieldInput = (field) => {
     setInput({ ...input, fields: [...input.fields, field] });
   };
 
+  const [validMap, setValidMap] = useState("")
+  
   const findMap = (e) => {
     e.preventDefault();
     if (!input.ciudad || !input.street || !input.num || !input.province) {
@@ -126,14 +128,18 @@ const CreateClub = () => {
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
+        //console.log('nominatim response', res.data)
+        if (!res.data.length) {
+          
+          return setValidMap("ingrese una dirección válida")
+          
+        }
+        setValidMap("")
         setInput({
           ...input,
           latitude: res.data[0].lat,
           longitude: res.data[0].lon,
         });
-        if (!res.data[0].lat) {
-          return setValid({ ...valid, map: "ingrese una dirección válida" });
-        }
 
         setZoom(13);
         setPosition({
@@ -147,15 +153,10 @@ const CreateClub = () => {
           latitude: "34.60",
           longitude: "58.38",
         }));
+       
       });
   };
-
-  const handleOnLoad = (map) => {
-    const bounds = new window.google.maps.LatLngBounds();
-    bounds.extend(position);
-    map.fitBounds(bounds);
-  };
-
+  
   const handleFile = (e) => {
     setFileName(`Cargaste ${e.target.files[0].name}`);
     setFile(e.target.files[0]);
@@ -167,6 +168,9 @@ const CreateClub = () => {
       <div className={styles.CreateClub}>
         <div className={styles.content}>
           <h1>Datos del establecimiento</h1>
+          {valid.all && showValid && (
+             <p className={styles.error}>{valid.all}</p>
+          )}
 
           <form
             action="/club"
@@ -210,16 +214,14 @@ const CreateClub = () => {
                     rows="3"
                     maxLength="1400"
                   ></textarea>
-                  {/* <input onChange={handleInput} type="text" name="description" /> */}
-                  {valid.description && showValid && (
-                    <p className={styles.error}>{valid.description}</p>
-                  )}
+                  {valid.description && <p className={styles.error}>{valid.description}</p>}
                 </div>
               </div>
             </div>
 
             <div className={styles.center}>
               <div className={styles.address}>
+              {validMap!=="" && <p className={styles.error}>{validMap}</p>}
                 <label htmlFor="ciudad">Ciudad</label>
                 <input
                   type="text"
@@ -252,9 +254,7 @@ const CreateClub = () => {
                   {provinces && provinces.map((p) => <option value={p} />)}
                 </datalist>
 
-                {valid.all && showValid && (
-                  <p className={styles.error}>{valid.all}</p>
-                )}
+                
                 <button className={styles.findMap} onClick={(e) => findMap(e)}>
                   Buscar en Mapa
                 </button>
