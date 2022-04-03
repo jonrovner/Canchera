@@ -37,9 +37,7 @@ const CreateClub = () => {
   const [filterCities, setFilterCities] = useState([]);
   const [showCities, setShowCities] = useState(false);
 
-  useEffect(() => {
-    setValid(validate(input));
-  }, [input]);
+
 
   useEffect(() => {
     if (input.ciudad && input.ciudad.length > 0) {
@@ -105,10 +103,16 @@ const CreateClub = () => {
     setInput((input) => ({ ...input, [name]: value }));
   };
 
+  useEffect(() => {
+    setValid(validate(input));
+  }, [input]);
+
   const fieldInput = (field) => {
     setInput({ ...input, fields: [...input.fields, field] });
   };
 
+  const [validMap, setValidMap] = useState("")
+  
   const findMap = (e) => {
     e.preventDefault();
     if (!input.ciudad || !input.street || !input.num || !input.province) {
@@ -126,14 +130,18 @@ const CreateClub = () => {
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
+        console.log('nominatim response', res.data)
+        if (!res.data.length) {
+          console.log('no valid map')
+          return setValidMap("ingrese una dirección válida")
+          
+        }
+        setValidMap("")
         setInput({
           ...input,
           latitude: res.data[0].lat,
           longitude: res.data[0].lon,
         });
-        if (!res.data[0].lat) {
-          return setValid({ ...valid, map: "ingrese una dirección válida" });
-        }
 
         setZoom(13);
         setPosition({
@@ -147,6 +155,7 @@ const CreateClub = () => {
           latitude: "34.60",
           longitude: "58.38",
         }));
+       
       });
   };
 
@@ -167,6 +176,9 @@ const CreateClub = () => {
       <div className={styles.CreateClub}>
         <div className={styles.content}>
           <h1>Datos del establecimiento</h1>
+          {valid.all && showValid && (
+             <p className={styles.error}>{valid.all}</p>
+          )}
 
           <form
             action="/club"
@@ -210,16 +222,14 @@ const CreateClub = () => {
                     rows="3"
                     maxLength="1400"
                   ></textarea>
-                  {/* <input onChange={handleInput} type="text" name="description" /> */}
-                  {valid.description && showValid && (
-                    <p className={styles.error}>{valid.description}</p>
-                  )}
+                  {valid.description && <p className={styles.error}>{valid.description}</p>}
                 </div>
               </div>
             </div>
 
             <div className={styles.center}>
               <div className={styles.address}>
+              {validMap!=="" && <p className={styles.error}>{validMap}</p>}
                 <label htmlFor="ciudad">Ciudad</label>
                 <input
                   type="text"
@@ -252,9 +262,7 @@ const CreateClub = () => {
                   {provinces && provinces.map((p) => <option value={p} />)}
                 </datalist>
 
-                {valid.all && showValid && (
-                  <p className={styles.error}>{valid.all}</p>
-                )}
+                
                 <button className={styles.findMap} onClick={(e) => findMap(e)}>
                   Buscar en Mapa
                 </button>
