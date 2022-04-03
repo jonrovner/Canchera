@@ -11,8 +11,7 @@ module.exports = {
 async postBooking(req:Request, res:Response, next:NextFunction){
 
  const { userId, dates } = req.body
- console.log("USER ID" + userId);
- console.log("DATES" + dates);
+ 
  
 
  try {
@@ -21,14 +20,11 @@ async postBooking(req:Request, res:Response, next:NextFunction){
     });
 
     const user = await User.findOne({ where:{id:userId} });
-      console.log(user);
+      
 
     const bookings = [];
     for(let i = 0; i < dates.length; i++){
-        let newBooking ={
-          time: dates[i].time,
-          FieldId: dates[i].field
-        }
+      
         const [book, created] = await Booking.findOrCreate({ 
           where: {
           UserId: userId,
@@ -129,7 +125,7 @@ async getBookings(req:Request, res:Response, next:NextFunction){
       const club = await Club.findOne({ where:{ name:field.ClubName } });
 
       
-      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre']
+      let meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
       
       let times = bookings.map((booking:any) =>{
         let date = new Date(booking.time);
@@ -153,6 +149,42 @@ async getBookings(req:Request, res:Response, next:NextFunction){
     } catch (error) {
       next(error);
     }
+
+  },
+
+
+  async setScore( req:Request, res:Response, next:NextFunction ){
+     
+    const { bookingId, rating } = req.body;
+    
+
+      const booking = await Booking.findOne({where: {id: bookingId}});
+
+      if(!booking.rated){
+
+        const field = await Field.findOne({where: {id: booking.FieldId}});
+        const club = await Club.findOne({where: {name: field.ClubName}});
+        console.log(club);
+        
+        let {score, totalRatings} = club;
+
+        score = (score * totalRatings + rating) / (totalRatings + 1);
+
+        const clubUpdated = await club.update({
+          score,
+          totalRatings: totalRatings + 1,
+        }); 
+
+        console.log(clubUpdated);
+
+        const bookingUpdated = await booking.update({
+          rated: true
+        });        
+        console.log(bookingUpdated);
+        
+        return res.json({bookingUpdated });
+      }
+      return res.json({ booking });
 
   }
 
