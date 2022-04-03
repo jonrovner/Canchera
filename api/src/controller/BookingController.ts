@@ -25,14 +25,17 @@ async postBooking(req:Request, res:Response, next:NextFunction){
 
     const bookings = [];
     for(let i = 0; i < dates.length; i++){
-        const newBooking = await Booking.findOrCreate({ 
-          where: {
+        let newBooking ={
           time: dates[i].time,
-          UserId: userId,
           FieldId: dates[i].field
-          }
+        }
+        const [book, created] = await Booking.findOrCreate({ 
+          where: {
+          UserId: userId,
+          },
+          defaults:newBooking
         });
-        bookings.push(newBooking);
+        bookings.push(book);
       };
       const [booking] = [...bookings];
       
