@@ -18,6 +18,7 @@ import {
 import { order } from "./metodos/order";
 const initialState = {
   clubes: [],
+  filterClubs: [],
   cancha: [],
   usersignin: [],
   user: {},
@@ -125,11 +126,14 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case LOCATION_FILTER: {
+      if(!payload) return {...state, filterClubs:[]}
+
       let filtered = filter(state.clubes, payload);
+       
 
       return {
         ...state,
-        clubes: filtered,
+        filterClubs: filtered,
       };
     }
 

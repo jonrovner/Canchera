@@ -13,6 +13,8 @@ const ListClubs = () => {
   useEffect(() => {
     dispatch(get_all_clubes());
   }, [dispatch]);
+   
+  let serchBarResult = useSelector(state => state.filterClubs)
 
   let clubes = useSelector((state) => state.clubes);
   const [filterClubs, setFilterClubs] = useState([]);
@@ -56,7 +58,7 @@ const ListClubs = () => {
     }
   };
 
-  console.log("filtered clubes: ", filterClubs);
+  //console.log("filtered clubes: ", filterClubs);
 
   const [mapFilter, setMapFilter] = useState(false);
 
@@ -74,7 +76,8 @@ const ListClubs = () => {
       setFilterClubs(filtered);
     }
   }, [mapBounds]);
-
+  
+  console.log(serchBarResult);
   return (
     <div className={style.contenedorGral}>
       <div className={style.orders}>
@@ -88,8 +91,8 @@ const ListClubs = () => {
 
       <div className={style.contenedorlistClubMap}>
         <div className={style.contenedor}>
-          {mapFilter
-            ? filterClubs.map((c, i) => (
+          {serchBarResult.length
+            ? serchBarResult.map((c, i) => (
                 <CardClub
                   key={i}
                   name={c.name}
@@ -129,7 +132,24 @@ const ListClubs = () => {
             });
           }}
         >
-          {clubes.map((club, index) => (
+          {serchBarResult.length ? serchBarResult.map((club, index) => (
+            <Marker
+              key={index}
+              position={positions[index]}
+              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
+              onClick={() => handleActiveMarker(club.name)}
+            >
+              {activeMarker === club.name ? (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <div>
+                    '{club.name}'
+                    <br />
+                    {club.location}
+                  </div>
+                </InfoWindow>
+              ) : null}
+            </Marker>
+          )) :clubes.map((club, index) => (
             <Marker
               key={index}
               position={positions[index]}
