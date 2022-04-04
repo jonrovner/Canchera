@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ListClubs.module.sass";
 import { useDispatch, useSelector } from "react-redux";
-import { get_all_clubes } from "../../redux/action";
+import { get_all_clubes, locationFilter } from "../../redux/action";
 import CardClub from "../CardClub/CardClub";
 import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
@@ -20,6 +20,7 @@ const ListClubs = () => {
 
   let clubes = useSelector((state) => state.clubes);
   const [filterClubs, setFilterClubs] = useState([]);
+
   let intialClubes = clubes.map((club) => ({
     ...club,
     pos: { lat: club.latitude, lng: club.longitude },
@@ -66,6 +67,7 @@ const ListClubs = () => {
 
   const handleMapFilter = () => {
     setMapFilter(!mapFilter);
+    dispatch(locationFilter());
   };
   const [mapBounds, setMapBounds] = useState({});
 
@@ -107,6 +109,21 @@ const ListClubs = () => {
                     openHour={c.openHour}
                     closeHour={c.closeHour}
                     Fields={c.Fields}
+                  />
+                ))
+              : mapFilter
+              ? filterClubs.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
                   />
                 ))
               : clubes.map((c, i) => (
