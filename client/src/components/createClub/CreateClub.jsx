@@ -67,14 +67,14 @@ const CreateClub = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!valid.valid || validMap !=="") {
+    if (!valid.valid || validMap !== "") {
       setShowValid(true);
     } else {
       const formData = new FormData();
 
       const toPost = {
         ...input,
-        score: 3,
+        score: 0,
         userId: user.id,
       };
 
