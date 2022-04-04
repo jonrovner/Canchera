@@ -332,7 +332,7 @@ const CreateClub = () => {
                   ))}
               </div>
             </div>
-            <button className={styles.Submit} type="submit" disabled={false}>
+            <button className={styles.Submit} type="submit" disabled={valid.valid ? false : true}>
               Guardar
             </button>
           </form>
