@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,SAAS,CAAC;EACN,MAAM,EAAE,IAAI;EACZ,UAAU,EAAE,MAAM;CAOS;;AAT/B,AAGI,SAHK,CAGL,EAAE,CAAC;EACC,SAAS,EAAE,IAAI;EACf,KAAK,ECNE,OAAO;EDOd,WAAW,EAAE,qBAAqB;CAAG;;AAN7C,AAOI,SAPK,CAOL,CAAC,CAAC;EACE,WAAW,EAAE,GAAG;EAChB,KAAK,ECXA,OAAO;CDWS",
+    "sources": [
+        "Checkout.module.sass",
+        "../CSScommons/commons.sass"
+    ],
+    "names": [],
+    "file": "Checkout.module.css"
+}
