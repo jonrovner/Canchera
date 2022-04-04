@@ -7,6 +7,9 @@ import Whatsapp from "../Whatsapp/Whatsapp";
 import ScrollButton from "../ScrollButton/ScrollButton";
 import { Link } from "react-router-dom";
 import hero from "../../assets/hero.png";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { locationFilter } from "../../redux/action";
 
 const Landing = () => {
   if (window.localStorage) {
@@ -16,6 +19,13 @@ const Landing = () => {
       window.localStorage.setItem("reload", true);
     }
   }
+
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    dispatch(locationFilter())
+  })
+
   return (
     <div className={styles.Landing}>
       <NavBar />
@@ -36,6 +46,7 @@ const Landing = () => {
         </section>
         <br />
 
+        <div className={styles.diagonalPattern}></div>
         <section loading="lazy" className={styles.player}>
           <div className={styles.text}>
             <h2>
@@ -57,6 +68,7 @@ const Landing = () => {
 
         <Slider />
 
+        <div className={styles.diagonalPatternDos}></div>
         <section loading="lazy" className={styles.host}>
           <div className={styles.text}>
             <h2>

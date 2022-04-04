@@ -1,0 +1,33 @@
+@import '../../CSScommons/commons'
+
+.modalContainer
+	z-index: 10
+	top: 40%
+	position: absolute
+	border-radius: 12px
+	background-color: white
+	display: flex
+	align-items: center
+	flex-direction: column
+	width: 300px
+	padding: 20px
+	border: 5px solid #d4bdbd
+	div
+		display: flex
+		align-items: center
+		justify-content: space-between
+		width: 100%
+	p
+		display: inline-block
+		text-align: center
+		margin-top: 10px
+	.cancelBtn
+		@include botonLanding
+		background-color: #e1b2b2
+		border-radius: 40px
+		font-weight: 500
+		height: 40px
+		width: 40px
+		line-height: 0
+	.cancelBtn:hover
+		background-color: #ff1f1f

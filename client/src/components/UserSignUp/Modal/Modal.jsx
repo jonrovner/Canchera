@@ -1,5 +1,5 @@
-import React from "react";
-import style from "./Modal.module.scss";
+/* import React from "react";
+import style from "./Modal.module.sass";
 
 const Modal = ({ closeModal }) => {
   return (
@@ -23,4 +23,22 @@ const Modal = ({ closeModal }) => {
   );
 };
 
-export default Modal;
+export default Modal; */
+
+import React from "react";
+import style from "./Modal.module.css";
+import { Link } from "react-router-dom";
+
+const ModalError = ({ closeModal }) => {
+  return (
+    <div className={style.modalContainer}>
+      <h2>
+        Bienvenido a <span>Canchera</span>
+      </h2>
+      <Link to="/login">Login</Link>
+      <p>Se ha enviado un email para confirmar su cuenta.</p>
+    </div>
+  );
+};
+
+export default ModalError;

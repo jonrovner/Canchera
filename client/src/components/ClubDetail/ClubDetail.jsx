@@ -12,8 +12,10 @@ import { Navigate, useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { get_club_detail } from "../../redux/action/index.js";
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import "./clubDetail.css";
+import styles from "./ClubDetail.module.css";
 import axios from "axios";
+import NavBar from "../NavBar/NavBarSinSearch";
+import Footer from "../Footer/FooterNoVideo";
 
 const Clubdetail = () => {
   //const navigate = useNavigate()
@@ -142,9 +144,10 @@ const Clubdetail = () => {
   };
 
   return (
-    <div className="clubDetails">
-      {club && (
-        <div className="clubDetail">
+    <div className={styles.ClubDetail}>
+      <NavBar />
+      {club.name && (
+        <div className={styles.Club}>
           <img src={club.image} alt={club.name} />
           <h1>{club.name}</h1>
           <h4>{club.description}</h4>
@@ -152,16 +155,17 @@ const Clubdetail = () => {
 
           {club.latitude && (
             <GoogleMap
-              onLoad={handleOnLoad}
+              //onLoad={handleOnLoad}
               center={position}
-              zoom={18}
-              mapContainerStyle={{ width: "50vw", height: "40vh" }}
-              options={{ mapId: "f8e61b002a1322a0" }}
+              zoom={16}
+              mapContainerStyle={{ width: "50vw", height: "60vh" }}
             >
               <Marker
                 key={club.name}
                 position={position}
-                icon={{ url: "https://i.postimg.cc/t43Ldy9h/canchera-PNG.png" }}
+                icon={{
+                  url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
+                }}
               ></Marker>
             </GoogleMap>
           )}
@@ -198,7 +202,7 @@ const Clubdetail = () => {
                 bookings={field.Bookings}
                 surface={field.surface}
                 handleClick={handleHourClick}
-                user='user'
+                user="user"
               />
             ))}
 
@@ -212,6 +216,7 @@ const Clubdetail = () => {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

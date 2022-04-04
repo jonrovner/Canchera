@@ -12,15 +12,18 @@ export const validate = (input) => {
     valid.all = "por favor complete todos los campos";
   }
   if (input.name && input.name.length < 4) {
+    valid.valid = false
     valid.name = "debe tener al menos 4 letras";
   }
   if (input.description && input.description.length < 10) {
+    valid.valid = false
     valid.description = "una descripción más completa";
   }
   if (input.fields && input.fields.length < 1) {
+    valid.valid = false
     valid.fields = "debe ingresar al menos una cancha";
   } else {
-    valid.valid = true;
+    valid = {valid:true};
   }
   return valid;
 };

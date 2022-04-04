@@ -1,193 +1,214 @@
-.contenedor {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 100vh;
+.dotPattern {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-image: radial-gradient(#00C49A 2px, transparent 2px);
+  background-size: 32px 32px;
+  background-color: transparent;
+  top: -10%;
+  left: -10%;
+  width: 400px;
+  height: 200px;
 }
 
-.contenedor form {
+.ResetPassword {
+  margin: auto;
+  width: 750px;
+  height: 600px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  position: relative;
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ResetPassword .image {
+  -webkit-box-flex: 1.5;
+      -ms-flex: 1.5 1.5 0px;
+          flex: 1.5 1.5 0px;
+  background-image: url("../../../assets/3.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px 0 0 5px;
+}
+
+.ResetPassword .form {
+  background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0, linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0, linear-gradient(315deg, #f3faff 25%, transparent 25%), linear-gradient(45deg, #e0f3ff 25%, transparent 25%);
+  background-size: 64px 64px;
+  background-color: #ecf9ff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+  padding: 20px;
+  color: #140027;
+  border-radius: 0 5px 5px 0;
+}
+
+.ResetPassword .form form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 0rem 5rem;
-  -webkit-transition: all 0.2s 0.7s;
-  transition: all 0.2s 0.7s;
-  overflow: hidden;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 1;
-  grid-column: 1 / 2;
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 1;
-  grid-row: 1 / 2;
-  width: 30rem;
-  height: 40rem;
-  border: 1px solid #3b3b3b;
-  border-radius: 10px;
-  -webkit-box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
-          box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
-  margin-top: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 30px;
+  height: 100%;
+  text-align: center;
 }
 
-.contenedor form .title {
-  font-size: 2.2rem;
-  color: #444;
-  margin-bottom: 10px;
+.ResetPassword .form form a {
+  text-decoration: none;
+  font-size: 50px;
+  color: #00C49A;
+  font-family: 'Pattaya', sans-serif;
 }
 
-.contenedor form .inputField {
+.ResetPassword .form form .inputField {
   max-width: 380px;
   width: 100%;
-  background-color: #f0f0f0;
-  margin: 10px 0;
-  height: 55px;
+  background-color: #dcdaee;
+  margin: 12px 0;
+  height: 40px;
   border-radius: 55px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 15% 85%;
-      grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
 }
 
-.contenedor form .inputField .fasFaUser {
+.ResetPassword .form form .inputField .input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ResetPassword .form form .fasFaUser {
   text-align: center;
-  line-height: 55px;
-  color: #acacac;
+  color: #140027;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   font-size: 1.1rem;
-  margin-top: 1rem;
-  margin-left: 1rem;
 }
 
-.contenedor form .inputField input {
+.ResetPassword .form form input {
   background: none;
   outline: none;
   border: none;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.1rem;
   color: #333;
-  width: 100%;
 }
 
-.contenedor form .inputField input::-webkit-input-placeholder {
+.ResetPassword .form form input::-webkit-input-placeholder {
   color: #aaa;
   font-weight: 500;
 }
 
-.contenedor form .inputField input:-ms-input-placeholder {
+.ResetPassword .form form input:-ms-input-placeholder {
   color: #aaa;
   font-weight: 500;
 }
 
-.contenedor form .inputField input::-ms-input-placeholder {
+.ResetPassword .form form input::-ms-input-placeholder {
   color: #aaa;
   font-weight: 500;
 }
 
-.contenedor form .inputField input::placeholder {
+.ResetPassword .form form input::placeholder {
   color: #aaa;
   font-weight: 500;
 }
 
-.contenedor form .containerError {
+.ResetPassword .form form input:-webkit-autofill, .ResetPassword .form form input:-webkit-autofill:hover, .ResetPassword .form form input:-webkit-autofill:focus, .ResetPassword .form form input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #dcdaee inset !important;
+  border-radius: 30px;
+}
+
+.ResetPassword .form form .containerError {
+  position: absolute;
+  top: 45px;
+  left: 15px;
+}
+
+.ResetPassword .form form .error {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-.contenedor form .containerError .error {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  color: red;
+  color: #ff7575;
   font-size: 14px;
   width: 100%;
 }
 
-.contenedor form .boton {
-  width: 150px;
-  background-color: #5995fd;
+.ResetPassword .form form .boton {
+  color: #140027;
+  font-size: 30px;
+  background-color: #dcdaeeb0;
   border: none;
-  outline: none;
-  height: 49px;
-  border-radius: 49px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin: 10px 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 10px;
   cursor: pointer;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  background-color: #62d9bf;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 10px;
 }
 
-.contenedor form .boton:hover {
-  background-color: #4d84e2;
+.ResetPassword .form form .boton:hover {
+  background-color: #00C49A;
 }
 
-.contenedor form .boton:disabled {
-  background: #505050;
+.ResetPassword .form form .boton:disabled {
+  background-color: rgba(128, 128, 128, 0.788);
 }
 
-.contenedor form .boton:disabled:hover {
-  background: #505050;
+.ResetPassword .form form .boton:disabled:hover {
+  background-color: rgba(128, 128, 128, 0.788);
 }
 
-.contenedor form .socialText {
-  padding: 0.7rem 0;
-  font-size: 1rem;
+.image::after {
+  width: 1040px;
+  height: 93%;
+  content: '';
+  position: absolute;
+  left: 30px;
+  border: 20px solid #dcdaeeb0;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  border: 10px solid #dcdaee;
+  margin: 10px;
 }
 
-.contenedor form .socialMedia {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.contenedor form .socialMedia .socialIcon {
-  height: 46px;
-  width: 46px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 0 0.45rem;
-  color: #333;
-  border-radius: 50%;
-  border: 1px solid #333;
-  text-decoration: none;
-  font-size: 1.1rem;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
-.contenedor form .socialMedia .socialIcon:hover {
-  color: #4481eb;
-  border-color: #4481eb;
+.form {
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
 }
 /*# sourceMappingURL=ValidateEmail.module.css.map */

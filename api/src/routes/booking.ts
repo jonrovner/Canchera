@@ -10,4 +10,6 @@ router.delete('/booking/:userId', BookingController.deleteBooking );
 
 router.post('/booking/sendEmial/:bookingId', BookingController.bookingInvitation);
 
+router.put('/booking/score' , BookingController.setScore)
+
 module.exports = router;

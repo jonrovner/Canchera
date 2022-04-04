@@ -1,5 +1,15 @@
 @import '../CSScommons/commons'
 
+.diagonalPattern
+    @include diagonalPattern
+    top: 100%
+    right: 70%
+
+.diagonalPatternDos
+    @include diagonalPattern
+    top: 380%
+    left: 70%
+
 .Landing
     width: 100%
     display: flex
@@ -55,7 +65,6 @@
             color: $color-header
             width: 100%
             padding: 0px
-            overflow: hidden
             min-height: 630px
             position: relative
             background-image: url('../../assets/9.jpg')

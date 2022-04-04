@@ -1,0 +1,169 @@
+@import '../CSScommons/commons'
+
+.dotPattern
+	@include dotPattern
+	bottom: 0
+	left: 13%
+
+.diagonalPattern
+	@include diagonalPattern
+	right: 15%
+	width: 300px
+	height: 200px
+	top: 10%
+
+.SignUp
+	display: flex
+	justify-content: center
+	height: 100%
+	margin: auto
+	.content
+		position: relative
+		display: flex
+		align-items: center
+		height: 100vh
+		.hero
+			width: 1000px
+			display: flex
+			align-items: center
+			justify-content: center
+			position: relative
+			overflow: hidden
+			@include Sombra
+			@include BordeRadio
+		.hero::after
+			@include marcoInterno
+			pointer-events: none
+			height: 91%
+			width: 94%
+			left: 0
+			left: 30px
+		.form
+			position: absolute
+			right: 80px
+			top: 0
+			height: 100%
+		form
+			display: flex
+			align-items: center
+			justify-content: center
+			flex-direction: column
+			transition: all 0.2s 0.7s
+			overflow: hidden
+			width: 310px
+			height: 100%
+			padding: 20px
+			@include Sombra
+			background: #1400277f
+			-webkit-backdrop-filter: blur(5px)
+			backdrop-filter: blur(5px)
+			.title
+				font-size: 2.2rem
+				color: $color-text
+				text-align: center
+				a
+					text-decoration: none
+					font-size: 45px
+					color: $color-detail
+					font-family: 'Pattaya', sans-serif
+			.inputField
+				max-width: 380px
+				width: 100%
+				background-color: $color-text
+				margin: 12px 0
+				height: 40px
+				border-radius: 55px
+				padding: 0 0.4rem
+				position: relative
+				display: flex
+				position: relative
+				.input
+					display: flex
+					align-items: center
+					gap: 10px
+					margin-left: 10px
+			.fasFaUser
+				text-align: center
+				color: #acacac
+				transition: 0.5s
+				font-size: 1.1rem
+			input
+				background: none
+				outline: none
+				border: none
+				line-height: 1
+				font-weight: 400
+				font-size: 1.1rem
+				color: #333
+			input::placeholder
+				color: #aaa
+				font-weight: 500
+			input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active
+				-webkit-box-shadow: 0 0 0 30px $color-text inset !important
+				border-radius: 30px
+			.containerError
+				position: absolute
+				top: 40px
+				left: 20px
+			.error
+				display: flex
+				color: #ffb7b7
+				font-size: 14px
+				width: 100%
+			.boton
+				//width: 150px
+				//background-color: #5995fd
+				//border: none
+				//outline: none
+				//height: 49px
+				//border-radius: 49px
+				//color: #fff
+				//text-transform: uppercase
+				//font-weight: 600
+				//margin: 10px 0
+				//cursor: pointer
+				//transition: 0.5s
+				@include botonLanding
+				background-color: #62d9bf
+				font-size: 23px
+				margin: 10px
+				width: 174px
+			.boton:hover
+				background-color: #00C49A
+			.boton:disabled
+				background-color: rgba(128, 128, 128, 0.788)
+			.boton:disabled:hover
+				background-color: rgba(128, 128, 128, 0.788)
+			.socialText
+				padding: 0.7rem 0
+				font-size: 1rem
+			.socialMedia
+				display: flex
+				justify-content: center
+				margin-bottom: 20px
+			.socialIcon
+				height: 46px
+				width: 46px
+				display: flex
+				justify-content: center
+				align-items: center
+				margin: 0 0.45rem
+				color: #333
+				border-radius: 50%
+				border: 1px solid #333
+				text-decoration: none
+				font-size: 1.1rem
+				transition: 0.3s
+			.socialIcon:hover
+				color: #4481eb
+				border-color: #4481eb
+			.resetPasswd
+				background-color: $color-text
+				border: none
+				font-size: 13px
+				border-radius: 3px
+				cursor: pointer
+				transition: all 0.3s ease-in-out
+			.resetPasswd:hover
+				background-color: $color-header
+				color: $color-detail

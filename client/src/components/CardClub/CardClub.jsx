@@ -3,7 +3,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "./CardClub.module.scss";
 
-const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
+const CardClub = ({
+  id,
+  name,
+  img,
+  location,
+  openHour,
+  closeHour,
+  Fields,
+  score,
+}) => {
   return (
     <Link
       key={id}
@@ -21,9 +30,12 @@ const CardClub = ({ id, name, img, location, openHour, closeHour, Fields }) => {
             <span>
               Horario: {openHour}am-{closeHour}pm
             </span>
-            {Fields?.map((f, i) => (
-              <li key={i}>Futbol {f.players}</li>
-            ))}
+            <ul>
+              {Fields?.map((f, i) => (
+                <li key={i}>Futbol {f.players}</li>
+              ))}
+            </ul>
+            <p>{score ? score.toFixed(2) + "⭐" : "Sin puntaje 😢"}</p>
           </div>
         </div>
       </div>

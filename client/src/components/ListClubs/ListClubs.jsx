@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import style from "./ListClubs.module.scss";
+import styles from "./ListClubs.module.sass";
 import { useDispatch, useSelector } from "react-redux";
-import { get_all_clubes } from "../../redux/action";
+import { get_all_clubes, locationFilter } from "../../redux/action";
 import CardClub from "../CardClub/CardClub";
 import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import ScrollButton from "../ScrollButton/ScrollButton";
-
-
+import NavBar from "../NavBar/NavBarSinSearch";
+import Footer from "../Footer/FooterNoVideo";
 
 const ListClubs = () => {
   let dispatch = useDispatch();
@@ -16,9 +16,15 @@ const ListClubs = () => {
     dispatch(get_all_clubes());
   }, [dispatch]);
 
+  let serchBarResult = useSelector((state) => state.filterClubs);
+
   let clubes = useSelector((state) => state.clubes);
-  const [filterClubs, setFilterClubs] = useState([])  
-  let intialClubes = clubes.map(club => ({...club, pos:{lat:club.latitude, lng:club.longitude}}))
+  const [filterClubs, setFilterClubs] = useState([]);
+
+  let intialClubes = clubes.map((club) => ({
+    ...club,
+    pos: { lat: club.latitude, lng: club.longitude },
+  }));
 
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
@@ -55,105 +61,146 @@ const ListClubs = () => {
     }
   };
 
-  console.log('filtered clubes: ', filterClubs)
-  
-  const [mapFilter, setMapFilter] = useState(false)
-  
+  //console.log("filtered clubes: ", filterClubs);
+
+  const [mapFilter, setMapFilter] = useState(false);
+
   const handleMapFilter = () => {
-    setMapFilter(!mapFilter)
-  }
-  const [mapBounds, setMapBounds] = useState({})
+    setMapFilter(!mapFilter);
+    dispatch(locationFilter());
+  };
+  const [mapBounds, setMapBounds] = useState({});
 
-  useEffect(()=> {
-    
-    if(clubes.length && mapBounds.zb){
-      let filtered = intialClubes.filter( club => 
+  useEffect(() => {
+    if (clubes.length && mapBounds.zb) {
+      let filtered = intialClubes.filter((club) =>
         mapBounds.contains(club.pos)
-      )   
-      
-      setFilterClubs(filtered)
+      );
+
+      setFilterClubs(filtered);
     }
-  },[mapBounds])
-  
-  
+  }, [mapBounds]);
+
+  console.log(serchBarResult);
   return (
-    <div className={style.contenedorGral}>
-      <div className={style.orders}>
-        <OrderName />
-        <OrderCiudad />
-        <label>
-          <input type="checkbox" onClick={handleMapFilter} /> Usar mapa como filtro 
+    <div className={styles.ListClubs}>
+      <NavBar />
+      <div className={styles.Container}>
+        <div className={styles.search}>
+          <OrderName />
+          <OrderCiudad />
+          <label>
+            <input type="checkbox" onClick={handleMapFilter} /> Usar mapa como
+            filtro
           </label>
-      </div>
-
-      <div className={style.contenedorlistClubMap}>
-        <div className={style.contenedor}>
-
-
-          { mapFilter 
-          
-          ? filterClubs.map((c, i) => (
-            <CardClub
-              key={i}
-              name={c.name}
-              img={c.image}
-              location={
-                c.street + " " + c.num + " " + c.ciudad + " " + c.province
-              }
-              openHour={c.openHour}
-              closeHour={c.closeHour}
-              Fields={c.Fields}
-            />
-          )) : clubes.map((c, i) => (
-            <CardClub
-              key={i}
-              name={c.name}
-              img={c.image}
-              location={
-                c.street + " " + c.num + " " + c.ciudad + " " + c.province
-              }
-              openHour={c.openHour}
-              closeHour={c.closeHour}
-              Fields={c.Fields}
-            />
-          ))
-
-          }
         </div>
-        <GoogleMap
-          onClick={() => setActiveMarker(null)}
-          center={mapPos}
-          zoom={zoom}
-          mapContainerStyle={{ width: "70vw", height: "100vh" }}
-          onLoad={ map => {
-            map.addListener('bounds_changed', () => { 
-             let newBounds = map.getBounds()
-             setMapBounds(newBounds)
-             
-            })            
-          }}
-        >
-          {clubes.map((club, index) => (
-            <Marker
-              key={index}
-              position={positions[index]}
-              icon={{ url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png" }}
-              onClick={() => handleActiveMarker(club.name)}
+
+        <div className={styles.clubesYmap}>
+          <div className={styles.clubes}>
+            {serchBarResult.length
+              ? serchBarResult.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                  />
+                ))
+              : mapFilter
+              ? filterClubs.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
+                  />
+                ))
+              : clubes.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
+                  />
+                ))}
+          </div>
+          <div className={styles.map}>
+            <GoogleMap
+              onClick={() => setActiveMarker(null)}
+              center={mapPos}
+              zoom={zoom}
+              mapContainerStyle={{ width: "100%", height: "100%" }}
+              onLoad={(map) => {
+                map.addListener("bounds_changed", () => {
+                  let newBounds = map.getBounds();
+                  setMapBounds(newBounds);
+                });
+              }}
             >
-              {activeMarker === club.name ? (
-                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                  <div>
-                    '{club.name}'
-                    <br />
-                    {club.location}
-                  </div>
-                </InfoWindow>
-              ) : null}
-            </Marker>
-          ))}
-        </GoogleMap>
-        <ScrollButton />
+              {serchBarResult.length
+                ? serchBarResult.map((club, index) => (
+                    <Marker
+                      key={index}
+                      position={positions[index]}
+                      icon={{
+                        url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
+                      }}
+                      onClick={() => handleActiveMarker(club.name)}
+                    >
+                      {activeMarker === club.name ? (
+                        <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                          <div>
+                            '{club.name}'
+                            <br />
+                            {club.location}
+                          </div>
+                        </InfoWindow>
+                      ) : null}
+                    </Marker>
+                  ))
+                : clubes.map((club, index) => (
+                    <Marker
+                      key={index}
+                      position={positions[index]}
+                      icon={{
+                        url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
+                      }}
+                      onClick={() => handleActiveMarker(club.name)}
+                    >
+                      {activeMarker === club.name ? (
+                        <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                          <div>
+                            '{club.name}'
+                            <br />
+                            {club.location}
+                          </div>
+                        </InfoWindow>
+                      ) : null}
+                    </Marker>
+                  ))}
+            </GoogleMap>
+          </div>
+          <ScrollButton />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

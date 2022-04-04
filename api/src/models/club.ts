@@ -93,6 +93,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       score: {
         type: DataTypes.FLOAT,
+        defaultValue: 0,
                                
       },                                                          
       latitude: {

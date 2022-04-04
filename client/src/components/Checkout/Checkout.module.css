@@ -1,0 +1,16 @@
+.Checkout {
+  margin: auto;
+  text-align: center;
+}
+
+.Checkout h1 {
+  font-size: 60px;
+  color: #00C49A;
+  font-family: 'Pattaya', sans-serif;
+}
+
+.Checkout p {
+  font-weight: 500;
+  color: #dcdaee;
+}
+/*# sourceMappingURL=Checkout.module.css.map */

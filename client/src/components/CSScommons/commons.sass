@@ -29,3 +29,19 @@ $color-bordeInterno: #dcdaeeb0
     left: 30px
     border: 20px solid $color
     @include Sombra
+
+@mixin dotPattern($color: $color-detail)
+    position: absolute
+    width: 300px
+    height: 500px
+    background-image: radial-gradient($color 2px, transparent 2px)
+    background-size: 32px 32px
+    background-color: transparent
+
+@mixin diagonalPattern($color: $color-detail)
+    position: absolute
+    width: 300px
+    height: 500px
+    background-image: repeating-linear-gradient(45deg, $color 0, $color 2px, transparent 0, transparent 50%)
+    background-size: 32px 32px
+    background-color: rgba(255, 255, 255, 0)
