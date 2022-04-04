@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACR,MAAM,EAAE,IAAI;CAIgB;;AALhC,AAEI,WAFO,CAEP,KAAK,CAAC;EACF,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,MAAM;CAAG",
+    "sources": [
+        "ClubDetail.module.sass"
+    ],
+    "names": [],
+    "file": "ClubDetail.module.css"
+}
