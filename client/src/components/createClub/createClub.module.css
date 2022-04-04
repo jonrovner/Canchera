@@ -1,11 +1,22 @@
 .CreateClub {
+  width: 100%;
+}
+
+.container {
   margin: auto;
   padding-block: 50px;
   width: 800px;
   color: #140027;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.CreateClub .content {
+.container .card {
   background-color: peru;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -25,8 +36,8 @@
   position: relative;
 }
 
-.CreateClub .content label {
-  font-weight: 500;
+.container .card label {
+  font-weight: 300;
   border-bottom: 1px solid #a2d4ff;
   width: -webkit-min-content;
   width: -moz-min-content;
@@ -34,38 +45,38 @@
   white-space: nowrap;
 }
 
-.CreateClub .content input[type="file"] {
+.container .card input[type="file"] {
   display: none;
 }
 
-.CreateClub .content input[type="text"], .CreateClub .content input[type="number"], .CreateClub .content select {
+.container .card input[type="text"], .container .card input[type="number"], .container .card select {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #a1a1a1;
   font-weight: 500;
 }
 
-.CreateClub .content input[type="text"]::-webkit-input-placeholder {
+.container .card input[type="text"]::-webkit-input-placeholder {
   color: #c2c2c2;
   font-weight: 300;
 }
 
-.CreateClub .content input[type="text"]:-ms-input-placeholder {
+.container .card input[type="text"]:-ms-input-placeholder {
   color: #c2c2c2;
   font-weight: 300;
 }
 
-.CreateClub .content input[type="text"]::-ms-input-placeholder {
+.container .card input[type="text"]::-ms-input-placeholder {
   color: #c2c2c2;
   font-weight: 300;
 }
 
-.CreateClub .content input[type="text"]::placeholder {
+.container .card input[type="text"]::placeholder {
   color: #c2c2c2;
   font-weight: 300;
 }
 
-.CreateClub .content .testIMG {
+.container .card .testIMG {
   color: #140027;
   font-size: 30px;
   background-color: #dcdaeeb0;
@@ -88,17 +99,17 @@
   color: #140027;
 }
 
-.CreateClub .content .testIMG:hover {
+.container .card .testIMG:hover {
   background-color: #00C49A;
 }
 
-.CreateClub .content .error {
+.container .card .error {
   color: #ff0000;
   font-weight: 500;
   font-size: small;
 }
 
-.CreateClub .content form {
+.container .card form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -112,7 +123,7 @@
   width: 100%;
 }
 
-.CreateClub .content form .top {
+.container .card form .top {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -125,12 +136,12 @@
           justify-content: space-evenly;
 }
 
-.CreateClub .content form .top .error {
+.container .card form .top .error {
   position: absolute;
   width: 300px;
 }
 
-.CreateClub .content form .top .clubName {
+.container .card form .top .clubName {
   text-align: center;
   width: 300px;
   display: -webkit-box;
@@ -144,16 +155,16 @@
   position: relative;
 }
 
-.CreateClub .content form .top .clubName .error {
+.container .card form .top .clubName .error {
   top: 25px;
   left: 100px;
 }
 
-.CreateClub .content form .top .clubName input {
+.container .card form .top .clubName input {
   width: 100%;
 }
 
-.CreateClub .content form .top .clubName .imageInput {
+.container .card form .top .clubName .imageInput {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -163,17 +174,17 @@
           flex-direction: column;
 }
 
-.CreateClub .content form .top .description {
+.container .card form .top .description {
   width: 300px;
   position: relative;
 }
 
-.CreateClub .content form .top .description .error {
+.container .card form .top .description .error {
   top: 5px;
   left: 100px;
 }
 
-.CreateClub .content form .top .description textarea {
+.container .card form .top .description textarea {
   width: 100%;
   height: 96px;
   background-color: #ffffffe8;
@@ -181,7 +192,7 @@
   resize: vertical;
 }
 
-.CreateClub .content form .center {
+.container .card form .center {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -195,7 +206,7 @@
   margin-block: 20px;
 }
 
-.CreateClub .content form .center .address {
+.container .card form .center .address {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -208,19 +219,19 @@
   position: relative;
 }
 
-.CreateClub .content form .center .address .error {
+.container .card form .center .address .error {
   position: absolute;
   width: 300px;
   bottom: 125px;
   left: 35px;
 }
 
-.CreateClub .content form .center .map {
+.container .card form .center .map {
   -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
           box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
 }
 
-.CreateClub .content form .center .findMap {
+.container .card form .center .findMap {
   color: #140027;
   font-size: 30px;
   background-color: #dcdaeeb0;
@@ -242,11 +253,11 @@
   color: #140027;
 }
 
-.CreateClub .content form .center .findMap:hover {
+.container .card form .center .findMap:hover {
   background-color: #00C49A;
 }
 
-.CreateClub .content form .center .openHours {
+.container .card form .center .openHours {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -257,7 +268,7 @@
           flex-direction: column;
 }
 
-.CreateClub .content form .center .openHours div {
+.container .card form .center .openHours div {
   margin: auto;
   width: 80%;
   display: -webkit-box;
@@ -268,7 +279,7 @@
           justify-content: space-between;
 }
 
-.CreateClub .content form .bottom {
+.container .card form .bottom {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -278,7 +289,7 @@
           flex-direction: column;
 }
 
-.CreateClub .content form .bottom .fields {
+.container .card form .bottom .fields {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -288,14 +299,14 @@
           flex-direction: column;
 }
 
-.CreateClub .content form .bottom .fields .field {
+.container .card form .bottom .fields .field {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 20px;
 }
 
-.CreateClub .content form .Submit {
+.container .card form .Submit {
   color: #140027;
   font-size: 30px;
   background-color: #dcdaeeb0;
@@ -314,11 +325,11 @@
   color: #140027;
 }
 
-.CreateClub .content form .Submit:hover {
+.container .card form .Submit:hover {
   background-color: #00C49A;
 }
 
-.CreateClub .content::before {
+.container .card::before {
   width: 1040px;
   height: 93%;
   content: '';
