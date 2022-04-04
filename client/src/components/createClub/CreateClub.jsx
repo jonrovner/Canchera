@@ -157,10 +157,10 @@ const CreateClub = () => {
   };
 
   return (
-    <>
+    <div className={styles.CreateClub}>
       <Navbar />
-      <div className={styles.CreateClub}>
-        <div className={styles.content}>
+      <div className={styles.container}>
+        <div className={styles.card}>
           <h1>Datos del establecimiento</h1>
           {valid.all && showValid && (
             <p className={styles.error}>{valid.all}</p>
@@ -343,7 +343,7 @@ const CreateClub = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

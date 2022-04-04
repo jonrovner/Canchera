@@ -1,11 +1,16 @@
 @import '../CSScommons/commons'
 
 .CreateClub
+    width: 100%
+
+.container
     margin: auto
     padding-block: 50px
     width: 800px
     color: $color-header
-    .content
+    display: flex
+    flex-direction: column
+    .card
         background-color: peru
         display: flex
         flex-direction: column
@@ -17,7 +22,7 @@
         background-color: #ecf9ff
         position: relative
         label
-            font-weight: 500
+            font-weight: 300
             border-bottom: 1px solid #a2d4ff
             width: min-content
             white-space: nowrap
@@ -147,7 +152,7 @@
                 color: $color-header
             .Submit:hover
                 background-color: $color-detail
-    .content::before
+    .card::before
         @include marcoInterno(#a2d4ff)
         width: 100%
         margin: auto
