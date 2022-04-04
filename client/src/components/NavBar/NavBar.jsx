@@ -27,13 +27,16 @@ const Navbar = () => {
   useEffect(() => {
     function updatePosition() {
       setPosition(window.scrollY);
+      if (!window.scrollY) {
+        setInput({ ...input, clubName: "" });
+      }
     }
 
     window.addEventListener("scroll", updatePosition);
     updatePosition();
 
     return () => window.removeEventListener("scroll", updatePosition);
-  }, []);
+  }, [scrollPosition]);
 
   const onChange = async (e) => {
     e.preventDefault();
