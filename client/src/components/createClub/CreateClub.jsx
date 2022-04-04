@@ -67,7 +67,7 @@ const CreateClub = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!valid.valid) {
+    if (!valid.valid || validMap !=="") {
       setShowValid(true);
     } else {
       const formData = new FormData();
@@ -106,7 +106,7 @@ const CreateClub = () => {
     setInput({ ...input, fields: [...input.fields, field] });
   };
 
-  const [validMap, setValidMap] = useState("");
+  const [validMap, setValidMap] = useState("busque su dirección en el mapa");
 
   const findMap = (e) => {
     e.preventDefault();
@@ -143,11 +143,7 @@ const CreateClub = () => {
         });
       })
       .catch((err) => {
-        setInput((input) => ({
-          ...input,
-          latitude: "34.60",
-          longitude: "58.38",
-        }));
+        return setValidMap("ingrese una dirección válida");
       });
   };
 
