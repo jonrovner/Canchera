@@ -21,6 +21,11 @@
 .reserved {
     background-color: red;
 }
+
+.past{
+    background-color: gray;
+}
+
 .fieldInfo{
     border: 1px solid red;
     display: flex;
