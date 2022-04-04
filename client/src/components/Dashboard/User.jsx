@@ -46,9 +46,7 @@ function User({ id, name }) {
     id: "",
   });
 
-  const refresh = () => {
-    window.location.reload();
-  };
+  
 
   //console.log("actual time", new Date().getTime());
   /* 
@@ -67,7 +65,6 @@ function User({ id, name }) {
       <h1>Bienvenido {name}</h1>
       <div>
         <h1>Reservas</h1>
-        <button onClick={() => refresh()}>Refresh</button>
         {openModal.modal && (
           <Modal
             id={openModal.id}
