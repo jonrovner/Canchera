@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import BotonLogout from "../BotonLogout/BotonLogout";
 import { AiOutlineSearch } from "react-icons/ai";
-
+import {  cities } from "../createClub/ar"
 import styles from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { locationFilter, get_all_clubes } from "../../redux/action";
@@ -10,12 +10,15 @@ import { locationFilter, get_all_clubes } from "../../redux/action";
 const Navbar = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  let club = useSelector(state => state.clubes);
+  let filterClub = useSelector(state => state.filterClubs);
   let user = useSelector((state) => state.user);
   if (user.name) {
     user.name = user.name.split(" ").shift();
     user.name = user.name[0].toUpperCase() + user.name.slice(1);
   }
-
+  const [showCities, setShowCities] = useState(false);
+  const [filterCities, setFilterCities] = useState([]);
   const [scrollPosition, setPosition] = useState(0);
 
   const [input, setInput] = useState({
@@ -23,6 +26,30 @@ const Navbar = () => {
     size: "",
     clubName: "",
   });
+
+  useEffect(() => {
+    if (input.ciudad && input.ciudad.length > 0) {
+      setShowCities(true);
+    }
+    if (!input.ciudad || input.ciudad.length < 1) {
+      setShowCities(false);
+    }
+  }, [input.ciudad]);
+
+  useEffect(() => {
+    const findMatch = (word, cities) => {
+      const regex = new RegExp(word, "gi");
+
+      setFilterCities(
+        cities.filter((place) => {
+          return place.city.match(regex);
+        })
+      );
+    };
+    if (input.ciudad && input.ciudad.length) {
+      findMatch(input.ciudad, cities);
+    }
+  }, [input.ciudad]);
 
   useEffect(() => {
     function updatePosition() {
@@ -42,14 +69,13 @@ const Navbar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // aca ya esta listo para ir a /clubs y filtrar segun lo pedido.
-    console.log(input);
     await dispatch(get_all_clubes());
     await dispatch(locationFilter(input));
     navigate("/clubs");
   };
-
+  console.log(club);
+  console.log(filterClub);
   return (
     <div
       className={
@@ -74,7 +100,15 @@ const Navbar = () => {
               type="text"
               placeholder="CIUDAD"
               value={input.ciudad}
+              list="cityname"
             />
+            { <datalist id="cityname">
+                  {filterCities.length &&
+                    showCities &&
+                    filterCities
+                      .slice(0, 10)
+                      .map((city) => <option value={city.city} />)}
+                </datalist> }
             <input
               onChange={(e) => onChange(e)}
               className={styles.size}
