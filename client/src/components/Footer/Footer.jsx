@@ -17,7 +17,7 @@ const Footer = () => {
           loading="lazy"
           title="video"
           height="120%"
-          src="https://player.vimeo.com/video/291893941?h=b268c1e346&muted=1&autoplay=1&loop=1&transparent=0&background=1&controls=0"
+          src="https://player.vimeo.com/video/696149197?h=b268c1e346&muted=1&autoplay=1&loop=1&transparent=0&background=1&controls=0"
           frameBorder="0"
           allow="fullscreen; autoplay; encrypted-media; picture-in-picture"
         ></iframe>
