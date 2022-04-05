@@ -74,7 +74,7 @@ const owner2 = ["","Benjamin", "Martin", "Florencia" , "Miguel" ]
 const clubs2 = ["","Tiro Libre","Al toque Canchita","Alto Sport","Amigos de Concepcion"]
 const owner3 = ["","Javier", "Lucas", "Airton" , "Martin" ]
 const clubs3 = ["","Fulbito 5","Azteca","Balompie","Bariloche Futbol Club"]
-const owner4 = ["","Nicolas", "Jonathan", "Carlos" , "Ezequiel"]
+const owner4 = ["","Nicolas", "Jonathan", "Leonardo Leonel" , "Ezequiel"]
 const clubs4 = ["","Bombonerita","El tatun","Abran cancha","Atletico Neuquen"]
 const owner5 = ["","Mario", "Amapola", "Sol" , "Ricardo"]
 const clubs5 = ["","La Cabrera","Pulperia lo de Cacho","Campo Chico","Equipo Viedma"]
@@ -84,7 +84,7 @@ const owner7 = ["","Marta", "Hector", "Alfio" , "Lucia"]
 const clubs7 = ["","Lo de Marta","La pelota no se mancha","La cancha del Coco","Atletico Jujuy"]
 const owner8 = ["","Santiago", "Daniela", "Alejo" , "Josefina"]
 const clubs8 = ["","Picadito","El Coliseo","La bombonera","Amigos de Posadas"]
-const owner9 = [,"","Micaela", "Gonzalo", "Damian" , "Mateo"]
+const owner9 = ["","Micaela", "Gonzalo", "Damian" , "Mateo"]
 const clubs9 = ["","Pase a Pase","El Templo","Los descendidos","La ventisca"]
 const owner10 = ["","Geronimo", "Bettina", "Monica" , "Nestor"]
 const clubs10 = ["","La chilena","El ascenso","Chabacuco","Futbol Rio Cuarto"]
@@ -177,12 +177,12 @@ try {
                     latitude: -34.6500 + latArray[i],
                     longitude: -59.4268678 + lonArray[i],
                     score: getScore(),
-                    totRatings: 1
+                    totalRatings: 1
                 }    
             })
-            for (let i = 0 ; i <= getTotalFields(); i++){
+            for (let j = 0 ; j <= getTotalFields(); j++){
 
-              await Field.Create(
+              await Field.create(
                 {
                   players: getField(),
                   surface: getSurface(),
@@ -230,13 +230,13 @@ for (let i = 1; i < 5; i++) {
               latitude: -28.3930 + latArray[i],
               longitude: -57.8868 + lonArray[i],
               score: getScore(),
-              totRatings: 1
+              totalRatings: 1
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -285,13 +285,13 @@ for (let i = 1; i < 5; i++) {
               latitude: -41.1500 + latArray[i],
               longitude: -71.3000 + lonArray[i],
               score: getScore(),
-              totRatings: 1
+              totalRatings: 1
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -341,13 +341,13 @@ for (let i = 1; i < 5; i++) {
               latitude: -38.9573 + latArray[i],
               longitude: -68.0455 + lonArray[i],
               score: getScore(),
-              totRatings: 1
+              totalRatings: 1
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -398,9 +398,9 @@ for (let i = 1; i < 5; i++) {
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -449,13 +449,13 @@ for (let i = 1; i < 5; i++) {
               latitude: -54.8022 + latArray[i],
               longitude: -68.3094 + lonArray[i],
               score: getScore(),
-              totRatings: 1
+              totalRatings: 1
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -505,9 +505,9 @@ for (let i = 1; i < 5; i++) {
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -555,13 +555,13 @@ for (let i = 1; i < 5; i++) {
               latitude: -27.3667 + latArray[i],
               longitude: -55.8969 + lonArray[i],
               score: getScore(),
-              totRatings: 1
+              totalRatings: 1
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -612,9 +612,9 @@ for (let i = 1; i < 5; i++) {
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
@@ -663,13 +663,13 @@ for (let i = 1; i < 5; i++) {
               latitude: -33.1230 + latArray[i],
               longitude:-64.3478 + lonArray[i],
               score: getScore(),
-              totRatings: 1
+              totalRatings: 1
           }    
       })
 
-      for (let i = 0 ; i <= getTotalFields(); i++){
+      for (let j = 0 ; j <= getTotalFields(); j++){
 
-        await Field.Create(
+        await Field.create(
           {
             players: getField(),
             surface: getSurface(),
