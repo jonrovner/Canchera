@@ -219,7 +219,7 @@ const ListClubs = () => {
                     Fields={c.Fields}
                   />
                 ))
-              ) : mapFilter ? (
+              ) : filterClubs.length ? (
                 filterClubs.map((c, i) => (
                   <CardClub
                     key={i}
@@ -234,21 +234,31 @@ const ListClubs = () => {
                     score={c.score}
                   />
                 ))
-              ) : clubes.length ? (
-                clubes.map((c, i) => (
-                  <CardClub
-                    key={i}
-                    name={c.name}
-                    img={c.image}
-                    location={
-                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
-                    }
-                    openHour={c.openHour}
-                    closeHour={c.closeHour}
-                    Fields={c.Fields}
-                    score={c.score}
-                  />
-                ))
+              ) : !mapFilter ? (
+                clubes.length ? (
+                  clubes.map((c, i) => (
+                    <CardClub
+                      key={i}
+                      name={c.name}
+                      img={c.image}
+                      location={
+                        c.street +
+                        " " +
+                        c.num +
+                        " " +
+                        c.ciudad +
+                        " " +
+                        c.province
+                      }
+                      openHour={c.openHour}
+                      closeHour={c.closeHour}
+                      Fields={c.Fields}
+                      score={c.score}
+                    />
+                  ))
+                ) : (
+                  <Loader />
+                )
               ) : (
                 <Loader />
               )}
