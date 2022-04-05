@@ -6,6 +6,7 @@ import styles from "./Dashboard.module.css";
 import Modal from "./Modal/Modal";
 
 function Admin({ user }) {
+  const [idUser, setIdUser] = useState("");
   let dispatch = useDispatch();
   let [data, setData] = useState({
     rol: "",
@@ -29,13 +30,20 @@ function Admin({ user }) {
   };
 
   const handlerInputChange = (e) => {
-    
     console.log(e.target.value);
     console.log(e.target.name);
-    
-    setData({ 
+
+    setData({
       ...data,
-      [e.target.name]: e.target.value 
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleEdit = (id) => {
+    setIdUser(id);
+    setData({
+      rol: "",
+      authorized: null,
     });
   };
 
@@ -47,35 +55,59 @@ function Admin({ user }) {
           {allUsers &&
             allUsers.map((c) => (
               <li key={c.id}>
-                Nombre: {c.name} - Rol: {c.rol} {c.rol === "owner" ? c.authorized === true ? ` - Estado: Autorizado` : ` - Estado: Bloqueado` : ""} 
-                <select
-                  name="rol"
-                  defaultValue=""
-                  onChange={handlerInputChange}
-                >
-                  <option disabled value="">Nuevo Rol</option>
-                  <option value="user">User</option>
-                  <option value="owner">Owner</option>
-                  <option value="admin">Admin</option>
-                </select>
-                {c.rol === "owner" && <select
-                  name="authorized"
-                  defaultValue=""
-                  onChange={handlerInputChange}
-                >
-                  <option disabled value="">Nuevo Estado</option>
-                  <option value="true">Autorizar</option>
-                  <option value="false">Bloqueado</option>                  
-                </select>}
-                <button onClick={() => updateUser(c.id)}>Actualizar</button>
-                <TiDelete
-                  className={styles.delete}
-                  onClick={() =>
-                    setOpenModal({ modal: true, name: c.name, id: c.id })
-                  }
-                />
+                <div className={styles.elemento}>
+                  <div className={styles.data}>
+                    Nombre: {c.name} - Rol: {c.rol}{" "}
+                    {c.rol === "owner"
+                      ? c.authorized === true
+                        ? ` - Estado: Autorizado`
+                        : ` - Estado: Bloqueado`
+                      : ""}
+                  </div>
+                  {idUser === c.id && (
+                    <div className={styles.hide}>
+                      <select
+                        name="rol"
+                        defaultValue=""
+                        onChange={handlerInputChange}
+                      >
+                        <option disabled value="">
+                          Nuevo Rol
+                        </option>
+                        <option value="user">User</option>
+                        <option value="owner">Owner</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                      {c.rol === "owner" && (
+                        <select
+                          name="authorized"
+                          defaultValue=""
+                          onChange={handlerInputChange}
+                        >
+                          <option disabled value="">
+                            Nuevo Estado
+                          </option>
+                          <option value="true">Autorizar</option>
+                          <option value="false">Bloqueado</option>
+                        </select>
+                      )}
+                      <button onClick={() => updateUser(c.id)}>
+                        Actualizar
+                      </button>
+                      <TiDelete
+                        className={styles.delete}
+                        onClick={() =>
+                          setOpenModal({ modal: true, name: c.name, id: c.id })
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
+                {idUser !== c.id && (
+                  <button onClick={() => handleEdit(c.id)}>Editar</button>
+                )}
               </li>
-            ))}{" "}
+            ))}
         </ul>
         {openModal.modal && (
           <Modal
