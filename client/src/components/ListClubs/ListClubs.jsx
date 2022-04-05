@@ -71,8 +71,6 @@ const ListClubs = () => {
     }
   };
 
-  //console.log("filtered clubes: ", filterClubs);
-
   const [mapFilter, setMapFilter] = useState(false);
 
   const handleMapFilter = () => {

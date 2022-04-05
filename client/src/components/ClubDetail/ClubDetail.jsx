@@ -86,7 +86,6 @@ const Clubdetail = () => {
 
   //on submit
   const handleReservation = async () => {
-    // console.log('you selected dates', selectedDates)
     if (typeof user.email === "string") {
       try {
         const mpResponse = await axios.post("/checkout", { price });
