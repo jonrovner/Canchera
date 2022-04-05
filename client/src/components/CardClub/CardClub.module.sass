@@ -1,0 +1,50 @@
+@import '../CSScommons/commons'
+
+.CardClub
+	text-decoration: none
+	.contenedor
+		background-color: #efeef8
+		color: $color-header
+		width: 100%
+		height: auto
+		min-height: 10rem
+		display: flex
+		overflow: hidden
+		border-radius: 5px
+		position: relative
+		.divImg
+			width: 25rem
+		img
+			height: 110%
+			clip-path: polygon(0% 0%, 88.8% 0%, 100% 100%, 0% 100%)
+
+		.divInfo
+			margin-left: 2rem
+			width: 25rem
+			padding-block: 20px
+			h2
+				line-height: 1
+
+		.divContenido
+			display: flex
+			flex-direction: column
+
+			p
+				line-height: 1
+				font-weight: 500
+			.location
+				font-weight: 300
+				margin-bottom: 14px
+			.data
+				display: flex
+				flex-direction: column
+				gap: 8px
+			.score
+				position: absolute
+				bottom: 10px
+				right: 10px
+.link:link,
+.link:visited,
+.link:active
+	text-decoration: none
+	text-decoration-color: none
