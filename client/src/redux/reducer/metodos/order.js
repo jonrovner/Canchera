@@ -35,9 +35,9 @@ export const order = (array, orderBy) => {
     );
 
   } */ else if (orderBy === "hr") {
-    array = array.slice().sort((a, b) => b.score - a.score);
+    array = array.sort((a, b) => b.score - a.score);
   } else if (orderBy === "lr") {
-    array = array.slice().sort((a, b) => a.score - b.score);
+    array = array.sort((a, b) => a.score - b.score);
   }
 
   return array;
