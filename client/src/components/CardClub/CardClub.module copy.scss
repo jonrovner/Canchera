@@ -1,17 +1,16 @@
 .link {
   .contenedor {
-    margin: 0.5rem;
     background-color: white;
     color: black;
     border: 2px solid black;
-    width: 100%rem;
+    width: 100%;
     height: auto;
     min-height: 10rem;
     display: flex;
     .divImg {
       width: 25rem;
       img {
-        height: 110%rem;
+        height: 110%;
       }
     }
     .divInfo {
