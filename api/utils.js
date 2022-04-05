@@ -48,13 +48,50 @@ function getScore() {
        default: return 5;
    }
 }
+
+function getTotalFields() {
+   let number =  Math.floor(1 + Math.random() * 3);
+
+   switch (number) {
+       case 1: return 1;          
+       case 2: return 2;         
+       case 3: return 3; 
+       default: return 3;
+   }
+}
+
 function getPrice() {
   let value =  Math.floor(1 + Math.random() * 1000);
 
   return value;
 }
-   
-   
+
+const adminName = ["","Julian", "Sandra", "Tomas"];
+const userName = ["","Franco", "Mariano", "Maria"];
+const owner1 = ["","Roberto", "Juan Carlos", "Federico" ,"Teresa"]
+const clubs1 = ["","100% Futbol","A dos toques","La cañada","Futbol Mercedes"]
+const owner2 = ["","Benjamin", "Martin", "Florencia" , "Miguel" ]
+const clubs2 = ["","Tiro Libre","Al toque Canchita","Alto Sport","Amigos de Concepcion"]
+const owner3 = ["","Javier", "Lucas", "Airton" , "Martin" ]
+const clubs3 = ["","Fulbito 5","Azteca","Balompie","Bariloche Futbol Club"]
+const owner4 = ["","Nicolas", "Jonathan", "Carlos" , "Ezequiel"]
+const clubs4 = ["","Bombonerita","El tatun","Abran cancha","Atletico Neuquen"]
+const owner5 = ["","Mario", "Amapola", "Sol" , "Ricardo"]
+const clubs5 = ["","La Cabrera","Pulperia lo de Cacho","Campo Chico","Equipo Viedma"]
+const owner6 = ["","David", "Carlos", "Sol" , "Maria Jose"]
+const clubs6 = ["","Canchas Offside","Cancha: El viejo Carlos","Hay Equipo","Cancha Ushuaia"]
+const owner7 = ["","Marta", "Hector", "Alfio" , "Lucia"]
+const clubs7 = ["","Lo de Marta","La pelota no se mancha","La cancha del Coco","Atletico Jujuy"]
+const owner8 = ["","Santiago", "Daniela", "Alejo" , "Josefina"]
+const clubs8 = ["","Picadito","El Coliseo","La bombonera","Amigos de Posadas"]
+const owner9 = [,"","Micaela", "Gonzalo", "Damian" , "Mateo"]
+const clubs9 = ["","Pase a Pase","El Templo","Los descendidos","La ventisca"]
+const owner10 = ["","Geronimo", "Bettina", "Monica" , "Nestor"]
+const clubs10 = ["","La chilena","El ascenso","Chabacuco","Futbol Rio Cuarto"]
+
+
+
+
 
 async function dataDB() {
     let encryptedPasswordUser = bcrypt.hashSync(
@@ -79,7 +116,7 @@ try {
         await User.findOrCreate({ 
             where: {
                 email: `user${i.toString()}@user.com`,
-                name: `User ${i.toString()}`,
+                name: userName[i],
                 rol: "user",
         },
         defaults: {
@@ -95,7 +132,7 @@ try {
         await User.findOrCreate({ 
             where: {
               email: `admin${i.toString()}@admin.com`,
-              name: `Admin ${i.toString()}`,
+              name: adminName[i],
               rol: "admin",
             },
             defaults: {
@@ -106,7 +143,7 @@ try {
     }
     
 // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------   
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 5; i++) {
         
         let idOwner = i;        
 
@@ -115,7 +152,7 @@ try {
               email: `owner${idOwner}@owner.com`
             },
             defaults: {
-             name: `Owner ${idOwner}`,
+             name: owner1[i],
              password: encryptedPasswordOwner,
              rol: "owner",
              status: true,
@@ -128,7 +165,7 @@ try {
                 const clubCreated = await Club.findOrCreate({ where: {
                   UserId: ownerCreated.dataValues.id},
                   defaults: {
-                    name: `Club de Prueba ${idOwner}`,
+                    name: clubs1[i],
                     description: "Descripcion de prueba",
                     street: "calle X",
                     num: 1000,
@@ -143,42 +180,32 @@ try {
                     totRatings: 1
                 }    
             })
+            for (let i = 0 ; i <= getTotalFields(); i++){
 
-            await Field.bulkCreate([
+              await Field.Create(
                 {
                   players: getField(),
                   surface: getSurface(),
                   price: 4000 + getPrice(),
                   ClubName: clubCreated[0].dataValues.name
-                },
-                {
-                  players: getField(),
-                  surface: getSurface(),
-                  price: 6000 + getPrice(),
-                  ClubName: clubCreated[0].dataValues.name
-                },
-                {
-                  players: getField(),
-                  surface: getSurface(),
-                  price: 8000 + getPrice(),
-                  ClubName: clubCreated[0].dataValues.name
-                }
-              ])
-            
+
+                })            
+              }
+
             }  
    };                       
     
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------   
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+2;        
+  let idOwner = i+4;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner2[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -191,7 +218,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs2[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -207,41 +234,33 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
+
+          })            
+        }
+
       
       }  
 };    
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------   
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+4;        
+  let idOwner = i+8;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner3[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -254,7 +273,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs3[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -270,42 +289,34 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
+
+          })            
+        }
+
       
       }  
 };    
 
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+6;        
+  let idOwner = i+12;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner4[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -318,7 +329,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs4[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -334,41 +345,33 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
+
+          })            
+        }
+
       
       }  
 };       
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------   
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+8;        
+  let idOwner = i+16;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner5[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -381,7 +384,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs5[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -395,42 +398,33 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
-      
+
+          })            
+        }
+
       }  
 };    
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------  
 
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+10;        
+  let idOwner = i+20;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner6[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -443,7 +437,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs6[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -459,41 +453,32 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
-      
+
+          })            
+        }      
+
       }  
 };     
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ---------------- 
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+12;        
+  let idOwner = i+24;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner7[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -506,7 +491,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs7[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -520,41 +505,32 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
-      
+
+          })            
+        }
+
       }  
 };      
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ----------------  
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+14;        
+  let idOwner = i+28;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner8[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -567,7 +543,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs8[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -583,42 +559,33 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
-      
+
+          })            
+        }      
+
       }  
 };     
 
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ---------------- 
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+16;        
+  let idOwner = i+32;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner9[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -631,7 +598,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs9[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -645,42 +612,33 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
-      
+
+          })            
+        }
+
       }  
 };      
 
 
 // // ------------- ACA EMPIEZA LA CREACION DE UNA CIUDAD ---------------- 
-for (let i = 1; i < 3; i++) {
+for (let i = 1; i < 5; i++) {
         
-  let idOwner = i+18;        
+  let idOwner = i+36;        
 
   const [ownerCreated, created] = await User.findOrCreate({
       where: {
         email: `owner${idOwner}@owner.com`
       },
       defaults: {
-       name: `Owner ${idOwner}`,
+       name: owner10[i],
        password: encryptedPasswordOwner,
        rol: "owner",
        status: true,
@@ -693,7 +651,7 @@ for (let i = 1; i < 3; i++) {
           const clubCreated = await Club.findOrCreate({ where: {
             UserId: ownerCreated.dataValues.id},
             defaults: {
-              name: `Club de Prueba ${idOwner}`,
+              name: clubs10[i],
               description: "Descripcion de prueba",
               street: "calle X",
               num: 1000,
@@ -709,26 +667,18 @@ for (let i = 1; i < 3; i++) {
           }    
       })
 
-      await Field.bulkCreate([
+      for (let i = 0 ; i <= getTotalFields(); i++){
+
+        await Field.Create(
           {
             players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 6000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          },
-          {
-            players: getField(),
-            surface: getSurface(),
-            price: 8000 + getPrice(),
-            ClubName: clubCreated[0].dataValues.name
-          }
-        ])
+
+          })            
+        }
+
       
       }  
 };          
