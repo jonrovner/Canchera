@@ -145,16 +145,18 @@ const ListClubs = () => {
     ],
   };
 
-  const hadlerHigherRating = async () => {
+  const hadlerHigherRating = () => {
     let order = "hr";
     //alert("mayor calificacion");
-    await dispatch(order_rating_clubs(order));
+    dispatch(order_rating_clubs(order));
+    setFilterClubs(filterClubs.sort((a, b) => b.score - a.score));
   };
 
-  const hadlerLowerRating = async () => {
+  const hadlerLowerRating = () => {
     let order = "lr";
     //alert("menor calificacion");
-    await dispatch(order_rating_clubs(order));
+    dispatch(order_rating_clubs(order));
+    setFilterClubs(filterClubs.sort((a, b) => a.score - b.score));
   };
   return (
     <div className={styles.ListClubs}>
@@ -220,36 +222,56 @@ const ListClubs = () => {
             <div className={styles.clubes}>
               {serchBarResult.length ? (
                 serchBarResult.map((c, i) => (
-                  <CardClub
-                    key={i}
-                    name={c.name}
-                    img={c.image}
-                    location={
-                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
-                    }
-                    openHour={c.openHour}
-                    closeHour={c.closeHour}
-                    Fields={c.Fields}
-                  />
-                ))
-              ) : filterClubs.length ? (
-                filterClubs.map((c, i) => (
-                  <CardClub
-                    key={i}
-                    name={c.name}
-                    img={c.image}
-                    location={
-                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
-                    }
-                    openHour={c.openHour}
-                    closeHour={c.closeHour}
-                    Fields={c.Fields}
-                    score={c.score}
-                  />
+                  <>
+                    <CardClub
+                      key={i}
+                      name={c.name}
+                      img={c.image}
+                      location={
+                        c.street +
+                        " " +
+                        c.num +
+                        " " +
+                        c.ciudad +
+                        " " +
+                        c.province
+                      }
+                      openHour={c.openHour}
+                      closeHour={c.closeHour}
+                      Fields={c.Fields}
+                    />
+                  </>
                 ))
               ) : !mapFilter ? (
                 clubes.length ? (
                   clubes.map((c, i) => (
+                    <>
+                      <CardClub
+                        key={i}
+                        name={c.name}
+                        img={c.image}
+                        location={
+                          c.street +
+                          " " +
+                          c.num +
+                          " " +
+                          c.ciudad +
+                          " " +
+                          c.province
+                        }
+                        openHour={c.openHour}
+                        closeHour={c.closeHour}
+                        Fields={c.Fields}
+                        score={c.score}
+                      />
+                    </>
+                  ))
+                ) : (
+                  <Loader />
+                )
+              ) : filterClubs.length ? (
+                filterClubs.map((c, i) => (
+                  <>
                     <CardClub
                       key={i}
                       name={c.name}
@@ -268,10 +290,8 @@ const ListClubs = () => {
                       Fields={c.Fields}
                       score={c.score}
                     />
-                  ))
-                ) : (
-                  <Loader />
-                )
+                  </>
+                ))
               ) : (
                 <Loader />
               )}
