@@ -124,8 +124,10 @@ export const order_name_clubs = (order) => {
   return { type: ORDER_NAME_CLUBS, payload: order };
 };
 
+
 export const order_rating_clubs = (order) => async (dispatch) => {
   return dispatch({ type: ORDER_RATING_CLUBS, payload: order });
+
 };
 
 export const order_price_clubs = (order) => {
