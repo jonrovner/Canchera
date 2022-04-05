@@ -7,6 +7,7 @@ import {
   GET_ALL_CLUBES,
   SET_USER,
   ORDER_NAME_CLUBS,
+  ORDER_RATING_CLUBS,
   ORDER_PRICE_CLUBS,
   GET_CLUB_DETAIL,
   CLEAN_STATE,
@@ -110,6 +111,14 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
 
+    case ORDER_RATING_CLUBS: {
+      let ordered = order(state.clubes, payload);
+      return {
+        ...state,
+        clubes: ordered,
+      };
+    }
+
     case ORDER_PRICE_CLUBS: {
       let ordered = order(state.clubes, payload);
       return {
@@ -126,10 +135,9 @@ function rootReducer(state = initialState, { type, payload }) {
     }
 
     case LOCATION_FILTER: {
-      if(!payload) return {...state, filterClubs:[]}
+      if (!payload) return { ...state, filterClubs: [] };
 
       let filtered = filter(state.clubes, payload);
-       
 
       return {
         ...state,

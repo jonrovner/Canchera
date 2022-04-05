@@ -7,6 +7,7 @@ export const LOAD_STATE_USER = "LOAD_STATE_USER";
 export const GET_ALL_CLUBES = "GET_ALL_CLUBES";
 export const SET_USER = "SET_USER";
 export const ORDER_NAME_CLUBS = "ORDER_NAME_CLUBS";
+export const ORDER_RATING_CLUBS = "ORDER_RATING_CLUBS";
 export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
 export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL";
 export const CLEAN_STATE = "CLEAN_STATE";
@@ -121,6 +122,10 @@ export const set_user = (user) => async (dispatch) => {
 
 export const order_name_clubs = (order) => {
   return { type: ORDER_NAME_CLUBS, payload: order };
+};
+
+export const order_rating_clubs = (order) => {
+  return { type: ORDER_RATING_CLUBS, payload: order };
 };
 
 export const order_price_clubs = (order) => {

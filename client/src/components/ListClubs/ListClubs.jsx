@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ListClubs.module.sass";
 import { useDispatch, useSelector } from "react-redux";
-import { get_all_clubes, locationFilter } from "../../redux/action";
+import {
+  get_all_clubes,
+  locationFilter,
+  order_rating_clubs,
+} from "../../redux/action";
 import CardClub from "../CardClub/CardClub";
 import OrderName from "../Order/OrderName";
 import OrderCiudad from "../Order/OrderCiudad";
@@ -141,21 +145,30 @@ const ListClubs = () => {
     ],
   };
 
+  const hadlerHigherRating = async () => {
+    let order = "hr";
+    //alert("mayor calificacion");
+    await dispatch(order_rating_clubs(order));
+  };
+
+  const hadlerLowerRating = async () => {
+    let order = "lr";
+    //alert("menor calificacion");
+    await dispatch(order_rating_clubs(order));
+  };
   return (
     <div className={styles.ListClubs}>
       <div className={styles.nonFooter}>
         <NavBar />
         <div className={styles.Container}>
           <div className={styles.search}>
-            {/* <OrderName />
-            <OrderCiudad /> */}
             <div className={styles.orderScore}>
               Ordenar por Calificación
               <div>
-                <button>
+                <button onClick={hadlerHigherRating}>
                   <BsArrowUpCircleFill />
                 </button>
-                <button>
+                <button onClick={hadlerLowerRating}>
                   <BsArrowDownCircleFill />
                 </button>
               </div>
@@ -219,7 +232,7 @@ const ListClubs = () => {
                     Fields={c.Fields}
                   />
                 ))
-              ) : mapFilter ? (
+              ) : filterClubs.length ? (
                 filterClubs.map((c, i) => (
                   <CardClub
                     key={i}
@@ -234,21 +247,31 @@ const ListClubs = () => {
                     score={c.score}
                   />
                 ))
-              ) : clubes.length ? (
-                clubes.map((c, i) => (
-                  <CardClub
-                    key={i}
-                    name={c.name}
-                    img={c.image}
-                    location={
-                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
-                    }
-                    openHour={c.openHour}
-                    closeHour={c.closeHour}
-                    Fields={c.Fields}
-                    score={c.score}
-                  />
-                ))
+              ) : !mapFilter ? (
+                clubes.length ? (
+                  clubes.map((c, i) => (
+                    <CardClub
+                      key={i}
+                      name={c.name}
+                      img={c.image}
+                      location={
+                        c.street +
+                        " " +
+                        c.num +
+                        " " +
+                        c.ciudad +
+                        " " +
+                        c.province
+                      }
+                      openHour={c.openHour}
+                      closeHour={c.closeHour}
+                      Fields={c.Fields}
+                      score={c.score}
+                    />
+                  ))
+                ) : (
+                  <Loader />
+                )
               ) : (
                 <Loader />
               )}
