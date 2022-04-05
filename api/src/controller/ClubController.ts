@@ -47,8 +47,6 @@ module.exports = {
       fields,
     } = JSON.parse(req.body.data);
 
-    // console.log("body : ", JSON.parse(req.body.data));
-
     try {
       if (
         !name ||

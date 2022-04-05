@@ -3,7 +3,6 @@ const mercadopago = require("mercadopago");
 mercadopago.configurations.setAccessToken(
   "TEST-8695737586875441-070217-1a21ea4563387f8660808cc98999157e-38774956"
 );
-//console.log('preferences', mercadopago.preferences)
 
 let url: string;
 if (process.env.NODE_ENV) {
@@ -33,7 +32,6 @@ module.exports = {
     mercadopago.preferences
       .create(preference)
       .then(function (mpres: any) {
-        console.log("mp response", mpres.body);
         return res.json(mpres.body);
       })
       .catch(function (error: any) {

@@ -197,7 +197,6 @@ module.exports = {
       ...user,
       resetPassword:token
     })
-    console.log(user);
     
 
     const templatePassword = getTemplatePassword(user.name, token);
