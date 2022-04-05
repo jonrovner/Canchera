@@ -12,6 +12,7 @@ import Footer from "../Footer/FooterNoVideo";
 import { AiOutlineSearch } from "react-icons/ai";
 import { cities } from "../createClub/ar";
 import { BsArrowDownCircleFill, BsArrowUpCircleFill } from "react-icons/bs";
+import Loader from "../Loader/Loader";
 
 const ListClubs = () => {
   let dispatch = useDispatch();
@@ -70,8 +71,6 @@ const ListClubs = () => {
       setZoom(4);
     }
   };
-
-  //console.log("filtered clubes: ", filterClubs);
 
   const [mapFilter, setMapFilter] = useState(false);
 
@@ -134,6 +133,12 @@ const ListClubs = () => {
     scaleControl: false,
     streetViewControl: false,
     rotateControl: false,
+    styles: [
+      {
+        featureType: "poi",
+        stylers: [{ visibility: "off" }],
+      },
+    ],
   };
 
   return (
@@ -200,67 +205,53 @@ const ListClubs = () => {
 
           <div className={styles.clubesYmap}>
             <div className={styles.clubes}>
-              {serchBarResult.length
-                ? serchBarResult.map((c, i) => (
-                    <CardClub
-                      key={i}
-                      name={c.name}
-                      img={c.image}
-                      location={
-                        c.street +
-                        " " +
-                        c.num +
-                        " " +
-                        c.ciudad +
-                        " " +
-                        c.province
-                      }
-                      openHour={c.openHour}
-                      closeHour={c.closeHour}
-                      Fields={c.Fields}
-                    />
-                  ))
-                : mapFilter
-                ? filterClubs.map((c, i) => (
-                    <CardClub
-                      key={i}
-                      name={c.name}
-                      img={c.image}
-                      location={
-                        c.street +
-                        " " +
-                        c.num +
-                        " " +
-                        c.ciudad +
-                        " " +
-                        c.province
-                      }
-                      openHour={c.openHour}
-                      closeHour={c.closeHour}
-                      Fields={c.Fields}
-                      score={c.score}
-                    />
-                  ))
-                : clubes.map((c, i) => (
-                    <CardClub
-                      key={i}
-                      name={c.name}
-                      img={c.image}
-                      location={
-                        c.street +
-                        " " +
-                        c.num +
-                        " " +
-                        c.ciudad +
-                        " " +
-                        c.province
-                      }
-                      openHour={c.openHour}
-                      closeHour={c.closeHour}
-                      Fields={c.Fields}
-                      score={c.score}
-                    />
-                  ))}
+              {serchBarResult.length ? (
+                serchBarResult.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                  />
+                ))
+              ) : mapFilter ? (
+                filterClubs.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
+                  />
+                ))
+              ) : clubes.length ? (
+                clubes.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
+                  />
+                ))
+              ) : (
+                <Loader />
+              )}
             </div>
             <div className={styles.map}>
               <label className={styles.mapFilter} htmlFor="mapFilter">

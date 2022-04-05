@@ -33,7 +33,6 @@ function Owner({ id, name, email, rol }) {
     };
     getOwner(email);
   }, [email]);
-  console.log("getOwner: ", owner);
   useEffect(() => {
     setClub(owner.Club);
     setDisabled(!owner.authorized);
@@ -85,7 +84,6 @@ function Owner({ id, name, email, rol }) {
     const toPost = { userId: owner.id, dates: selectedDates };
 
     const post = await axios.post("/booking", toPost);
-    console.log("booking response: ", post.data);
     if (post.data.length) window.location.reload();
   };
   const [bookingDetail, setBookingDetail] = useState({
@@ -95,7 +93,6 @@ function Owner({ id, name, email, rol }) {
 
   const handleInfo = (e, fieldId, booking) => {
     e.preventDefault();
-    console.log("handling info booking: ", booking);
     setBookingDetail({ show: true, detail: { fieldId, booking } });
   };
 
@@ -111,8 +108,6 @@ function Owner({ id, name, email, rol }) {
   const closeInfo = () => {
     setBookingDetail({ detail: {}, show: false });
   };
-
-  console.log(owner.authorized, disabled);
 
   return (
     <div>

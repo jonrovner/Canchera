@@ -149,6 +149,7 @@
   position: relative;
   margin-bottom: 20px;
   height: 70vh;
+  gap: 10px;
 }
 
 .ListClubs .Container .clubesYmap .clubes {
@@ -164,6 +165,8 @@
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 10px;
+  border-radius: 5px;
+  overflow: overlay;
 }
 
 .ListClubs .Container .clubesYmap .map {

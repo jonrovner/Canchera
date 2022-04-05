@@ -27,7 +27,6 @@ const Modal = ({ club, closeModal }) => {
     num: club.num,
     province: club.province,
   });
-  console.log("input: ", input.fields);
   useEffect(() => {
     findMap();
   }, []);
@@ -77,12 +76,9 @@ const Modal = ({ club, closeModal }) => {
 
       formData.append("data", JSON.stringify(toPost));
       formData.append("image", file);
-      console.log("toPost: ", toPost);
-      console.log("formData: ", formData);
       axios
         .put(`/club/${club.name}`, toPost)
         .then((res) => {
-          console.log("res: ", res);
           if (res.data.newClub.name) {
             closeModal(false);
             window.location.reload();

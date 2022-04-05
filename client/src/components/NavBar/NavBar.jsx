@@ -77,7 +77,6 @@ const Navbar = () => {
     await dispatch(locationFilter(input));
     navigate("/clubs");
   };
-
   return (
     <div
       className={

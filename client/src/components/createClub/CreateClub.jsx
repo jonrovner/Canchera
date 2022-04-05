@@ -12,7 +12,6 @@ import Footer from "../Footer/FooterNoVideo";
 
 const CreateClub = () => {
   const user = useSelector((state) => state.user);
-  console.log("user: ", user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,7 +79,6 @@ const CreateClub = () => {
 
       formData.append("data", JSON.stringify(toPost));
       formData.append("image", file);
-      console.log(toPost);
       axios
         .post("/club", formData)
         .then((res) => {
@@ -125,7 +123,6 @@ const CreateClub = () => {
         `https://nominatim.openstreetmap.org/search?q=${queryString}&format=json&polygon_geojson=1&addressdetails=1`
       )
       .then((res) => {
-        //console.log('nominatim response', res.data)
         if (!res.data.length) {
           return setValidMap("ingrese una dirección válida");
         }
@@ -150,6 +147,21 @@ const CreateClub = () => {
   const handleFile = (e) => {
     setFileName(`Cargaste ${e.target.files[0].name}`);
     setFile(e.target.files[0]);
+  };
+
+  const defaultMapOptions = {
+    fullscreenControl: false,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+    styles: [
+      {
+        featureType: "poi",
+        stylers: [{ visibility: "off" }],
+      },
+    ],
   };
 
   return (
@@ -298,6 +310,7 @@ const CreateClub = () => {
                     //onLoad={handleOnLoad}
                     center={position.lat ? position : defaultPos}
                     zoom={zoom}
+                    options={defaultMapOptions}
                     mapContainerStyle={{ width: "300px", height: "400px" }}
                   >
                     <Marker

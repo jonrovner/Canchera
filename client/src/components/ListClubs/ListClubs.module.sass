@@ -83,12 +83,15 @@
 			position: relative
 			margin-bottom: 20px
 			height: 70vh
+			gap: 10px
 			.clubes
 				flex: 1.5 1.5 0px
 				overflow-y: scroll
 				display: flex
 				flex-direction: column
 				gap: 10px
+				@include BordeRadio
+				overflow: overlay
 			.map
 				justify-self: flex-end
 				align-self: flex-end

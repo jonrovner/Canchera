@@ -15,8 +15,6 @@ function User({ id, name }) {
     axios.get(`/user?email=${userMail}`).then((res) => setUser(res.data));
   }, [userMail]);
 
-  console.log(user);
-
   useEffect(() => {
     if (user.name) {
       if (user.Bookings.length) {
@@ -45,15 +43,6 @@ function User({ id, name }) {
     name: "",
     id: "",
   });
-
-  
-
-  //console.log("actual time", new Date().getTime());
-  /* 
-  console.log("booking time", bookings[0].time.getTime());
-
-  console.log(new Date().getTime() > bookings[0].time.getTime());
- */
 
   const handleScore = (bookingId, rating) => {
     axios.put("/booking/score", { bookingId: bookingId, rating: rating });

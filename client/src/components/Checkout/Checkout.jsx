@@ -16,8 +16,6 @@ const Checkout = () => {
   );
   const [msg, setMsg] = useState("Confirmando su reserva.");
 
-  console.log("booking: ", booking);
-
   useEffect(() => {
     if (booking && booking.payment_id === id && status === "approved") {
       axios
@@ -29,16 +27,12 @@ const Checkout = () => {
               navigate("/dashboard");
             }, 1000);
           }
-          console.log("data from server: ", response.data);
         })
         .catch((err) => console.log("error in booking: ", err));
     }
   }, []);
 
   // const state = useSelector((state) => state)
-  console.log("status: ", status);
-  console.log("id in query: ", id);
-
   return (
     <div className={styles.Checkout}>
       <h1>Canchera</h1>
