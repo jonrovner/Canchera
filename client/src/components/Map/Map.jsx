@@ -55,6 +55,15 @@ function Map() {
     }
   };
 
+  const defaultMapOptions = {
+    fullscreenControl: false,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+  };
+
   return (
     <div className={styles.Map}>
       <div className={styles.clubs}>
@@ -93,6 +102,7 @@ function Map() {
           onClick={() => setActiveMarker(null)}
           center={mapPos}
           zoom={zoom}
+          options={defaultMapOptions}
           mapContainerStyle={{ width: "700px", height: "70vh" }}
         >
           {clubes.map((club, index) => (

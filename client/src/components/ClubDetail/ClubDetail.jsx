@@ -142,6 +142,15 @@ const Clubdetail = () => {
     document.querySelector("#checkout-btn").appendChild(script);
   };
 
+  const defaultMapOptions = {
+    fullscreenControl: false,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+  };
+
   return (
     <div className={styles.ClubDetail}>
       <NavBar />
@@ -157,6 +166,7 @@ const Clubdetail = () => {
               //onLoad={handleOnLoad}
               center={position}
               zoom={16}
+              options={defaultMapOptions}
               mapContainerStyle={{ width: "50vw", height: "60vh" }}
             >
               <Marker
