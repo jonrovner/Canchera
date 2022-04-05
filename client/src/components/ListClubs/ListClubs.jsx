@@ -135,7 +135,6 @@ const ListClubs = () => {
     rotateControl: false,
   };
 
-  clubes = [];
   return (
     <div className={styles.ListClubs}>
       <div className={styles.nonFooter}>
