@@ -26,6 +26,33 @@ function getPrice() {
 
   return value;
 }
+function getField() {
+   let number =  Math.floor(1 + Math.random() * 3);
+
+   switch (number) {
+       case 1: return 5;          
+       case 2: return 9;         
+       case 3: return 11; 
+       default: return 11;
+   }
+}
+function getScore() {
+   let number =  Math.floor(1 + Math.random() * 5);
+
+   switch (number) {
+       case 1: return 1;          
+       case 2: return 2;         
+       case 3: return 3; 
+       case 4: return 4; 
+       case 5: return 5; 
+       default: return 5;
+   }
+}
+function getPrice() {
+  let value =  Math.floor(1 + Math.random() * 1000);
+
+  return value;
+}
    
    
 
@@ -112,24 +139,26 @@ try {
                     image: `${url}/images/${i}.jpeg`,
                     latitude: -34.6500 + latArray[i],
                     longitude: -59.4268678 + lonArray[i],
+                    score: getScore(),
+                    totRatings: 1
                 }    
             })
 
             await Field.bulkCreate([
                 {
-                  players: 5,
+                  players: getField(),
                   surface: getSurface(),
                   price: 4000 + getPrice(),
                   ClubName: clubCreated[0].dataValues.name
                 },
                 {
-                  players: 9,
+                  players: getField(),
                   surface: getSurface(),
                   price: 6000 + getPrice(),
                   ClubName: clubCreated[0].dataValues.name
                 },
                 {
-                  players: 11,
+                  players: getField(),
                   surface: getSurface(),
                   price: 8000 + getPrice(),
                   ClubName: clubCreated[0].dataValues.name
@@ -173,24 +202,26 @@ for (let i = 1; i < 3; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -28.3930 + latArray[i],
               longitude: -57.8868 + lonArray[i],
+              score: getScore(),
+              totRatings: 1
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -234,24 +265,26 @@ for (let i = 1; i < 3; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -41.1500 + latArray[i],
               longitude: -71.3000 + lonArray[i],
+              score: getScore(),
+              totRatings: 1
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -296,24 +329,26 @@ for (let i = 1; i < 3; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -38.9573 + latArray[i],
               longitude: -68.0455 + lonArray[i],
+              score: getScore(),
+              totRatings: 1
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -356,25 +391,25 @@ for (let i = 1; i < 3; i++) {
               closeHour: 22,
               image: `${url}/images/${i}.jpeg`,
               latitude: -40.8000 + latArray[i],
-              longitude: -63.0000 + lonArray[i],
+              longitude: -63.0000 + lonArray[i],              
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -419,24 +454,26 @@ for (let i = 1; i < 3; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -54.8022 + latArray[i],
               longitude: -68.3094 + lonArray[i],
+              score: getScore(),
+              totRatings: 1
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -479,25 +516,25 @@ for (let i = 1; i < 3; i++) {
               closeHour: 22,
               image: `${url}/images/${i}.jpeg`,
               latitude: -24.1856 + latArray[i],
-              longitude: -65.2994 + lonArray[i],
+              longitude: -65.2994 + lonArray[i],              
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -541,24 +578,26 @@ for (let i = 1; i < 3; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -27.3667 + latArray[i],
               longitude: -55.8969 + lonArray[i],
+              score: getScore(),
+              totRatings: 1
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -602,25 +641,25 @@ for (let i = 1; i < 3; i++) {
               closeHour: 22,
               image: `${url}/images/${i}.jpeg`,
               latitude: -27.7844 + latArray[i],
-              longitude: -64.2669 + lonArray[i],
+              longitude: -64.2669 + lonArray[i]              
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
@@ -665,24 +704,26 @@ for (let i = 1; i < 3; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -33.1230 + latArray[i],
               longitude:-64.3478 + lonArray[i],
+              score: getScore(),
+              totRatings: 1
           }    
       })
 
       await Field.bulkCreate([
           {
-            players: 5,
+            players: getField(),
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 9,
+            players: getField(),
             surface: getSurface(),
             price: 6000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
           },
           {
-            players: 11,
+            players: getField(),
             surface: getSurface(),
             price: 8000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
