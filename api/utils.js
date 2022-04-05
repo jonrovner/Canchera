@@ -229,8 +229,8 @@ for (let i = 1; i < 5; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -28.3930 + latArray[i],
               longitude: -57.8868 + lonArray[i],
-              score: getScore(),
-              totalRatings: 1
+              score: i % 2 === 0 ? getScore(): 0,
+              totalRatings: i % 2 === 0 ? 1 : 0
           }    
       })
 
@@ -284,8 +284,8 @@ for (let i = 1; i < 5; i++) {
               image: `${url}/images/${i}.jpeg`,
               latitude: -41.1500 + latArray[i],
               longitude: -71.3000 + lonArray[i],
-              score: getScore(),
-              totalRatings: 1
+              score: i % 2 === 0 ? getScore(): 0,
+              totalRatings: i % 2 === 0 ? 1 : 0
           }    
       })
 
@@ -394,7 +394,9 @@ for (let i = 1; i < 5; i++) {
               closeHour: 22,
               image: `${url}/images/${i}.jpeg`,
               latitude: -40.8000 + latArray[i],
-              longitude: -63.0000 + lonArray[i],              
+              longitude: -63.0000 + lonArray[i], 
+              score: getScore(),
+              totalRatings: 1             
           }    
       })
 
@@ -449,7 +451,7 @@ for (let i = 1; i < 5; i++) {
               latitude: -54.8022 + latArray[i],
               longitude: -68.3094 + lonArray[i],
               score: getScore(),
-              totalRatings: 1
+              totalRatings: 1              
           }    
       })
 
@@ -501,7 +503,9 @@ for (let i = 1; i < 5; i++) {
               closeHour: 22,
               image: `${url}/images/${i}.jpeg`,
               latitude: -24.1856 + latArray[i],
-              longitude: -65.2994 + lonArray[i],              
+              longitude: -65.2994 + lonArray[i],
+              score: i % 2 === 0 ? getScore(): 0,
+              totalRatings: i % 2 === 0 ? 1 : 0              
           }    
       })
 
@@ -608,7 +612,9 @@ for (let i = 1; i < 5; i++) {
               closeHour: 22,
               image: `${url}/images/${i}.jpeg`,
               latitude: -27.7844 + latArray[i],
-              longitude: -64.2669 + lonArray[i]              
+              longitude: -64.2669 + lonArray[i],
+              score: i % 2 === 0 ? getScore(): 0,
+              totalRatings: i % 2 === 0 ? 1 : 0              
           }    
       })
 
@@ -686,15 +692,8 @@ for (let i = 1; i < 5; i++) {
     }catch(e){
 
         console.log("Se ha producido este error "+e)
-    }
-                
-
-
+    }                
     
 }
-
-
-
-
 
 export default dataDB;
