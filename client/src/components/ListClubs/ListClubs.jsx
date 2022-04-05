@@ -89,8 +89,6 @@ const ListClubs = () => {
     }
   }, [mapBounds]);
 
-<<<<<<< HEAD
-=======
   const handleSubmit = async (e) => {
     e.preventDefault();
     // aca ya esta listo para ir a /clubs y filtrar segun lo pedido.
@@ -136,7 +134,6 @@ const ListClubs = () => {
     rotateControl: false,
   };
 
->>>>>>> bf950a68560c335ff87303de84539dac177877fb
   return (
     <div className={styles.ListClubs}>
       <div className={styles.nonFooter}>
