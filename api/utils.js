@@ -69,7 +69,7 @@ function getPrice() {
 const adminName = ["","Julian", "Sandra", "Tomas"];
 const userName = ["","Franco", "Mariano", "Maria"];
 const owner1 = ["","Roberto", "Juan Carlos", "Federico" ,"Teresa"]
-const clubs1 = ["","100% Futbol","A dos toques","La cañada","Futbol Mercedes"]
+const clubs1 = ["","100x100 Futbol","A dos toques","La cañada","Futbol Mercedes"]
 const owner2 = ["","Benjamin", "Martin", "Florencia" , "Miguel" ]
 const clubs2 = ["","Tiro Libre","Al toque Canchita","Alto Sport","Amigos de Concepcion"]
 const owner3 = ["","Javier", "Lucas", "Airton" , "Martin" ]
