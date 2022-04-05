@@ -223,7 +223,6 @@ const ListClubs = () => {
               {serchBarResult.length ? (
                 serchBarResult.map((c, i) => (
                   <>
-                    <p>searchBar</p>
                     <CardClub
                       key={i}
                       name={c.name}
@@ -247,7 +246,6 @@ const ListClubs = () => {
                 clubes.length ? (
                   clubes.map((c, i) => (
                     <>
-                      <p>mapclubesglobal</p>
                       <CardClub
                         key={i}
                         name={c.name}
@@ -274,7 +272,6 @@ const ListClubs = () => {
               ) : filterClubs.length ? (
                 filterClubs.map((c, i) => (
                   <>
-                    <p>filterclub</p>
                     <CardClub
                       key={i}
                       name={c.name}
