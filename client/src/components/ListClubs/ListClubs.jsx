@@ -95,7 +95,7 @@ const ListClubs = () => {
   }, [mapBounds]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();    
     // aca ya esta listo para ir a /clubs y filtrar segun lo pedido.
     await dispatch(get_all_clubes());
     await dispatch(locationFilter(input));
