@@ -1,5 +1,7 @@
 .ListClubs
+	width: min-content
 	margin: auto
+	width: 1100px
 	.Container
 		.search
 			display: flex
@@ -7,7 +9,13 @@
 			align-items: center
 		.clubesYmap
 			display: flex
-
-	.map
-		width: 300px
-		height: 400px
+			position: relative
+			.clubes
+				background-color: peru
+				width: 700px
+			.map
+				justify-self: flex-end
+				align-self: flex-end
+				width: 400px
+				height: 500px
+				position: absolute

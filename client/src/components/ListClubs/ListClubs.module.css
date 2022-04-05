@@ -1,5 +1,9 @@
 .ListClubs {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
   margin: auto;
+  width: 1100px;
 }
 
 .ListClubs .Container .search {
@@ -18,10 +22,20 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
 }
 
-.ListClubs .map {
-  width: 300px;
-  height: 400px;
+.ListClubs .Container .clubesYmap .clubes {
+  background-color: peru;
+  width: 700px;
+}
+
+.ListClubs .Container .clubesYmap .map {
+  justify-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  width: 400px;
+  height: 500px;
+  position: absolute;
 }
 /*# sourceMappingURL=ListClubs.module.css.map */
