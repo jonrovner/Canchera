@@ -134,10 +134,11 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
 
-    case LOCATION_FILTER: {
-      if (!payload) return { ...state, filterClubs: [] };
+    case LOCATION_FILTER: {     
 
-      let filtered = filter(state.clubes, payload);
+      let copyClubes = state.clubes;
+
+      let filtered = filter(copyClubes, payload)
 
       return {
         ...state,

@@ -1,23 +1,26 @@
 export const filter = (clubes, payload) => {
   let currentClubes = clubes;
+  
+  
 
   if (payload.ciudad.length > 0) {
     const removeAccents = (str) => {
       return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
-    currentClubes = clubes.filter(
+    currentClubes = currentClubes.filter(
       (c) =>
         removeAccents(c.ciudad.toLowerCase()).search(
           payload.ciudad.toLowerCase()
         ) >= 0
     );
   }
+ 
 
   if (payload.clubName.length > 0) {
     const removeAccents = (str) => {
       return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
-    currentClubes = clubes.filter(
+    currentClubes = currentClubes.filter(
       (c) =>
         removeAccents(c.name.toLowerCase()).search(
           payload.clubName.toLowerCase()
@@ -25,11 +28,12 @@ export const filter = (clubes, payload) => {
     );
   }
 
+
   if (payload.size.length > 0) {
-    currentClubes = clubes.filter((c) =>
+    currentClubes = currentClubes.filter((c) =>
       c.Fields.some((f) => Number(f.players) === Number(payload.size))
     );
   }
-
+ 
   return currentClubes;
 };
