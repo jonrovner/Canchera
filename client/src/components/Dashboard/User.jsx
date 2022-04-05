@@ -15,8 +15,6 @@ function User({ id, name }) {
     axios.get(`/user?email=${userMail}`).then((res) => setUser(res.data));
   }, [userMail]);
 
-  console.log(user);
-
   useEffect(() => {
     if (user.name) {
       if (user.Bookings.length) {
@@ -46,17 +44,6 @@ function User({ id, name }) {
     id: "",
   });
 
-  const refresh = () => {
-    window.location.reload();
-  };
-
-  //console.log("actual time", new Date().getTime());
-  /* 
-  console.log("booking time", bookings[0].time.getTime());
-
-  console.log(new Date().getTime() > bookings[0].time.getTime());
- */
-
   const handleScore = (bookingId, rating) => {
     axios.put("/booking/score", { bookingId: bookingId, rating: rating });
     setDisabled(true);
@@ -67,7 +54,6 @@ function User({ id, name }) {
       <h1>Bienvenido {name}</h1>
       <div>
         <h1>Reservas</h1>
-        <button onClick={() => refresh()}>Refresh</button>
         {openModal.modal && (
           <Modal
             id={openModal.id}

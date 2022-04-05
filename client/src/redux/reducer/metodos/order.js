@@ -34,26 +34,10 @@ export const order = (array, orderBy) => {
       a.Fields.map((f) => f.slice().sort((b, a) => b.price - a.price))
     );
 
-  } */ else if (orderBy === "hp") {
-    array = array.slice().sort((a, b) => {
-      if (a.score > b.score) {
-        return -1;
-      }
-      if (b.score > a.score) {
-        return 1;
-      }
-      return 0;
-    });
-  } else if (orderBy === "lp") {
-    array = array.slice().sort((a, b) => {
-      if (a.score > b.score) {
-        return 1;
-      }
-      if (b.score > a.score) {
-        return -1;
-      }
-      return 0;
-    });
+  } */ else if (orderBy === "hr") {
+    array = array.slice().sort((a, b) => b.score - a.score);
+  } else if (orderBy === "lr") {
+    array = array.slice().sort((a, b) => a.score - b.score);
   }
 
   return array;

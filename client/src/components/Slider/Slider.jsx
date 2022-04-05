@@ -33,7 +33,6 @@ const Slider = () => {
       : setCurrentSlider(
           currentSlider < data.length - 1 ? currentSlider + 1 : 0
         );
-    console.log(currentSlider);
   };
 
   return (

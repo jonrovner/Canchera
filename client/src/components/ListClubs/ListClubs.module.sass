@@ -1,13 +1,111 @@
+@import '../CSScommons/commons'
+
 .ListClubs
-	margin: auto
+	width: min-content
+	width: 100%
+	.nonFooter
+		height: 100vh
 	.Container
+		width: 1100px
+		margin: auto
 		.search
 			display: flex
 			justify-content: center
 			align-items: center
+			margin-block: 30px
+			position: relative
+			.orderScore
+				position: absolute
+				left: 0
+				display: flex
+				flex-direction: column
+				gap: 5px
+				align-items: center
+				color: $color-text
+				font-weight: 500
+				div
+					display: flex
+					gap: 10px
+				button
+					color: #abb2d6
+					padding: 0
+					font-size: 24px
+					line-height: 0
+					background: none
+					border: none
+					cursor: pointer
+					transition: all 0.2s ease-in-out
+				button:hover
+					color: $color-detail
+			.searchBar
+				form
+					height: 50px
+					width: 600px
+					display: flex
+					border-radius: 50px
+					background-color: #abb2d6
+					transition: all 0.3s ease-in-out
+					.ciudad
+						flex-grow: 3
+					.size
+						width: 100px
+						flex-grow: 2
+					.clubName
+						flex-grow: 1
+						display: block
+					input
+						font-weight: 500
+						height: 100%
+						background-color: transparent
+						border: none
+						padding-inline-start: 20px
+						outline: none
+						transition: background-color 0.3s ease-in-out
+						border-radius: 50px
+						transition: all 0.3s ease-in-out
+					input:focus, input:hover, input:not(:placeholder-shown)
+						background-color: #ffffff
+						border-radius: 50px
+						transition: background-color 0.3s ease-in-out
+					button
+						background-color: #00C49A
+						font-size: 30px
+						height: 50px
+						width: 50px
+						border-radius: 50px
+						border: none
+						cursor: pointer
+						transition: transform 0.3s ease-in-out
+					button:hover
+						transform: scale(110%)
 		.clubesYmap
 			display: flex
-
-	.map
-		width: 300px
-		height: 400px
+			position: relative
+			margin-bottom: 20px
+			height: 70vh
+			gap: 10px
+			.clubes
+				flex: 1.5 1.5 0px
+				overflow-y: scroll
+				display: flex
+				flex-direction: column
+				gap: 10px
+				@include BordeRadio
+				overflow: overlay
+			.map
+				justify-self: flex-end
+				align-self: flex-end
+				flex: 1 1 0px
+				height: 70vh
+				position: relative
+				.mapFilter
+					position: absolute
+					top: -30px
+					right: 0
+					display: flex
+					align-items: center
+					background-color: $color-detail
+					border-radius: 50px
+					padding-inline: 7px
+					cursor: pointer
+					font-weight: 500

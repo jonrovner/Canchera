@@ -48,6 +48,7 @@ function getScore() {
        default: return 5;
    }
 }
+
 function getTotalFields() {
    let number =  Math.floor(1 + Math.random() * 3);
 
@@ -58,11 +59,13 @@ function getTotalFields() {
        default: return 3;
    }
 }
+
 function getPrice() {
   let value =  Math.floor(1 + Math.random() * 1000);
 
   return value;
 }
+
 const adminName = ["","Julian", "Sandra", "Tomas"];
 const userName = ["","Franco", "Mariano", "Maria"];
 const owner1 = ["","Roberto", "Juan Carlos", "Federico" ,"Teresa"]
@@ -89,7 +92,6 @@ const clubs10 = ["","La chilena","El ascenso","Chabacuco","Futbol Rio Cuarto"]
 
 
 
-   
 
 async function dataDB() {
     let encryptedPasswordUser = bcrypt.hashSync(
@@ -186,8 +188,10 @@ try {
                   surface: getSurface(),
                   price: 4000 + getPrice(),
                   ClubName: clubCreated[0].dataValues.name
+
                 })            
               }
+
             }  
    };                       
     
@@ -238,8 +242,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       
       }  
 };    
@@ -291,8 +297,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       
       }  
 };    
@@ -345,8 +353,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       
       }  
 };       
@@ -396,8 +406,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       }  
 };    
 
@@ -449,8 +461,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }      
+
       }  
 };     
 
@@ -499,8 +513,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       }  
 };      
 
@@ -551,8 +567,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }      
+
       }  
 };     
 
@@ -602,8 +620,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       }  
 };      
 
@@ -655,8 +675,10 @@ for (let i = 1; i < 5; i++) {
             surface: getSurface(),
             price: 4000 + getPrice(),
             ClubName: clubCreated[0].dataValues.name
+
           })            
         }
+
       
       }  
 };          

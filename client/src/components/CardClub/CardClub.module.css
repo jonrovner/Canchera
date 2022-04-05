@@ -1,30 +1,42 @@
-.link .contenedor {
-  margin: 0.5rem;
-  background-color: #9db4f0;
-  color: black;
-  border: 2px solid black;
-  width: 100%rem;
+.CardClub {
+  text-decoration: none;
+}
+
+.CardClub .contenedor {
+  background-color: #efeef8;
+  color: #140027;
+  width: 100%;
   height: auto;
   min-height: 10rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
 }
 
-.link .contenedor .divImg {
+.CardClub .contenedor .divImg {
   width: 25rem;
 }
 
-.link .contenedor .divImg img {
-  height: 110%rem;
+.CardClub .contenedor img {
+  height: 110%;
+  -webkit-clip-path: polygon(0% 0%, 88.8% 0%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 88.8% 0%, 100% 100%, 0% 100%);
 }
 
-.link .contenedor .divInfo {
+.CardClub .contenedor .divInfo {
   margin-left: 2rem;
   width: 25rem;
+  padding-block: 20px;
 }
 
-.link .contenedor .divContenido {
+.CardClub .contenedor .divInfo h2 {
+  line-height: 1;
+}
+
+.CardClub .contenedor .divContenido {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,6 +44,33 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.CardClub .contenedor .divContenido p {
+  line-height: 1;
+  font-weight: 500;
+}
+
+.CardClub .contenedor .divContenido .location {
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+.CardClub .contenedor .divContenido .data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 8px;
+}
+
+.CardClub .contenedor .divContenido .score {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .link:link,

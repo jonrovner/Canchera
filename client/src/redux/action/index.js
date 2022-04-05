@@ -7,6 +7,7 @@ export const LOAD_STATE_USER = "LOAD_STATE_USER";
 export const GET_ALL_CLUBES = "GET_ALL_CLUBES";
 export const SET_USER = "SET_USER";
 export const ORDER_NAME_CLUBS = "ORDER_NAME_CLUBS";
+export const ORDER_RATING_CLUBS = "ORDER_RATING_CLUBS";
 export const ORDER_PRICE_CLUBS = "ORDER_PRICE_CLUBS";
 export const GET_CLUB_DETAIL = "GET_CLUB_DETAIL";
 export const CLEAN_STATE = "CLEAN_STATE";
@@ -84,7 +85,6 @@ export const post_users_signin = (data) => async (dispatch) => {
 };
 
 export const post_users_owner = (data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post("/signup/owner", data);
   } catch (e) {
@@ -93,7 +93,6 @@ export const post_users_owner = (data) => async () => {
 };
 
 export const post_users = (data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post("/signup/user", data);
   } catch (e) {
@@ -102,7 +101,6 @@ export const post_users = (data) => async () => {
 };
 
 export const post_users_google = (data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post("/signup/singup/google", data);
   } catch (e) {
@@ -115,7 +113,6 @@ export const clear_state_user = (email) => async (dispatch) => {
 };
 
 export const load_state_user = (user) => async (dispatch) => {
-  console.log(user);
   return dispatch({ type: LOAD_STATE_USER, payload: user });
 };
 
@@ -125,6 +122,10 @@ export const set_user = (user) => async (dispatch) => {
 
 export const order_name_clubs = (order) => {
   return { type: ORDER_NAME_CLUBS, payload: order };
+};
+
+export const order_rating_clubs = (order) => {
+  return { type: ORDER_RATING_CLUBS, payload: order };
 };
 
 export const order_price_clubs = (order) => {
@@ -167,7 +168,6 @@ export const locationFilter = (filter) => async (dispatch) => {
 };
 
 export const invitacion = (id, data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post(`/booking/sendEmial/${id}`, data);
   } catch (e) {

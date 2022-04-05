@@ -56,7 +56,6 @@ const UserSignUp = () => {
         setOpenModalError(true);
       }
     } else {
-      console.log("no enviado");
       setOpenModalError(true);
     }
   };
