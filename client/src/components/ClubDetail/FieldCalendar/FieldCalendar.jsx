@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
     setHours,
     eachHourOfInterval,
     getHours,
-    isEqual
+    isBefore
 
 } from 'date-fns'
 import './fieldCalendar.css'
@@ -12,6 +12,7 @@ import './fieldCalendar.css'
 const FieldCalendar = ({day, close, open, players, bookings, price, handleClick, handleInfo, fieldId, surface, user}) => {
     
     //console.log('day :', day)
+    const [now] = useState(new Date())
 
     const hours = eachHourOfInterval({
         start: setHours(day, open),
@@ -19,7 +20,7 @@ const FieldCalendar = ({day, close, open, players, bookings, price, handleClick,
     }) 
     //console.log('cancha de', players, 'bookings', bookings)
     const bookingDates = bookings.map(b => new Date(b.time))
-    const users = user==='owner' && bookings.map( b => ({name: b.User.name, email: b.User.email}))
+   // const users = user==='owner' && bookings.map( b => ({name: b.User.name, email: b.User.email}))
     const bookingStrings = bookingDates.map( b => b.toString())
     const hourStrings = hours.map(h => h.toString())
     //console.log('bookings', bookingStrings)
@@ -38,24 +39,28 @@ const FieldCalendar = ({day, close, open, players, bookings, price, handleClick,
             {
                 hourStrings && hourStrings.map( (date, i) => (
                     <div 
-                    className={bookingStrings.indexOf(date) !==-1 ? 'hour reserved' : 'hour'} 
+                    className={bookingStrings.indexOf(date) !==-1 ? 'hour reserved' : isBefore(hours[i], now) ? 'hour past' : 'hour'} 
                     key={i} 
                     onClick={(e)=>{
-                        if (user === 'owner'){
-                            console.log('user is owner')
-                            if(bookingStrings.indexOf(date) !==-1){
-                                console.log('hour is reserved')
-                                handleInfo(e, fieldId, bookings[bookingStrings.indexOf(date)])
-                            }
-                            else{
-                                console.log('hour is not reserved')
-                                handleClick(e, date, fieldId, price)    
-                            }
-                        }
-                        else {
-                            console.log('user is user')
-                            handleClick(e, date, fieldId, price)}}
-                        }
+                        if(isBefore(hours[i], now)) {
+                            return
+                        } else {
+                                if (user === 'owner'){
+                                    console.log('user is owner')
+                                    if(bookingStrings.indexOf(date) !==-1){
+                                        console.log('hour is reserved')
+                                        handleInfo(e, fieldId, bookings[bookingStrings.indexOf(date)])
+                                    }
+                                    else{
+                                        console.log('hour is not reserved')
+                                        handleClick(e, date, fieldId, price)    
+                                    }
+                                }
+                                else {
+                                    console.log('user is user')
+                                    handleClick(e, date, fieldId, price)}}
+                                }
+                            }                        
                    
                     >
                         {getHours(hours[i])}hs
