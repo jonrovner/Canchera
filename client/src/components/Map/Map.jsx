@@ -4,18 +4,29 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Map.module.css";
 import { get_all_clubes } from "../../redux/action/index";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import { cities } from "../createClub/ar"
 
 function Map() {
   const dispatch = useDispatch();
-  const [ciudad, setCiudad] = useState("Goya");
+  const [ciudad, setCiudad] = useState("");
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
   const [zoom, setZoom] = useState(4);
-
+  
+  
   useEffect(() => {
     dispatch(get_all_clubes());
   }, [dispatch]);
-
+  
   const clubes = useSelector((state) => state.clubes);
+  
+  let ciudades =[]
+  clubes.forEach(club =>{
+     let algo = cities.find(f => f.city === club.ciudad);
+     ciudades.push(algo);
+     ciudades.sort((a,b) => a.city.localeCompare(b.city
+      ))
+  })
+  //console.log("ciudades", ciudades);
 
   const positions =
     clubes &&
@@ -53,6 +64,7 @@ function Map() {
       setMapPos({ lat: -32.9632, lng: -61.409 });
       setZoom(4);
     }
+
   };
 
   return (
@@ -63,12 +75,15 @@ function Map() {
         </h2>
         <div>
           <label htmlFor="ciudades">Clubes en</label>
-          <select name="ciudades" onChange={handleSelect}>
-            <option value="Goya">Goya</option>
+          <select name="ciudades" onChange={handleSelect} value={ciudad} >
+           {/*  <option value="Goya">Goya</option>
             <option value="Mercedes">Mercedes</option>
             <option value="Tucuman">Tucuman</option>
             <option value="La Rioja">La Rioja</option>
-            <option value="Corrientes">Corrientes</option>
+            <option value="Corrientes">Corrientes</option>   */}
+            <option>Todos</option>
+            {ciudades.filter((f,i ) => ciudades.indexOf(f)===i ).map((t, i) => (<option key={i}>{t.city}</option>))}
+                
           </select>
         </div>
         <ul>
