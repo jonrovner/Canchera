@@ -61,8 +61,6 @@ const ListClubs = () => {
     }
   };
 
-  //console.log("filtered clubes: ", filterClubs);
-
   const [mapFilter, setMapFilter] = useState(false);
 
   const handleMapFilter = () => {
@@ -81,7 +79,6 @@ const ListClubs = () => {
     }
   }, [mapBounds]);
 
-  console.log(serchBarResult);
   return (
     <div className={styles.ListClubs}>
       <NavBar />

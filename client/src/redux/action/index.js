@@ -84,7 +84,6 @@ export const post_users_signin = (data) => async (dispatch) => {
 };
 
 export const post_users_owner = (data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post("/signup/owner", data);
   } catch (e) {
@@ -93,7 +92,6 @@ export const post_users_owner = (data) => async () => {
 };
 
 export const post_users = (data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post("/signup/user", data);
   } catch (e) {
@@ -102,7 +100,6 @@ export const post_users = (data) => async () => {
 };
 
 export const post_users_google = (data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post("/signup/singup/google", data);
   } catch (e) {
@@ -115,7 +112,6 @@ export const clear_state_user = (email) => async (dispatch) => {
 };
 
 export const load_state_user = (user) => async (dispatch) => {
-  console.log(user);
   return dispatch({ type: LOAD_STATE_USER, payload: user });
 };
 
@@ -167,7 +163,6 @@ export const locationFilter = (filter) => async (dispatch) => {
 };
 
 export const invitacion = (id, data) => async () => {
-  console.log("Data enviada:", data);
   try {
     await axios.post(`/booking/sendEmial/${id}`, data);
   } catch (e) {
