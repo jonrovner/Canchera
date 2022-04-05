@@ -69,7 +69,6 @@ module.exports = {
       );
 
       await sendEmailBooking(user.email, "Reserva realizada", templateBooking);
-      console.log("aqui", bookings);
 
       return res.status(200).json(bookings);
     } catch (error) {
@@ -168,7 +167,6 @@ module.exports = {
   },
 
   async setScore(req: Request, res: Response, next: NextFunction) {
-    console.log("entro a la puta");
 
     const { bookingId, rating } = req.body;
 
@@ -177,7 +175,6 @@ module.exports = {
     if (!booking.rated) {
       const field = await Field.findOne({ where: { id: booking.FieldId } });
       const club = await Club.findOne({ where: { name: field.ClubName } });
-      console.log(club);
 
       let { score, totalRatings } = club;
 
@@ -188,12 +185,9 @@ module.exports = {
         totalRatings: totalRatings + 1,
       });
 
-      console.log(clubUpdated);
-
       const bookingUpdated = await booking.update({
         rated: true,
       });
-      console.log(bookingUpdated);
 
       return res.json({ bookingUpdated });
     }
