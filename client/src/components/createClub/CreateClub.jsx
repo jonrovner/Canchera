@@ -156,6 +156,12 @@ const CreateClub = () => {
     scaleControl: false,
     streetViewControl: false,
     rotateControl: false,
+    styles: [
+      {
+        featureType: "poi",
+        stylers: [{ visibility: "off" }],
+      },
+    ],
   };
 
   return (
