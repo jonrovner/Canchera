@@ -152,6 +152,15 @@ const CreateClub = () => {
     setFile(e.target.files[0]);
   };
 
+  const defaultMapOptions = {
+    fullscreenControl: false,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+  };
+
   return (
     <div className={styles.CreateClub}>
       <Navbar />
@@ -298,6 +307,7 @@ const CreateClub = () => {
                     //onLoad={handleOnLoad}
                     center={position.lat ? position : defaultPos}
                     zoom={zoom}
+                    options={defaultMapOptions}
                     mapContainerStyle={{ width: "300px", height: "400px" }}
                   >
                     <Marker
