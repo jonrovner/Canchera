@@ -18,6 +18,7 @@ import { ImCross } from "react-icons/im";
 import { cities } from "../createClub/ar";
 import { BsArrowDownCircleFill, BsArrowUpCircleFill } from "react-icons/bs";
 import Loader from "../Loader/Loader";
+import { Link } from "react-router-dom";
 
 const ListClubs = () => {
   let dispatch = useDispatch();
@@ -187,14 +188,14 @@ const ListClubs = () => {
     let order = "hr";
     //alert("mayor calificacion");
     dispatch(order_rating_clubs(order));
-    //setFilterClubs(serchBarResult.sort((a, b) => b.score - a.score));
+    setFilterClubs(filterClubs.sort((a, b) => b.score - a.score));
   };
 
   const hadlerLowerRating = () => {
     let order = "lr";
     //alert("menor calificacion");
     dispatch(order_rating_clubs(order));
-    //setFilterClubs(serchBarResult.sort((a, b) => a.score - b.score));
+    setFilterClubs(filterClubs.sort((a, b) => a.score - b.score));
   };
 
   const vaciarInput = async () => {
@@ -207,7 +208,9 @@ const ListClubs = () => {
     setZoom(4);
     await dispatch(locationFilter());
   };
-
+  console.log("searchbarresult: ", serchBarResult);
+  console.log("clubes: ", clubes);
+  console.log("filterClubs: ", filterClubs);
   return (
     <div className={styles.ListClubs}>
       <div className={styles.nonFooter}>
@@ -405,9 +408,14 @@ const ListClubs = () => {
                             onCloseClick={() => setActiveMarker(null)}
                           >
                             <div>
-                              '{club.name}'
-                              <br />
-                              {club.location}
+                              <p>
+                                {club.name}, {club.score} ⭐<br />
+                                <Link
+                                  to={`/club/${club.name.replaceAll(" ", "-")}`}
+                                >
+                                  Reservar Aqui
+                                </Link>
+                              </p>
                             </div>
                           </InfoWindow>
                         ) : null}

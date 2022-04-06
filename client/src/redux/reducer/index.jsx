@@ -116,11 +116,11 @@ function rootReducer(state = initialState, { type, payload }) {
       //console.log("filterClubs:", state.filterClubs);
       console.log("filterClubs:", state.clubes[0]);
       let ordered = order([...state.clubes], payload);
-      let ordered_filter = order([...state.filterClubs], payload);
+      //let ordered_filter = order([...state.filterClubs], payload);
       return {
         ...state,
         clubes: ordered,
-        filterClubs: ordered_filter,
+        //filterClubs: ordered_filter,
       };
     }
 
