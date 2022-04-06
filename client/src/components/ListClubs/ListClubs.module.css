@@ -69,6 +69,33 @@
   color: #00C49A;
 }
 
+.ListClubs .Container .search .searchBar {
+  position: relative;
+}
+
+.ListClubs .Container .search .searchBar .vaciarInput {
+  color: #dcdaee;
+  position: absolute;
+  top: -30px;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: transparent;
+  border-radius: 50px;
+  padding-inline: 7px;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+}
+
+.ListClubs .Container .search .searchBar .vaciarInput .deleteIcon {
+  margin-left: 5px;
+}
+
 .ListClubs .Container .search .searchBar form {
   height: 50px;
   width: 600px;
