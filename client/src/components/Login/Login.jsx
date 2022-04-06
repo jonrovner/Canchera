@@ -51,7 +51,18 @@ const Login = () => {
         let formulario = document.getElementById("formul");
         formulario.reset();
         if (users.data.user.rol === "owner") return navigate("/dashboard");
-        if (users.data.user.rol === "user") return navigate("/clubs");
+        if (users.data.user.rol === "user") {
+          let clubDetail = localStorage.getItem("clubDetail");
+          clubDetail = JSON.parse(clubDetail).split(" ").join("-");
+          //clubDetail = clubDetail.slice(");
+
+          console.log(clubDetail);
+          if (clubDetail.length > 0) {
+            localStorage.removeItem("clubDetail");
+            return navigate(`/club/${clubDetail}`);
+          }
+          navigate("/clubs");
+        }
         if (users.data.user.rol === "admin") return navigate("/dashboard");
       }
     } else {
@@ -69,7 +80,16 @@ const Login = () => {
       window.localStorage.setItem("user", JSON.stringify(existe.data.email));
       await dispatch(set_user(existe.data));
       if (existe.data.rol === "owner") return navigate("/dashboard");
-      if (existe.data.rol === "user") return navigate("/clubs");
+      if (existe.data.rol === "user") {
+        let clubDetail = localStorage.getItem("clubDetail");
+        clubDetail = JSON.parse(clubDetail).split(" ").join("-");
+        console.log(clubDetail);
+        if (clubDetail.length > 0) {
+          localStorage.removeItem("clubDetail");
+          return navigate(`/club/${clubDetail}`);
+        }
+        navigate("/clubs");
+      }
       if (existe.data.rol === "admin") return navigate("/dashboard");
       let formulario = document.getElementById("formul");
       formulario.reset();
@@ -79,7 +99,16 @@ const Login = () => {
       await dispatch(set_user(usuario.data));
       window.localStorage.setItem("user", JSON.stringify(usuario.data.email));
       if (usuario.data.rol === "owner") return navigate("/dashboard");
-      if (usuario.data.rol === "user") return navigate("/clubs");
+      if (usuario.data.rol === "user") {
+        let clubDetail = localStorage.getItem("clubDetail");
+        clubDetail = JSON.parse(clubDetail).split(" ").join("-");
+        console.log(clubDetail);
+        if (clubDetail.length > 0) {
+          localStorage.removeItem("clubDetail");
+          return navigate(`/club/${clubDetail}`);
+        }
+        navigate("/clubs");
+      }
       if (usuario.data.rol === "admin") return navigate("/dashboard");
     }
   };
