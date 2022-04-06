@@ -51,7 +51,18 @@ const Login = () => {
         let formulario = document.getElementById("formul");
         formulario.reset();
         if (users.data.user.rol === "owner") return navigate("/dashboard");
-        if (users.data.user.rol === "user") return navigate("/clubs");
+        if (users.data.user.rol === "user") {
+          let clubDetail = localStorage.getItem("clubDetail");
+          clubDetail = JSON.parse(clubDetail).replace(" ", "-");
+          //clubDetail = clubDetail.slice(");
+
+          console.log(clubDetail);
+          if (clubDetail.length > 0) {
+            localStorage.removeItem("clubDetail");
+            return navigate(`/club/${clubDetail}`);
+          }
+          navigate("/clubs");
+        }
         if (users.data.user.rol === "admin") return navigate("/dashboard");
       }
     } else {
@@ -79,7 +90,16 @@ const Login = () => {
       await dispatch(set_user(usuario.data));
       window.localStorage.setItem("user", JSON.stringify(usuario.data.email));
       if (usuario.data.rol === "owner") return navigate("/dashboard");
-      if (usuario.data.rol === "user") return navigate("/clubs");
+      if (usuario.data.rol === "user") {
+        let clubDetail = localStorage.getItem("clubDetail");
+        clubDetail = JSON.parse(clubDetail).replace(" ", "-");
+        console.log(clubDetail);
+        if (clubDetail.length > 0) {
+          localStorage.removeItem("clubDetail");
+          return navigate(`/club/${clubDetail}`);
+        }
+        navigate("/clubs");
+      }
       if (usuario.data.rol === "admin") return navigate("/dashboard");
     }
   };
