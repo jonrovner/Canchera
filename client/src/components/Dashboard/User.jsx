@@ -71,7 +71,7 @@ function User({ id, name }) {
             <th>Precio</th>
             <th>Superficie</th>
             <th>Tamaño</th>
-            <th>Invitar</th>
+            <th>Acción</th>
           </tr>
           {user &&
             bookings &&
@@ -126,7 +126,7 @@ function User({ id, name }) {
                       </button>
                     </ul>
                   ) : (
-                    <p>Ya esta loco</p>
+                    <p>Ya calificado</p>
                   )}
                 </td>
               </tr>
