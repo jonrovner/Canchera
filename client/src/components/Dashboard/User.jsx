@@ -22,11 +22,13 @@ function User({ id, name }) {
           user.Bookings.map((b) => {
             return {
               id: b.id,
-              ClubName: b.Field.ClubName,
+              ClubName: b.Field.ClubName
+                ? b.Field.ClubName
+                : "Este club no pertenece mas a Canchera",
               time: new Date(b.time),
-              street: b.Field.Club.street,
-              num: b.Field.Club.num,
-              ciudad: b.Field.Club.ciudad,
+              street: b.Field.Club?.street || "",
+              num: b.Field.Club?.num || "",
+              ciudad: b.Field.Club?.ciudad || "",
               price: b.Field.price,
               surface: b.Field.surface,
               rated: b.rated,
