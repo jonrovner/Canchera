@@ -107,7 +107,8 @@ const ListClubs = () => {
   useEffect(() => {
     if (
       (!input.ciudad && !input.size && !input.clubName) ||
-      (input.size && !input.ciudad)
+      (input.size && !input.ciudad) ||
+      (input.clubName && serchBarResult.length > 1)
     ) {
       setMapPos({ lat: -32.9632, lng: -61.409 });
       setZoom(4);
