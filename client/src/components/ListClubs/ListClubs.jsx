@@ -18,6 +18,7 @@ import { ImCross } from "react-icons/im";
 import { cities } from "../createClub/ar";
 import { BsArrowDownCircleFill, BsArrowUpCircleFill } from "react-icons/bs";
 import Loader from "../Loader/Loader";
+import { Link } from "react-router-dom";
 
 const ListClubs = () => {
   let dispatch = useDispatch();
@@ -405,9 +406,14 @@ const ListClubs = () => {
                             onCloseClick={() => setActiveMarker(null)}
                           >
                             <div>
-                              '{club.name}'
-                              <br />
-                              {club.location}
+                              <p>
+                                {club.name}, {club.score} ⭐<br />
+                                <Link
+                                  to={`/club/${club.name.replaceAll(" ", "-")}`}
+                                >
+                                  Reservar Aqui
+                                </Link>
+                              </p>
                             </div>
                           </InfoWindow>
                         ) : null}
