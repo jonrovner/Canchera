@@ -188,14 +188,14 @@ const ListClubs = () => {
     let order = "hr";
     //alert("mayor calificacion");
     dispatch(order_rating_clubs(order));
-    //setFilterClubs(serchBarResult.sort((a, b) => b.score - a.score));
+    setFilterClubs(filterClubs.sort((a, b) => b.score - a.score));
   };
 
   const hadlerLowerRating = () => {
     let order = "lr";
     //alert("menor calificacion");
     dispatch(order_rating_clubs(order));
-    //setFilterClubs(serchBarResult.sort((a, b) => a.score - b.score));
+    setFilterClubs(filterClubs.sort((a, b) => a.score - b.score));
   };
 
   const vaciarInput = async () => {
@@ -208,7 +208,9 @@ const ListClubs = () => {
     setZoom(4);
     await dispatch(locationFilter());
   };
-
+  console.log("searchbarresult: ", serchBarResult);
+  console.log("clubes: ", clubes);
+  console.log("filterClubs: ", filterClubs);
   return (
     <div className={styles.ListClubs}>
       <div className={styles.nonFooter}>
