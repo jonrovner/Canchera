@@ -14,6 +14,7 @@ import ScrollButton from "../ScrollButton/ScrollButton";
 import NavBar from "../NavBar/NavBarSinSearch";
 import Footer from "../Footer/FooterNoVideo";
 import { AiOutlineSearch } from "react-icons/ai";
+import { ImCross } from "react-icons/im";
 import { cities } from "../createClub/ar";
 import { BsArrowDownCircleFill, BsArrowUpCircleFill } from "react-icons/bs";
 import Loader from "../Loader/Loader";
@@ -81,7 +82,16 @@ const ListClubs = () => {
   const handleMapFilter = () => {
     setMapFilter(!mapFilter);
     dispatch(locationFilter());
+    serchBarResult = [];
+    setInput({
+      ciudad: "",
+      size: "",
+      clubName: "",
+    });
+    setMapPos({ lat: -32.9632, lng: -61.409 });
+    setZoom(4);
   };
+
   const [mapBounds, setMapBounds] = useState({});
 
   useEffect(() => {
@@ -94,11 +104,39 @@ const ListClubs = () => {
     }
   }, [mapBounds]);
 
+  useEffect(() => {
+    if (
+      (!input.ciudad && !input.size && !input.clubName) ||
+      (input.size && !input.ciudad) ||
+      (input.clubName && serchBarResult.length > 1)
+    ) {
+      setMapPos({ lat: -32.9632, lng: -61.409 });
+      setZoom(4);
+    } else if (serchBarResult.length) {
+      setMapPos({
+        lat: serchBarResult[0].latitude,
+        lng: serchBarResult[0].longitude,
+      });
+      setZoom(12);
+    } else {
+      setMapPos({ lat: -32.9632, lng: -61.409 });
+      setZoom(4);
+    }
+    console.log(serchBarResult);
+  }, [serchBarResult]);
+
   const handleSubmit = async (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     // aca ya esta listo para ir a /clubs y filtrar segun lo pedido.
-    await dispatch(get_all_clubes());
-    await dispatch(locationFilter(input));
+    // await dispatch(get_all_clubes());
+
+    if (!input.ciudad && !input.size && !input.clubName) {
+      setMapPos({ lat: -32.9632, lng: -61.409 });
+      setZoom(4);
+      await dispatch(locationFilter(input));
+    } else {
+      await dispatch(locationFilter(input));
+    }
   };
 
   const onChange = async (e) => {
@@ -149,15 +187,27 @@ const ListClubs = () => {
     let order = "hr";
     //alert("mayor calificacion");
     dispatch(order_rating_clubs(order));
-    setFilterClubs(filterClubs.sort((a, b) => b.score - a.score));
+    //setFilterClubs(serchBarResult.sort((a, b) => b.score - a.score));
   };
 
   const hadlerLowerRating = () => {
     let order = "lr";
     //alert("menor calificacion");
     dispatch(order_rating_clubs(order));
-    setFilterClubs(filterClubs.sort((a, b) => a.score - b.score));
+    //setFilterClubs(serchBarResult.sort((a, b) => a.score - b.score));
   };
+
+  const vaciarInput = async () => {
+    setInput({
+      ciudad: "",
+      size: "",
+      clubName: "",
+    });
+    setMapPos({ lat: -32.9632, lng: -61.409 });
+    setZoom(4);
+    await dispatch(locationFilter());
+  };
+
   return (
     <div className={styles.ListClubs}>
       <div className={styles.nonFooter}>
@@ -176,6 +226,12 @@ const ListClubs = () => {
               </div>
             </div>
             <div className={styles.searchBar}>
+              {(input.ciudad || input.size || input.clubName) && (
+                <button className={styles.vaciarInput} onClick={vaciarInput}>
+                  <ImCross className={styles.deleteIcon} />
+                  Vaciar campos de busqueda
+                </button>
+              )}
               <form action="" onSubmit={handleSubmit}>
                 <input
                   onChange={(e) => onChange(e)}
@@ -192,7 +248,7 @@ const ListClubs = () => {
                       showCities &&
                       filterCities
                         .slice(0, 10)
-                        .map((city) => <option value={city.city} />)}
+                        .map((city, i) => <option key={i} value={city.city} />)}
                   </datalist>
                 }
                 <input
@@ -222,56 +278,22 @@ const ListClubs = () => {
             <div className={styles.clubes}>
               {serchBarResult.length ? (
                 serchBarResult.map((c, i) => (
-                  <>
-                    <CardClub
-                      key={i}
-                      name={c.name}
-                      img={c.image}
-                      location={
-                        c.street +
-                        " " +
-                        c.num +
-                        " " +
-                        c.ciudad +
-                        " " +
-                        c.province
-                      }
-                      openHour={c.openHour}
-                      closeHour={c.closeHour}
-                      Fields={c.Fields}
-                    />
-                  </>
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
+                  />
                 ))
               ) : !mapFilter ? (
                 clubes.length ? (
                   clubes.map((c, i) => (
-                    <>
-                      <CardClub
-                        key={i}
-                        name={c.name}
-                        img={c.image}
-                        location={
-                          c.street +
-                          " " +
-                          c.num +
-                          " " +
-                          c.ciudad +
-                          " " +
-                          c.province
-                        }
-                        openHour={c.openHour}
-                        closeHour={c.closeHour}
-                        Fields={c.Fields}
-                        score={c.score}
-                      />
-                    </>
-                  ))
-                ) : (
-                  <Loader />
-                )
-              ) : filterClubs.length ? (
-                filterClubs.map((c, i) => (
-                  <>
                     <CardClub
                       key={i}
                       name={c.name}
@@ -290,7 +312,24 @@ const ListClubs = () => {
                       Fields={c.Fields}
                       score={c.score}
                     />
-                  </>
+                  ))
+                ) : (
+                  <Loader />
+                )
+              ) : filterClubs.length ? (
+                filterClubs.map((c, i) => (
+                  <CardClub
+                    key={i}
+                    name={c.name}
+                    img={c.image}
+                    location={
+                      c.street + " " + c.num + " " + c.ciudad + " " + c.province
+                    }
+                    openHour={c.openHour}
+                    closeHour={c.closeHour}
+                    Fields={c.Fields}
+                    score={c.score}
+                  />
                 ))
               ) : (
                 <Loader />
@@ -327,7 +366,10 @@ const ListClubs = () => {
                   ? serchBarResult.map((club, index) => (
                       <Marker
                         key={index}
-                        position={positions[index]}
+                        position={{
+                          lat: club.latitude,
+                          lng: club.longitude,
+                        }}
                         icon={{
                           url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
                         }}
@@ -349,7 +391,10 @@ const ListClubs = () => {
                   : clubes.map((club, index) => (
                       <Marker
                         key={index}
-                        position={positions[index]}
+                        position={{
+                          lat: club.latitude,
+                          lng: club.longitude,
+                        }}
                         icon={{
                           url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
                         }}

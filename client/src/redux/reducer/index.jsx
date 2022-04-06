@@ -1,4 +1,5 @@
 import { filter } from "../../utils/filter";
+import { filtrarTodo } from "./metodos/nuevoUtils";
 import {
   POST_USERS_SIGNIN,
   GET_USERS_EMAIL,
@@ -138,15 +139,15 @@ function rootReducer(state = initialState, { type, payload }) {
       };
     }
 
-    case LOCATION_FILTER: {     
+    case LOCATION_FILTER: {
+      let copyClubes = [...state.clubes];
+      if (!payload) return { ...state, filterClubs: [] };
 
-      let copyClubes = state.clubes;
-
-      let filtered = filter(copyClubes, payload)
+      copyClubes = filtrarTodo(copyClubes, payload);
 
       return {
         ...state,
-        filterClubs: filtered,
+        filterClubs: copyClubes,
       };
     }
 
