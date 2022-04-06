@@ -3,8 +3,8 @@ export const filtrarTodo = (clubes, payload) => {
 
   // filtro por ciudad, si es que existe.
   if (ciudad) {
-    clubes = clubes.filter(
-      (club) => club.ciudad.toUpperCase() === ciudad.toUpperCase()
+    clubes = clubes.filter((club) =>
+      club.ciudad.toUpperCase().includes(ciudad.toUpperCase())
     );
   }
 
@@ -20,8 +20,8 @@ export const filtrarTodo = (clubes, payload) => {
 
   // filtro por clubName si es que existe.
   if (clubName) {
-    clubes = clubes.filter(
-      (club) => club.name.toUpperCase() === clubName.toUpperCase()
+    clubes = clubes.filter((club) =>
+      club.name.toUpperCase().includes(clubName.toUpperCase())
     );
   }
 

@@ -111,12 +111,15 @@ const ListClubs = () => {
     ) {
       setMapPos({ lat: -32.9632, lng: -61.409 });
       setZoom(4);
-    } else {
+    } else if (serchBarResult.length) {
       setMapPos({
         lat: serchBarResult[0].latitude,
         lng: serchBarResult[0].longitude,
       });
       setZoom(12);
+    } else {
+      setMapPos({ lat: -32.9632, lng: -61.409 });
+      setZoom(4);
     }
     console.log(serchBarResult);
   }, [serchBarResult]);
