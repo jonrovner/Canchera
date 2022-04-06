@@ -193,12 +193,15 @@ const ListClubs = () => {
     //setFilterClubs(serchBarResult.sort((a, b) => a.score - b.score));
   };
 
-  const vaciarInput = () => {
+  const vaciarInput = async () => {
     setInput({
       ciudad: "",
       size: "",
       clubName: "",
     });
+    setMapPos({ lat: -32.9632, lng: -61.409 });
+    setZoom(4);
+    await dispatch(locationFilter());
   };
 
   return (
