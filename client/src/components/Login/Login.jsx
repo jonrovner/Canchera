@@ -53,13 +53,14 @@ const Login = () => {
         if (users.data.user.rol === "owner") return navigate("/dashboard");
         if (users.data.user.rol === "user") {
           let clubDetail = localStorage.getItem("clubDetail");
-          clubDetail = JSON.parse(clubDetail).split(" ").join("-");
-          //clubDetail = clubDetail.slice(");
-
-          console.log(clubDetail);
-          if (clubDetail.length > 0) {
-            localStorage.removeItem("clubDetail");
-            return navigate(`/club/${clubDetail}`);
+          if (clubDetail) {
+            clubDetail = JSON.parse(clubDetail).split(" ").join("-");
+            //clubDetail = clubDetail.slice(");
+            console.log(clubDetail);
+            if (clubDetail.length > 0) {
+              localStorage.removeItem("clubDetail");
+              return navigate(`/club/${clubDetail}`);
+            }
           }
           navigate("/clubs");
         }
@@ -82,11 +83,14 @@ const Login = () => {
       if (existe.data.rol === "owner") return navigate("/dashboard");
       if (existe.data.rol === "user") {
         let clubDetail = localStorage.getItem("clubDetail");
-        clubDetail = JSON.parse(clubDetail).split(" ").join("-");
-        console.log(clubDetail);
-        if (clubDetail.length > 0) {
-          localStorage.removeItem("clubDetail");
-          return navigate(`/club/${clubDetail}`);
+        if (clubDetail) {
+          clubDetail = JSON.parse(clubDetail).split(" ").join("-");
+          //clubDetail = clubDetail.slice(");
+          console.log(clubDetail);
+          if (clubDetail.length > 0) {
+            localStorage.removeItem("clubDetail");
+            return navigate(`/club/${clubDetail}`);
+          }
         }
         navigate("/clubs");
       }
@@ -101,11 +105,14 @@ const Login = () => {
       if (usuario.data.rol === "owner") return navigate("/dashboard");
       if (usuario.data.rol === "user") {
         let clubDetail = localStorage.getItem("clubDetail");
-        clubDetail = JSON.parse(clubDetail).split(" ").join("-");
-        console.log(clubDetail);
-        if (clubDetail.length > 0) {
-          localStorage.removeItem("clubDetail");
-          return navigate(`/club/${clubDetail}`);
+        if (clubDetail) {
+          clubDetail = JSON.parse(clubDetail).split(" ").join("-");
+          //clubDetail = clubDetail.slice(");
+          console.log(clubDetail);
+          if (clubDetail.length > 0) {
+            localStorage.removeItem("clubDetail");
+            return navigate(`/club/${clubDetail}`);
+          }
         }
         navigate("/clubs");
       }
