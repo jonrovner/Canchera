@@ -61,6 +61,8 @@ const Modal = ({ club, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    findMap();
+
     fieldInput(field);
 
     if (!valid.valid) {
@@ -99,7 +101,7 @@ const Modal = ({ club, closeModal }) => {
     setFile(e.target.files[0]);
   };
 
-  const findMap = () => {
+  const findMap = (e) => {
     if (!input.ciudad || !input.street || !input.num || !input.province) {
       return;
     }
@@ -274,12 +276,12 @@ const Modal = ({ club, closeModal }) => {
                     {valid.all && showValid && (
                       <p className={style.error}>{valid.all}</p>
                     )}
-                    <button
+                    {/* <button
                       className={style.findMap}
                       onClick={(e) => findMap(e)}
                     >
                       Buscar en Mapa
-                    </button>
+                    </button> */}
 
                     <div className={style.openHours}>
                       <div>
