@@ -228,8 +228,8 @@ const ListClubs = () => {
             <div className={styles.searchBar}>
               {(input.ciudad || input.size || input.clubName) && (
                 <button className={styles.vaciarInput} onClick={vaciarInput}>
-                  Vaciar campos de busqueda{" "}
                   <ImCross className={styles.deleteIcon} />
+                  Vaciar campos de busqueda
                 </button>
               )}
               <form action="" onSubmit={handleSubmit}>
