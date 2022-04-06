@@ -85,7 +85,7 @@ const Clubdetail = () => {
   };
 
   //on submit
-  const handleReservation = async () => {
+  const handleReservation = async (nameClub) => {
     if (typeof user.email === "string") {
       try {
         const mpResponse = await axios.post("/checkout", { price });
@@ -106,6 +106,7 @@ const Clubdetail = () => {
         console.log(err);
       }
     } else {
+      window.localStorage.setItem("clubDetail", JSON.stringify(nameClub));
       navigate("/login");
     }
 
@@ -226,7 +227,9 @@ const Clubdetail = () => {
             <p>{reservationDetail.hours} horas reservadas</p>
             <p>total: $ {reservationDetail.price}</p>
             <div id={"checkout-btn"}>
-              <button onClick={() => handleReservation()}>Confirmar</button>
+              <button onClick={() => handleReservation(club.name)}>
+                Confirmar
+              </button>
             </div>
           </div>
         </div>
