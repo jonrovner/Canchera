@@ -1,5 +1,6 @@
 .ClubDetail {
   margin: auto;
+  width: 100%;
 }
 
 .ClubDetail .Club {
@@ -13,6 +14,140 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.ClubDetail .clubImg {
+  border-radius: 5px;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  margin-bottom: 100px;
+}
+
+.ClubDetail .clubData {
+  color: #140027;
+  margin: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 880px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  padding: 40px;
+  background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0, linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0, linear-gradient(315deg, #f3faff 25%, transparent 25%), linear-gradient(45deg, #e0f3ff 25%, transparent 25%);
+  background-size: 64px 64px;
+  background-color: #ecf9ff;
+  position: relative;
+}
+
+.ClubDetail .clubData .data {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 40px;
+}
+
+.ClubDetail .clubData .data p {
+  width: 350px;
+}
+
+.ClubDetail .clubData .data span {
+  font-weight: 500;
+}
+
+.ClubDetail .clubData .map {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+  height: 50vh;
+  border-radius: 5px;
+  overflow: hidden;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ClubDetail .reservas {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #dcdaee;
+}
+
+.ClubDetail .reservas h2 {
+  font-size: 30px;
+}
+
+.ClubDetail .reservas .calendarControls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  font-size: 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 40px;
+}
+
+.ClubDetail .reservas .buttonDay {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.ClubDetail .reservas .reservaDetails {
+  margin: 40px;
+}
+
+.ClubDetail .reservas .botonConfirmar {
+  color: #140027;
+  font-size: 30px;
+  background-color: #dcdaeeb0;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 10px;
+}
+
+.ClubDetail .clubData::before {
+  width: 1040px;
+  height: 93%;
+  content: '';
+  position: absolute;
+  left: 30px;
+  border: 20px solid #a2d4ff;
+  -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin: auto;
+  left: 0;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
 }
 
 .selected {
