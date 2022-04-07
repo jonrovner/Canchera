@@ -14,4 +14,8 @@
       -ms-flex-align: center;
           align-items: center;
 }
+
+.selected {
+  background-color: #00C49A;
+}
 /*# sourceMappingURL=ClubDetail.module.css.map */
