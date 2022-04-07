@@ -22,7 +22,7 @@ function Admin({ user }) {
     dispatch(get_all_user());
   }, [dispatch]);
 
-  let allUsers = useSelector((state) => state.allUsers);
+  let allUsers = useSelector((state) => state.allUsers.sort((a,b) => a.name.localeCompare(b.name)));
 
   const updateUser = async (id) => {
     await dispatch(update_user(id, data));
