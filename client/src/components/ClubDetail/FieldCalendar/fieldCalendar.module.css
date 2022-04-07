@@ -31,6 +31,8 @@
   font-weight: 500;
   border-radius: 5px;
   border: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .selected {
