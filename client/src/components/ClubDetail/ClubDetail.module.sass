@@ -1,6 +1,73 @@
+@import '../CSScommons/commons'
+
 .ClubDetail
     margin: auto
     .Club
         display: flex
         flex-direction: column
         align-items: center
+        .clubImg
+            @include BordeRadio
+            @include Sombra
+            width: 500px
+            margin-bottom: 100px
+        .clubData
+            color: $color-header
+            margin: 100px
+            display: flex
+            width: 880px
+            justify-content: space-evenly
+            padding: 40px
+            background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0, linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0, linear-gradient(315deg, #f3faff 25%, transparent 25%), linear-gradient(45deg, #e0f3ff 25%, transparent 25%)
+            background-size: 64px 64px
+            background-color: #ecf9ff
+            position: relative
+            .data
+                flex: 1 1 0px
+                display: flex
+                flex-direction: column
+                gap: 40px
+                h1
+                p
+                    width: 350px
+                span
+                    font-weight: 500
+            .map
+                flex: 1 1 0px
+                height: 50vh
+                @include BordeRadio
+                overflow: hidden
+                @include Sombra
+        .reservas
+            display: flex
+            flex-direction: column
+            align-items: center
+            color: $color-text
+            h2
+                font-size: 30px
+            .calendarControls
+                display: flex
+                align-items: center
+                gap: 10px
+                font-size: 25px
+                justify-content: center
+                margin-bottom: 40px
+            .buttonDay
+                font-size: 20px
+                cursor: pointer
+            .reservaDetails
+                margin: 40px
+            .botonConfirmar
+                @include botonLanding
+                font-size: 24px
+                font-weight: 500
+                margin: 10px
+
+        .clubData::before
+            @include marcoInterno(#a2d4ff)
+            width: 100%
+            margin: auto
+            left: 0
+            top: 0
+            height: 100%
+            pointer-events: none

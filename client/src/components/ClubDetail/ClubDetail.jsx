@@ -16,6 +16,7 @@ import styles from "./ClubDetail.module.css";
 import axios from "axios";
 import NavBar from "../NavBar/NavBarSinSearch";
 import Footer from "../Footer/FooterNoVideo";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Clubdetail = () => {
   //const navigate = useNavigate()
@@ -163,73 +164,92 @@ const Clubdetail = () => {
       <NavBar />
       {club.name && (
         <div className={styles.Club}>
-          <img src={club.image} alt={club.name} />
-          <h1>{club.name}</h1>
-          <h4>{club.description}</h4>
-          <h3>{location}</h3>
-
-          {club.latitude && (
-            <GoogleMap
-              //onLoad={handleOnLoad}
-              center={position}
-              zoom={16}
-              options={defaultMapOptions}
-              mapContainerStyle={{ width: "50vw", height: "60vh" }}
-            >
-              <Marker
-                key={club.name}
-                position={position}
-                icon={{
-                  url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
-                }}
-              ></Marker>
-            </GoogleMap>
-          )}
-
-          <p>
-            horario: de {club.openHour} a {club.closeHour}
-          </p>
-          <h2>Calendario</h2>
-          <p>Seleccione clickeando las horas que desea reservar</p>
-
-          <div className="calendarControls">
-            <div className="button" onClick={handlePrevDay}>
-              ⏪
+          <div className={styles.clubData}>
+            <div className={styles.data}>
+              <h1>{club.name}</h1>
+              <p>
+                {club.description} Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Nulla sint dolorum ex similique quidem fugit
+                officiis, possimus voluptates sunt ipsa!
+              </p>
+              <div>
+                <span>Direccion:</span>
+                <p>{location}</p>
+              </div>
+              <p>
+                <span>Horario:</span> de {club.openHour} a {club.closeHour}
+              </p>
             </div>
-            <p>
-              {isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}
-            </p>
-            <div className="button" onClick={handleNextDay}>
-              ⏩
+            <div className={styles.map}>
+              {club.latitude && (
+                <GoogleMap
+                  //onLoad={handleOnLoad}
+                  center={position}
+                  zoom={16}
+                  options={defaultMapOptions}
+                  mapContainerStyle={{ width: "100%", height: "100%" }}
+                >
+                  <Marker
+                    key={club.name}
+                    position={position}
+                    icon={{
+                      url: "https://i.postimg.cc/wjKd121N/mark-Canchera.png",
+                    }}
+                  ></Marker>
+                </GoogleMap>
+              )}
             </div>
           </div>
-          {club &&
-            club.Fields &&
-            club.Fields.map((field, i) => (
-              <FieldCalendar
-                key={i}
-                day={selectedDay}
-                open={club.openHour}
-                close={club.closeHour}
-                players={field.players}
-                ilumination={field.ilumination}
-                price={field.price}
-                fieldId={field.id}
-                bookings={field.Bookings}
-                surface={field.surface}
-                handleClick={handleHourClick}
-                user="user"
-              />
-            ))}
+          <img className={styles.clubImg} src={club.image} alt={club.name} />
 
-          <div className="reservationDetails">
-            <p>detalles de su reserva:</p>
-            <p>{reservationDetail.hours} horas reservadas</p>
-            <p>total: $ {reservationDetail.price}</p>
-            <div id={"checkout-btn"}>
-              <button onClick={() => handleReservation(club.name)}>
-                Confirmar
-              </button>
+          <div className={styles.reservas}>
+            <h2>Calendario de Reservas</h2>
+            <p>Seleccione clickeando las horas que desea reservar</p>
+
+            <div className={styles.calendarControls}>
+              <div className={styles.buttonDay} onClick={handlePrevDay}>
+                <FaChevronLeft />
+              </div>
+              <p>
+                {isToday(selectedDay)
+                  ? "Hoy"
+                  : selectedDay.toLocaleDateString()}
+              </p>
+              <div className={styles.buttonDay} onClick={handleNextDay}>
+                <FaChevronRight />
+              </div>
+            </div>
+            {club &&
+              club.Fields &&
+              club.Fields.map((field, i) => (
+                <FieldCalendar
+                  key={i}
+                  day={selectedDay}
+                  open={club.openHour}
+                  close={club.closeHour}
+                  players={field.players}
+                  ilumination={field.ilumination}
+                  price={field.price}
+                  fieldId={field.id}
+                  bookings={field.Bookings}
+                  surface={field.surface}
+                  handleClick={handleHourClick}
+                  user="user"
+                />
+              ))}
+
+            <div className={styles.reservaDetails}>
+              <h3>Detalle de su reserva:</h3>
+              <p>{reservationDetail.hours} horas reservadas</p>
+              <h3>total: $ {reservationDetail.price}</h3>
+              <div id={"checkout-btn"}>
+                <button
+                  className={styles.botonConfirmar}
+                  onClick={() => handleReservation(club.name)}
+                >
+                  Confirmar y pagar
+                </button>
+              </div>
             </div>
           </div>
         </div>
