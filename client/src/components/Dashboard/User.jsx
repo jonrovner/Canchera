@@ -126,7 +126,7 @@ function User({ id, name }) {
                       </button>
                     </div>
                   ) : (
-                    <p>Ya puntuado</p>
+                    <p>Ya calificado</p>
                   )}
                 </td>
               </tr>
