@@ -1,5 +1,3 @@
-
-
 .modalBackground {
   /* width: 50%;
   height: 50%; */
@@ -8,9 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  margin-top: 5rem;
-  
+
   .modalContainer {
     position: absolute;
     width: auto;
@@ -22,7 +18,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    
 
     .title {
       display: inline-block;
@@ -36,7 +31,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 1.7rem;
+      font-size: 1.4rem;
       text-align: center;
     }
     .content {
@@ -53,7 +48,10 @@
       align-items: center;
       width: 100%;
       padding-block: 50px;
-      background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0, linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0, linear-gradient(315deg, #f3faff 25%, transparent 25%), linear-gradient(45deg, #e0f3ff 25%, transparent 25%);
+      background: linear-gradient(135deg, #f3faff 25%, transparent 25%) -32px 0,
+        linear-gradient(225deg, #e0f3ff 25%, transparent 25%) -32px 0,
+        linear-gradient(315deg, #f3faff 25%, transparent 25%),
+        linear-gradient(45deg, #e0f3ff 25%, transparent 25%);
       background-size: 64px 64px;
       background-color: #ecf9ff;
       position: relative;
@@ -103,7 +101,7 @@
 
     .content .testIMG {
       color: #140027;
-      font-size: 30px;
+      font-size: 20px;
       background-color: #dcdaeeb0;
       border: none;
       font-family: "Open Sans", sans-serif;
@@ -125,7 +123,7 @@
     }
 
     .content .testIMG:hover {
-      background-color: #00C49A;
+      background-color: #00c49a;
     }
 
     .content .error {
@@ -258,7 +256,7 @@
 
     .content form .center .findMap {
       color: #140027;
-      font-size: 30px;
+      font-size: 20px;
       background-color: #dcdaeeb0;
       border: none;
       font-family: "Open Sans", sans-serif;
@@ -279,7 +277,7 @@
     }
 
     .content form .center .findMap:hover {
-      background-color: #00C49A;
+      background-color: #00c49a;
     }
 
     .content form .center .openHours {
@@ -333,7 +331,7 @@
 
     .content form .Submit {
       color: #140027;
-      font-size: 30px;
+      font-size: 20px;
       background-color: #dcdaeeb0;
       border: none;
       font-family: "Open Sans", sans-serif;
@@ -351,13 +349,13 @@
     }
 
     .content form .Submit:hover {
-      background-color: #00C49A;
+      background-color: #00c49a;
     }
 
     .content::before {
       width: 1040px;
       height: 93%;
-      content: '';
+      content: "";
       position: absolute;
       left: 30px;
       border: 20px solid #a2d4ff;
@@ -414,7 +412,7 @@
 
     .crearCancha button {
       color: #140027;
-      font-size: 30px;
+      font-size: 20px;
       background-color: #dcdaeeb0;
       border: none;
       font-family: "Open Sans", sans-serif;
@@ -432,7 +430,7 @@
     }
 
     .crearCancha button:hover {
-      background-color: #00C49A;
+      background-color: #00c49a;
     }
 
     .botones {
@@ -447,7 +445,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.7rem;
+      font-size: 1.2rem;
       text-align: center;
     }
 

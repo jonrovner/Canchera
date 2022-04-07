@@ -47,11 +47,11 @@ function Admin({ user }) {
   return (
     <div className={styles.Admin}>
       <h1>Bienvenido {user.name}</h1>
-      <div className={styles.users}>
+      <div className={styles.listUsers}>
         <ul>
           {allUsers &&
             allUsers.map((c) => (
-              <li key={c.id}>
+              <li key={c.id} className={styles.listItem}>
                 <div className={styles.elemento}>
                   <div className={styles.data}>
                     Nombre: {c.name} - Rol: {c.rol}{" "}
@@ -71,8 +71,8 @@ function Admin({ user }) {
                         <option disabled value="">
                           Nuevo Rol
                         </option>
-                        <option value="user">User</option>
-                        <option value="owner">Owner</option>
+                        <option value="user">Usuario</option>
+                        <option value="owner">Dueño</option>
                         <option value="admin">Admin</option>
                       </select>
                       {c.rol === "owner" && (
@@ -80,6 +80,7 @@ function Admin({ user }) {
                           name="authorized"
                           defaultValue=""
                           onChange={handlerInputChange}
+                          className={styles.controls}
                         >
                           <option disabled value="">
                             Nuevo Estado
@@ -88,7 +89,10 @@ function Admin({ user }) {
                           <option value="false">Bloqueado</option>
                         </select>
                       )}
-                      <button onClick={() => updateUser(c.id)}>
+                      <button
+                        className={styles.button}
+                        onClick={() => updateUser(c.id)}
+                      >
                         Actualizar
                       </button>
                       <TiDelete
@@ -101,7 +105,12 @@ function Admin({ user }) {
                   )}
                 </div>
                 {idUser !== c.id && (
-                  <button onClick={() => handleEdit(c.id)}>Editar</button>
+                  <button
+                    className={styles.button}
+                    onClick={() => handleEdit(c.id)}
+                  >
+                    Editar
+                  </button>
                 )}
               </li>
             ))}

@@ -1,8 +1,14 @@
+.Dashboard {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
 .Dashboard .switch {
   color: #dcdaee;
   width: 1100px;
   margin: auto;
-  padding: 100px;
+  padding: 70px;
 }
 
 .header {
@@ -10,7 +16,23 @@
   color: #140027;
 }
 
-.Admin .users li {
+.Admin {
+  position: relative;
+}
+
+.Admin .listUsers {
+  height: 50vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.Admin .listUsers .listItem {
+  border-bottom: 2px solid #b5b5b5;
+  margin: 5px;
+  font-weight: 500;
+}
+
+.Admin .listUsers li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,11 +42,181 @@
   gap: 10px;
 }
 
-.Admin .users .delete {
+.Admin .listUsers .delete {
   color: #ca3a01;
   font-size: 40px;
   display: inline;
   cursor: pointer;
 }
-/*# sourceMappingURL=Dashboard.module.css.map */
 
+.User {
+  min-height: 50vh;
+  position: relative;
+}
+
+.User .bookings .actions .rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  gap: 5px;
+}
+
+.User .bookings .actions button {
+  color: #140027;
+  font-size: 30px;
+  background-color: #dcdaeeb0;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 0;
+  padding-inline: 5px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.User .bookings .actions button:hover {
+  background-color: #00C49A;
+}
+
+.User .bookings .actions button:disabled, .User .bookings .actions button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
+}
+
+.Owner h1 {
+  margin-bottom: 20px;
+}
+
+.Owner .clubData button {
+  color: #140027;
+  font-size: 30px;
+  background-color: #dcdaeeb0;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 0;
+  padding-inline: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 20px;
+  margin-left: 0;
+}
+
+.Owner .clubData button:hover {
+  background-color: #00C49A;
+}
+
+.Owner .calendarControls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  font-size: 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.Owner .fields {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 30px;
+}
+
+.Owner .fields button {
+  color: #140027;
+  font-size: 30px;
+  background-color: #dcdaeeb0;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  padding: 0;
+  padding-inline: 5px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.Owner .fields button:hover {
+  background-color: #00C49A;
+}
+
+.hide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.elemento {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.data {
+  width: 450px;
+}
+
+.button {
+  color: #140027;
+  font-size: 30px;
+  background-color: #dcdaeeb0;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+  padding: 0;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 5px;
+  padding-inline: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #00C49A;
+}
+/*# sourceMappingURL=Dashboard.module.css.map */
