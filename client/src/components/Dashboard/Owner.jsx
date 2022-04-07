@@ -113,7 +113,9 @@ function Owner({ id, name, email, rol }) {
   return (
     <div className={styles.Owner}>
       <h1>Bienvenido {name}</h1>
-
+      {openModal.modal && (
+        <Modal club={openModal.club} closeModal={setOpenModal} />
+      )}
       <div>
         {!owner.Club && (
           <>
@@ -204,9 +206,6 @@ function Owner({ id, name, email, rol }) {
             ))}
         </div>
       </div>
-      {openModal.modal && (
-        <Modal club={openModal.club} closeModal={setOpenModal} />
-      )}
 
       {/* <div>
                      <h1>Clubes</h1>
