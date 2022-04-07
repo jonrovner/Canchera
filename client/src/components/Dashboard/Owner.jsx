@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import Modal from "./ModalEditarClub/Modal";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function Owner({ id, name, email, rol }) {
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ function Owner({ id, name, email, rol }) {
   };
 
   return (
-    <div>
+    <div className={styles.Owner}>
       <h1>Bienvenido {name}</h1>
 
       <div>
@@ -127,20 +128,20 @@ function Owner({ id, name, email, rol }) {
       </div>
 
       {club && (
-        <div>
+        <div className={styles.clubData}>
           <h3>Datos de su club </h3>
           <p>Nombre: {club.name}</p>
           <p>Descripción: {club.description}</p>
           <p>Dirección: {`${club.street} ${club.num} ${club.ciudad}`}</p>
           <p>Horario: {`de ${club.openHour} hs a ${club.closeHour} hs`}</p>
 
-          <button onClick={() => handlerUpdateClub(club)}>editar</button>
-          <button onClick={() => refresh()}>refresh</button>
+          <button onClick={() => handlerUpdateClub(club)}>Editar</button>
+          <button onClick={() => refresh()}>Actualizar</button>
         </div>
       )}
 
       <div>
-        <h1>Reservas owner</h1>
+        <h1>Reservas de sus canchas</h1>
         {bookingDetail.show && (
           <div className="bookingDetail">
             <div>
@@ -167,39 +168,41 @@ function Owner({ id, name, email, rol }) {
           </div>
         )}
 
-        <div className="calendarControls">
+        <div className={styles.calendarControls}>
           <div className="button" onClick={handlePrevDay}>
-            ⏪
+            <FaChevronLeft />
           </div>
           <p>
-            {isToday(selectedDay) ? "hoy" : selectedDay.toLocaleDateString()}
+            {isToday(selectedDay) ? "Hoy" : selectedDay.toLocaleDateString()}
           </p>
           <div className="button" onClick={handleNextDay}>
-            ⏩
+            <FaChevronRight />
           </div>
         </div>
 
-        {club &&
-          club.Fields &&
-          club.Fields.map((field) => (
-            <>
-              <FieldCalendar
-                day={selectedDay}
-                close={club.closeHour}
-                open={club.openHour}
-                players={field.players}
-                bookings={field.Bookings}
-                price={field.price}
-                handleClick={handleCalendar}
-                handleInfo={handleInfo}
-                fieldId={field.id}
-                surface={field.surface}
-                user="owner"
-              />
+        <div className={styles.fields}>
+          {club &&
+            club.Fields &&
+            club.Fields.map((field) => (
+              <div className={styles.field}>
+                <FieldCalendar
+                  day={selectedDay}
+                  close={club.closeHour}
+                  open={club.openHour}
+                  players={field.players}
+                  bookings={field.Bookings}
+                  price={field.price}
+                  handleClick={handleCalendar}
+                  handleInfo={handleInfo}
+                  fieldId={field.id}
+                  surface={field.surface}
+                  user="owner"
+                />
 
-              <button onClick={handleBlock}>bloquear</button>
-            </>
-          ))}
+                <button onClick={handleBlock}>Bloquear horario</button>
+              </div>
+            ))}
+        </div>
       </div>
       {openModal.modal && (
         <Modal club={openModal.club} closeModal={setOpenModal} />

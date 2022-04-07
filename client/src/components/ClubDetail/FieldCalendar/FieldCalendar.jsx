@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { setHours, eachHourOfInterval, getHours, isBefore } from "date-fns";
-import "./fieldCalendar.css";
+import styles from "./fieldCalendar.module.css";
 
 const FieldCalendar = ({
   day,
@@ -29,11 +29,11 @@ const FieldCalendar = ({
 
   return (
     <div>
-      <div className={"hoursCalendar"}>
-        <div className={"fieldInfo"}>
+      <div className={styles.hoursCalendar}>
+        <div className={styles.fieldInfo}>
           <h5>{players} jugadores</h5>
           <p>$ {price}</p>
-          <p className="surface">{surface}</p>
+          <p className={styles.surface}>{surface}</p>
         </div>
 
         {hourStrings &&
@@ -41,10 +41,10 @@ const FieldCalendar = ({
             <div
               className={
                 bookingStrings.indexOf(date) !== -1
-                  ? "hour reserved"
+                  ? styles.hourReserved
                   : isBefore(hours[i], now)
-                  ? "hour past"
-                  : "hour"
+                  ? styles.hourPast
+                  : styles.hour
               }
               key={i}
               onClick={(e) => {

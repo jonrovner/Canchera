@@ -1,0 +1,121 @@
+.hoursCalendar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hour {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: whitesmoke;
+  border-right: 1px solid black;
+  cursor: pointer;
+  color: #140027;
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+}
+
+.selected {
+  background-color: green;
+}
+
+.hourReserved {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: whitesmoke;
+  border-right: 1px solid black;
+  background-color: #ff6767;
+  color: #140027;
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+}
+
+.hourPast {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: whitesmoke;
+  border-right: 1px solid black;
+  background-color: gray;
+  color: #140027;
+  font-weight: 500;
+  border-radius: 5px;
+  border: none;
+}
+
+.fieldInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.fieldInfo h5 {
+  margin: 0;
+  padding: 0;
+}
+
+.fieldInfo p {
+  margin: 0;
+  padding: 0;
+  font-size: smaller;
+}
+
+.surface {
+  font-size: small;
+}
+
+.hour:hover {
+  background-color: white;
+}
+/*# sourceMappingURL=fieldCalendar.module.css.map */

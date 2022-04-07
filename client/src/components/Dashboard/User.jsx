@@ -52,7 +52,7 @@ function User({ id, name }) {
   };
 
   return (
-    <div>
+    <div className={styles.User}>
       <h1>Bienvenido {name}</h1>
       <div>
         <h1>Reservas</h1>
@@ -71,19 +71,19 @@ function User({ id, name }) {
             <th>Precio</th>
             <th>Superficie</th>
             <th>Tamaño</th>
-            <th>Invitar</th>
+            <th>Acción</th>
           </tr>
           {user &&
             bookings &&
             bookings.map((b) => (
-              <tr>
+              <tr className={styles.bookings}>
                 <td>{b.ClubName}</td>
                 <td>{b.street + " " + b.num + ", " + b.ciudad}</td>
                 <td>{b.time.toString().split("G").shift()}</td>
                 <td>${b.price}</td>
                 <td>{b.surface}</td>
                 <td>{b.players}</td>
-                <td>
+                <td className={styles.actions}>
                   {new Date().getTime() < b.time.getTime() ? (
                     <button
                       onClick={() => {
@@ -93,7 +93,7 @@ function User({ id, name }) {
                       Invitar Amigo
                     </button>
                   ) : !b.rated ? (
-                    <ul>
+                    <div className={styles.rating}>
                       <button
                         disabled={disabled}
                         onClick={() => handleScore(b.id, 1)}
@@ -124,9 +124,9 @@ function User({ id, name }) {
                       >
                         5
                       </button>
-                    </ul>
+                    </div>
                   ) : (
-                    <p>Ya esta loco</p>
+                    <p>Ya calificado</p>
                   )}
                 </td>
               </tr>
