@@ -132,6 +132,10 @@ const Login = () => {
     navigate("/forgotPassword");
   };
 
+  const handleRegister = () => {
+    navigate("/signup/user");
+  };
+
   return (
     <div className={styles.SignUp}>
       {openModalError && <ModalError closeModal={setOpenModalError} />}
@@ -209,7 +213,10 @@ const Login = () => {
                   cookiePolicy={"single_host_origin"}
                 />
               </div>
-              <div>
+              <div className={styles.resetYregister}>
+                <button className={styles.resetPasswd} onClick={handleRegister}>
+                  No tenes cuenta? Registrate!
+                </button>
                 <button className={styles.resetPasswd} onClick={handlePass}>
                   Olvidaste tu contraseña?
                 </button>
