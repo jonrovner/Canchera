@@ -281,6 +281,17 @@
   border-color: #4481eb;
 }
 
+.SignUp .content form .resetYregister {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
 .SignUp .content form .resetPasswd {
   background-color: #dcdaee;
   border: none;

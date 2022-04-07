@@ -21,7 +21,7 @@
 }
 
 .CardClub .contenedor img {
-  height: 110%;
+  width: 300px;
   -webkit-clip-path: polygon(0% 0%, 88.8% 0%, 100% 100%, 0% 100%);
           clip-path: polygon(0% 0%, 88.8% 0%, 100% 100%, 0% 100%);
 }
