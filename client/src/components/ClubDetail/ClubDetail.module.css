@@ -15,6 +15,7 @@
           align-items: center;
 }
 
+
 .ClubDetail .Club .clubImg {
   border-radius: 5px;
   -webkit-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
@@ -147,5 +148,8 @@
   top: 0;
   height: 100%;
   pointer-events: none;
+  
+.selected {
+  background-color: #00C49A;
 }
 /*# sourceMappingURL=ClubDetail.module.css.map */

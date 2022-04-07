@@ -75,13 +75,13 @@ const Clubdetail = () => {
     if (!existent) {
       setSelectedDates([...selectedDates, { time: date, field: fieldId }]);
       setPrice((price) => price + fieldPrice);
-      e.target.classList.add("selected");
+      e.target.classList.add(styles.selected);
     } else {
       setSelectedDates([
         ...selectedDates.filter((d) => d.time.toString() !== date.toString()),
       ]);
       setPrice((price) => price - fieldPrice);
-      e.target.classList.remove("selected");
+      e.target.classList.remove(styles.selected);
     }
   };
 

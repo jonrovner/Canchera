@@ -219,4 +219,8 @@
 .button:hover {
   background-color: #00C49A;
 }
+
+.selected {
+  background-color: #00C49A;
+}
 /*# sourceMappingURL=Dashboard.module.css.map */

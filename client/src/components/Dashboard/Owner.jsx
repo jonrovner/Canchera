@@ -71,13 +71,13 @@ function Owner({ id, name, email, rol }) {
     if (!existent) {
       setSelectedDates([...selectedDates, { time: date, field: fieldId }]);
 
-      e.target.classList.add("selected");
+      e.target.classList.add(styles.selected);
     } else {
       setSelectedDates([
         ...selectedDates.filter((d) => d.time.toString() !== date.toString()),
       ]);
 
-      e.target.classList.remove("selected");
+      e.target.classList.remove(styles.selected);
     }
   };
 
