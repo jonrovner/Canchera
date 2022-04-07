@@ -172,7 +172,9 @@ const Modal = ({ club, closeModal }) => {
         <div className={style.body}>
           <div className={style.CreateClub}>
             <div className={style.content}>
-              <h1>Editar datos del club: {club.name}</h1>
+              <h1 className={style.title}>
+                Editar datos del club: {club.name}
+              </h1>
 
               <form
                 action="/club/:clubName"
@@ -193,7 +195,7 @@ const Modal = ({ club, closeModal }) => {
                     />
                     {valid.name && <p className={style.error}>{valid.name}</p>}
 
-                    <div className={style.imageInput}>
+                    {/* <div className={style.imageInput}>
                       <label className={style.testIMG} htmlFor="image">
                         Subir imagen
                       </label>
@@ -205,7 +207,7 @@ const Modal = ({ club, closeModal }) => {
                         accept="image/png, image/gif, image/jpeg"
                         onChange={handleFile}
                       ></input>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className={style.description}>
@@ -229,7 +231,7 @@ const Modal = ({ club, closeModal }) => {
 
                 <div className={style.center}>
                   <div className={style.address}>
-                    <label htmlFor="ciudad">Ciudad</label>
+                    {/* <label htmlFor="ciudad">Ciudad</label>
                     <input
                       type="text"
                       name="ciudad"
@@ -275,7 +277,7 @@ const Modal = ({ club, closeModal }) => {
 
                     {valid.all && showValid && (
                       <p className={style.error}>{valid.all}</p>
-                    )}
+                    )} */}
                     {/* <button
                       className={style.findMap}
                       onClick={(e) => findMap(e)}
@@ -327,7 +329,7 @@ const Modal = ({ club, closeModal }) => {
                     </div>
                   </div>
 
-                  <div className={style.map}>
+                  {/* <div className={style.map}>
                     {defaultPos.lat && (
                       <GoogleMap
                         //onLoad={handleOnLoad}
@@ -343,7 +345,7 @@ const Modal = ({ club, closeModal }) => {
                         ></Marker>
                       </GoogleMap>
                     )}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className={style.bottom}>

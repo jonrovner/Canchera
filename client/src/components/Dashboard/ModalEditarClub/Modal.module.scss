@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   .modalContainer {
     position: absolute;
     width: auto;
@@ -18,11 +17,15 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 45rem;
 
     .title {
       display: inline-block;
       text-align: center;
       margin-top: 10px;
+      margin-left: 5rem;
+      margin-right: 5rem;
+      font-size: 26px;
     }
     .body {
       color: black;
@@ -153,7 +156,7 @@
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
-      width: 100%;
+      width: 50vw;
       -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
       justify-content: space-evenly;
@@ -344,6 +347,7 @@
       background-color: #a2d4ff;
       width: 250px;
       margin-top: 30px;
+      margin-left: 1rem;
       font-weight: 500;
       color: #140027;
     }
