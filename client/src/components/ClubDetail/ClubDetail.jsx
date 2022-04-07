@@ -179,6 +179,12 @@ const Clubdetail = () => {
               <p>
                 <span>Horario:</span> de {club.openHour} a {club.closeHour}
               </p>
+              <p>
+                <p>
+                  <span>Calificación:</span>{" "}
+                  {club.score ? club.score.toFixed(2) + "⭐" : "Sin calificar"}
+                </p>
+              </p>
             </div>
             <div className={styles.map}>
               {club.latitude && (
