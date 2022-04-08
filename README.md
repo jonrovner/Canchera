@@ -1,6 +1,8 @@
 <h1>Canchera</h1>
+
 <p>Una SPA para reservar canchas de fútbol</p>
 <p>Football field booking SPA</p>
+<P>Desarrollado como Proyecto Final para Henry Bootcamp - Abril 2022</p>
 
 <h3>Api</h3>
 <p>NodeJs, Express, PostgreSQL, Sequelize, Nodemailer</p>
