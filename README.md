@@ -3,7 +3,7 @@
 <p>Football field booking SPA</p>
 
 <h3>Api</h3>
-<p>NodeJs, Express, PostgreSQL, Sequelize, Nodemailier</p>
+<p>NodeJs, Express, PostgreSQL, Sequelize, Nodemailer</p>
 
 <h3>Client</h3>
 <p>ReactJS, Google Auth, Google Maps API, Mercadopago Checkout Pro, </p>
