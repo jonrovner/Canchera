@@ -1,4 +1,18 @@
-<h1>Readme del proyecto:</h1>
+<h1>Canchera</h1>
+<p>Una SPA para reservar canchas de fútbol</p>
+<p>Football field booking SPA</p>
+
+<h3>Api</h3>
+<p>NodeJs, Express, PostgreSQL, Sequelize, Nodemailier</p>
+
+<h3>Client</h3>
+<p>ReactJS, Google Auth, Google Maps API, Mercadopago Checkout Pro, </p>
+
+<h3>Instructions</h3>
+
+<p>Server init: npm run start</p>
+<p>Client init: npm start</p>
+
 
 <h2>Integrantes:</h2>
 
