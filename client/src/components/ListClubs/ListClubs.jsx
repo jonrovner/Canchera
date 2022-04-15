@@ -94,13 +94,13 @@ const ListClubs = () => {
   };
 
   const [mapBounds, setMapBounds] = useState({});
-
+  //console.log('map bounds: ', mapBounds)
   useEffect(() => {
-    if (clubes.length && mapBounds.zb) {
+    if (clubes.length ) {
       let filtered = intialClubes.filter((club) =>
         mapBounds.contains(club.pos)
       );
-
+      console.log('filtering clubs')
       setFilterClubs(filtered);
     }
   }, [mapBounds]);
