@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Map.module.css";
 import { get_all_clubes } from "../../redux/action/index";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
-import { cities } from "../createClub/ar";
+
 
 function Map() {
+
   const dispatch = useDispatch();
   const [ciudad, setCiudad] = useState("");
   const [mapPos, setMapPos] = useState({ lat: -32.9632, lng: -61.409 });
@@ -18,13 +19,18 @@ function Map() {
 
   const clubes = useSelector((state) => state.clubes);
 
-  let ciudades = [];
+  /* let ciudades = [];
   clubes.forEach((club) => {
     let algo = cities.find((f) => f.city === club.ciudad);
     ciudades.push(algo);
     ciudades.sort((a, b) => a.city.localeCompare(b.city));
-  });
-  //console.log("ciudades", ciudades);
+  }); */
+
+  let ciudades = clubes.length && [...new Set(clubes
+    .map( c => c.ciudad))]
+    .sort((a, b) => a.localeCompare(b))  
+  
+  console.log("ciudades", ciudades);
 
   const positions =
     clubes &&
@@ -39,12 +45,7 @@ function Map() {
     setActiveMarker(marker);
   };
 
-  const handleOnLoad = (map) => {
-    const bounds = new window.google.maps.LatLngBounds();
-    clubes.forEach(({ position }) => bounds.extend(positions));
-    map.fitBounds(bounds);
-  };
-
+  
   var clubXciudad = [];
   clubXciudad = clubes.filter((club) => club.ciudad === ciudad);
 
@@ -88,16 +89,11 @@ function Map() {
         <div>
           <label htmlFor="ciudades">Clubes en</label>
           <select name="ciudades" onChange={handleSelect} value={ciudad}>
-            {/*  <option value="Goya">Goya</option>
-            <option value="Mercedes">Mercedes</option>
-            <option value="Tucuman">Tucuman</option>
-            <option value="La Rioja">La Rioja</option>
-            <option value="Corrientes">Corrientes</option>   */}
+         
             <option>Todos</option>
-            {ciudades
-              .filter((f, i) => ciudades.indexOf(f) === i)
-              .map((t, i) => (
-                <option key={i}>{t.city}</option>
+            {ciudades.length && ciudades              
+              .map((city, i) => (
+                <option key={i}>{city}</option>
               ))}
           </select>
         </div>
@@ -122,7 +118,7 @@ function Map() {
       </div>
       <div>
         <GoogleMap
-          //onLoad={handleOnLoad}
+          
           onClick={() => setActiveMarker(null)}
           center={mapPos}
           zoom={zoom}
