@@ -1,5 +1,5 @@
 <h1>Canchera</h1>
-
+<img src="https://github.com/jonrovner/Canchera/blob/main/canchera1.png" />
 <p>Una SPA para reservar canchas de fútbol</p>
 <p>Football field booking SPA</p>
 <P>Desarrollado como Proyecto Final para Henry Bootcamp - Abril 2022</p>
@@ -33,3 +33,6 @@
 - <a href='https://github.com/martinjuncos'>Martin Juncos</a>
 
 - <a href='https://github.com/NicoYanez9621'>Nicolas Yañez</a>
+
+<img src="https://github.com/jonrovner/Canchera/blob/main/canchera2.png" />
+<img src="https://github.com/jonrovner/Canchera/blob/main/canchera3.png" />
